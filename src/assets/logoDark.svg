@@ -1,22 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
     <defs>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&amp;display=swap');
             .logo {
                 font-family: "Inter", sans-serif;
-                font-optical-sizing: auto;
                 font-weight: 900;
-                font-style: normal;
             }
             .khidma { 
-                fill: #ffffff;
+                fill: #ffffff; 
             }
             .ma { 
                 fill: #F97316; 
             }
         </style>
     </defs>
-    <text x="10" y="75" class="logo">
+
+    <text x="0" y="40" class="logo">
         <tspan class="khidma">Khidma</tspan><tspan class="ma">.ma</tspan>
     </text>
 </svg>
