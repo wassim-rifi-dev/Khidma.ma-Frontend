@@ -1,7 +1,16 @@
 import Header from "../components/Landing/Header";
+import Hero from "../components/Landing/Hero";
 
 export default function Landing({isDark , toogleDark}) {
     return (
-        <Header isDark={isDark} toogleDark={toogleDark} />
+        <div className={`min-h-screen transition-colors duration-300 ${
+            isDark ? 'bg-[#0F172A]' : 'bg-white'
+        }`}>
+            <Header isDark={isDark} toogleDark={toogleDark} />
+            
+            <main>
+                <Hero />
+            </main>
+        </div>
     )
 }
