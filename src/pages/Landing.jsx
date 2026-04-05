@@ -9,7 +9,7 @@ export default function Landing({isDark , toogleDark}) {
             <Header isDark={isDark} toogleDark={toogleDark} />
             
             <main>
-                <Hero />
+                <Hero isDark={isDark} />
             </main>
         </div>
     )
