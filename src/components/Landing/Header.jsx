@@ -78,7 +78,7 @@ export default function Header({isDark , toogleDark}) {
             </div>
 
             {menuOpen && (
-                <div className={`md:hidden shadow-lg px-6 py-4 flex flex-col border-b-2 ${
+                <div className={`absolute top-full left-0 w-full md:hidden shadow-xl px-6 py-4 flex flex-col border-b-2 ${
                     isDark ? 'bg-[#0F172A] border-[#334155]/50' : 'bg-white border-[#E2E8F0]'
                 }`}>
                     <nav className={`flex flex-col font-bold ${
