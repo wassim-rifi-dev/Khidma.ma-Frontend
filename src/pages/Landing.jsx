@@ -1,5 +1,6 @@
 import Header from "../components/Landing/Header";
 import Hero from "../components/Landing/Hero";
+import PopularServices from "../components/Landing/PopularServices";
 
 export default function Landing({isDark , toogleDark}) {
     return (
@@ -10,6 +11,7 @@ export default function Landing({isDark , toogleDark}) {
             
             <main>
                 <Hero isDark={isDark} />
+                <PopularServices />
             </main>
         </div>
     )
