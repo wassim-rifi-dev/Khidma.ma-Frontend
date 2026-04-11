@@ -1,5 +1,6 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import Cards from "./PopularServices/Cards";
+import { services } from "../../data/Services";
 
 export default function PopularServices() {
     return (
@@ -26,7 +27,9 @@ export default function PopularServices() {
                 </a>
             </div>
             <div className="grid grid-cols-6 gap-8">
-                <Cards />
+                {services.map((service, index) => (
+                    <Cards key={index} Service={service} />
+                ))}
             </div>
         </section>
     )
