@@ -38,7 +38,11 @@ export default function FeaturedProfessionals({ isDark }) {
                     />
                 </a>
             </div>
-            <div className="grid grid-cols-4 gap-10">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 w-full">
+                <Cards isDark={isDark} />
+                <Cards isDark={isDark} />
+                <Cards isDark={isDark} />
                 <Cards isDark={isDark} />
             </div>
         </section>
