@@ -2,21 +2,29 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import Cards from "./PopularServices/Cards";
 import { services } from "../../data/Services";
 
-export default function PopularServices() {
+export default function PopularServices({ isDark }) {
     return (
         <section
-            className={`flex flex-col items-center justify-center py-16 px-12 bg-[#F8F7F5] gap-y-14`}
+            className={`flex flex-col items-center justify-center py-16 px-12 gap-y-14  ${
+                isDark ? 'bg-[#1E293B]' : 'bg-[#F8F7F5]'
+            }`}
         >
             <div 
                 className={`w-full flex justify-between items-end`}
             >
                 <div>
                     <h2 
-                        className="text-3xl font-extrabold text-[#1E293B] mb-2 tracking-tight"
+                        className={`text-3xl font-extrabold mb-2 tracking-tight ${
+                            isDark ? 'text-white' : 'text-[#1E293B]'
+                        }`} 
                     >
                         Popular Services
                     </h2>
-                    <p className="text-slate-500 font-medium">Get your home tasks handled by experts</p>
+                    <p className={`font-medium ${
+                        isDark ? 'text-[#94A3B8]' : 'text-[#64748B]'
+                    }`}>
+                        Get your home tasks handled by experts
+                    </p>
                 </div>
                 <a 
                     href="#" 
@@ -28,7 +36,7 @@ export default function PopularServices() {
             </div>
             <div className="grid grid-cols-6 gap-8">
                 {services.map((service, index) => (
-                    <Cards key={index} Service={service} />
+                    <Cards key={index} Service={service} isDark={isDark} />
                 ))}
             </div>
         </section>
