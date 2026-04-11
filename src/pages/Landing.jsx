@@ -15,7 +15,7 @@ export default function Landing({isDark , toogleDark}) {
                 <Hero isDark={isDark} />
                 <PopularServices isDark={isDark} />
                 <HowItWork isDark={isDark} />
-                <FeaturedProfessionals />
+                <FeaturedProfessionals isDark={isDark} />
             </main>
         </div>
     )
