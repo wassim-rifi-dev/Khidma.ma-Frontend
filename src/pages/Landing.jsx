@@ -1,5 +1,6 @@
 import BecomeAProfessional from "../components/Landing/BecomeAProfessional";
 import FeaturedProfessionals from "../components/Landing/FeaturedProfessionals";
+import Footer from "../components/Landing/Footer";
 import Header from "../components/Landing/Header";
 import Hero from "../components/Landing/Hero";
 import HowItWork from "../components/Landing/HowItWork";
@@ -21,6 +22,8 @@ export default function Landing({isDark , toogleDark}) {
                 <WhyChooseKhidma isDark={isDark} />
                 <BecomeAProfessional />
             </main>
+
+            <Footer />
         </div>
     )
 }
