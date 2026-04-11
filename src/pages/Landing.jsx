@@ -13,7 +13,7 @@ export default function Landing({isDark , toogleDark}) {
             <main className="mt-18">
                 <Hero isDark={isDark} />
                 <PopularServices isDark={isDark} />
-                <HowItWork />
+                <HowItWork isDark={isDark} />
             </main>
         </div>
     )
