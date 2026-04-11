@@ -3,6 +3,7 @@ import Header from "../components/Landing/Header";
 import Hero from "../components/Landing/Hero";
 import HowItWork from "../components/Landing/HowItWork";
 import PopularServices from "../components/Landing/PopularServices";
+import WhyChooseKhidma from "../components/Landing/WhyChooseKhidma";
 
 export default function Landing({isDark , toogleDark}) {
     return (
@@ -16,6 +17,7 @@ export default function Landing({isDark , toogleDark}) {
                 <PopularServices isDark={isDark} />
                 <HowItWork isDark={isDark} />
                 <FeaturedProfessionals isDark={isDark} />
+                <WhyChooseKhidma />
             </main>
         </div>
     )
