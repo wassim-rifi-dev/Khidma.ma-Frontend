@@ -4,7 +4,6 @@ export default function HowItWork({isDark}) {
             isDark ? 'bg-[#0F172A]' : 'bg-white'
         }`}>
             <div class="w-full mx-auto text-center">
-
                 <div class="mb-14 md:mb-16">
                     <h2 class={`text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 ${
                         isDark ? 'text-white' : 'text-[#0F172A]'
