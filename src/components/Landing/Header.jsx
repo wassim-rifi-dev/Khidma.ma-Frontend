@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Header({isDark , toogleDark}) {
     const [menuOpen , toggleMenu] = useState(false);
     return (
-        <header className="relative z-50">
+        <header className="fixed top-0 left-0 w-full z-50">
             <div className={`flex items-center justify-between px-5 md:px-10 h-18 border-b-2 shadow-lg ${
                 isDark ? 
                     'bg-[#0F172A] border-[#334155]/50' :

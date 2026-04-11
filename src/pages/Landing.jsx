@@ -9,7 +9,7 @@ export default function Landing({isDark , toogleDark}) {
         }`}>
             <Header isDark={isDark} toogleDark={toogleDark} />
             
-            <main>
+            <main className="mt-18">
                 <Hero isDark={isDark} />
                 <PopularServices isDark={isDark} />
             </main>
