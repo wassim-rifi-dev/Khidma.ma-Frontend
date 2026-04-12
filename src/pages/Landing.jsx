@@ -23,7 +23,7 @@ export default function Landing({isDark , toogleDark}) {
                 <BecomeAProfessional />
             </main>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }
