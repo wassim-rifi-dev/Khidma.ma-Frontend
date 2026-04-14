@@ -3,6 +3,7 @@ import { MdOutlineDarkMode , MdOutlineLightMode , MdMenu } from "react-icons/md"
 import logoLight from '../../assets/logoLight.svg';
 import logoDark from '../../assets/logoDark.svg';
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header({isDark , toogleDark}) {
     const [menuOpen , toggleMenu] = useState(false);
@@ -59,14 +60,17 @@ export default function Header({isDark , toogleDark}) {
                     <div className={`w-px h-8 ${isDark ? 'bg-[#334155]' : 'bg-gray-300'}`} />
 
                     <div className="flex items-center gap-4">
-                        <a href="/login" className={`font-semibold transition-colors ${
-                            isDark ? 'text-white hover:text-[#FF781F]' : 'text-[#475569] hover:text-black'
-                        }`}>
+                        <Link 
+                            to="/login"
+                            className={`font-semibold transition-colors ${
+                                isDark ? 'text-white hover:text-[#FF781F]' : 'text-[#475569] hover:text-black'
+                            }`}
+                        >
                             Connexion
-                        </a>
-                        <a href="/register" className="bg-[#FF781F] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#e66a1a] transition">
+                        </Link>
+                        <Link to="/register" className="bg-[#FF781F] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#e66a1a] transition" >
                             Inscription
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
