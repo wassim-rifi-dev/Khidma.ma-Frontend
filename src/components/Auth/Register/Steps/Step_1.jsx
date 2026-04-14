@@ -1,4 +1,4 @@
-export default function Step_1() {
+export default function Step_1({ handleChange , form }) {
     return (
         <div>
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
@@ -11,10 +11,11 @@ export default function Step_1() {
                 <label className="relative cursor-pointer">
                     <input
                         type="radio"
-                        name="account_type"
+                        name="role"
                         value="client"
                         className="peer sr-only"
-                        defaultChecked
+                        checked={form.role === 'client'}
+                        onChange={handleChange}
                     />
 
                     <div className="rounded-2xl border-2 border-slate-100 bg-white p-5 text-center transition-all hover:bg-slate-50 peer-checked:border-[#FF781F] peer-checked:bg-orange-50/30">
@@ -37,9 +38,11 @@ export default function Step_1() {
                 <label className="relative cursor-pointer">
                     <input
                         type="radio"
-                        name="account_type"
-                        value="pro"
+                        name="role"
+                        value="professional"
                         className="peer sr-only"
+                        checked={form.role === 'professional'}
+                        onChange={handleChange}
                     />
 
                     <div className="rounded-2xl border-2 border-slate-100 bg-white p-5 text-center transition-all hover:bg-slate-50 peer-checked:border-[#FF781F] peer-checked:bg-orange-50/30">

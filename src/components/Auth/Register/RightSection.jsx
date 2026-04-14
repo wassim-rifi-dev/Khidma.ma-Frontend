@@ -1,3 +1,4 @@
+import { useState } from "react";
 import IHaveAccount from "./IHaveAccount";
 import SocialSection from "./SocialSection";
 import Step_1 from "./Steps/Step_1";
@@ -5,6 +6,23 @@ import Step_2 from "./Steps/Step_2";
 import Step_3 from "./Steps/Step_3";
 
 export default function RegisterForm() {
+    const [form , setForm] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        role: '',
+        password: '',
+        password_confirmation: '',
+        category: '',
+        city: ''
+    });
+
+    function handleChange(e) {
+        const newForm = { ...form, [e.target.name]: e.target.value };
+
+        setForm(newForm);
+    }
+
     return (
         <div className="w-full max-w-xl mx-auto p-5 sm:p-6 md:p-8 bg-white font-sans text-slate-800">
             <div className="text-center mb-8 md:mb-10">
@@ -20,7 +38,7 @@ export default function RegisterForm() {
             <form className="space-y-7 md:space-y-8">
 
                 {/* Step 1 */}
-                <Step_1 />
+                <Step_1 handleChange={handleChange} form={form} />
 
                 {/* Step 2 */}
                 <Step_2 />
