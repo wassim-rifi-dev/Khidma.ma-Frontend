@@ -29,7 +29,11 @@ export default function RegisterForm() {
                 <Step_2 handleChange={handleChange} />
 
                 {/* Step 3 */}
-                <Step_3 handleChange={handleChange} />
+                {
+                    form.role === 'professional' ? 
+                        <Step_3 handleChange={handleChange} /> : 
+                        ''
+                }
 
                 {/* Submit */}
                 <button
