@@ -12,7 +12,8 @@ export function useRegisterForm() {
         password: '',
         password_confirmation: '',
         category: '',
-        city: ''
+        city: '',
+        description: ''
     });
 
     function handleChange(e) {

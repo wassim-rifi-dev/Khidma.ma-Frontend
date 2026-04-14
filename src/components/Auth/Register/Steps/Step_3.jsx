@@ -6,14 +6,14 @@ export default function Step_3() {
             </h3>
 
             <div className="space-y-5">
-                <select className="w-full px-6 py-4 bg-slate-100 border border-slate-200 rounded-full text-slate-600 outline-none focus:border-[#FF781F]">
+                <select name="category" className="w-full px-6 py-4 bg-slate-100 border border-slate-200 rounded-full text-slate-600 outline-none focus:border-[#FF781F]">
                     <option>Select Category</option>
                     <option>Plumbing</option>
                     <option>Electrician</option>
                     <option>Cleaning</option>
                 </select>
 
-                <select className="w-full px-6 py-4 bg-slate-100 border border-slate-200 rounded-full text-slate-600 outline-none focus:border-[#FF781F]">
+                <select name="city" className="w-full px-6 py-4 bg-slate-100 border border-slate-200 rounded-full text-slate-600 outline-none focus:border-[#FF781F]">
                     <option>Select City</option>
                     <option>Casablanca</option>
                     <option>Rabat</option>
@@ -23,6 +23,7 @@ export default function Step_3() {
                 <textarea
                     rows="4"
                     placeholder="Tell us about your experience..."
+                    name="description"
                     className="w-full px-6 py-5 bg-slate-100 border border-slate-200 rounded-3xl text-slate-500 outline-none resize-none focus:border-[#FF781F]"
                 />
             </div>
