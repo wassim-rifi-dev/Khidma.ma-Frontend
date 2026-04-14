@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRegisterForm } from "../../../hooks/useRegisterForm";
 import IHaveAccount from "./IHaveAccount";
 import SocialSection from "./SocialSection";
 import Step_1 from "./Steps/Step_1";
@@ -6,22 +6,7 @@ import Step_2 from "./Steps/Step_2";
 import Step_3 from "./Steps/Step_3";
 
 export default function RegisterForm() {
-    const [form , setForm] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        role: '',
-        password: '',
-        password_confirmation: '',
-        category: '',
-        city: ''
-    });
-
-    function handleChange(e) {
-        const newForm = { ...form, [e.target.name]: e.target.value };
-
-        setForm(newForm);
-    }
+    const {form , handleChange , handleSubmit} = useRegisterForm();
 
     return (
         <div className="w-full max-w-xl mx-auto p-5 sm:p-6 md:p-8 bg-white font-sans text-slate-800">
@@ -35,7 +20,7 @@ export default function RegisterForm() {
                 </p>
             </div>
 
-            <form className="space-y-7 md:space-y-8">
+            <form className="space-y-7 md:space-y-8" onSubmit={handleSubmit}>
 
                 {/* Step 1 */}
                 <Step_1 handleChange={handleChange} form={form} />
