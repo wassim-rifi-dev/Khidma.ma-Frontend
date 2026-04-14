@@ -26,10 +26,10 @@ export default function RegisterForm() {
                 <Step_1 handleChange={handleChange} form={form} />
 
                 {/* Step 2 */}
-                <Step_2 />
+                <Step_2 handleChange={handleChange} />
 
                 {/* Step 3 */}
-                <Step_3 />
+                <Step_3 handleChange={handleChange} />
 
                 {/* Submit */}
                 <button

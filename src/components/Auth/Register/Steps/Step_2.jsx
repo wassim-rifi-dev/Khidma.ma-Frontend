@@ -1,4 +1,4 @@
-export default function Step_2() {
+export default function Step_2({handleChange}) {
     return (
         <div>
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
@@ -11,6 +11,7 @@ export default function Step_2() {
                 type="text"
                 placeholder="Full Name"
                 name="name"
+                onChange={handleChange}
                 className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#FF781F] focus:ring-1 focus:ring-[#FF781F]"
                 />
 
@@ -20,6 +21,7 @@ export default function Step_2() {
                     type="email"
                     placeholder="Email Address"
                     name="email"
+                    onChange={handleChange}
                     className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#FF781F]"
                 />
 
@@ -27,6 +29,7 @@ export default function Step_2() {
                     type="tel"
                     placeholder="Phone (06...)"
                     name="phone"
+                    onChange={handleChange}
                     className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#FF781F]"
                 />
 
@@ -34,6 +37,7 @@ export default function Step_2() {
                     type="password"
                     placeholder="Password"
                     name="password"
+                    onChange={handleChange}
                     className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#FF781F]"
                 />
 
@@ -41,6 +45,7 @@ export default function Step_2() {
                     type="password"
                     placeholder="Confirm Password"
                     name="password_confirmation"
+                    onChange={handleChange}
                     className="w-full px-5 py-3.5 bg-slate-50/50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#FF781F]"
                 />
 
