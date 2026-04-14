@@ -1,3 +1,6 @@
+import { LuUserSearch } from "react-icons/lu";
+import { FaTools } from "react-icons/fa";
+
 export default function Step_1({ handleChange , form }) {
     return (
         <div>
@@ -20,8 +23,8 @@ export default function Step_1({ handleChange , form }) {
 
                     <div className="rounded-2xl border-2 border-slate-100 bg-white p-5 text-center transition-all hover:bg-slate-50 peer-checked:border-[#FF781F] peer-checked:bg-orange-50/30">
 
-                        <div className="mx-auto flex h-12 w-12 items-center justify-center text-[#FF781F] mb-2">
-                            {/* icon */}
+                        <div className="mx-auto flex h-12 w-12 items-center justify-center text-[#94A3B8] mb-2">
+                            <LuUserSearch size={35} />
                         </div>
 
                         <h4 className="font-bold text-slate-800">Client</h4>
@@ -47,8 +50,8 @@ export default function Step_1({ handleChange , form }) {
 
                     <div className="rounded-2xl border-2 border-slate-100 bg-white p-5 text-center transition-all hover:bg-slate-50 peer-checked:border-[#FF781F] peer-checked:bg-orange-50/30">
 
-                        <div className="mx-auto flex h-12 w-12 items-center justify-center text-slate-400 peer-checked:text-[#FF781F] mb-2">
-                            {/* icon */}
+                        <div className="mx-auto flex h-12 w-12 items-center justify-center text-[#94A3B8] mb-2">
+                            <FaTools size={35} />
                         </div>
 
                         <h4 className="font-bold text-slate-800">Pro</h4>
