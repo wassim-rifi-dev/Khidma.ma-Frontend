@@ -2,7 +2,7 @@ import { FiUser, FiMail, FiPhone } from 'react-icons/fi';
 import { MdLockOutline, MdLockReset } from 'react-icons/md';
 import { FaArrowRight } from 'react-icons/fa';
 
-export default function StepSimpleInfo({form , handleChange}) {
+export default function StepSimpleInfo({form , handleChange , setStep}) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
             <div className="text-center mb-8">
@@ -108,6 +108,7 @@ export default function StepSimpleInfo({form , handleChange}) {
 
                 <button
                     className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
+                    onClick={() => setStep(3)}
                     disabled={!form.name.trim() && !form.email.trim() && !form.phone.trim() && !form.password.trim() && !form.password_confirmation.trim()}
                 >
                     Continue
