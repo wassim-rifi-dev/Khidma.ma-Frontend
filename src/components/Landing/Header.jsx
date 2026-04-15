@@ -15,10 +15,12 @@ export default function Header({isDark , toogleDark}) {
                     'bg-white border-[#E2E8F0]'
                 }
             `}>
-                {isDark ? 
-                    <img src={logoDark} alt="Logo" className="h-14 w-auto" /> :
-                    <img src={logoLight} alt="Logo" className="h-14 w-auto" />
-                }
+                <Link to={'/'}>
+                    {isDark ? 
+                        <img src={logoDark} alt="Logo" className="h-14 w-auto" /> :
+                        <img src={logoLight} alt="Logo" className="h-14 w-auto" />
+                    }
+                </Link>
 
                 <nav className={`hidden md:flex items-center gap-8 font-bold text-[15px] ${
                     isDark ? 'text-white' : 'text-[#475569]'

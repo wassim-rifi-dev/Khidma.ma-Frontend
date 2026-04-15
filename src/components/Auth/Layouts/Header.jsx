@@ -7,7 +7,9 @@ export default function Header() {
     return (
         <header className="bg-white py-4 px-6 md:px-12 flex justify-between items-center w-full shadow-sm">
 
-            <img src={logoLight} alt="Logo" className="h-12 w-auto" />
+            <Link to={'/'}>
+                <img src={logoLight} alt="Logo" className="h-12 w-auto" />
+            </Link>
 
             <div className="flex items-center space-x-6 text-sm md:text-base font-medium">
                 {
