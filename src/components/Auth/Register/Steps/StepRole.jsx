@@ -76,6 +76,7 @@ export default function StepRole({form , handleChange , setStep}) {
             <button
                 className="mt-8 w-full flex items-center justify-center gap-2 bg-[#FF781F] hover:bg-[#e96d17] text-white font-semibold py-3 rounded-xl transition"
                 onClick={() => setStep(2)}
+                disabled={form.role === 'client' || form.role === 'professional' ? false : true}
             >
                 Continue
                 <FaArrowRight size={14} />
