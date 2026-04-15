@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRegisterForm } from "../../../hooks/useRegisterForm";
 import StepRole from "./Steps/StepRole";
 import StepSimpleInfo from "./Steps/StepSimpleInfo";
+import StepProInfo from "./Steps/StepProInfo";
 
 export default function RegisterForm() {
     const { form , handleChange , handleSubmit } = useRegisterForm();
@@ -13,6 +14,11 @@ export default function RegisterForm() {
                 return <StepRole form={form} handleChange={handleChange} setStep={setStep}  />
             case 2:
                 return <StepSimpleInfo form={form} handleChange={handleChange} setStep={setStep} />
+            case 3:
+                if (form.role === 'professionel') {
+                    return <StepProInfo />
+                }
+                break;
             default:
                 return null;
         }
