@@ -1,7 +1,7 @@
 import { FiChevronDown, FiMapPin } from 'react-icons/fi';
 import { services } from '../../../../data/Services';
 
-export default function StepProInfo({ form, handleChange }) {
+export default function StepProInfo({ form, handleChange, setStep }) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 md:p-8">
 
@@ -95,6 +95,7 @@ export default function StepProInfo({ form, handleChange }) {
 
                 <button
                     type="button"
+                    onClick={() => {setStep(2)}}
                     className="w-full py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
                 >
                     Back
