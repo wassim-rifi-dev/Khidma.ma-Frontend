@@ -12,7 +12,7 @@ export default function RegisterForm() {
             case 1:
                 return <StepRole form={form} handleChange={handleChange} setStep={setStep}  />
             case 2:
-                return <StepSimpleInfo form={form} />
+                return <StepSimpleInfo form={form} handleChange={handleChange} />
             default:
                 return null;
         }

@@ -2,7 +2,7 @@ import { FiUser, FiMail, FiPhone } from 'react-icons/fi';
 import { MdLockOutline, MdLockReset } from 'react-icons/md';
 import { FaArrowRight } from 'react-icons/fa';
 
-export default function StepSimpleInfo({form}) {
+export default function StepSimpleInfo({form , handleChange}) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
             <div className="text-center mb-8">
@@ -26,6 +26,7 @@ export default function StepSimpleInfo({form}) {
                             name='name'
                             placeholder="John Doe"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
@@ -41,6 +42,7 @@ export default function StepSimpleInfo({form}) {
                             name='email'
                             placeholder="john@example.com"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
@@ -56,6 +58,7 @@ export default function StepSimpleInfo({form}) {
                             name='phone'
                             placeholder="+212 600 000000"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
@@ -72,6 +75,7 @@ export default function StepSimpleInfo({form}) {
                                 name='password'
                                 placeholder="••••••••"
                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -87,6 +91,7 @@ export default function StepSimpleInfo({form}) {
                                 name='password_confirmation'
                                 placeholder="••••••••"
                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
