@@ -2,17 +2,33 @@ import { useState } from "react";
 import * as authServices from '../services/authServices';
 import { AuthContext } from "./AuthContext";
 
-export default function AuthProvider({children}) {
-    const [user , setUser] = useState(null);
+export default function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
 
     async function register(data) {
         try {
             const res = await authServices.registerUser(data);
 
-            const {user , token} = res.data;
+            const { user, token } = res.data;
 
-            localStorage.setItem("token" , token);
-            
+            localStorage.setItem("token", token);
+
+            setUser(user);
+
+            return res;
+        } catch (error) {
+            throw error.response?.data || error.message;
+        }
+    }
+
+    async function login(data) {
+        try {
+            const res = await authServices.loginUser(data);
+
+            const { user, token } = res.data;
+
+            localStorage.setItem("token", token);
+
             setUser(user);
 
             return res;
@@ -22,8 +38,8 @@ export default function AuthProvider({children}) {
     }
 
     return (
-        <AuthContext.Provider value={{ user , register }} >
-            { children }
+        <AuthContext.Provider value={{ user, register, login }} >
+            {children}
         </AuthContext.Provider>
     )
 
