@@ -3,8 +3,8 @@ import { useRegisterForm } from "../../../hooks/useRegisterForm";
 import StepRole from "./Steps/StepRole";
 
 export default function RegisterForm() {
+    const { form , handleChange , handleSubmit } = useRegisterForm();
     const [step , setStep] = useState(1);
-    const {form , handleChange , handleSubmit} = useRegisterForm();
 
     function renderStep() {
         switch (step) {
@@ -14,7 +14,7 @@ export default function RegisterForm() {
                 return null;
         }
     }
-    
+
     return (
         <form onSubmit={handleSubmit}>
             {
