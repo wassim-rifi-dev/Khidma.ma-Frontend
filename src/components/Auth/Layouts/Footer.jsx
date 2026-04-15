@@ -20,7 +20,7 @@ export default function Footer() {
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-sm text-slate-400">
-                    <p>&copy; 2024 Khidma.ma. All rights reserved.</p>
+                    <p>&copy; 2026 Khidma.ma. All rights reserved.</p>
 
                     <div class="flex space-x-6">
                         <a href="#" class="hover:underline">Terms of Service</a>
