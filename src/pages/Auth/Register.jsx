@@ -1,11 +1,9 @@
-import LeftSection from "../../components/Auth/LeftSection"
-import RegisterForm from "../../components/Auth/Register/RightSection"
+import Header from "../../components/Auth/Layouts/Header"
 
 export default function Register() {
     return (
-        <div className="flex  items-center">
-            <LeftSection />
-            <RegisterForm />
+        <div className="flex flex-col">
+            <Header />
         </div>
     )
 }
