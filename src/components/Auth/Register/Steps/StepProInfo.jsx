@@ -1,4 +1,5 @@
 import { FiChevronDown, FiMapPin } from 'react-icons/fi';
+import { services } from '../../../../data/Services';
 
 export default function StepProInfo() {
     return (
@@ -23,9 +24,11 @@ export default function StepProInfo() {
                             defaultValue=""
                         >
                             <option value="" disabled>Select a category</option>
-                            <option value="tech">Technology</option>
-                            <option value="design">Design</option>
-                            <option value="marketing">Marketing</option>
+                            {
+                                services.map((service , index) => (
+                                    <option key={index} value={service.value}>{service.title}</option>
+                                ))
+                            }
                         </select>
                         <FiChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none" />
                     </div>
