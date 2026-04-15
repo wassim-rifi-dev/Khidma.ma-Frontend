@@ -5,7 +5,7 @@ export default function Header() {
     const location = useLocation();
 
     return (
-        <header class="bg-[#F8F9FA] py-4 px-6 md:px-12 flex justify-between items-center w-full shadow-sm">
+        <header class="bg-white py-4 px-6 md:px-12 flex justify-between items-center w-full shadow-sm">
 
             <img src={logoLight} alt="Logo" className="h-12 w-auto" />
 
