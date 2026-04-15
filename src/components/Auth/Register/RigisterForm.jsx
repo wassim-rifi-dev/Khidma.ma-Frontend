@@ -15,9 +15,9 @@ export default function RegisterForm() {
             case 2:
                 return <StepSimpleInfo form={form} handleChange={handleChange} setStep={setStep} />
             case 3:
-                if (form.role === 'professionel') {
+                if (form.role === 'professional') {
                     return <StepProInfo />
-                }
+                } 
                 break;
             default:
                 return null;
