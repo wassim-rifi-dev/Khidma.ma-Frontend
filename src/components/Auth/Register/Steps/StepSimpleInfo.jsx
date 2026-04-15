@@ -23,6 +23,7 @@ export default function StepSimpleInfo() {
                         <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                         <input
                             type="text"
+                            name='name'
                             placeholder="John Doe"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                         />
@@ -37,6 +38,7 @@ export default function StepSimpleInfo() {
                         <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                         <input
                             type="email"
+                            name='email'
                             placeholder="john@example.com"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                         />
@@ -51,6 +53,7 @@ export default function StepSimpleInfo() {
                         <FiPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                         <input
                             type="tel"
+                            name='phone'
                             placeholder="+212 600 000000"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                         />
@@ -66,6 +69,7 @@ export default function StepSimpleInfo() {
                             <MdLockOutline className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                             <input
                                 type="password"
+                                name='password'
                                 placeholder="••••••••"
                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             />
@@ -80,6 +84,7 @@ export default function StepSimpleInfo() {
                             <MdLockReset className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                             <input
                                 type="password"
+                                name='password_confirmation'
                                 placeholder="••••••••"
                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             />
