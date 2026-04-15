@@ -17,7 +17,11 @@ export function useRegisterForm() {
     });
 
     function handleChange(e) {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const newForm = { ...form, [e.target.name]: e.target.value };
+        
+        console.log(newForm);
+        
+        setForm(newForm);
     }
 
     async function handleSubmit(e) {

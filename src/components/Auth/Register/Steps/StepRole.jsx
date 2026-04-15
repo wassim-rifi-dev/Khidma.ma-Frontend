@@ -1,7 +1,7 @@
 import { FiTool, FiCheck } from "react-icons/fi";
 import { FaArrowRight , FaRegUser } from "react-icons/fa";
 
-export default function StepRole() {
+export default function StepRole({form , handleChange}) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
 
@@ -22,6 +22,8 @@ export default function StepRole() {
                         name="role"
                         value="client"
                         className="peer sr-only"
+                        checked={form.role === 'client'}
+                        onClick={handleChange}
                     />
 
                     <div className="relative p-6 rounded-2xl border-2 border-[#F3F4F6] bg-white transition-all peer-checked:border-[#FF781F] peer-checked:bg-[#FFF7ED]">
@@ -47,6 +49,8 @@ export default function StepRole() {
                         name="role"
                         value="professional"
                         className="peer sr-only"
+                        checked={form.role === 'professional'}
+                        onClick={handleChange}
                     />
 
                     <div className="relative p-6 rounded-2xl border-2 border-[#F3F4F6] bg-white transition-all peer-checked:border-[#FF781F] peer-checked:bg-[#FFF7ED]">
