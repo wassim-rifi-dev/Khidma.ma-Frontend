@@ -1,4 +1,5 @@
 import { FiChevronDown, FiMapPin } from 'react-icons/fi';
+import { FaArrowRight } from 'react-icons/fa';
 import { services } from '../../../../data/Services';
 
 export default function StepProInfo() {
@@ -62,6 +63,21 @@ export default function StepProInfo() {
                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors resize-none"
                     ></textarea>
                 </div>
+            </div>
+            <div className='grid grid-cols-3 gap-5'>
+                <button
+                    type="button"
+                    className="mt-8 w-full bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
+                >
+                    Back
+                </button>
+
+                <button
+                    className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
+                >
+                    Continue
+                    <FaArrowRight size={14} />
+                </button>
             </div>
         </div>
     )
