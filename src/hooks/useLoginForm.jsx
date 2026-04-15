@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { AuthContext } from "../context/AuthContext";
 
 export function useLoginForm() {
-    const {register} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
 
     const [form , setForm] = useState({
         email: '',
@@ -22,7 +22,7 @@ export function useLoginForm() {
         e.preventDefault();
 
         try {
-            await register(form);
+            await login(form);
 
             window.location.href = '/home';
         } catch (err) {
