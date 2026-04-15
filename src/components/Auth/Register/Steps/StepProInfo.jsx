@@ -1,5 +1,4 @@
 import { FiChevronDown, FiMapPin } from 'react-icons/fi';
-import { FaArrowRight } from 'react-icons/fa';
 import { services } from '../../../../data/Services';
 
 export default function StepProInfo({form , handleChange}) {
@@ -84,7 +83,6 @@ export default function StepProInfo({form , handleChange}) {
                     className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
                 >
                     Enregistrer
-                    <FaArrowRight size={14} />
                 </button>
             </div>
         </div>

@@ -112,14 +112,24 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                     Back
                 </button>
 
-                <button
-                    className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
-                    onClick={() => setStep(3)}
-                    disabled={!form.name.trim() && !form.email.trim() && !form.phone.trim() && !form.password.trim() && !form.password_confirmation.trim()}
-                >
-                    Continue
-                    <FaArrowRight size={14} />
-                </button>
+                {
+                    form.role === 'professional' ? 
+                        <button
+                            className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
+                            onClick={() => setStep(3)}
+                            disabled={!form.name.trim() && !form.email.trim() && !form.phone.trim() && !form.password.trim() && !form.password_confirmation.trim()}
+                        >
+                            Continue
+                            <FaArrowRight size={14} />
+                        </button> :
+                        <button
+                            type='submit'
+                            className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
+                            disabled={!form.name.trim() && !form.email.trim() && !form.phone.trim() && !form.password.trim() && !form.password_confirmation.trim()}
+                        >
+                            Enregistre
+                        </button> 
+                }
             </div>
         </div>
     )
