@@ -3,7 +3,6 @@ import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
 import { useLoginForm } from '../../../hooks/useLoginForm';
 
 export default function LoginForm() {
-
     const [showPassword, setShowPassword] = useState(false);
     const { form, handleChange, handleSubmit } = useLoginForm();
 
@@ -23,7 +22,6 @@ export default function LoginForm() {
 
             <form className="w-full space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
 
-                {/* Email */}
                 <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">
                         Email
@@ -43,7 +41,6 @@ export default function LoginForm() {
                     </div>
                 </div>
 
-                {/* Password */}
                 <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">
                         Password
@@ -76,7 +73,6 @@ export default function LoginForm() {
                     </div>
                 </div>
 
-                {/* Remember */}
                 <div className="flex items-center justify-between pt-1">
 
                     <label className="flex items-center gap-2 cursor-pointer group">
@@ -99,7 +95,6 @@ export default function LoginForm() {
 
                 </div>
 
-                {/* Button */}
                 <button
                     className="mt-4 sm:mt-6 w-full flex items-center justify-center gap-2 bg-[#f97316] text-white font-bold py-3 sm:py-3.5 rounded-xl shadow-[0_8px_20px_-6px_rgba(249,115,22,0.5)] hover:bg-[#ea580c] transition-all disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:shadow-none"
                 >
@@ -123,10 +118,7 @@ export default function LoginForm() {
                         Register
                     </a>
                 </p>
-
             </div>
-
         </div>
-
     )
 }

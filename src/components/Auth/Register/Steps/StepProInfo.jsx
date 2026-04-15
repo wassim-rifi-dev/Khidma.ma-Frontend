@@ -17,7 +17,6 @@ export default function StepProInfo({ form, handleChange, setStep }) {
 
             <div className="max-w-md w-full mx-auto space-y-4 sm:space-y-5">
 
-                {/* Category */}
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                         Service Category
@@ -46,8 +45,6 @@ export default function StepProInfo({ form, handleChange, setStep }) {
                     </div>
                 </div>
 
-
-                {/* City */}
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                         City
@@ -70,8 +67,6 @@ export default function StepProInfo({ form, handleChange, setStep }) {
                     </div>
                 </div>
 
-
-                {/* Description */}
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                         Professional Description
@@ -89,8 +84,6 @@ export default function StepProInfo({ form, handleChange, setStep }) {
 
             </div>
 
-
-            {/* Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-6">
 
                 <button
