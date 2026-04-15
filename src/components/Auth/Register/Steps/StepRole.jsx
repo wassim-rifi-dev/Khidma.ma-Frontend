@@ -1,4 +1,4 @@
-import { FiTool, FiCheck } from "react-icons/fi";
+import { FiTool } from "react-icons/fi";
 import { FaArrowRight, FaRegUser } from "react-icons/fa";
 
 export default function StepRole({ form, handleChange, setStep }) {
