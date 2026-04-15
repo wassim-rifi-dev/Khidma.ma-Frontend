@@ -1,7 +1,7 @@
 import { FiTool, FiCheck } from "react-icons/fi";
-import { FaArrowRight , FaRegUser } from "react-icons/fa";
+import { FaArrowRight, FaRegUser } from "react-icons/fa";
 
-export default function StepRole({form , handleChange , setStep}) {
+export default function StepRole({ form, handleChange, setStep }) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
 
@@ -74,9 +74,9 @@ export default function StepRole({form , handleChange , setStep}) {
             </div>
 
             <button
-                className="mt-8 w-full flex items-center justify-center gap-2 bg-[#FF781F] hover:bg-[#e96d17] text-white font-semibold py-3 rounded-xl transition"
+                className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300"
                 onClick={() => setStep(2)}
-                disabled={form.role === 'client' || form.role === 'professional' ? false : true}
+                disabled={form.role !== 'client' && form.role !== 'professional'}
             >
                 Continue
                 <FaArrowRight size={14} />
