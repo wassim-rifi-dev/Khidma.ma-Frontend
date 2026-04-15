@@ -17,11 +17,7 @@ export function useRegisterForm() {
     });
 
     function handleChange(e) {
-        const newForm = { ...form, [e.target.name]: e.target.value };
-        
-        console.log(newForm);
-        
-        setForm(newForm);
+        setForm({ ...form, [e.target.name]: e.target.value });
     }
 
     async function handleSubmit(e) {
@@ -29,6 +25,8 @@ export function useRegisterForm() {
 
         try {
             await register(form);
+
+            window.location.href = '/home';
         } catch (err) {
             console.error("Error : " , err);
         }
