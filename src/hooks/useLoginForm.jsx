@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/AuthContext";
 
-export function useRegisterForm() {
+export function useLoginForm() {
     const {register} = useContext(AuthContext);
 
     const [form , setForm] = useState({
@@ -10,7 +10,12 @@ export function useRegisterForm() {
     });
 
     function handleChange(e) {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const f = { ...form, [e.target.name]: e.target.value };
+
+        console.log(f);
+        
+
+        setForm(f);
     }
 
     async function handleSubmit(e) {
