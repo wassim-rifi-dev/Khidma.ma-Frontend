@@ -2,83 +2,99 @@ import { FiUser, FiMail, FiPhone } from 'react-icons/fi';
 import { MdLockOutline, MdLockReset } from 'react-icons/md';
 import { FaArrowRight } from 'react-icons/fa';
 
-export default function StepSimpleInfo({form , handleChange , setStep}) {
+export default function StepSimpleInfo({ form, handleChange, setStep }) {
     return (
-        <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
-            <div className="text-center mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-slate-800">
+        <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 md:p-8">
+
+            <div className="text-center mb-6 sm:mb-8">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800">
                     Your Information
                 </h2>
-                <p className="text-slate-500 text-sm mt-1">
+
+                <p className="text-slate-500 text-xs sm:text-sm mt-1">
                     Please provide your details to complete your profile.
                 </p>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
+
+                {/* Name */}
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                         Full Name
                     </label>
+
                     <div className="relative">
                         <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+
                         <input
                             type="text"
-                            name='name'
+                            name="name"
                             value={form.name}
                             placeholder="John Doe"
-                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
                         />
                     </div>
                 </div>
 
+                {/* Email */}
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                         Email Address
                     </label>
+
                     <div className="relative">
                         <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+
                         <input
                             type="email"
-                            name='email'
+                            name="email"
                             value={form.email}
                             placeholder="john@example.com"
-                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
                         />
                     </div>
                 </div>
 
+                {/* Phone */}
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                         Phone Number
                     </label>
+
                     <div className="relative">
                         <FiPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+
                         <input
                             type="tel"
-                            name='phone'
+                            name="phone"
                             value={form.phone}
                             placeholder="+212 600 000000"
-                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
                         />
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                {/* Passwords */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
                     <div>
                         <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                             Password
                         </label>
+
                         <div className="relative">
                             <MdLockOutline className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+
                             <input
                                 type="password"
-                                name='password'
+                                name="password"
                                 value={form.password}
                                 placeholder="••••••••"
-                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                                 onChange={handleChange}
                             />
                         </div>
@@ -88,49 +104,71 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                         <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                             Confirm Password
                         </label>
+
                         <div className="relative">
                             <MdLockReset className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
+
                             <input
                                 type="password"
-                                name='password_confirmation'
+                                name="password_confirmation"
                                 value={form.password_confirmation}
                                 placeholder="••••••••"
-                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                                 onChange={handleChange}
                             />
                         </div>
                     </div>
+
                 </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-5'>
+            {/* Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-6">
+
                 <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="mt-8 w-full bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
+                    className="w-full py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
                 >
                     Back
                 </button>
 
                 {
-                    form.role === 'professional' ? 
+                    form.role === 'professional' ?
+
                         <button
-                            className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
+                            className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"
                             onClick={() => setStep(3)}
-                            disabled={!form.name.trim() && !form.email.trim() && !form.phone.trim() && !form.password.trim() && !form.password_confirmation.trim()}
+                            disabled={
+                                !form.name.trim() ||
+                                !form.email.trim() ||
+                                !form.phone.trim() ||
+                                !form.password.trim() ||
+                                !form.password_confirmation.trim()
+                            }
                         >
                             Continue
                             <FaArrowRight size={14} />
-                        </button> :
+                        </button>
+
+                        :
+
                         <button
-                            type='submit'
-                            className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
-                            disabled={!form.name.trim() && !form.email.trim() && !form.phone.trim() && !form.password.trim() && !form.password_confirmation.trim()}
+                            type="submit"
+                            className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"
+                            disabled={
+                                !form.name.trim() ||
+                                !form.email.trim() ||
+                                !form.phone.trim() ||
+                                !form.password.trim() ||
+                                !form.password_confirmation.trim()
+                            }
                         >
                             Enregistre
-                        </button> 
+                        </button>
                 }
+
             </div>
         </div>
-    )
+    );
 }
