@@ -24,6 +24,7 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                         <input
                             type="text"
                             name='name'
+                            value={form.name}
                             placeholder="John Doe"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
@@ -40,6 +41,7 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                         <input
                             type="email"
                             name='email'
+                            value={form.email}
                             placeholder="john@example.com"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
@@ -56,6 +58,7 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                         <input
                             type="tel"
                             name='phone'
+                            value={form.phone}
                             placeholder="+212 600 000000"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
@@ -73,6 +76,7 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                             <input
                                 type="password"
                                 name='password'
+                                value={form.password}
                                 placeholder="••••••••"
                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                                 onChange={handleChange}
@@ -89,6 +93,7 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
                             <input
                                 type="password"
                                 name='password_confirmation'
+                                value={form.password_confirmation}
                                 placeholder="••••••••"
                                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                                 onChange={handleChange}
@@ -101,6 +106,7 @@ export default function StepSimpleInfo({form , handleChange , setStep}) {
             <div className='grid grid-cols-3 gap-5'>
                 <button
                     type="button"
+                    onClick={() => setStep(1)}
                     className="mt-8 w-full bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
                 >
                     Back
