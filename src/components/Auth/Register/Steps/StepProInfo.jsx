@@ -2,7 +2,7 @@ import { FiChevronDown, FiMapPin } from 'react-icons/fi';
 import { FaArrowRight } from 'react-icons/fa';
 import { services } from '../../../../data/Services';
 
-export default function StepProInfo() {
+export default function StepProInfo({form , handleChange}) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
             <div className="text-center mb-8">
@@ -22,7 +22,9 @@ export default function StepProInfo() {
                     <div className="relative">
                         <select
                             className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-500 appearance-none focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors cursor-pointer"
-                            defaultValue=""
+                            name='category'
+                            value={form.category}
+                            onChange={handleChange}
                         >
                             <option value="" disabled>Select a category</option>
                             {
@@ -42,7 +44,9 @@ export default function StepProInfo() {
                     <div className="relative">
                         <select
                             className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-500 appearance-none focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors cursor-pointer"
-                            defaultValue=""
+                            name='city'
+                            value={form.city}
+                            onChange={handleChange}
                         >
                             <option value="" disabled>Select your city</option>
                             <option value="casablanca">Casablanca</option>
@@ -58,6 +62,9 @@ export default function StepProInfo() {
                         Professional Description
                     </label>
                     <textarea
+                            name='description'
+                            value={form.description}
+                            onChange={handleChange}
                         rows="4"
                         placeholder="Briefly describe your experience and the specific services you offer..."
                         className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors resize-none"
@@ -73,9 +80,10 @@ export default function StepProInfo() {
                 </button>
 
                 <button
+                    type='submit'
                     className="mt-8 w-full flex items-center justify-center gap-2  bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 col-span-2"
                 >
-                    Continue
+                    Enregistrer
                     <FaArrowRight size={14} />
                 </button>
             </div>
