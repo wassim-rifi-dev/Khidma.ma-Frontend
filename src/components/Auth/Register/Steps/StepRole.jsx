@@ -23,7 +23,7 @@ export default function StepRole({form , handleChange}) {
                         value="client"
                         className="peer sr-only"
                         checked={form.role === 'client'}
-                        onClick={handleChange}
+                        onChange={handleChange}
                     />
 
                     <div className="relative p-6 rounded-2xl border-2 border-[#F3F4F6] bg-white transition-all peer-checked:border-[#FF781F] peer-checked:bg-[#FFF7ED]">
@@ -50,7 +50,7 @@ export default function StepRole({form , handleChange}) {
                         value="professional"
                         className="peer sr-only"
                         checked={form.role === 'professional'}
-                        onClick={handleChange}
+                        onChange={handleChange}
                     />
 
                     <div className="relative p-6 rounded-2xl border-2 border-[#F3F4F6] bg-white transition-all peer-checked:border-[#FF781F] peer-checked:bg-[#FFF7ED]">
