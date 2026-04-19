@@ -1,4 +1,3 @@
-import Register from "./pages/Auth/Register";
 import AuthProvider from "./context/AuthProvider";
 import AppRoutes from "./routes/AppRoutes";
 import { BrowserRouter } from "react-router-dom";
