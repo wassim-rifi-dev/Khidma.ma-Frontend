@@ -5,7 +5,9 @@ export function useRegisterForm() {
     const {register} = useContext(AuthContext);
 
     const [form , setForm] = useState({
-        name: '',
+        first_name: '',
+        last_name: '',
+        username: '',
         email: '',
         phone: '',
         role: '',
