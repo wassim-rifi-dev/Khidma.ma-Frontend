@@ -1,5 +1,4 @@
 import {Route, Routes} from 'react-router-dom';
-import { ModeContext } from '../context/ModeContext';
 import Landing from '../pages/Landing';
 import Register from '../pages/Auth/Register';
 import Login from '../pages/Auth/Login';

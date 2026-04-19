@@ -21,9 +21,51 @@ export default function StepSimpleInfo({ form, handleChange, setStep }) {
 
             <div className="space-y-4 sm:space-y-5">
 
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                    <div>
+                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                            First Name
+                        </label>
+
+                        <div className="relative">
+                            <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+
+                            <input
+                                name="first_name"
+                                type="text"
+                                value={form.first_name}
+                                placeholder="John"
+                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                            Last Name
+                        </label>
+
+                        <div className="relative">
+                            <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+
+                            <input
+                                type="text"
+                                name="last_name"
+                                value={form.last_name}
+                                placeholder="Doe"
+                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 tracking-widest focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+
+                </div>
+
                 <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                        Full Name
+                        Username
                     </label>
 
                     <div className="relative">
@@ -31,9 +73,9 @@ export default function StepSimpleInfo({ form, handleChange, setStep }) {
 
                         <input
                             type="text"
-                            name="name"
-                            value={form.name}
-                            placeholder="John Doe"
+                            name="username"
+                            value={form.username}
+                            placeholder="johndoe"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                             onChange={handleChange}
                         />
@@ -160,7 +202,9 @@ export default function StepSimpleInfo({ form, handleChange, setStep }) {
                             className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"
                             onClick={() => setStep(3)}
                             disabled={
-                                !form.name.trim() ||
+                                !form.first_name.trim() ||
+                                !form.last_name.trim() ||
+                                !form.username.trim() ||
                                 !form.email.trim() ||
                                 !form.phone.trim() ||
                                 !form.password.trim() ||
@@ -177,7 +221,9 @@ export default function StepSimpleInfo({ form, handleChange, setStep }) {
                             type="submit"
                             className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"
                             disabled={
-                                !form.name.trim() ||
+                                !form.first_name.trim() ||
+                                !form.last_name.trim() ||
+                                !form.username.trim() ||
                                 !form.email.trim() ||
                                 !form.phone.trim() ||
                                 !form.password.trim() ||
