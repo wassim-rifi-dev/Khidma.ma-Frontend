@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as authServices from '../services/authServices';
 import { AuthContext } from "./AuthContext";
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            authServices.getMe()
+                .then(res => setUser(res.data.user))
+                .catch(()=>{
+                    localStorage.removeItem("token");
+                });
+        }
+    } , [])
 
     async function register(data) {
         try {
