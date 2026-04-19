@@ -1,8 +1,10 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function useRegisterForm() {
     const {register} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [form , setForm] = useState({
         first_name: '',
@@ -28,7 +30,7 @@ export function useRegisterForm() {
         try {
             await register(form);
 
-            window.location.href = '/home';
+            navigate('/home');
         } catch (err) {
             console.error("Error : " , err);
         }

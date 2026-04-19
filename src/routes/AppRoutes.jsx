@@ -17,11 +17,10 @@ export default function AppRoutes() {
             <Route path='/' element={<Landing isDark={dark} toogleDark={changeMode} />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
-            {/* <Route path='/home' element={<Home />} /> */}
 
             {/* Private Route */}
             <Route path='/home' element={
-                <RoleRoutes allowedRole={['client']}> <Home /> </RoleRoutes>
+                <IsAuthRoute> <HomeRoute /> </IsAuthRoute>
             } />
         </Routes>
     )

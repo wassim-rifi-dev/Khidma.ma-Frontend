@@ -17,12 +17,3 @@ export async function loginUser(data) {
         throw error.response?.data || error.message;
     }
 }
-
-export async function getMe() {
-    try {
-        const response = await api.get('/user/profile');
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-}
