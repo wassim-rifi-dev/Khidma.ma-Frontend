@@ -5,6 +5,8 @@ import Login from '../pages/Auth/Login';
 import { useDarkMode } from '../hooks/useDarkMode';
 import HomeRoute from './HomeRoute';
 import IsAuthRoute from './IsAuthRoutes';
+import RoleRoutes from './RoleRoutes';
+import Home from '../pages/Client/Home';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -15,13 +17,12 @@ export default function AppRoutes() {
             <Route path='/' element={<Landing isDark={dark} toogleDark={changeMode} />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/home' element={<Home />} />
 
             {/* Private Route */}
-            <Route path='/home' element={
-                <IsAuthRoute>
-                    <HomeRoute />
-                </IsAuthRoute>
-            } />
+            {/* <Route path='/home' element={
+                <RoleRoutes allowedRole={['client']}> <Home /> </RoleRoutes>
+            } /> */}
         </Routes>
     )
 }

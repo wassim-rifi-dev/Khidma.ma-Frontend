@@ -14,6 +14,8 @@ export default function AuthProvider({ children }) {
             localStorage.setItem("token", token);
 
             setUser(user);
+            console.log(user);
+            
 
             return res;
         } catch (error) {
