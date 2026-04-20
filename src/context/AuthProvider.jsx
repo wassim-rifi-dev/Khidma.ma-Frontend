@@ -34,9 +34,6 @@ export default function AuthProvider({ children }) {
 
             const { user, token } = res.data;
 
-            console.log("Res : " , res);
-            
-
             localStorage.setItem("token", token);
 
             setUser(user);
@@ -63,8 +60,22 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    async function logout() {
+        try {
+            const res = await authServices.logoutUser();
+
+            localStorage.removeItem("token");
+
+            setUser(null);
+
+            return res;
+        } catch (error) {
+            throw error.response?.data || error.message;
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ user, loading, register, login }} >
+        <AuthContext.Provider value={{ user, loading, register, login , logout }} >
             {children}
         </AuthContext.Provider>
     )

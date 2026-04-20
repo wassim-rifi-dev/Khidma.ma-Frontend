@@ -1,8 +1,10 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function useLoginForm() {
-    const {login} = useContext(AuthContext);
+    const {user , login} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [form , setForm] = useState({
         email: '',
@@ -24,7 +26,14 @@ export function useLoginForm() {
         try {
             await login(form);
 
-            window.location.href = '/home';
+            switch (user.role) {
+                case 'client':
+                    navigate('/client/home');
+                    break;
+                case 'professionale':
+                    navigate('professional/home');
+                    break;
+            }
         } catch (err) {
             console.error("Error : " , err);
         }

@@ -12,7 +12,7 @@ import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 export default function Header({ isDark, toogleDark }) {
     const [menuOpen, toggleMenu] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { user , logout } = useContext(AuthContext);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
 
@@ -27,6 +27,7 @@ export default function Header({ isDark, toogleDark }) {
     }, []);
 
     const handleLogout = () => {
+        logout();
         navigate("/login");
     };
 
