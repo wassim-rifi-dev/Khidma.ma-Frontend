@@ -4,6 +4,8 @@ import { AuthContext } from "../../context/AuthContext";
 import Hero from "../../components/Client/Home/Hero";
 import PopularServices from "../../components/Client/Home/PopularServices";
 import TopProfessional from "../../components/Client/Home/TopProfessional";
+import MyRequest from "../../components/Client/Home/MyRequest";
+import Footer from "../../components/Landing/Footer";
 
 export default function Home({isDark , toogleDark}) {
     const { user } = useContext(AuthContext);
@@ -20,7 +22,10 @@ export default function Home({isDark , toogleDark}) {
                 <Hero />
                 <PopularServices />
                 <TopProfessional />
+                <MyRequest />
             </main>
+
+            <Footer />
         </div>
     )
 }
