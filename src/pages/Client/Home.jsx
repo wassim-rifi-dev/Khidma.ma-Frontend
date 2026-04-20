@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import Header from "../../components/Client/Home/Header";
 import { AuthContext } from "../../context/AuthContext";
 import Hero from "../../components/Client/Home/Hero";
+import PopularServices from "../../components/Client/Home/PopularServices";
 
 export default function Home({isDark , toogleDark}) {
     const { user } = useContext(AuthContext);
@@ -16,6 +17,7 @@ export default function Home({isDark , toogleDark}) {
 
             <main className="mt-18">
                 <Hero />
+                <PopularServices />
             </main>
         </div>
     )
