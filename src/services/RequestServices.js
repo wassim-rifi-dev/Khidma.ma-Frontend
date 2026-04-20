@@ -8,3 +8,12 @@ export async function getClientRequest() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getLastThreeClientRequest() {
+    try {
+        const response = await api.get('client/request/latest');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
