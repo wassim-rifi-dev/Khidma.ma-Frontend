@@ -17,7 +17,7 @@ export default function AuthProvider({ children }) {
 
             try {
                 const res = await authServices.getMe();
-                setUser(res.user);
+                setUser(res.data.user);
             } catch {
                 localStorage.removeItem("token");
             } finally {
@@ -32,7 +32,10 @@ export default function AuthProvider({ children }) {
         try {
             const res = await authServices.registerUser(data);
 
-            const { user, token } = res;
+            const { user, token } = res.data;
+
+            console.log("Res : " , res);
+            
 
             localStorage.setItem("token", token);
 

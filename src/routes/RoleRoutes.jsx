@@ -9,11 +9,11 @@ export default function RoleRoutes({ allowedRole, children }) {
 
     if (loading) return <div>Loading...</div>;
 
-    if (!token) {
-        return <Navigate to="/login" replace />
+    if (!token || !user) {
+        return <Navigate to="/login" replace />;
     }
 
-    if (!user || !allowedRole.includes(user.role)) {
+    if (!allowedRole.includes(user.role)) {
         return <Navigate to="/unauthorized" replace />
     }
 

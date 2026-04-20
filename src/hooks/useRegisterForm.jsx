@@ -22,6 +22,8 @@ export function useRegisterForm() {
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
+
+        console.log({ ...form, [e.target.name]: e.target.value });
     }
 
     async function handleSubmit(e) {
@@ -30,7 +32,14 @@ export function useRegisterForm() {
         try {
             await register(form);
 
-            navigate('/client/home');
+            switch (form.role) {
+                case 'client':
+                    navigate('/client/home');
+                    break;
+                case 'professionale':
+                    navigate('professional/home');
+                    break;
+            }
         } catch (err) {
             console.error("Error : " , err);
         }
