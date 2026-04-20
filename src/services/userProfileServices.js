@@ -8,3 +8,12 @@ export async function getInfo() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function updateInfo(data) {
+    try {
+        const response = await api.put('user/profile/update' , data);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
