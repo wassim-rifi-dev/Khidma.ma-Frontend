@@ -22,27 +22,38 @@ export default function Card({ request }) {
                 </span>
             </div>
 
-            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-1.5">
-                Kitchen Sink Repair
-            </h3>
+            {
+                request.status !== 'Nouveau' ? 
+                    <div className="flex items-center gap-1.5 mb-3">
+                        <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden">
+                            <img
+                                src="https://i.pravatar.cc/100?img=11"
+                                className="w-full h-full object-cover"
+                                alt="avatar"
+                            />
+                        </div>
 
-            <div className="flex items-center gap-1.5 mb-3">
-                <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden">
-                    <img
-                        src="https://i.pravatar.cc/100?img=11"
-                        className="w-full h-full object-cover"
-                        alt="avatar"
-                    />
-                </div>
+                        <span className="text-[11px] text-gray-600 font-medium">
+                            Brahim T.
+                        </span>
+                    </div> : 
+                    ''
+            }
 
-                <span className="text-[11px] text-gray-600 font-medium">
-                    Brahim T.
-                </span>
-            </div>
-
-            <button className="w-full bg-gray-50 text-gray-700 text-xs sm:text-sm font-semibold py-2 rounded-xl hover:bg-gray-100 transition">
-                Chat with Brahim
-            </button>
+            {
+                request.status === 'Nouveau' ? 
+                    <button className="w-full bg-gray-50 text-gray-700 text-xs sm:text-sm font-semibold py-2 rounded-xl hover:bg-gray-100 transition">
+                        Cancel Request
+                    </button> :
+                    (request.status === 'En_Cour' ?
+                        <button className="w-full bg-gray-50 text-gray-700 text-xs sm:text-sm font-semibold py-2 rounded-xl hover:bg-gray-100 transition">
+                            Chat with Brahim
+                        </button> :
+                        <button className="w-full bg-[#fff0ea] text-[#ff7e5f] text-xs sm:text-sm font-semibold py-2 rounded-xl hover:bg-[#ffe5dc] transition">
+                            Leave a Review
+                        </button>
+                    )
+            }
         </div>
     )
 }

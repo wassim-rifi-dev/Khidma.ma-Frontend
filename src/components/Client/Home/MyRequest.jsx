@@ -63,10 +63,6 @@ export default function MyRequest() {
                                 </span>
                             </div>
 
-                            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-1.5">
-                                Kitchen Sink Repair
-                            </h3>
-
                             <div className="flex items-center gap-1.5 mb-3">
                                 <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden">
                                     <img
@@ -97,10 +93,6 @@ export default function MyRequest() {
                                 </span>
                             </div>
 
-                            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-1.5">
-                                Living Room Painting
-                            </h3>
-
                             <div className="flex items-center gap-1.5 mb-3">
                                 <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden">
                                     <img
@@ -130,10 +122,6 @@ export default function MyRequest() {
                                     3 days ago
                                 </span>
                             </div>
-
-                            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-0.5">
-                                Garden Lighting Setup
-                            </h3>
 
                             <p className="text-gray-400 text-[10px] sm:text-xs mb-3">
                                 Waiting for pro acceptance...
