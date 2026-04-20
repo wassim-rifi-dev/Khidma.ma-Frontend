@@ -7,6 +7,7 @@ import logoDark from '../../../assets/logoDark.svg';
 import { useContext, useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
+import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 
 export default function Header({ isDark, toogleDark }) {
     const [menuOpen, toggleMenu] = useState(false);
@@ -28,6 +29,8 @@ export default function Header({ isDark, toogleDark }) {
     const handleLogout = () => {
         navigate("/login");
     };
+
+    const existeImage = user.photo;
 
     return (
         <header className="fixed top-0 left-0 w-full z-50">
@@ -87,11 +90,19 @@ export default function Header({ isDark, toogleDark }) {
                                 </p>
                             </div>
                             <div className="relative">
-                                <img
-                                    className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
-                                    src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                                    alt="Avatar"
-                                />
+                                {
+                                    existeImage ? 
+                                        <img
+                                            className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
+                                            src={`http://127.0.0.1:8000/storage/${user.photo}`}
+                                            alt="Avatar"
+                                        /> : 
+                                        <img
+                                            className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
+                                            src={defaultProfile}
+                                            alt="Avatar"
+                                        />
+                                }
                                 <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border-2 ${isDark ? 'border-[#0F172A]' : 'border-white'} bg-green-400`}></span>
                             </div>
                         </button>
@@ -105,11 +116,19 @@ export default function Header({ isDark, toogleDark }) {
                                 <div className={`px-4 py-4 flex items-center gap-3 border-b ${
                                     isDark ? 'border-[#334155]' : 'border-[#F1F5F9]'
                                 }`}>
-                                    <img
-                                        className="w-12 h-12 rounded-full object-cover border-2 border-orange-400"
-                                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                                        alt="Avatar"
-                                    />
+                                    {
+                                    existeImage ? 
+                                        <img
+                                            className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
+                                            src={`http://127.0.0.1:8000/storage/${user.photo}`}
+                                            alt="Avatar"
+                                        /> : 
+                                        <img
+                                            className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
+                                            src={defaultProfile}
+                                            alt="Avatar"
+                                        />
+                                    }
                                     <div>
                                         <p className={`font-bold text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>
                                             {user.first_name} {user.last_name}
