@@ -1,10 +1,21 @@
-export default function Card() {
+export default function Card({ request }) {
     return (
         <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-50">
             <div className="flex justify-between items-center mb-2">
-                <span className="bg-blue-50 text-blue-600 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
-                    In Progress
-                </span>
+                {
+                    request.status === 'Nouveau' ? 
+                        <span className="bg-[#fff0ea] text-[#ff7e5f] text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
+                            New Request
+                        </span> : 
+                        (request.status === 'En_Cour' ? 
+                            <span className="bg-blue-50 text-blue-600 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
+                                In Progress
+                            </span> : 
+                            <span className="bg-green-50 text-green-600 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
+                                Completed
+                            </span>
+                        )
+                }
 
                 <span className="text-gray-400 text-[9px] sm:text-[10px] font-medium">
                     2h ago
