@@ -4,7 +4,6 @@ export default function MyRequest() {
 
             <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
 
-                {/* Images */}
                 <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
 
                     <div className="flex flex-col gap-4">
@@ -37,10 +36,8 @@ export default function MyRequest() {
 
                 </div>
 
-                {/* Requests Card */}
-                <div className="w-full sm:max-w-[420px] lg:max-w-[350px] bg-[#f8f9fa] rounded-[1.5rem] p-4 sm:p-5 shadow-sm border border-gray-100">
+                <div className="w-full sm:max-w-105 lg:max-w-87.5 bg-[#f8f9fa] rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100">
 
-                    {/* Header */}
                     <div className="flex justify-between items-center mb-4 px-1">
                         <h2 className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight">
                             My Requests
@@ -55,8 +52,6 @@ export default function MyRequest() {
                     </div>
 
                     <div className="flex flex-col gap-3">
-
-                        {/* Card 1 */}
                         <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-50">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="bg-blue-50 text-blue-600 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
@@ -91,7 +86,6 @@ export default function MyRequest() {
                             </button>
                         </div>
 
-                        {/* Card 2 */}
                         <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-50">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="bg-green-50 text-green-600 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
@@ -126,7 +120,6 @@ export default function MyRequest() {
                             </button>
                         </div>
 
-                        {/* Card 3 */}
                         <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-50">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="bg-[#fff0ea] text-[#ff7e5f] text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase">
@@ -150,10 +143,8 @@ export default function MyRequest() {
                                 Cancel Request
                             </button>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     )
