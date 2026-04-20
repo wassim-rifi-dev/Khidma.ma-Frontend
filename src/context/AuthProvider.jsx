@@ -48,7 +48,7 @@ export default function AuthProvider({ children }) {
         try {
             const res = await authServices.loginUser(data);
 
-            const { user, token } = res;
+            const { user , token } = res.data;
 
             localStorage.setItem("token", token);
 
