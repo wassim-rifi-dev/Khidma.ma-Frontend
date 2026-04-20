@@ -1,3 +1,5 @@
+import { FaRegStar } from "react-icons/fa";
+
 export default function TopProfessional() {
     return (
         <div className="w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-16 font-sans">
@@ -75,7 +77,7 @@ export default function TopProfessional() {
                             </div>
 
                             <div className="bg-gray-50 px-3 py-1 rounded-full flex items-center gap-1">
-                                <span className="text-[#FBBF24]">★</span>
+                                <FaRegStar color="#EAB308" />
                                 <span className="text-sm font-bold text-gray-700">
                                     4.9
                                 </span>
@@ -121,7 +123,7 @@ export default function TopProfessional() {
                             </div>
 
                             <div className="bg-gray-50 px-3 py-1 rounded-full flex items-center gap-1">
-                                <span className="text-[#FBBF24]">★</span>
+                                <FaRegStar color="#EAB308" />
                                 <span className="text-sm font-bold text-gray-700">
                                     4.9
                                 </span>
