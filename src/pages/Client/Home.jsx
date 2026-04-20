@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-// import Header from "../../components/Client/Home/Header";
+import Header from "../../components/Client/Home/Header";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function Home() {
+export default function Home({isDark , toogleDark}) {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -11,7 +11,7 @@ export default function Home() {
 
     return (
         <div className={`min-h-screen transition-colors duration-300 bg-white`}>
-            {/* <Header /> */}
+            <Header isDark={isDark} toogleDark={toogleDark} />
         </div>
     )
 }

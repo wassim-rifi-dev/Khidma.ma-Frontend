@@ -1,0 +1,178 @@
+import { IoLanguage } from "react-icons/io5";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineDarkMode , MdOutlineLightMode , MdMenu } from "react-icons/md";
+import logoLight from '../../../assets/logoLight.svg';
+import logoDark from '../../../assets/logoDark.svg';
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+
+export default function Header({isDark , toogleDark}) {
+    const [menuOpen , toggleMenu] = useState(false);
+    const { user } = useContext(AuthContext);
+
+    return (
+        <header className="fixed top-0 left-0 w-full z-50">
+            <div className={`flex items-center justify-between px-5 md:px-10 h-18 border-b-2 shadow-lg ${
+                isDark ? 
+                    'bg-[#0F172A] border-[#334155]/50' :
+                    'bg-white border-[#E2E8F0]'
+                }
+            `}>
+                <Link to={'/'}>
+                    {isDark ? 
+                        <img src={logoDark} alt="Logo" className="h-14 w-auto" /> :
+                        <img src={logoLight} alt="Logo" className="h-14 w-auto" />
+                    }
+                </Link>
+
+                <nav className={`hidden md:flex items-center gap-8 font-bold text-[15px] ${
+                    isDark ? 'text-white' : 'text-[#475569]'
+                }`}>
+                    <a href="#" className={`transition-colors ${
+                        isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'
+                    }`}>
+                        Home
+                    </a>
+                    
+                    <a href="#" className={`transition-colors ${
+                        isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'
+                    }`}>
+                        Services
+                    </a>
+                    
+                    <a href="#" className={`transition-colors whitespace-nowrap ${
+                        isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'
+                    }`}>
+                        Orders
+                    </a>
+                </nav>
+
+                {/* <div className="hidden md:flex items-center gap-6">
+                    <div className={`flex items-center gap-5 text-[20px] ${
+                        isDark ? 'text-white' : 'text-[#0F172A]'
+                    }`}>
+                        <button className="transition hover:text-[#FF781F]">
+                            <IoLanguage />
+                        </button>
+                        <button className="transition hover:text-[#FF781F]" onClick={() => toogleDark()}>
+                            {isDark ?
+                                <MdOutlineLightMode /> :
+                                <MdOutlineDarkMode />
+                            }
+                        </button>
+                    </div>
+
+                    <div className={`w-px h-8 ${isDark ? 'bg-[#334155]' : 'bg-gray-300'}`} />
+
+                    <div className="flex items-center gap-4">
+                        <Link 
+                            to="/login"
+                            className={`font-semibold transition-colors ${
+                                isDark ? 'text-white hover:text-[#FF781F]' : 'text-[#475569] hover:text-black'
+                            }`}
+                        >
+                            Connexion
+                        </Link>
+                        <Link to="/register" className="bg-[#FF781F] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#e66a1a] transition" >
+                            Inscription
+                        </Link>
+                    </div>
+                </div> */}
+
+                <div class="flex items-center justify-end space-x-6 p-4">
+                    
+                    <div class="flex items-center space-x-5 text-gray-600">
+                        
+                        <button class="relative transition hover:text-[#FF781F]">
+                            <IoMdNotificationsOutline size={24} />
+                            <span class="absolute top-0 right-0 block w-2 h-2 bg-orange-500 rounded-full ring-2 ring-white"></span>
+                        </button>
+
+                        <button className="transition hover:text-[#FF781F]">
+                            <IoLanguage size={24} />
+                        </button>
+
+                        <button className="transition hover:text-[#FF781F]" onClick={() => toogleDark()}>
+                            {isDark ?
+                                <MdOutlineLightMode size={24} /> :
+                                <MdOutlineDarkMode size={24} />
+                            }
+                        </button>
+                    </div>
+
+                    <div class="h-8 border-l border-red-50"></div>
+
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right">
+                        <p class="text-base font-bold text-gray-900 leading-tight">{ user.first_name }</p>
+                        <p className="text-sm text-slate-500 font-medium">
+                            {user.role?.charAt(0).toUpperCase() + user.role?.slice(1)}
+                        </p>
+                        </div>
+                        <img class="w-11 h-11 rounded-full object-cover border border-gray-100 bg-orange-400" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Ahmed's avatar" />
+                    </div>
+                    
+                    </div>
+
+                <button className={`md:hidden p-1 transition ${
+                    isDark ? 'text-white hover:text-[#FF781F]' : 'text-[#0F172A] hover:text-black'
+                }`} onClick={() => toggleMenu(!menuOpen)}>
+                    <MdMenu size={26} />
+                </button>
+            </div>
+
+            {menuOpen && (
+                <div className={`absolute top-full left-0 w-full md:hidden shadow-xl px-6 py-4 flex flex-col border-b-2 ${
+                    isDark ? 'bg-[#0F172A] border-[#334155]/50' : 'bg-white border-[#E2E8F0]'
+                }`}>
+                    <nav className={`flex flex-col font-bold ${
+                        isDark ? 'text-white' : 'text-[#475569]'
+                    }`}>
+                        <a href="#" className={`py-3 border-b transition-colors ${
+                            isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'
+                        }`}>
+                            Accueil
+                        </a>
+                        <a href="#" className={`py-3 border-b transition-colors ${
+                            isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'
+                        }`}>
+                            Services
+                        </a>
+                        <a href="#" className={`py-3 transition-colors ${
+                            isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'
+                        }`}>
+                            Comment ça fonctionne
+                        </a>
+                    </nav>
+
+                    <div className={`flex items-center justify-between mt-5 pt-4 border-t ${
+                        isDark ? 'border-[#334155]/50' : 'border-[#E2E8F0]'
+                    }`}>
+                        <div className={`flex items-center gap-4 text-[20px] ${
+                            isDark ? 'text-white' : 'text-[#0F172A]'
+                        }`}>
+                            <button className="hover:text-[#FF781F] transition">
+                                <IoLanguage />
+                            </button>
+                            <button className="hover:text-[#FF781F] transition" onClick={() => toogleDark()}>
+                                {isDark ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
+                            </button>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                            <a href="/login" className={`font-semibold transition-colors ${
+                                isDark ? 'text-white hover:text-[#FF781F]' : 'text-[#475569] hover:text-black'
+                            }`}>
+                                Connexion
+                            </a>
+                            <a href="/register" className="bg-[#FF781F] text-white px-5 py-2 rounded-full font-bold hover:bg-[#e66a1a] transition text-center">
+                                Inscription
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </header>
+    )
+}

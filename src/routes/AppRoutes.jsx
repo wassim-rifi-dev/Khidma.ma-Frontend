@@ -19,8 +19,10 @@ export default function AppRoutes() {
             <Route path='/login' element={<Login />} />
 
             {/* Private Route */}
-            <Route path='/home' element={
-                <IsAuthRoute> <HomeRoute /> </IsAuthRoute>
+            <Route path='client/home' element={
+                <RoleRoutes allowedRole={['client']}>
+                    <Home />
+                </RoleRoutes>
             } />
         </Routes>
     )

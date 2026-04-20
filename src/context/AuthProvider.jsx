@@ -1,21 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as authServices from '../services/authServices';
 import { AuthContext } from "./AuthContext";
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function checkAuth() {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const res = await authServices.getMe();
+                setUser(res.user);
+            } catch {
+                localStorage.removeItem("token");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        checkAuth();
+    }, []);
 
     async function register(data) {
         try {
             const res = await authServices.registerUser(data);
 
-            const { user, token } = res.data;
+            const { user, token } = res;
 
             localStorage.setItem("token", token);
 
             setUser(user);
-            console.log(user);
-            
 
             return res;
         } catch (error) {
@@ -27,7 +48,7 @@ export default function AuthProvider({ children }) {
         try {
             const res = await authServices.loginUser(data);
 
-            const { user, token } = res.data;
+            const { user, token } = res;
 
             localStorage.setItem("token", token);
 
@@ -40,7 +61,7 @@ export default function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, register, login }} >
+        <AuthContext.Provider value={{ user, loading, register, login }} >
             {children}
         </AuthContext.Provider>
     )

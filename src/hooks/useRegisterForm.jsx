@@ -30,7 +30,7 @@ export function useRegisterForm() {
         try {
             await register(form);
 
-            navigate('/home');
+            navigate('/client/home');
         } catch (err) {
             console.error("Error : " , err);
         }

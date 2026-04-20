@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function IsAuthRoute({ children }) {
-    const { user } = useContext(AuthContext);
-    
-    if (!user) {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
         return <Navigate to={'/login'} replace />
     }
 
