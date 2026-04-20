@@ -5,7 +5,6 @@ export default function TopProfessional() {
         <div className="w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-16 font-sans">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
 
-                {/* LEFT SIDE */}
                 <div className="lg:col-span-4 space-y-8 text-center lg:text-left">
 
                     <div>
@@ -20,7 +19,7 @@ export default function TopProfessional() {
 
                     <div className="space-y-4">
 
-                        <div className="flex items-center p-4 bg-white rounded-3xl border border-gray-50 shadow-sm">
+                        <div className="flex items-center p-4 bg-white rounded-2xl border border-gray-50 shadow-sm">
                             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4 shrink-0">
                                 <svg className="w-6 h-6 text-[#FF7A1A]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
@@ -37,7 +36,7 @@ export default function TopProfessional() {
                             </div>
                         </div>
 
-                        <div className="flex items-center p-4 bg-white rounded-3xl border border-gray-50 shadow-sm">
+                        <div className="flex items-center p-4 bg-white rounded-2xl border border-gray-50 shadow-sm">
                             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4 shrink-0">
                                 <svg className="w-6 h-6 text-[#FF7A1A]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -57,12 +56,9 @@ export default function TopProfessional() {
                     </div>
                 </div>
 
-
-                {/* RIGHT SIDE */}
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-                    {/* CARD 1 */}
-                    <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
+                    <div className="bg-white rounded-[30px] md:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
 
                         <div className="flex justify-between items-start mb-6">
 
@@ -106,9 +102,7 @@ export default function TopProfessional() {
 
                     </div>
 
-
-                    {/* CARD 2 */}
-                    <div className="bg-white rounded-[30px] md:rounded-[40px] p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
+                    <div className="bg-white rounded-[30px] md:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
 
                         <div className="flex justify-between items-start mb-6">
 
