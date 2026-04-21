@@ -2,12 +2,19 @@ import { FiMail, FiPhone, FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import ProfileInputField from "./ProfileInputField";
 
-const nameFields = [
-    { label: "First Name", value: "John" },
-    { label: "Last Name", value: "Doe" },
-];
+export default function PersonalInfoSection({
+    inputBaseClass,
+    firstName,
+    lastName,
+    username,
+    email,
+    phone,
+}) {
+    const nameFields = [
+        { label: "First Name", value: firstName },
+        { label: "Last Name", value: lastName },
+    ];
 
-export default function PersonalInfoSection({ inputBaseClass }) {
     return (
         <div className="pt-8">
             <h2 className="text-3xl font-semibold tracking-tight text-slate-800">
@@ -29,7 +36,7 @@ export default function PersonalInfoSection({ inputBaseClass }) {
             <div className="mt-5">
                 <ProfileInputField
                     label="Username"
-                    defaultValue="johnwaterson"
+                    defaultValue={username}
                     icon={FiUser}
                     inputClassName={inputBaseClass}
                 />
@@ -38,7 +45,7 @@ export default function PersonalInfoSection({ inputBaseClass }) {
             <div className="mt-5">
                 <ProfileInputField
                     label="Email Address"
-                    defaultValue="john@example.com"
+                    defaultValue={email}
                     icon={FiMail}
                     inputClassName={inputBaseClass}
                 />
@@ -47,7 +54,7 @@ export default function PersonalInfoSection({ inputBaseClass }) {
             <div className="mt-5 border-b border-slate-200 pb-7">
                 <ProfileInputField
                     label="Phone Number"
-                    defaultValue="+212 600 000000"
+                    defaultValue={phone}
                     icon={FiPhone}
                     inputClassName={inputBaseClass}
                 />
