@@ -12,7 +12,7 @@ import SearchBox from "./SearchBox";
 import ServiceCard from "./ServiceCard";
 import ServicesState from "./ServicesState";
 
-const initialVisibleServices = 6;
+const initialVisibleServices = 3;
 const maxVisibleServices = 50;
 const fallbackImages = [
     "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=80",
