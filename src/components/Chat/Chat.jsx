@@ -1,6 +1,9 @@
-export default function Chat() {
+export default function Chat({ isOpen }) {
     return (
-        <div className="fixed bottom-6 right-6 w-[420px] h-[480px] bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden flex z-50">
+        <div className={`fixed bottom-6 right-6 w-105 h-120 bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden flex z-50 ${
+            isOpen ? 
+                'block' : 'hidden'
+        }`}>
 
             {/* Sidebar */}
             <div className="w-48 border-r border-gray-100 flex flex-col">
@@ -17,7 +20,7 @@ export default function Chat() {
                             key={c.name}
                             className={`flex items-center gap-3 px-3 py-3 cursor-pointer ${c.active ? "bg-gray-100" : "hover:bg-gray-50"}`}
                         >
-                            <div className="relative flex-shrink-0">
+                            <div className="relative shrink-0">
                                 <img src={c.img} className="w-9 h-9 rounded-full object-cover" />
                                 {c.active && (
                                     <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white"></span>
