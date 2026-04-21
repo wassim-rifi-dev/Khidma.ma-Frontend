@@ -22,8 +22,6 @@ export function useRegisterForm() {
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
-
-        console.log({ ...form, [e.target.name]: e.target.value });
     }
 
     async function handleSubmit(e) {

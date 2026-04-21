@@ -7,6 +7,7 @@ import HomeRoute from './HomeRoute';
 import IsAuthRoute from './IsAuthRoutes';
 import RoleRoutes from './RoleRoutes';
 import Home from '../pages/Client/Home';
+import Profile from '../pages/Client/Profile';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -20,9 +21,14 @@ export default function AppRoutes() {
 
             {/* Private Route */}
             <Route path='/home' element={
-                <RoleRoutes allowedRole={['client']}>
+                <IsAuthRoute>
                     <Home />
-                </RoleRoutes>
+                </IsAuthRoute>
+            } />
+            <Route path='/profile' element={
+                <IsAuthRoute>
+                    <Profile />
+                </IsAuthRoute>
             } />
         </Routes>
     )
