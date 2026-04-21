@@ -44,3 +44,12 @@ export async function getLastThreeClientRequest() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getLastSixClientRequest() {
+    try {
+        const response = await api.get('client/request/latest-six');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
