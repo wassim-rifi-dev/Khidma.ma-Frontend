@@ -5,12 +5,6 @@ import getUserPhotoUrl from "../../../../utils/getUserPhotoUrl";
 
 export default function ProfessionalCard({ professional }) {
     const photoUrl = getUserPhotoUrl(professional.user?.photo);
-    const fullName = professional.user
-        ? `${professional.user.first_name} ${professional.user.last_name}`
-        : "Professional";
-    const categoryName = professional.category?.name || "Professional";
-    const description = professional.description || "Trusted professional ready to help with your next service.";
-    const rating = Number(professional.rating || 0).toFixed(1);
 
     return (
         <div className="bg-white rounded-[30px] md:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
@@ -18,7 +12,7 @@ export default function ProfessionalCard({ professional }) {
                 <div className="relative">
                     <img
                         src={photoUrl || defaultProfile}
-                        alt={fullName}
+                        alt={professional.user.name}
                         className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white shadow-sm"
                     />
 
@@ -28,21 +22,21 @@ export default function ProfessionalCard({ professional }) {
                 <div className="bg-gray-50 px-3 py-1 rounded-full flex items-center gap-1">
                     <FaRegStar color="#EAB308" />
                     <span className="text-sm font-bold text-gray-700">
-                        {rating}
+                        {Number(professional.rating || 0).toFixed(1)}
                     </span>
                 </div>
             </div>
 
             <h3 className="text-lg sm:text-xl font-bold text-[#111827] mb-1">
-                {fullName}
+                {professional.user.name}
             </h3>
 
             <p className="text-[#FF7A1A] text-xs font-black uppercase tracking-wider mb-4">
-                {categoryName}
+                {professional.category?.name}
             </p>
 
             <p className="text-gray-500 text-sm leading-relaxed mb-8">
-                {description}
+                {professional.description}
             </p>
 
             <div className="flex justify-between items-center border-t border-gray-50 pt-6">
