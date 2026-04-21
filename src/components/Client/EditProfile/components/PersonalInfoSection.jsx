@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ProfileInputField from "./ProfileInputField";
 
 export default function PersonalInfoSection({
-    inputBaseClass,
     form,
     onChange,
     submitError,
@@ -13,6 +12,12 @@ export default function PersonalInfoSection({
         { label: "First Name", name: "first_name", value: form.first_name },
         { label: "Last Name", name: "last_name", value: form.last_name },
     ];
+
+    const otherFields = [
+        { label: "Username", name: "username", value: form.username },
+        { label: "Email Address", name: "email", value: form.email },
+        { label: "Phone Number", name: "phone", value: form.phone },
+    ]
 
     return (
         <div className="pt-8">
@@ -29,43 +34,24 @@ export default function PersonalInfoSection({
                         value={field.value}
                         onChange={onChange}
                         icon={FiUser}
-                        inputClassName={inputBaseClass}
                     />
                 ))}
             </div>
 
-            <div className="mt-5">
-                <ProfileInputField
-                    label="Username"
-                    name="username"
-                    value={form.username}
-                    onChange={onChange}
-                    icon={FiUser}
-                    inputClassName={inputBaseClass}
-                />
+            {
+                otherFields.map((field) => (
+                    <div className="mt-5">
+                        <ProfileInputField
+                            key={field.label}
+                            label={field.label}
+                            name={field.name}
+                            value={field.value}
+                            onChange={onChange}
+                            icon={FiUser}
+                        />
             </div>
-
-            <div className="mt-5">
-                <ProfileInputField
-                    label="Email Address"
-                    name="email"
-                    value={form.email}
-                    onChange={onChange}
-                    icon={FiMail}
-                    inputClassName={inputBaseClass}
-                />
-            </div>
-
-            <div className="mt-5 border-b border-slate-200 pb-7">
-                <ProfileInputField
-                    label="Phone Number"
-                    name="phone"
-                    value={form.phone}
-                    onChange={onChange}
-                    icon={FiPhone}
-                    inputClassName={inputBaseClass}
-                />
-            </div>
+                ))
+            }
 
             {submitError ? (
                 <p className="mt-5 text-sm font-medium text-red-500">{submitError}</p>

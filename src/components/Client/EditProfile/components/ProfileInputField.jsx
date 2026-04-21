@@ -4,7 +4,6 @@ export default function ProfileInputField({
     value,
     onChange,
     icon: Icon,
-    inputClassName,
 }) {
     return (
         <label className="block">
@@ -17,7 +16,7 @@ export default function ProfileInputField({
                     name={name}
                     value={value}
                     onChange={onChange}
-                    className={inputClassName}
+                    className="w-full rounded-xl border border-slate-200 bg-[#f8f9fb] px-4 py-3 pl-10 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white"
                 />
             </div>
         </label>
