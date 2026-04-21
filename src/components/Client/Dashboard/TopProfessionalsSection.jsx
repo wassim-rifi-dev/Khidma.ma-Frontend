@@ -1,26 +1,8 @@
-import { useEffect, useState } from "react";
+import useTopProfessionalsInHome from "../../../hooks/useTopProfessionalsInHome";
 import ProfessionalCard from "./cards/ProfessionalCard";
-import { getTopProfessionals } from "../../../services/ProfessionalServices";
 
 export default function TopProfessional() {
-    const [professionals, setProfessionals] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function fetchTopProfessionals() {
-            try {
-                const response = await getTopProfessionals();
-                setProfessionals(response.data.professionals ?? []);
-            } catch (error) {
-                console.error("Error fetching top professionals:", error);
-                setProfessionals([]);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchTopProfessionals();
-    }, []);
+    const { professionals, isLoading } = useTopProfessionalsInHome();
 
     return (
         <div className="w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-16 font-sans">
