@@ -18,6 +18,15 @@ export async function getClientRequestCount() {
     }
 }
 
+export async function getCompletedClientRequestCount() {
+    try {
+        const response = await api.get('client/request/count/completed');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function getLastThreeClientRequest() {
     try {
         const response = await api.get('client/request/latest');
