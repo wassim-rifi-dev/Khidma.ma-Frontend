@@ -10,7 +10,7 @@ export default function ProfileStats() {
             {stats.map((stat) => (
                 <div
                     key={stat.label}
-                    className="rounded-[24px] bg-white px-6 py-5 text-center shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
+                    className="rounded-2xl bg-white px-6 py-5 text-center shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
                 >
                     <span className="text-[2rem] font-semibold leading-none text-orange-500">
                         {stat.value}
