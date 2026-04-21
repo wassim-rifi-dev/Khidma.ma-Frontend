@@ -10,7 +10,7 @@ export default function PersonalInfoSection({
     email,
     phone,
 }) {
-    const nameFields = [
+    const personalFields = [
         { label: "First Name", value: firstName },
         { label: "Last Name", value: lastName },
     ];
@@ -22,7 +22,7 @@ export default function PersonalInfoSection({
             </h2>
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
-                {nameFields.map((field) => (
+                {personalFields.map((field) => (
                     <ProfileInputField
                         key={field.label}
                         label={field.label}

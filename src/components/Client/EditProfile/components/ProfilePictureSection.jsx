@@ -1,17 +1,19 @@
 import { FiAlertCircle, FiCamera } from "react-icons/fi";
 
+const fileInputId = "edit-profile-image";
+
 export default function ProfilePictureSection({
-    fileInputRef,
+    fileInputKey,
     imagePreview,
     uploadError,
-    onOpenFilePicker,
     onImageChange,
     onRemoveImage,
 }) {
     return (
         <div className="flex flex-col gap-6 border-b border-slate-200 pb-8 sm:flex-row sm:items-center">
             <input
-                ref={fileInputRef}
+                key={fileInputKey}
+                id={fileInputId}
                 type="file"
                 accept="image/*"
                 onChange={onImageChange}
@@ -24,13 +26,12 @@ export default function ProfilePictureSection({
                     alt="Profile"
                     className="h-full w-full rounded-full object-cover shadow-md"
                 />
-                <button
-                    type="button"
-                    onClick={onOpenFilePicker}
+                <label
+                    htmlFor={fileInputId}
                     className="absolute bottom-1 right-1 flex h-8 w-8 items-center justify-center rounded-full bg-white text-orange-500 shadow-md ring-2 ring-slate-100"
                 >
                     <FiCamera className="h-4 w-4" />
-                </button>
+                </label>
             </div>
 
             <div className="max-w-xl">
@@ -41,13 +42,12 @@ export default function ProfilePictureSection({
                 </p>
 
                 <div className="mt-5 flex items-center gap-5">
-                    <button
-                        type="button"
-                        onClick={onOpenFilePicker}
+                    <label
+                        htmlFor={fileInputId}
                         className="rounded-full bg-orange-50 px-5 py-2.5 text-sm font-medium text-orange-500 transition hover:bg-orange-100"
                     >
                         Upload New
-                    </button>
+                    </label>
                     <button
                         type="button"
                         onClick={onRemoveImage}
