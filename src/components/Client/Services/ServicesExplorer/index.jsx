@@ -6,6 +6,7 @@ import {
     FiTool,
 } from "react-icons/fi";
 import { getAllServices } from "../../../../services/ServiceServices";
+import { getAllCategories } from "../../../../services/CategoryServices";
 import SearchBox from "./SearchBox";
 import ServiceCard from "./ServiceCard";
 import ServicesState from "./ServicesState";
@@ -19,22 +20,41 @@ const fallbackImages = [
 ];
 
 export default function ServicesExplorer() {
-    const [services, setServices] = useState([]);
-    const [totalServices, setTotalServices] = useState(0);
+    const [allServices, setAllServices] = useState([]);
+    const [categoryOptions, setCategoryOptions] = useState([]);
+    const [visibleCount, setVisibleCount] = useState(initialVisibleServices);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
+    const [filters, setFilters] = useState({
+        query: "",
+        category: "",
+        city: "",
+    });
+    const [appliedFilters, setAppliedFilters] = useState({
+        query: "",
+        category: "",
+        city: "",
+    });
 
     useEffect(() => {
         async function fetchInitialServices() {
             try {
-                const response = await getAllServices(initialVisibleServices);
-                const servicesPayload = response.data.services;
-                setServices(servicesPayload.data ?? []);
-                setTotalServices(servicesPayload.total ?? 0);
+                const [servicesResponse, categoriesResponse] = await Promise.all([
+                    getAllServices(maxVisibleServices),
+                    getAllCategories(),
+                ]);
+                const servicesPayload = servicesResponse.data.services;
+                const categoriesPayload = categoriesResponse.data.categories ?? [];
+                setAllServices(servicesPayload.data ?? []);
+                setCategoryOptions(
+                    categoriesPayload
+                        .map((category) => category.name)
+                        .filter(Boolean)
+                );
             } catch (error) {
                 console.error("Error fetching services:", error);
-                setServices([]);
-                setTotalServices(0);
+                setAllServices([]);
+                setCategoryOptions([]);
             } finally {
                 setIsLoading(false);
             }
@@ -45,20 +65,51 @@ export default function ServicesExplorer() {
 
     async function handleLoadMore() {
         setIsLoadingMore(true);
-
-        try {
-            const response = await getAllServices(maxVisibleServices);
-            const servicesPayload = response.data.services;
-            setServices(servicesPayload.data ?? []);
-            setTotalServices(servicesPayload.total ?? 0);
-        } catch (error) {
-            console.error("Error loading more services:", error);
-        } finally {
-            setIsLoadingMore(false);
-        }
+        setVisibleCount(allServices.length);
+        setIsLoadingMore(false);
     }
 
-    const canLoadMore = services.length < totalServices;
+    function handleFilterChange(event) {
+        const { name, value } = event.target;
+        setFilters((currentFilters) => ({
+            ...currentFilters,
+            [name]: value,
+        }));
+    }
+
+    function handleSearch() {
+        setAppliedFilters({
+            query: filters.query.trim(),
+            category: filters.category,
+            city: filters.city,
+        });
+    }
+
+    const cityOptions = [...new Set(allServices.map((service) => service.city).filter(Boolean))];
+
+    const filteredServices = allServices.filter((service) => {
+        const matchesQuery = appliedFilters.query
+            ? [service.title, service.description, service.category?.name]
+                .filter(Boolean)
+                .some((value) => value.toLowerCase().includes(appliedFilters.query.toLowerCase()))
+            : true;
+        const matchesCategory = appliedFilters.category
+            ? service.category?.name?.toLowerCase().includes(appliedFilters.category.toLowerCase())
+            : true;
+        const matchesCity = appliedFilters.city
+            ? service.city?.toLowerCase().includes(appliedFilters.city.toLowerCase())
+            : true;
+
+        return matchesQuery && matchesCategory && matchesCity;
+    });
+
+    const hasActiveFilters = Boolean(
+        appliedFilters.query || appliedFilters.category || appliedFilters.city
+    );
+    const servicesToRender = hasActiveFilters
+        ? filteredServices
+        : allServices.slice(0, visibleCount);
+    const canLoadMore = !hasActiveFilters && visibleCount < allServices.length;
 
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-10 sm:px-6 lg:px-8">
@@ -78,19 +129,34 @@ export default function ServicesExplorer() {
                     <div className="grid gap-3 xl:grid-cols-[1.2fr_0.9fr_0.9fr_auto]">
                         <SearchBox
                             icon={FiSearch}
+                            name="query"
+                            value={filters.query}
+                            onChange={handleFilterChange}
                             placeholder="What service do you need?"
                         />
                         <SearchBox
                             icon={FiTool}
-                            value="What service do you need?"
+                            name="category"
+                            value={filters.category}
+                            onChange={handleFilterChange}
+                            placeholder="Choose category"
+                            options={categoryOptions}
                             hasChevron
                         />
                         <SearchBox
                             icon={FiMapPin}
-                            value="Casablanca"
+                            name="city"
+                            value={filters.city}
+                            onChange={handleFilterChange}
+                            placeholder="Choose city"
+                            options={cityOptions}
                             hasChevron
                         />
-                        <button className="h-14 rounded-2xl bg-orange-500 px-8 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600">
+                        <button
+                            type="button"
+                            onClick={handleSearch}
+                            className="h-14 rounded-2xl bg-orange-500 px-8 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
+                        >
                             Search
                         </button>
                     </div>
@@ -99,10 +165,10 @@ export default function ServicesExplorer() {
                 <div className="mt-10 grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
                     {isLoading ? (
                         <ServicesState message="Loading services..." />
-                    ) : services.length === 0 ? (
-                        <ServicesState message="No services available right now." />
+                    ) : servicesToRender.length === 0 ? (
+                        <ServicesState message="No services match your search." />
                     ) : (
-                        services.map((service, index) => (
+                        servicesToRender.map((service, index) => (
                             <ServiceCard
                                 key={service.id}
                                 service={service}
