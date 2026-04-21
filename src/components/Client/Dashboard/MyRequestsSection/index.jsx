@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getClientRequest } from "../../../../services/RequestServices";
+import * as requestServices from "../../../../services/RequestServices";
 import RequestCard from "./RequestCard";
 
 const showcaseImages = [
@@ -41,12 +41,9 @@ export default function MyRequestsSection() {
     useEffect(() => {
         async function fetchRequests() {
             try {
-                const response = await getClientRequest();
-                const items = response.data.requests ?? [];
-                const latestRequests = [...items]
-                    .sort((firstRequest, secondRequest) => new Date(secondRequest.created_at) - new Date(firstRequest.created_at))
-                    .slice(0, 3);
-                setRequests(latestRequests);
+                const response = await requestServices.getLastThreeClientRequest();
+                const requests = response.data.requests ?? [];
+                setRequests(requests);
             } catch (error) {
                 console.error("Error fetching client requests:", error);
                 setRequests([]);
