@@ -1,6 +1,10 @@
+import useClientRequest from "../../../../hooks/useClientRequest";
+
 export default function ProfileStats() {
+    const { request_count } = useClientRequest();
+
     const stats = [
-        { value: "12", label: "TOTAL REQUESTS" },
+        { value: request_count , label: "TOTAL REQUESTS" },
         { value: "09", label: "COMPLETED" },
         { value: "04", label: "REVIEWS GIVEN" },
     ];
