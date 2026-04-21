@@ -5,7 +5,7 @@ import Chat from "./Chat";
 export default function Index() {
     const [isOpen , toogleOpen] = useState(false);
     return (
-        <div className="relative">
+        <div className="relative hidden md:block">
             <Chat isOpen={isOpen} />
             <Button toogleOpen={toogleOpen} isOpen={isOpen} />
         </div>
