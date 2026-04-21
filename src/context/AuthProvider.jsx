@@ -17,6 +17,8 @@ export default function AuthProvider({ children }) {
 
             try {
                 const res = await authServices.getMe();
+                // console.log(res.data.user);
+                
                 setUser(res.data.user);
             } catch {
                 localStorage.removeItem("token");

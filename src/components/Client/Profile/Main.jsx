@@ -3,7 +3,7 @@ import RightSide from "./RightSide";
 
 export default function Main() {
     return (
-        <div>
+        <div className="flex">
             <LeftSide />
             <RightSide />
         </div>

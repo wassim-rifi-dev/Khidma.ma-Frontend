@@ -3,7 +3,7 @@ import Stats from "./Right/Stats";
 
 export default function RightSide() {
     return (
-        <div>
+        <div className="flex flex-col gap-4">
             <Stats />
             <Requests />
         </div>
