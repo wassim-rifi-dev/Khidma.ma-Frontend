@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { FiUser } from "react-icons/fi";
+import { AuthContext } from "../../../../context/AuthContext";
 
 export default function PersonalInfoCard() {
+    const { user } = useContext(AuthContext);
+
     const details = [
-        { label: "Full Name", value: "Amine Mansouri" },
-        { label: "Email Address", value: "amine.mansouri@email.com" },
-        { label: "Phone Number", value: "+212 661 234 567" },
-        { label: "Location", value: "Casablanca, Morocco" },
+        { label: "Full Name", value: user.name },
+        { label: "Email Address", value: user.email },
+        { label: "Phone Number", value: `+212 ${user.phone.startsWith('0') ? user.phone.slice(1) : user.phone}` }
     ];
 
     return (

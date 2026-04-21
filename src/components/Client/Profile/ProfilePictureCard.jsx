@@ -40,7 +40,7 @@ export default function Picture() {
             </p>
 
             <p className="text-gray-400 text-sm sm:text-base">
-                212 {user.phone.startsWith('0') ? user.phone.slice(1) : user.phone}
+                +212 {user.phone.startsWith('0') ? user.phone.slice(1) : user.phone}
             </p>
 
             <Link to={'/profile/edit'} className="mt-6 px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full transition">
