@@ -11,7 +11,11 @@ export async function getInfo() {
 
 export async function updateInfo(data) {
     try {
-        const response = await api.put('user/profile/update' , data);
+        const response = await api.post('user/profile/update', data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         return response.data;
     } catch (error) {
         throw error.response?.data || error.message;

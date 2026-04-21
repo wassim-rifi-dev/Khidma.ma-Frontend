@@ -1,6 +1,8 @@
 export default function ProfileInputField({
     label,
-    defaultValue,
+    name,
+    value,
+    onChange,
     icon: Icon,
     inputClassName,
 }) {
@@ -12,7 +14,9 @@ export default function ProfileInputField({
             <div className="relative">
                 <Icon className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 <input
-                    defaultValue={defaultValue}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
                     className={inputClassName}
                 />
             </div>

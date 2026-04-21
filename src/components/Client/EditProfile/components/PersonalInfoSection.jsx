@@ -4,15 +4,14 @@ import ProfileInputField from "./ProfileInputField";
 
 export default function PersonalInfoSection({
     inputBaseClass,
-    firstName,
-    lastName,
-    username,
-    email,
-    phone,
+    form,
+    onChange,
+    submitError,
+    isSubmitting,
 }) {
     const personalFields = [
-        { label: "First Name", value: firstName },
-        { label: "Last Name", value: lastName },
+        { label: "First Name", name: "first_name", value: form.first_name },
+        { label: "Last Name", name: "last_name", value: form.last_name },
     ];
 
     return (
@@ -26,7 +25,9 @@ export default function PersonalInfoSection({
                     <ProfileInputField
                         key={field.label}
                         label={field.label}
-                        defaultValue={field.value}
+                        name={field.name}
+                        value={field.value}
+                        onChange={onChange}
                         icon={FiUser}
                         inputClassName={inputBaseClass}
                     />
@@ -36,7 +37,9 @@ export default function PersonalInfoSection({
             <div className="mt-5">
                 <ProfileInputField
                     label="Username"
-                    defaultValue={username}
+                    name="username"
+                    value={form.username}
+                    onChange={onChange}
                     icon={FiUser}
                     inputClassName={inputBaseClass}
                 />
@@ -45,7 +48,9 @@ export default function PersonalInfoSection({
             <div className="mt-5">
                 <ProfileInputField
                     label="Email Address"
-                    defaultValue={email}
+                    name="email"
+                    value={form.email}
+                    onChange={onChange}
                     icon={FiMail}
                     inputClassName={inputBaseClass}
                 />
@@ -54,11 +59,17 @@ export default function PersonalInfoSection({
             <div className="mt-5 border-b border-slate-200 pb-7">
                 <ProfileInputField
                     label="Phone Number"
-                    defaultValue={phone}
+                    name="phone"
+                    value={form.phone}
+                    onChange={onChange}
                     icon={FiPhone}
                     inputClassName={inputBaseClass}
                 />
             </div>
+
+            {submitError ? (
+                <p className="mt-5 text-sm font-medium text-red-500">{submitError}</p>
+            ) : null}
 
             <div className="mt-7 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-end">
                 <Link
@@ -68,10 +79,11 @@ export default function PersonalInfoSection({
                     Cancel
                 </Link>
                 <button
-                    type="button"
+                    type="submit"
+                    disabled={isSubmitting}
                     className="rounded-2xl bg-orange-500 px-8 py-3 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
                 >
-                    Save Changes
+                    {isSubmitting ? "Saving..." : "Save Changes"}
                 </button>
             </div>
         </div>
