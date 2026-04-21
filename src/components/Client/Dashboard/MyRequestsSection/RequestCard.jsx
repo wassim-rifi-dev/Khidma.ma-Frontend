@@ -1,62 +1,10 @@
 import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../../utils/getUserPhotoUrl";
-
-function getStatusConfig(status) {
-    if (status === "En_Cour") {
-        return {
-            label: "In Progress",
-            badgeClassName: "bg-blue-50 text-blue-600",
-            actionLabel: "Chat with Pro",
-        };
-    }
-
-    if (status === "Terminer") {
-        return {
-            label: "Completed",
-            badgeClassName: "bg-green-50 text-green-600",
-            actionLabel: "Leave a Review",
-        };
-    }
-
-    return {
-        label: "New Request",
-        badgeClassName: "bg-[#fff0ea] text-[#ff7e5f]",
-        actionLabel: "Cancel Request",
-    };
-}
-
-function formatRelativeDate(dateString) {
-    if (!dateString) {
-        return "Recently";
-    }
-
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
-
-    if (diffInHours < 1) {
-        return "Just now";
-    }
-
-    if (diffInHours < 24) {
-        return `${diffInHours}h ago`;
-    }
-
-    const diffInDays = Math.floor(diffInHours / 24);
-
-    if (diffInDays === 1) {
-        return "Yesterday";
-    }
-
-    return `${diffInDays} days ago`;
-}
+import * as requestHelpers from "../../../../utils/Helpers/Request";
 
 export default function RequestCard({ request }) {
-    const statusConfig = getStatusConfig(request.status);
+    const statusConfig = requestHelpers.getStatusConfig(request.status);
     const professionalUser = request.service?.professional?.user;
-    const professionalName = professionalUser
-        ? `${professionalUser.first_name} ${professionalUser.last_name}`
-        : "Professional";
     const professionalPhoto = getUserPhotoUrl(professionalUser?.photo);
 
     return (
@@ -67,7 +15,7 @@ export default function RequestCard({ request }) {
                 </span>
 
                 <span className="text-gray-400 text-[9px] sm:text-[10px] font-medium">
-                    {formatRelativeDate(request.created_at)}
+                    {requestHelpers.formatRelativeDate(request.created_at)}
                 </span>
             </div>
 
@@ -77,12 +25,12 @@ export default function RequestCard({ request }) {
                         <img
                             src={professionalPhoto || defaultProfile}
                             className="w-full h-full object-cover"
-                            alt={professionalName}
+                            alt={professionalUser.name}
                         />
                     </div>
 
                     <span className="text-[11px] text-gray-600 font-medium">
-                        {professionalName}
+                        {professionalUser.name}
                     </span>
                 </div>
             ) : (
