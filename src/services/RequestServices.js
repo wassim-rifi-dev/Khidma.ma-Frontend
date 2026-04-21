@@ -27,6 +27,15 @@ export async function getCompletedClientRequestCount() {
     }
 }
 
+export async function getClientReviewCount() {
+    try {
+        const response = await api.get('client/review/count');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function getLastThreeClientRequest() {
     try {
         const response = await api.get('client/request/latest');
