@@ -3,6 +3,7 @@ import {
     FiChevronDown,
     FiMapPin,
     FiSearch,
+    FiSliders,
     FiTool,
 } from "react-icons/fi";
 import { getAllServices } from "../../../../services/ServiceServices";
@@ -29,12 +30,14 @@ export default function ServicesExplorer() {
         query: "",
         category: "",
         city: "",
+        sort: "",
     });
-    const [appliedFilters, setAppliedFilters] = useState({
-        query: "",
-        category: "",
-        city: "",
-    });
+    const sortOptions = [
+        "Top Rated",
+        "Price: Low to High",
+        "Price: High to Low",
+        "Newest",
+    ];
 
     useEffect(() => {
         async function fetchInitialServices() {
@@ -77,37 +80,59 @@ export default function ServicesExplorer() {
         }));
     }
 
-    function handleSearch() {
-        setAppliedFilters({
-            query: filters.query.trim(),
-            category: filters.category,
-            city: filters.city,
+    function handleClearFilters() {
+        setFilters({
+            query: "",
+            category: "",
+            city: "",
+            sort: "",
         });
+        setVisibleCount(initialVisibleServices);
     }
 
     const cityOptions = [...new Set(allServices.map((service) => service.city).filter(Boolean))];
 
     const filteredServices = allServices.filter((service) => {
-        const matchesQuery = appliedFilters.query
+        const matchesQuery = filters.query.trim()
             ? [service.title, service.description, service.category?.name]
                 .filter(Boolean)
-                .some((value) => value.toLowerCase().includes(appliedFilters.query.toLowerCase()))
+                .some((value) => value.toLowerCase().includes(filters.query.trim().toLowerCase()))
             : true;
-        const matchesCategory = appliedFilters.category
-            ? service.category?.name?.toLowerCase().includes(appliedFilters.category.toLowerCase())
+        const matchesCategory = filters.category
+            ? service.category?.name?.toLowerCase().includes(filters.category.toLowerCase())
             : true;
-        const matchesCity = appliedFilters.city
-            ? service.city?.toLowerCase().includes(appliedFilters.city.toLowerCase())
+        const matchesCity = filters.city
+            ? service.city?.toLowerCase().includes(filters.city.toLowerCase())
             : true;
 
         return matchesQuery && matchesCategory && matchesCity;
     });
 
+    const sortedServices = [...filteredServices].sort((firstService, secondService) => {
+        if (filters.sort === "Top Rated") {
+            return Number(secondService.rating || 0) - Number(firstService.rating || 0);
+        }
+
+        if (filters.sort === "Price: Low to High") {
+            return Number(firstService.price_min || 0) - Number(secondService.price_min || 0);
+        }
+
+        if (filters.sort === "Price: High to Low") {
+            return Number(secondService.price_min || 0) - Number(firstService.price_min || 0);
+        }
+
+        if (filters.sort === "Newest") {
+            return new Date(secondService.created_at) - new Date(firstService.created_at);
+        }
+
+        return 0;
+    });
+
     const hasActiveFilters = Boolean(
-        appliedFilters.query || appliedFilters.category || appliedFilters.city
+        filters.query || filters.category || filters.city || filters.sort
     );
     const servicesToRender = hasActiveFilters
-        ? filteredServices
+        ? sortedServices
         : allServices.slice(0, visibleCount);
     const canLoadMore = !hasActiveFilters && visibleCount < allServices.length;
 
@@ -126,7 +151,7 @@ export default function ServicesExplorer() {
                 </div>
 
                 <div className="mt-10 rounded-[28px] bg-white p-3 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
-                    <div className="grid gap-3 xl:grid-cols-[1.2fr_0.9fr_0.9fr_auto]">
+                    <div className="grid gap-3 xl:grid-cols-[1.2fr_0.9fr_0.9fr_0.9fr_auto]">
                         <SearchBox
                             icon={FiSearch}
                             name="query"
@@ -152,12 +177,21 @@ export default function ServicesExplorer() {
                             options={cityOptions}
                             hasChevron
                         />
+                        <SearchBox
+                            icon={FiSliders}
+                            name="sort"
+                            value={filters.sort}
+                            onChange={handleFilterChange}
+                            placeholder="Sort by"
+                            options={sortOptions}
+                            hasChevron
+                        />
                         <button
                             type="button"
-                            onClick={handleSearch}
+                            onClick={handleClearFilters}
                             className="h-14 rounded-2xl bg-orange-500 px-8 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
                         >
-                            Search
+                            Clear Filters
                         </button>
                     </div>
                 </div>
