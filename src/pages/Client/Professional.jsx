@@ -1,5 +1,5 @@
-import Header from "../../components/Client/Home/Header";
-import Main from "../../components/Client/Professional/Main";
+import Header from "../../components/Client/Shared/ClientHeader";
+import ProfessionalProfile from "../../components/Client/Professionals/ProfessionalProfile";
 import Footer from "../../components/Landing/Footer";
 
 export default function Professional({isDark , toogleDark}) {
@@ -8,7 +8,7 @@ export default function Professional({isDark , toogleDark}) {
             <Header isDark={isDark} toogleDark={toogleDark} />
 
             <main className="mt-18">
-                <Main />
+                <ProfessionalProfile />
             </main>
 
             <Footer />

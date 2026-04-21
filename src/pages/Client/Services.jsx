@@ -1,5 +1,5 @@
-import Header from "../../components/Client/Home/Header";
-import Main from "../../components/Client/Services/Main";
+import Header from "../../components/Client/Shared/ClientHeader";
+import ServicesExplorer from "../../components/Client/Services/ServicesExplorer";
 import Footer from "../../components/Landing/Footer";
 
 export default function Services({isDark , toogleDark}) {
@@ -8,7 +8,7 @@ export default function Services({isDark , toogleDark}) {
             <Header isDark={isDark} toogleDark={toogleDark} />
 
             <main className="mt-18">
-                <Main />
+                <ServicesExplorer />
             </main>
 
             <Footer />

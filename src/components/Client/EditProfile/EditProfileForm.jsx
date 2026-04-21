@@ -12,7 +12,7 @@ const defaultImage = "https://i.pravatar.cc/200?img=68";
 const inputBaseClass =
     "w-full rounded-xl border border-slate-200 bg-[#f8f9fb] px-4 py-3 pl-10 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white";
 
-export default function Main() {
+export default function EditProfileForm() {
     const fileInputRef = useRef(null);
     const [imagePreview, setImagePreview] = useState(defaultImage);
     const [uploadError, setUploadError] = useState("");

@@ -1,4 +1,4 @@
-export default function Stats() {
+export default function ProfileStats() {
     const stats = [
         { value: "12", label: "TOTAL REQUESTS" },
         { value: "09", label: "COMPLETED" },

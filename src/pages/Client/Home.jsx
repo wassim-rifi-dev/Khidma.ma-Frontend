@@ -1,8 +1,8 @@
-import Header from "../../components/Client/Home/Header";
-import Hero from "../../components/Client/Home/Hero";
-import PopularServices from "../../components/Client/Home/PopularServices";
-import TopProfessional from "../../components/Client/Home/TopProfessional";
-import MyRequest from "../../components/Client/Home/MyRequest";
+import Header from "../../components/Client/Shared/ClientHeader";
+import HeroSection from "../../components/Client/Dashboard/HeroSection";
+import PopularServicesSection from "../../components/Client/Dashboard/PopularServicesSection";
+import TopProfessionalsSection from "../../components/Client/Dashboard/TopProfessionalsSection";
+import MyRequestsSection from "../../components/Client/Dashboard/MyRequestsSection";
 import Footer from "../../components/Landing/Footer";
 
 export default function Home({isDark , toogleDark}) {
@@ -11,10 +11,10 @@ export default function Home({isDark , toogleDark}) {
             <Header isDark={isDark} toogleDark={toogleDark} />
 
             <main className="mt-18">
-                <Hero />
-                <PopularServices />
-                <TopProfessional />
-                <MyRequest />
+                <HeroSection />
+                <PopularServicesSection />
+                <TopProfessionalsSection />
+                <MyRequestsSection />
             </main>
 
             <Footer />

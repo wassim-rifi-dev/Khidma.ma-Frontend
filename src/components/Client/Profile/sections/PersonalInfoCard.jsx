@@ -1,6 +1,6 @@
 import { FiUser } from "react-icons/fi";
 
-export default function PersonelInfo() {
+export default function PersonalInfoCard() {
     const details = [
         { label: "Full Name", value: "Amine Mansouri" },
         { label: "Email Address", value: "amine.mansouri@email.com" },

@@ -1,6 +1,6 @@
 import { FiGrid, FiHome, FiTool, FiWind, FiZap } from "react-icons/fi";
 
-export default function Requests() {
+export default function RecentRequestsCard() {
     const requests = [
         {
             icon: FiTool,

@@ -6,7 +6,7 @@ import {
     FiStar,
 } from "react-icons/fi";
 
-export default function Main() {
+export default function ServiceDetails() {
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-10 sm:px-6 lg:px-8">
             <div className="mx-auto w-full max-w-7xl">

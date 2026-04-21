@@ -60,7 +60,7 @@ const quickInfo = [
     { icon: FiShield, label: "Identity", value: "Verified", accent: true },
 ];
 
-export default function Main() {
+export default function ProfessionalProfile() {
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-8 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">

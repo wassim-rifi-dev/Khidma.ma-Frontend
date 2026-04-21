@@ -1,5 +1,5 @@
-import Main from "../../components/Client/EditProfile/Main";
-import Header from "../../components/Client/Home/Header";
+import EditProfileForm from "../../components/Client/EditProfile/EditProfileForm";
+import Header from "../../components/Client/Shared/ClientHeader";
 import Footer from "../../components/Landing/Footer";
 
 export default function EditProfile({isDark , toogleDark}) {
@@ -8,7 +8,7 @@ export default function EditProfile({isDark , toogleDark}) {
             <Header isDark={isDark} toogleDark={toogleDark} />
 
             <main className="mt-18 flex items-center justify-center bg-[#F6F6F7]">
-                <Main />
+                <EditProfileForm />
             </main>
 
             <Footer />

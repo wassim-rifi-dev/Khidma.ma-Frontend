@@ -1,10 +1,6 @@
-import Header from "../../components/Client/Home/Header";
-import Hero from "../../components/Client/Home/Hero";
-import PopularServices from "../../components/Client/Home/PopularServices";
-import TopProfessional from "../../components/Client/Home/TopProfessional";
-import MyRequest from "../../components/Client/Home/MyRequest";
+import Header from "../../components/Client/Shared/ClientHeader";
 import Footer from "../../components/Landing/Footer";
-import Main from "../../components/Client/Services/ShowService/Main";
+import ServiceDetails from "../../components/Client/Services/ServiceDetails";
 
 export default function ShowService({isDark , toogleDark}) {
     return (
@@ -12,7 +8,7 @@ export default function ShowService({isDark , toogleDark}) {
             <Header isDark={isDark} toogleDark={toogleDark} />
 
             <main className="mt-18">
-                <Main />
+                <ServiceDetails />
             </main>
 
             <Footer />
