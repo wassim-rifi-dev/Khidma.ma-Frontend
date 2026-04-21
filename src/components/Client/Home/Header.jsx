@@ -40,7 +40,7 @@ export default function Header({ isDark, toogleDark }) {
                     ? 'bg-[#0F172A] border-[#334155]/50'
                     : 'bg-white border-[#E2E8F0]'
             }`}>
-                <Link to={'/'}>
+                <Link to={'/home'}>
                     {isDark
                         ? <img src={logoDark} alt="Logo" className="h-14 w-auto" />
                         : <img src={logoLight} alt="Logo" className="h-14 w-auto" />

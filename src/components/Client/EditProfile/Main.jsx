@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { FiAlertCircle, FiCamera, FiMail, FiPhone, FiUser } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const nameFields = [
     { label: "First Name", value: "John" },
@@ -189,12 +190,12 @@ export default function Main() {
                     </div>
 
                     <div className="mt-7 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-end">
-                        <button
-                            type="button"
+                        <Link
+                            to={'/profile'}
                             className="px-3 py-2 text-sm font-medium text-slate-500 transition hover:text-slate-700"
                         >
                             Cancel
-                        </button>
+                        </Link>
                         <button
                             type="button"
                             className="rounded-2xl bg-orange-500 px-8 py-3 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"

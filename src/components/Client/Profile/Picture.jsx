@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Picture() {
     return (
         <div className="w-full rounded-[40px] flex flex-col items-center text-center shadow-sm bg-white px-4 sm:px-6 md:px-10 py-10">
@@ -22,9 +24,9 @@ export default function Picture() {
                 +212 661 234 567
             </p>
 
-            <button className="mt-6 px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full transition">
+            <Link to={'/profile/edit'} className="mt-6 px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full transition">
                 Edit Profile
-            </button>
+            </Link>
 
         </div>
     )
