@@ -4,12 +4,12 @@ import PopularServicesSection from "../../components/Client/Dashboard/PopularSer
 import TopProfessionalsSection from "../../components/Client/Dashboard/TopProfessionalsSection";
 import MyRequestsSection from "../../components/Client/Dashboard/MyRequestsSection";
 import Footer from "../../components/Landing/Footer";
-import Button from "../../components/Chat/Button";
+import Index from "../../components/Chat/index";
 
 export default function Home({isDark , toogleDark}) {
     return (
         <div className={`min-h-screen transition-colors duration-300 bg-white`}>
-            <Button />
+            <Index />
             <Header isDark={isDark} toogleDark={toogleDark} />
 
             <main className="mt-18">
