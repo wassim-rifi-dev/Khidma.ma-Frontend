@@ -1,34 +1,34 @@
+import { FiUser } from "react-icons/fi";
+
 export default function PersonelInfo() {
+    const details = [
+        { label: "Full Name", value: "Amine Mansouri" },
+        { label: "Email Address", value: "amine.mansouri@email.com" },
+        { label: "Phone Number", value: "+212 661 234 567" },
+        { label: "Location", value: "Casablanca, Morocco" },
+    ];
+
     return (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 w-80">
-            <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-bold text-gray-900">Personal Information</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-orange-500" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-                </svg>
+        <section className="rounded-[28px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+            <div className="mb-7 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-slate-900">Personal Information</h2>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-50 text-orange-500">
+                    <FiUser className="h-4 w-4" />
+                </span>
             </div>
 
-            <div className="space-y-4">
-                <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Full Name</p>
-                    <p className="text-sm font-medium text-gray-900 mt-1">Amine Mansouri</p>
-                </div>
-
-                <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Email Address</p>
-                    <p className="text-sm font-medium text-gray-900 mt-1">amine.mansouri@email.com</p>
-                </div>
-
-                <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Phone Number</p>
-                    <p className="text-sm font-medium text-gray-900 mt-1">+212 661 234 567</p>
-                </div>
-
-                <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Location</p>
-                    <p className="text-sm font-medium text-gray-900 mt-1">Casablanca, Morocco</p>
-                </div>
+            <div className="space-y-6">
+                {details.map((item) => (
+                    <div key={item.label}>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                            {item.label}
+                        </p>
+                        <p className="mt-1.5 text-[15px] font-medium text-slate-800">
+                            {item.value}
+                        </p>
+                    </div>
+                ))}
             </div>
-        </div>
-    )
+        </section>
+    );
 }
