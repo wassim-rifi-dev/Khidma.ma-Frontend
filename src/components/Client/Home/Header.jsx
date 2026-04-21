@@ -51,7 +51,7 @@ export default function Header({ isDark, toogleDark }) {
                     isDark ? 'text-white' : 'text-[#475569]'
                 }`}>
                     <Link to={'/home'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Home</Link>
-                    <Link to={'/serivces'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Services</Link>
+                    <Link to={'/services'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Services</Link>
                 </nav>
 
                 <div className="flex items-center gap-3 md:gap-6">

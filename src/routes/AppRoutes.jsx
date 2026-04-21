@@ -9,6 +9,7 @@ import RoleRoutes from './RoleRoutes';
 import Home from '../pages/Client/Home';
 import Profile from '../pages/Client/Profile';
 import EditProfile from '../pages/Client/EditProfile';
+import Services from '../pages/Client/Services';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -34,6 +35,11 @@ export default function AppRoutes() {
             <Route path='/profile/edit' element={
                 <IsAuthRoute>
                     <EditProfile />
+                </IsAuthRoute>
+            } />
+            <Route path='/services' element={
+                <IsAuthRoute>
+                    <Services />
                 </IsAuthRoute>
             } />
         </Routes>
