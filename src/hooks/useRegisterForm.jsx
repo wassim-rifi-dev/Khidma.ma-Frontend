@@ -32,14 +32,7 @@ export function useRegisterForm() {
         try {
             await register(form);
 
-            switch (form.role) {
-                case 'client':
-                    navigate('/client/home');
-                    break;
-                case 'professionale':
-                    navigate('professional/home');
-                    break;
-            }
+            navigate('/home');
         } catch (err) {
             console.error("Error : " , err);
         }

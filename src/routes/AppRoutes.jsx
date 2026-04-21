@@ -19,7 +19,7 @@ export default function AppRoutes() {
             <Route path='/login' element={<Login />} />
 
             {/* Private Route */}
-            <Route path='client/home' element={
+            <Route path='/home' element={
                 <RoleRoutes allowedRole={['client']}>
                     <Home />
                 </RoleRoutes>

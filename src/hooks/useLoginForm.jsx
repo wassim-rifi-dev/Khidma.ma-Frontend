@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export function useLoginForm() {
-    const {user , login} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [form , setForm] = useState({
@@ -12,12 +12,7 @@ export function useLoginForm() {
     });
 
     function handleChange(e) {
-        const f = { ...form, [e.target.name]: e.target.value };
-
-        console.log(f);
-        
-
-        setForm(f);
+        setForm({ ...form, [e.target.name]: e.target.value });
     }
 
     async function handleSubmit(e) {
@@ -26,14 +21,7 @@ export function useLoginForm() {
         try {
             await login(form);
 
-            switch (user.role) {
-                case 'client':
-                    navigate('/client/home');
-                    break;
-                case 'professionale':
-                    navigate('professional/home');
-                    break;
-            }
+            navigate('/home');
         } catch (err) {
             console.error("Error : " , err);
         }
