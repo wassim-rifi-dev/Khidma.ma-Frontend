@@ -12,7 +12,7 @@ function EmptyRequestsState() {
 }
 
 export default function MyRequestsSection() {
-    const { requests, isLoading } = useClientRequest();
+    const { three_requests, isLoading } = useClientRequest();
     return (
         <div className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center justify-center">
             <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
@@ -59,10 +59,10 @@ export default function MyRequestsSection() {
                             <div className="rounded-2xl bg-white p-4 text-sm text-slate-500 shadow-sm border border-gray-50">
                                 Loading your requests...
                             </div>
-                        ) : requests.length === 0 ? (
+                        ) : three_requests.length === 0 ? (
                             <EmptyRequestsState />
                         ) : (
-                            requests.map((request) => (
+                            three_requests.map((request) => (
                                 <RequestCard key={request.id} request={request} />
                             ))
                         )}

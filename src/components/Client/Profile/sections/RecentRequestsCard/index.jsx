@@ -1,28 +1,10 @@
-import { useEffect, useState } from "react";
 import { FiTool } from "react-icons/fi";
-import { getLastSixClientRequest } from "../../../../../services/RequestServices";
 import RecentRequestsMessage from "./RecentRequestsMessage";
 import * as requestHelpers from "../../../../../utils/Helpers/Request"
+import useClientRequest from "../../../../../hooks/useClientRequest";
 
 export default function RecentRequestsCard() {
-    const [requests, setRequests] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function fetchRecentRequests() {
-            try {
-                const response = await getLastSixClientRequest();
-                setRequests(response.data.requests ?? []);
-            } catch (error) {
-                console.error("Error fetching recent requests:", error);
-                setRequests([]);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchRecentRequests();
-    }, []);
+    const { six_requests, isLoading } = useClientRequest();
 
     return (
         <section className="rounded-[28px] bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:p-6">
@@ -30,14 +12,14 @@ export default function RecentRequestsCard() {
 
             {isLoading ? (
                 <RecentRequestsMessage message="Loading recent requests..." />
-            ) : requests.length === 0 ? (
+            ) : six_requests.length === 0 ? (
                 <RecentRequestsMessage
                     message="No recent requests yet"
                     description="Your latest service requests will appear here once you create one."
                 />
             ) : (
                 <div className="space-y-3">
-                    {requests.map((request) => {
+                    {six_requests.map((request) => {
                         const statusMeta = requestHelpers.getStatusConfig(request.status);
                         const title = request.service?.title || "Service request";
                         const subtitle = request.message || "No additional details";

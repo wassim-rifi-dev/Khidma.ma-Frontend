@@ -3,7 +3,8 @@ import * as requestServices from '../services/RequestServices';
 
 export default function useClientRequest() {
     const [isLoading , setIsLoading] = useState(true);
-    const [requests, setRequests] = useState([]);
+    const [three_requests, setThreeRequests] = useState([]);
+    const [six_requests, setSixRequests] = useState([]);
     const [request_count , setRequestCount] = useState(0);
     const [completed_request_count, setCompletedRequestCount] = useState(0);
     const [review_count, setReviewCount] = useState(0);
@@ -25,22 +26,35 @@ export default function useClientRequest() {
             }
         }
 
-        async function fetchRequests() {
+        async function fetchLastThreeRequests() {
             try {
                 const response = await requestServices.getLastThreeClientRequest();
                 const requests = response.data.requests;
-                setRequests(requests);
+                setThreeRequests(requests);
             } catch (error) {
                 console.error("Error fetching client requests:", error);
-                setRequests([]);
+                setThreeRequests([]);
             } finally {
                 setIsLoading(false);
             }
         }
 
-        fetchRequests();
+        async function fetchLastSixRequests() {
+            try {
+                const response = await requestServices.getLastSixClientRequest();
+                setSixRequests(response.data.requests ?? []);
+            } catch (error) {
+                console.error("Error fetching recent requests:", error);
+                setSixRequests([]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchLastSixRequests();
+        fetchLastThreeRequests();
         fetchCount();
     } , [])
 
-    return { request_count, completed_request_count, review_count, requests, isLoading };
+    return { request_count, completed_request_count, review_count, three_requests, six_requests, isLoading };
 }
