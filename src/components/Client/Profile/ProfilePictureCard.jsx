@@ -2,21 +2,22 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
+import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
 
 export default function Picture() {
     const { user } = useContext(AuthContext);
 
-    const existeImage = user.photo;
+    const photoUrl = getUserPhotoUrl(user.photo);
     
     return (
         <div className="w-full rounded-[40px] flex flex-col items-center text-center shadow-sm bg-white px-4 sm:px-6 md:px-10 py-10">
 
             <div className="w-28 h-28 rounded-full border-[5px] border-orange-500 overflow-hidden mb-4">
                 {
-                    existeImage ? 
+                    photoUrl ? 
                         <img
                             className="w-full h-full object-cover"
-                            src={`http://127.0.0.1:8000/storage/${user.photo}`}
+                            src={photoUrl}
                             alt="Avatar"
                         /> : 
                         <img

@@ -8,6 +8,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
+import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
 
 export default function Header({ isDark, toogleDark }) {
     const [menuOpen, toggleMenu] = useState(false);
@@ -31,7 +32,7 @@ export default function Header({ isDark, toogleDark }) {
         navigate("/login");
     };
 
-    const existeImage = user.photo;
+    const photoUrl = getUserPhotoUrl(user.photo);
 
     return (
         <header className="fixed top-0 left-0 w-full z-50">
@@ -91,10 +92,10 @@ export default function Header({ isDark, toogleDark }) {
                             </div>
                             <div className="relative">
                                 {
-                                    existeImage ? 
+                                    photoUrl ? 
                                         <img
                                             className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
-                                            src={`http://127.0.0.1:8000/storage/${user.photo}`}
+                                            src={photoUrl}
                                             alt="Avatar"
                                         /> : 
                                         <img
@@ -117,10 +118,10 @@ export default function Header({ isDark, toogleDark }) {
                                     isDark ? 'border-[#334155]' : 'border-[#F1F5F9]'
                                 }`}>
                                     {
-                                    existeImage ? 
+                                    photoUrl ? 
                                         <img
                                             className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover border-2 border-orange-400 transition group-hover:border-[#FF781F]"
-                                            src={`http://127.0.0.1:8000/storage/${user.photo}`}
+                                            src={photoUrl}
                                             alt="Avatar"
                                         /> : 
                                         <img

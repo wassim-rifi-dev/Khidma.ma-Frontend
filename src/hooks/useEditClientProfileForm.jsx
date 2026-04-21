@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import defaultProfile from "../assets/Profile/default_profile.jpg";
 import { updateInfo } from "../services/userProfileServices";
 import { useNavigate } from "react-router-dom";
+import getUserPhotoUrl from "../utils/getUserPhotoUrl";
 
 const defaultImage = defaultProfile;
 const maxImageSize = 2 * 1024 * 1024;
@@ -34,11 +35,7 @@ export default function useEditClientProfileForm() {
             phone: user?.phone ? `+212 ${user.phone.startsWith("0") ? user.phone.slice(1) : user.phone}` : "",
         });
 
-        if (user?.photo) {
-            setImagePreview(user.photo.startsWith("http") ? user.photo : `http://127.0.0.1:8000/storage/${user.photo}`);
-        } else {
-            setImagePreview(defaultImage);
-        }
+        setImagePreview(getUserPhotoUrl(user?.photo) || defaultImage);
 
         setSelectedImage(null);
         setRemovePhoto(false);
