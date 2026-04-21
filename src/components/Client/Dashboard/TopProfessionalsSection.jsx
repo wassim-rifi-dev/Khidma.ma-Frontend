@@ -1,24 +1,42 @@
-import { FaRegStar } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import ProfessionalCard from "./cards/ProfessionalCard";
+import { getTopProfessionals } from "../../../services/ProfessionalServices";
 
 export default function TopProfessional() {
+    const [professionals, setProfessionals] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchTopProfessionals() {
+            try {
+                const response = await getTopProfessionals();
+                setProfessionals(response.data.professionals ?? []);
+            } catch (error) {
+                console.error("Error fetching top professionals:", error);
+                setProfessionals([]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchTopProfessionals();
+    }, []);
+
     return (
         <div className="w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-16 font-sans">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-
                 <div className="lg:col-span-4 space-y-8 text-center lg:text-left">
-
                     <div>
                         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111827] mb-4">
                             Top Professionals
                         </h2>
 
                         <p className="text-gray-500 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
-                            Meet our highest-rated experts who have completed over 500+ successful missions.
+                            Meet our highest-rated experts chosen directly from the latest professionals in our network.
                         </p>
                     </div>
 
                     <div className="space-y-4">
-
                         <div className="flex items-center p-4 bg-white rounded-2xl border border-gray-50 shadow-sm">
                             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4 shrink-0">
                                 <svg className="w-6 h-6 text-[#FF7A1A]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -52,102 +70,25 @@ export default function TopProfessional() {
                                 </p>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-                    <div className="bg-white rounded-[30px] md:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
-
-                        <div className="flex justify-between items-start mb-6">
-
-                            <div className="relative">
-                                <img
-                                    src="https://ui-avatars.com/api/?name=Ahmed+Benali&background=0D8ABC&color=fff"
-                                    alt="Ahmed"
-                                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white shadow-sm"
-                                />
-
-                                <div className="absolute bottom-1 right-1 w-4 h-4 sm:w-5 sm:h-5 bg-[#22C55E] border-4 border-white rounded-full"></div>
-                            </div>
-
-                            <div className="bg-gray-50 px-3 py-1 rounded-full flex items-center gap-1">
-                                <FaRegStar color="#EAB308" />
-                                <span className="text-sm font-bold text-gray-700">
-                                    4.9
-                                </span>
-                            </div>
-
+                    {isLoading ? (
+                        <div className="sm:col-span-2 rounded-[30px] bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
+                            Loading top professionals...
                         </div>
-
-                        <h3 className="text-lg sm:text-xl font-bold text-[#111827] mb-1">
-                            Ahmed Benali
-                        </h3>
-
-                        <p className="text-[#FF7A1A] text-xs font-black uppercase tracking-wider mb-4">
-                            Master Electrician
-                        </p>
-
-                        <p className="text-gray-500 text-sm leading-relaxed mb-8">
-                            Specialized in smart home installations and industrial wiring.
-                            12 years experience in...
-                        </p>
-
-                        <div className="flex justify-between items-center border-t border-gray-50 pt-6">
-                            <a href="#" className="text-[#FF7A1A] font-bold hover:underline">
-                                Book Profile
-                            </a>
+                    ) : professionals.length === 0 ? (
+                        <div className="sm:col-span-2 rounded-[30px] bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
+                            No professionals available right now.
                         </div>
-
-                    </div>
-
-                    <div className="bg-white rounded-[30px] md:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
-
-                        <div className="flex justify-between items-start mb-6">
-
-                            <div className="relative">
-                                <img
-                                    src="https://ui-avatars.com/api/?name=Laila+Mansouri&background=059669&color=fff"
-                                    alt="Laila"
-                                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white shadow-sm"
-                                />
-
-                                <div className="absolute bottom-1 right-1 w-4 h-4 sm:w-5 sm:h-5 bg-[#22C55E] border-4 border-white rounded-full"></div>
-                            </div>
-
-                            <div className="bg-gray-50 px-3 py-1 rounded-full flex items-center gap-1">
-                                <FaRegStar color="#EAB308" />
-                                <span className="text-sm font-bold text-gray-700">
-                                    4.9
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <h3 className="text-lg sm:text-xl font-bold text-[#111827] mb-1">
-                            Laila Mansouri
-                        </h3>
-
-                        <p className="text-[#FF7A1A] text-xs font-black uppercase tracking-wider mb-4">
-                            Interior Decorator
-                        </p>
-
-                        <p className="text-gray-500 text-sm leading-relaxed mb-8">
-                            Transforming spaces with modern Moroccan fusion.
-                            Certified expert in Rabat and Kenitra.
-                        </p>
-
-                        <div className="flex justify-between items-center border-t border-gray-50 pt-6">
-                            <a href="#" className="text-[#FF7A1A] font-bold hover:underline">
-                                Book Profile
-                            </a>
-                        </div>
-
-                    </div>
-
+                    ) : (
+                        professionals.map((professional) => (
+                            <ProfessionalCard key={professional.id} professional={professional} />
+                        ))
+                    )}
                 </div>
             </div>
         </div>
-    )
+    );
 }
