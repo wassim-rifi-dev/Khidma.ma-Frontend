@@ -153,7 +153,7 @@ export default function ProfessionalProfile() {
                                     return (
                                         <article
                                             key={service.title}
-                                            className="rounded-[24px] bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.06)]"
+                                            className="rounded-2xl bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.06)]"
                                         >
                                             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef3ff] text-slate-700">
                                                 <Icon className="h-5 w-5" />
@@ -182,7 +182,7 @@ export default function ProfessionalProfile() {
                                 ].map((src, index) => (
                                     <div
                                         key={src}
-                                        className="overflow-hidden rounded-[24px] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.06)]"
+                                        className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_rgba(15,23,42,0.06)]"
                                     >
                                         <img
                                             src={src}
@@ -205,7 +205,7 @@ export default function ProfessionalProfile() {
                                 {reviews.map((review) => (
                                     <article
                                         key={review.name}
-                                        className="rounded-[24px] bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.06)]"
+                                        className="rounded-2xl bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.06)]"
                                     >
                                         <div className="flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-3">

@@ -42,11 +42,11 @@ export default function ServiceDetails() {
                         <img
                             src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80"
                             alt="Plumbing Service"
-                            className="h-[300px] w-full rounded-[32px] object-cover shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:h-[360px]"
+                            className="h-75 w-full rounded-2xl object-cover shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:h-90"
                         />
                     </div>
 
-                    <aside className="self-start rounded-[32px] bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                    <aside className="self-start rounded-2xl bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
                         <div className="text-center">
                             <p className="text-sm text-slate-400">Estimated Price</p>
                             <p className="mt-2 text-[2rem] font-semibold leading-none text-slate-900">
