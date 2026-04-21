@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as requestServices from "../../../../services/RequestServices";
 import RequestCard from "./RequestCard";
 import { showcaseImages } from "../../../../data/CaseImages";
+import useClientRequest from "../../../../hooks/useClientRequest";
 
 function EmptyRequestsState() {
     return (
@@ -13,26 +12,7 @@ function EmptyRequestsState() {
 }
 
 export default function MyRequestsSection() {
-    const [requests, setRequests] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function fetchRequests() {
-            try {
-                const response = await requestServices.getLastThreeClientRequest();
-                const requests = response.data.requests ?? [];
-                setRequests(requests);
-            } catch (error) {
-                console.error("Error fetching client requests:", error);
-                setRequests([]);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        fetchRequests();
-    }, []);
-
+    const { requests, isLoading } = useClientRequest();
     return (
         <div className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center justify-center">
             <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
