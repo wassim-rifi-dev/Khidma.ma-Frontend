@@ -1,13 +1,21 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import LoadingScreen from "../components/ui/LoadingScreen";
 
 export default function RoleRoutes({ allowedRole, children }) {
 
     const { user, loading } = useContext(AuthContext);
     const token = localStorage.getItem("token");
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) {
+        return (
+            <LoadingScreen
+                title="Checking permissions"
+                subtitle="We are confirming your role and unlocking the right pages."
+            />
+        );
+    }
 
     if (!token || !user) {
         return <Navigate to="/login" replace />;
