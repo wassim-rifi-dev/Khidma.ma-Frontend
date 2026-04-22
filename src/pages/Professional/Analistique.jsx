@@ -1,4 +1,5 @@
 import AnalyticsHeader from "../../components/Professional/Analistique/AnalyticsHeader";
+import AnalyticsStats from "../../components/Professional/Analistique/AnalyticsStats";
 import Header from "../../components/Professional/Shared/Header";
 import SideBar from "../../components/Professional/Shared/SideBar";
 
@@ -10,6 +11,7 @@ export default function Analistique() {
 
             <section className="ml-60 px-8 pb-8 pt-28 lg:px-12">
                 <AnalyticsHeader />
+                <AnalyticsStats />
             </section>
         </main>
     );
