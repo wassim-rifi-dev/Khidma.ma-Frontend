@@ -62,3 +62,12 @@ export async function createRequest(serviceId , data) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function cancelRequest(requestId) {
+    try {
+        const response = await api.put(`request/cancel/${requestId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
