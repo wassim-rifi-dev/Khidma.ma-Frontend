@@ -3,6 +3,9 @@ import Header from "../../components/Professional/Shared/Header";
 import SideBar from "../../components/Professional/Shared/SideBar";
 import { AuthContext } from "../../context/AuthContext";
 import WelcomeCard from "../../components/Professional/Home/WelcomeCard";
+import GetStartedSteps from "../../components/Professional/Home/GetStartedSteps";
+import ProfessionalHomePanels from "../../components/Professional/Home/ProfessionalHomePanels";
+import ProfessionalFooter from "../../components/Professional/Home/ProfessionalFooter";
 
 export default function Home() {
     const { user } = useContext(AuthContext);
@@ -14,6 +17,9 @@ export default function Home() {
 
             <section className="ml-60 px-8 pb-8 pt-28 lg:px-12">
                 <WelcomeCard user={user} />
+                <GetStartedSteps />
+                <ProfessionalHomePanels />
+                <ProfessionalFooter />
             </section>
         </main>
     );
