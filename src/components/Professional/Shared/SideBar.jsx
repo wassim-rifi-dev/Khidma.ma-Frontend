@@ -1,16 +1,14 @@
-import { Link } from "react-router-dom";
-import { FiBarChart2, FiGrid, FiHome, FiPlus, FiSettings, FiStar, FiTool } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
+import { FiHome, FiPlus } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
 
 const navItems = [
-    { label: "Overview", icon: FiGrid },
-    { label: "My Services", icon: FiTool, active: true },
-    { label: "Client Reviews", icon: FiStar },
-    { label: "Analytics", icon: FiBarChart2 },
-    { label: "Settings", icon: FiSettings },
+    { label: "Home", path: "/professional/home", icon: FiHome },
 ];
 
 export default function SideBar() {
+    const { pathname } = useLocation();
+
     return (
         <aside className="fixed left-0 top-0 z-50 flex h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-slate-200 bg-white">
             <div className="px-6 pb-8 pt-6">
@@ -19,20 +17,24 @@ export default function SideBar() {
             </div>
 
             <nav className="mt-1 space-y-1">
-                {navItems.map(({ label, icon: Icon, active }) => (
-                    <a
+                {navItems.map(({ label, path, icon: Icon }) => {
+                    const active = pathname === path;
+
+                    return (
+                    <Link
                         key={label}
-                        href="#"
+                        to={path}
                         className={`flex h-12 items-center gap-3.5 px-6 text-base font-medium transition-colors ${
                             active
-                                ? "bg-slate-50 text-[#A34E0D]"
-                                : "text-slate-600 hover:bg-slate-50 hover:text-[#A34E0D]"
+                                ? "bg-orange-50 text-[#F97415]"
+                                : "text-slate-600 hover:bg-orange-50 hover:text-[#F97415]"
                         }`}
                     >
                         <Icon className="h-5 w-5 shrink-0" />
                         <span className="truncate">{label}</span>
-                    </a>
-                ))}
+                    </Link>
+                    );
+                })}
             </nav>
 
             <div className="mt-auto px-5 pb-6 pt-6">
