@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FiEdit3, FiEye, FiMapPin, FiStar, FiTool } from "react-icons/fi";
 import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../../utils/getUserPhotoUrl";
@@ -57,13 +58,17 @@ export default function ProfilePictureCard({ user, professional }) {
                         Edit Profile
                     </button>
 
-                    <button
-                        type="button"
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 px-8 py-4 text-base font-semibold text-slate-600 transition hover:bg-slate-200"
+                    <Link
+                        to={professional?.id ? `/professional/${professional.id}` : "#"}
+                        className={`inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold transition ${
+                            professional?.id
+                                ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                : "pointer-events-none bg-slate-100 text-slate-300"
+                        }`}
                     >
                         <FiEye className="h-5 w-5" />
                         Preview Public Profile
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>
