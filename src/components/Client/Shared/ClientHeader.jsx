@@ -5,7 +5,7 @@ import { FiBriefcase, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
 import logoLight from '../../../assets/logoLight.svg';
 import logoDark from '../../../assets/logoDark.svg';
 import { useContext, useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
@@ -34,6 +34,18 @@ export default function Header({ isDark, toogleDark }) {
 
     const photoUrl = getUserPhotoUrl(user.photo);
     const isProfessional = user.role === "professional";
+    const navLinkClass = ({ isActive }) => `relative px-1 py-2 transition-colors duration-200 outline-none ${
+        isDark
+            ? `${isActive ? 'text-orange-300' : 'hover:text-orange-300 focus-visible:text-orange-300'}`
+            : `${isActive ? 'text-[#F97415]' : 'hover:text-[#F97415] focus-visible:text-[#F97415]'}`
+    } after:absolute after:bottom-1.5 after:left-1/2 after:h-0.5 after:-translate-x-1/2 after:rounded-full after:bg-[#F97415] after:transition-all after:duration-200 ${
+        isActive ? 'after:w-5' : 'after:w-0 hover:after:w-5 focus-visible:after:w-5'
+    }`;
+    const mobileNavLinkClass = ({ isActive }) => `border-b px-0 py-3 transition-colors duration-200 outline-none ${
+        isDark
+            ? `border-[#334155]/50 ${isActive ? 'text-orange-300' : 'hover:text-orange-300 focus-visible:text-orange-300'}`
+            : `border-[#F1F5F9] ${isActive ? 'text-[#F97415]' : 'hover:text-[#F97415] focus-visible:text-[#F97415]'}`
+    }`;
 
     return (
         <header className="fixed top-0 left-0 w-full z-50">
@@ -52,16 +64,16 @@ export default function Header({ isDark, toogleDark }) {
                 <nav className={`hidden md:flex items-center gap-8 font-bold text-[15px] ${
                     isDark ? 'text-white' : 'text-[#475569]'
                 }`}>
-                    <Link to={'/client/home'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Home</Link>
-                    <Link to={'/services'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Services</Link>
-                    <Link to={'/messages'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Messages</Link>
+                    <NavLink to={'/client/home'} className={navLinkClass}>Home</NavLink>
+                    <NavLink to={'/services'} className={navLinkClass}>Services</NavLink>
+                    <NavLink to={'/messages'} className={navLinkClass}>Messages</NavLink>
                     {isProfessional && (
                         <Link
-                            to="/professional/profile"
-                            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                            to="/professional/home"
+                            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors outline-none focus-visible:ring-4 ${
                                 isDark
-                                    ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15'
-                                    : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+                                    ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15 focus-visible:ring-orange-400/20'
+                                    : 'bg-orange-50 text-orange-600 hover:bg-orange-100 focus-visible:ring-orange-100'
                             }`}
                         >
                             <FiBriefcase size={16} />
@@ -171,7 +183,7 @@ export default function Header({ isDark, toogleDark }) {
                                     </Link>
                                     {isProfessional && (
                                         <Link
-                                            to="/professional/profile"
+                                            to="/professional/home"
                                             onClick={() => setDropdownOpen(false)}
                                             className={`mx-2 my-1 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-colors ${
                                                 isDark
@@ -236,12 +248,12 @@ export default function Header({ isDark, toogleDark }) {
                     isDark ? 'bg-[#0F172A] border-[#334155]/50' : 'bg-white border-[#E2E8F0]'
                 }`}>
                     <nav className={`flex flex-col font-bold ${isDark ? 'text-white' : 'text-[#475569]'}`}>
-                        <Link to={'/client/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
-                        <Link to={'/services'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Services</Link>
-                        <Link to={'/messages'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Messages</Link>
+                        <NavLink to={'/client/home'} className={mobileNavLinkClass}>Accueil</NavLink>
+                        <NavLink to={'/services'} className={mobileNavLinkClass}>Services</NavLink>
+                        <NavLink to={'/messages'} className={mobileNavLinkClass}>Messages</NavLink>
                         {isProfessional && (
-                            <Link to={'/professional/profile'} className={`my-3 flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors ${
-                                isDark ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15' : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+                            <Link to={'/professional/home'} className={`my-3 flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors outline-none focus-visible:ring-4 ${
+                                isDark ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15 focus-visible:ring-orange-400/20' : 'bg-orange-50 text-orange-600 hover:bg-orange-100 focus-visible:ring-orange-100'
                             }`}>
                                 <FiBriefcase size={18} />
                                 <span className="font-bold">Professional Dashboard</span>
