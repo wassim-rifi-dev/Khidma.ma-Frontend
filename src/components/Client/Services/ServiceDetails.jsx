@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
     FiChevronRight,
@@ -8,6 +9,7 @@ import {
 } from "react-icons/fi";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
+import RequestServiceModal from "../Shared/RequestServiceModal";
 
 const fallbackImage =
     "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80";
@@ -25,6 +27,8 @@ function StateMessage({ children, tone = "default" }) {
 }
 
 export default function ServiceDetails({ details, isLoading, error }) {
+    const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+
     if (isLoading) {
         return <StateMessage>Loading service...</StateMessage>;
     }
@@ -88,7 +92,11 @@ export default function ServiceDetails({ details, isLoading, error }) {
                             </p>
                         </div>
 
-                        <button className="mt-7 w-full rounded-full bg-orange-500 px-6 py-4 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600">
+                        <button
+                            type="button"
+                            onClick={() => setIsRequestModalOpen(true)}
+                            className="mt-7 w-full rounded-full bg-orange-500 px-6 py-4 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
+                        >
                             Request Service
                         </button>
 
@@ -146,6 +154,15 @@ export default function ServiceDetails({ details, isLoading, error }) {
                     </section>
                 </div>
             </div>
+
+            <RequestServiceModal
+                isOpen={isRequestModalOpen}
+                onClose={() => setIsRequestModalOpen(false)}
+                serviceTitle={service.title}
+                professionalName={professionalName}
+                location={location}
+                price={price}
+            />
         </section>
     );
 }

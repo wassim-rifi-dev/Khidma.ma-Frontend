@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     FiAward,
     FiCheckCircle,
@@ -11,6 +12,7 @@ import {
 import { MdCleaningServices, MdElectricalServices } from "react-icons/md";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
+import RequestServiceModal from "../Shared/RequestServiceModal";
 
 function getServiceIcon(index) {
     const icons = [FiTool, MdCleaningServices, MdElectricalServices];
@@ -26,6 +28,8 @@ function EmptyState({ children }) {
 }
 
 export default function ProfessionalProfile({ profile, isLoading, error }) {
+    const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+
     if (isLoading) {
         return (
             <section className="min-h-screen bg-[#f6f8fc] px-4 py-8 sm:px-6 lg:px-8">
@@ -104,6 +108,8 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
 
                             <div className="mt-6 flex flex-wrap items-center gap-3">
                                 <button
+                                    type="button"
+                                    onClick={() => setIsRequestModalOpen(true)}
                                     className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
                                     disabled={!firstService}
                                 >
@@ -284,6 +290,8 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
 
                         <div className="mt-8 space-y-3">
                             <button
+                                type="button"
+                                onClick={() => setIsRequestModalOpen(true)}
                                 className="w-full rounded-full bg-orange-500 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
                                 disabled={!firstService}
                             >
@@ -302,6 +310,15 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                     </aside>
                 </div>
             </div>
+
+            <RequestServiceModal
+                isOpen={isRequestModalOpen}
+                onClose={() => setIsRequestModalOpen(false)}
+                serviceTitle={firstService?.title}
+                professionalName={user.name}
+                location={firstService?.city || location}
+                price={firstService?.price_min ? `${firstService.price_min} MAD` : "Contact for price"}
+            />
         </section>
     );
 }
