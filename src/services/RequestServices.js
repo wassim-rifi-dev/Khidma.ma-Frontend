@@ -53,3 +53,12 @@ export async function getLastSixClientRequest() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function createRequest(serviceId , data) {
+    try {
+        const response = await api.post(`request/store/${serviceId}` , data);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
