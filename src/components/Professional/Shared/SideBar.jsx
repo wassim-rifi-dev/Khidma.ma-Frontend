@@ -1,4 +1,5 @@
-import { FiBarChart2, FiGrid, FiPlus, FiSettings, FiStar, FiTool } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { FiBarChart2, FiGrid, FiHome, FiPlus, FiSettings, FiStar, FiTool } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
 
 const navItems = [
@@ -35,6 +36,19 @@ export default function SideBar() {
             </nav>
 
             <div className="mt-auto px-5 pb-6 pt-6">
+                <Link
+                    to="/home"
+                    className="mb-3 flex w-full items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3.5 text-left text-sm font-semibold text-slate-700 transition hover:bg-sky-100"
+                >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-sky-500 shadow-sm">
+                        <FiHome className="h-5 w-5" />
+                    </span>
+                    <span>
+                        <span className="block leading-tight">Client Home</span>
+                        <span className="text-[11px] font-medium text-slate-400">Browse as client</span>
+                    </span>
+                </Link>
+
                 <button
                     type="button"
                     className="flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"

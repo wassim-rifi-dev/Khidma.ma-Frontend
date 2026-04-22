@@ -11,7 +11,7 @@ export default function HomeRoute({isDark , toogleDark}) {
         return <Navigate to={'/login'} replace />
     }
 
-    if (user.role === 'client') {
+    if (['client', 'professional'].includes(user.role)) {
         return <Home isDark={isDark} toogleDark={toogleDark} />
     }
 

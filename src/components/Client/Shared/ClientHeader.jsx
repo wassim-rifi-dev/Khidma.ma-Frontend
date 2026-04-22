@@ -1,7 +1,7 @@
 import { IoLanguage } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineDarkMode, MdOutlineLightMode, MdMenu } from "react-icons/md";
-import { FiUser, FiSettings, FiLogOut } from "react-icons/fi";
+import { FiBriefcase, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
 import logoLight from '../../../assets/logoLight.svg';
 import logoDark from '../../../assets/logoDark.svg';
 import { useContext, useState, useRef, useEffect } from "react";
@@ -33,6 +33,7 @@ export default function Header({ isDark, toogleDark }) {
     };
 
     const photoUrl = getUserPhotoUrl(user.photo);
+    const isProfessional = user.role === "professional";
 
     return (
         <header className="fixed top-0 left-0 w-full z-50">
@@ -54,6 +55,19 @@ export default function Header({ isDark, toogleDark }) {
                     <Link to={'/home'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Home</Link>
                     <Link to={'/services'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Services</Link>
                     <Link to={'/messages'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Messages</Link>
+                    {isProfessional && (
+                        <Link
+                            to="/professional/profile-preview"
+                            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                                isDark
+                                    ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15'
+                                    : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+                            }`}
+                        >
+                            <FiBriefcase size={16} />
+                            Professional Dashboard
+                        </Link>
+                    )}
                 </nav>
 
                 <div className="flex items-center gap-3 md:gap-6">
@@ -155,6 +169,29 @@ export default function Header({ isDark, toogleDark }) {
                                         <FiUser size={16} className="text-[#FF781F]" />
                                         Mon Profil
                                     </Link>
+                                    {isProfessional && (
+                                        <Link
+                                            to="/professional/profile-preview"
+                                            onClick={() => setDropdownOpen(false)}
+                                            className={`mx-2 my-1 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-colors ${
+                                                isDark
+                                                    ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15'
+                                                    : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+                                            }`}
+                                        >
+                                            <span className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                                                isDark ? 'bg-orange-400/15' : 'bg-white'
+                                            }`}>
+                                                <FiBriefcase size={17} className="text-[#FF781F]" />
+                                            </span>
+                                            <span>
+                                                <span className="block leading-tight">Professional Dashboard</span>
+                                                <span className={`text-[11px] font-medium ${isDark ? 'text-orange-200/80' : 'text-orange-500/80'}`}>
+                                                    Manage services
+                                                </span>
+                                            </span>
+                                        </Link>
+                                    )}
                                     <Link
                                         to="/settings"
                                         onClick={() => setDropdownOpen(false)}
@@ -202,6 +239,14 @@ export default function Header({ isDark, toogleDark }) {
                         <Link to={'/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
                         <Link to={'/services'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Services</Link>
                         <Link to={'/messages'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Messages</Link>
+                        {isProfessional && (
+                            <Link to={'/professional/profile-preview'} className={`my-3 flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors ${
+                                isDark ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15' : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+                            }`}>
+                                <FiBriefcase size={18} />
+                                <span className="font-bold">Professional Dashboard</span>
+                            </Link>
+                        )}
                     </nav>
 
                     <div className={`flex items-center justify-between mt-4 pt-4 border-t ${isDark ? 'border-[#334155]/50' : 'border-[#E2E8F0]'}`}>

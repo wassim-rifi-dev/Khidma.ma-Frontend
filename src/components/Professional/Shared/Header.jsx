@@ -1,7 +1,7 @@
 import { IoLanguage } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineDarkMode, MdOutlineLightMode, MdMenu } from "react-icons/md";
-import { FiLogOut, FiSearch, FiSettings, FiUser } from "react-icons/fi";
+import { FiHome, FiLogOut, FiSearch, FiSettings, FiUser } from "react-icons/fi";
 import { useContext, useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
@@ -162,6 +162,27 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
                                     >
                                         <FiUser size={16} className="text-[#FF781F]" />
                                         Mon Profil
+                                    </Link>
+                                    <Link
+                                        to="/home"
+                                        onClick={() => setDropdownOpen(false)}
+                                        className={`mx-2 my-1 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-colors ${
+                                            isDark
+                                                ? 'bg-sky-500/10 text-sky-300 hover:bg-sky-500/15'
+                                                : 'bg-sky-50 text-slate-700 hover:bg-sky-100'
+                                        }`}
+                                    >
+                                        <span className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                                            isDark ? 'bg-sky-400/15' : 'bg-white'
+                                        }`}>
+                                            <FiHome size={17} className="text-sky-500" />
+                                        </span>
+                                        <span>
+                                            <span className="block leading-tight">Client Home</span>
+                                            <span className={`text-[11px] font-medium ${isDark ? 'text-sky-200/80' : 'text-slate-400'}`}>
+                                                Browse services
+                                            </span>
+                                        </span>
                                     </Link>
                                     <Link
                                         to="/settings"
