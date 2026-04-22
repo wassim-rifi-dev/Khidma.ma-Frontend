@@ -158,6 +158,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
             <RequestServiceModal
                 isOpen={isRequestModalOpen}
                 onClose={() => setIsRequestModalOpen(false)}
+                serviceId={service.id}
                 serviceTitle={service.title}
                 professionalName={professionalName}
                 location={location}

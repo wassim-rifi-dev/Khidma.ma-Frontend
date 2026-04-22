@@ -314,6 +314,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
             <RequestServiceModal
                 isOpen={isRequestModalOpen}
                 onClose={() => setIsRequestModalOpen(false)}
+                serviceId={firstService?.id}
                 serviceTitle={firstService?.title}
                 professionalName={user.name}
                 location={firstService?.city || location}

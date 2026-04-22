@@ -8,15 +8,19 @@ import {
     FiUser,
     FiX,
 } from "react-icons/fi";
+import useCreateRequestForm from "../../../hooks/useCreateRequestForm";
 
 export default function RequestServiceModal({
     isOpen,
     onClose,
+    serviceId,
     serviceTitle = "Selected service",
     professionalName = "Professional",
     location = "Morocco",
     price = "Contact for price",
 }) {
+    const { form, handleChange, handleSubmit } = useCreateRequestForm(serviceId, onClose);
+
     if (!isOpen) {
         return null;
     }
@@ -45,8 +49,9 @@ export default function RequestServiceModal({
                     </p>
                 </div>
 
-                <div className="grid gap-6 px-6 py-6 sm:px-8 lg:grid-cols-[1fr_220px]">
-                    <div className="space-y-5">
+                <form onSubmit={handleSubmit}>
+                    <div className="grid gap-6 px-6 py-6 sm:px-8 lg:grid-cols-[1fr_220px]">
+                        <div className="space-y-5">
                         <label className="block">
                             <span className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
                                 <FiMessageSquare className="h-4 w-4 text-orange-500" />
@@ -54,6 +59,10 @@ export default function RequestServiceModal({
                             </span>
                             <textarea
                                 rows="5"
+                                name="message"
+                                value={form.message}
+                                onChange={handleChange}
+                                required
                                 placeholder="Describe what you need help with..."
                                 className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
                             />
@@ -67,6 +76,10 @@ export default function RequestServiceModal({
                                 </span>
                                 <input
                                     type="date"
+                                    name="preferred_date"
+                                    value={form.preferred_date}
+                                    onChange={handleChange}
+                                    required
                                     className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
                                 />
                             </label>
@@ -78,6 +91,10 @@ export default function RequestServiceModal({
                                 </span>
                                 <input
                                     type="time"
+                                    name="preferred_time"
+                                    value={form.preferred_time}
+                                    onChange={handleChange}
+                                    required
                                     className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
                                 />
                             </label>
@@ -90,6 +107,10 @@ export default function RequestServiceModal({
                             </span>
                             <input
                                 type="text"
+                                name="address"
+                                value={form.address}
+                                onChange={handleChange}
+                                required
                                 placeholder="Add your address or neighborhood"
                                 className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
                             />
@@ -103,7 +124,12 @@ export default function RequestServiceModal({
                             <div className="flex h-12 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 transition focus-within:border-orange-300 focus-within:bg-white focus-within:ring-4 focus-within:ring-orange-100">
                                 <input
                                     type="number"
+                                    name="price"
+                                    value={form.price}
+                                    onChange={handleChange}
                                     min="0"
+                                    step="0.01"
+                                    required
                                     placeholder="Enter your budget"
                                     className="min-w-0 flex-1 bg-transparent px-4 text-sm text-slate-700 outline-none placeholder:text-slate-400"
                                 />
@@ -112,9 +138,9 @@ export default function RequestServiceModal({
                                 </span>
                             </div>
                         </label>
-                    </div>
+                        </div>
 
-                    <aside className="self-start rounded-2xl bg-slate-50 p-5">
+                        <aside className="self-start rounded-2xl bg-slate-50 p-5">
                         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
                             Summary
                         </p>
@@ -136,25 +162,26 @@ export default function RequestServiceModal({
                                 <p className="mt-1 text-xl font-semibold text-slate-900">{price}</p>
                             </div>
                         </div>
-                    </aside>
-                </div>
+                        </aside>
+                    </div>
 
-                <div className="flex flex-col-reverse gap-3 border-t border-slate-100 px-6 py-5 sm:flex-row sm:justify-end sm:px-8">
-                    <button
-                        type="button"
-                        onClick={onClose}
-                        className="rounded-full bg-slate-100 px-6 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-200"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="button"
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
-                    >
-                        <FiSend className="h-4 w-4" />
-                        Send Request
-                    </button>
-                </div>
+                    <div className="flex flex-col-reverse gap-3 border-t border-slate-100 px-6 py-5 sm:flex-row sm:justify-end sm:px-8">
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="rounded-full bg-slate-100 px-6 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-200"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
+                        >
+                            <FiSend className="h-4 w-4" />
+                            Send Request
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createRequest } from "../services/RequestServices";
 
-export default function useCreateRequestForm(serviceId) {
+export default function useCreateRequestForm(serviceId, onSuccess) {
     const [form, setForm] = useState({
         message: "",
         preferred_date: "",
@@ -18,7 +18,19 @@ export default function useCreateRequestForm(serviceId) {
         event.preventDefault();
 
         try {
-            await createRequest(serviceId, form);
+            const response = await createRequest(serviceId, form);
+
+            setForm({
+                message: "",
+                preferred_date: "",
+                preferred_time: "",
+                address: "",
+                price: "",
+            });
+
+            if (onSuccess) {
+                onSuccess(response);
+            }
         } catch (err) {
             console.error("Error : ", err);
         }
