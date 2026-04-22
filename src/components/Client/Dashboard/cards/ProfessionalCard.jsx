@@ -40,7 +40,7 @@ export default function ProfessionalCard({ professional }) {
             </p>
 
             <div className="flex justify-between items-center border-t border-gray-50 pt-6">
-                <Link to="/services" className="text-[#FF7A1A] font-bold hover:underline">
+                <Link to={`/professional/${professional.id}`} className="text-[#FF7A1A] font-bold hover:underline">
                     Book Profile
                 </Link>
             </div>

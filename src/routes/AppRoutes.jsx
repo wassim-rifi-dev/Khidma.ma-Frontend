@@ -10,6 +10,7 @@ import Home from '../pages/Client/Home';
 import Profile from '../pages/Client/Profile';
 import EditProfile from '../pages/Client/EditProfile';
 import Services from '../pages/Client/Services';
+import Professional from '../pages/Client/Professional';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -40,6 +41,11 @@ export default function AppRoutes() {
             <Route path='/services' element={
                 <IsAuthRoute>
                     <Services />
+                </IsAuthRoute>
+            } />
+            <Route path='/professional/:professionalId' element={
+                <IsAuthRoute>
+                    <Professional />
                 </IsAuthRoute>
             } />
         </Routes>
