@@ -1,0 +1,63 @@
+import { FiEdit3, FiEye, FiMapPin, FiStar, FiTool } from "react-icons/fi";
+
+export default function ProfilePictureCard() {
+    return (
+        <section className="mx-auto mt-10 w-full max-w-6xl rounded-[32px] border border-slate-100 bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-10">
+            <div className="flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
+                <div className="flex flex-col items-center gap-7 text-center sm:flex-row sm:text-left">
+                    <div className="relative h-36 w-36 shrink-0 sm:h-40 sm:w-40">
+                        <img
+                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+                            alt="Ahmed M."
+                            className="h-full w-full rounded-full object-cover ring-4 ring-orange-100"
+                        />
+                        <span className="absolute bottom-2 right-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-orange-500 shadow-md ring-2 ring-slate-100">
+                            <FiTool className="h-5 w-5" />
+                        </span>
+                    </div>
+
+                    <div>
+                        <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                            Ahmed M.
+                        </h2>
+
+                        <div className="mt-4 flex flex-wrap justify-center gap-3 text-base text-slate-500 sm:justify-start">
+                            <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-600">
+                                <FiTool className="h-5 w-5 text-orange-500" />
+                                Expert Plumber
+                            </span>
+                            <span className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-4 py-2 font-medium">
+                                <FiMapPin className="h-5 w-5 text-slate-400" />
+                                Casablanca
+                            </span>
+                        </div>
+
+                        <div className="mt-4 inline-flex items-center gap-2 text-base">
+                            <FiStar className="h-5 w-5 fill-orange-400 text-orange-400" />
+                            <span className="font-semibold text-slate-900">4.9</span>
+                            <span className="text-slate-400">(124 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row xl:justify-end">
+                    <button
+                        type="button"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-8 py-4 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
+                    >
+                        <FiEdit3 className="h-5 w-5" />
+                        Edit Profile
+                    </button>
+
+                    <button
+                        type="button"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 px-8 py-4 text-base font-semibold text-slate-600 transition hover:bg-slate-200"
+                    >
+                        <FiEye className="h-5 w-5" />
+                        Preview Public Profile
+                    </button>
+                </div>
+            </div>
+        </section>
+    );
+}
