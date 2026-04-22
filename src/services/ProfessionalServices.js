@@ -17,3 +17,12 @@ export async function getProfessionalById(professionalId) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getMyProfessionalProfile() {
+    try {
+        const response = await api.get("/profissional/profile");
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}

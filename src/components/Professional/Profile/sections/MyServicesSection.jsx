@@ -1,33 +1,28 @@
 import { FiArrowUpRight, FiDroplet, FiHome, FiPlus, FiTool } from "react-icons/fi";
 
-const services = [
-    {
-        title: "Emergency Plumbing",
-        description: "24/7 rapid response for burst pipes, severe blockages, and water damage",
-        tag: "Urgent Repair",
-        price: "From 300 MAD",
-        icon: FiHome,
-        iconStyle: "bg-orange-100 text-orange-500",
-    },
-    {
-        title: "Leak Detection",
-        description: "Advanced thermal and acoustic leak detection for hidden pipe issues...",
-        tag: "Diagnostic",
-        price: "From 200 MAD",
-        icon: FiDroplet,
-        iconStyle: "bg-sky-100 text-sky-500",
-    },
-    {
-        title: "Fixture Installation",
-        description: "Professional installation of sinks, toilets, showers, and water filtration...",
-        tag: "Installation",
-        price: "Hourly Rate",
-        icon: FiTool,
-        iconStyle: "bg-slate-100 text-slate-500",
-    },
+const serviceIcons = [
+    { icon: FiHome, iconStyle: "bg-orange-100 text-orange-500" },
+    { icon: FiDroplet, iconStyle: "bg-sky-100 text-sky-500" },
+    { icon: FiTool, iconStyle: "bg-slate-100 text-slate-500" },
 ];
 
-export default function MyServicesSection() {
+function formatServicePrice(service) {
+    if (service?.price_min && service?.price_max) {
+        return `${service.price_min} - ${service.price_max} MAD`;
+    }
+
+    if (service?.price_min) {
+        return `From ${service.price_min} MAD`;
+    }
+
+    if (service?.price_max) {
+        return `Up to ${service.price_max} MAD`;
+    }
+
+    return "Price not set";
+}
+
+export default function MyServicesSection({ services = [] }) {
     return (
         <section className="mx-auto mt-8 w-full max-w-6xl">
             <div className="mb-6">
@@ -37,28 +32,35 @@ export default function MyServicesSection() {
 
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
                 <div className="grid gap-6 md:grid-cols-2">
-                    {services.map(({ title, description, tag, price, icon: Icon, iconStyle }) => (
+                    {services.map((service, index) => {
+                        const { icon: Icon, iconStyle } = serviceIcons[index % serviceIcons.length];
+                        const categoryName = service?.category?.name || service?.categorie?.name || "Service";
+
+                        return (
                         <article
-                            key={title}
+                            key={service.id || service.title}
                             className="rounded-[22px] border border-slate-100 bg-white p-6 shadow-sm"
                         >
                             <span className={`flex h-10 w-10 items-center justify-center rounded-full ${iconStyle}`}>
                                 <Icon className="h-5 w-5" />
                             </span>
 
-                            <h3 className="mt-5 text-xl font-semibold text-slate-900">{title}</h3>
-                            <p className="mt-2 min-h-12 text-base leading-6 text-slate-500">{description}</p>
+                            <h3 className="mt-5 text-xl font-semibold text-slate-900">{service.title}</h3>
+                            <p className="mt-2 min-h-12 text-base leading-6 text-slate-500">
+                                {service.description || "No description provided yet."}
+                            </p>
 
                             <div className="mt-5 border-t border-slate-100 pt-4">
                                 <div className="flex items-center justify-between gap-4">
                                     <span className="rounded-md bg-slate-100 px-3 py-1 text-sm font-medium text-slate-500">
-                                        {tag}
+                                        {categoryName}
                                     </span>
-                                    <span className="text-base font-bold text-[#A34E0D]">{price}</span>
+                                    <span className="text-base font-bold text-[#A34E0D]">{formatServicePrice(service)}</span>
                                 </div>
                             </div>
                         </article>
-                    ))}
+                        );
+                    })}
 
                     <button
                         type="button"
