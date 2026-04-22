@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FiArrowUpRight, FiDroplet, FiHome, FiPlus, FiTool } from "react-icons/fi";
 
 const serviceIcons = [
@@ -62,8 +63,8 @@ export default function MyServicesSection({ services = [] }) {
                         );
                     })}
 
-                    <button
-                        type="button"
+                    <Link
+                        to="/professional/services/create"
                         className="flex min-h-[205px] flex-col items-center justify-center rounded-[22px] border border-dashed border-slate-200 bg-white/40 p-6 text-center transition hover:border-orange-200 hover:bg-orange-50/40"
                     >
                         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#A34E0D] shadow-sm">
@@ -71,7 +72,7 @@ export default function MyServicesSection({ services = [] }) {
                         </span>
                         <span className="mt-5 text-lg font-semibold text-slate-900">Create New Service</span>
                         <span className="mt-1 text-sm font-medium text-slate-500">Add a new offering to your catalog</span>
-                    </button>
+                    </Link>
                 </div>
 
                 <aside className="rounded-[30px] bg-[#252a2b] p-7 text-white shadow-[0_22px_55px_rgba(15,23,42,0.18)] xl:self-start">

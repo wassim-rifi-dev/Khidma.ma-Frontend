@@ -15,6 +15,7 @@ const steps = [
         description: "List what you offer, set your price, and define your availability.",
         icon: FiTool,
         action: "Create Service",
+        href: "/professional/services/create",
         highlighted: true,
     },
     {

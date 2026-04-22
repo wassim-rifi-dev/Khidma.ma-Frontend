@@ -17,13 +17,13 @@ export default function ProfessionalHomePanels() {
                         Your profile is hidden until you add at least one service offering.
                     </p>
 
-                    <button
-                        type="button"
+                    <Link
+                        to="/professional/services/create"
                         className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#F97415] px-8 text-sm font-bold text-white shadow-[0_12px_24px_rgba(249,116,21,0.22)] transition hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-100"
                     >
                         <FiPlus className="h-4 w-4" />
                         Create Service
-                    </button>
+                    </Link>
                 </article>
 
                 <article className="min-h-[330px] rounded-[26px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">

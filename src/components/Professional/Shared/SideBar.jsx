@@ -53,13 +53,13 @@ export default function SideBar() {
                     </span>
                 </Link>
 
-                <button
-                    type="button"
+                <Link
+                    to="/professional/services/create"
                     className="flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
                 >
                     <FiPlus className="h-5 w-5" />
                     Create Service
-                </button>
+                </Link>
             </div>
         </aside>
     )
