@@ -14,7 +14,7 @@ import ServiceCard from "./ServiceCard";
 import ServicesState from "./ServicesState";
 
 const initialVisibleServices = 3;
-const maxVisibleServices = 50;
+const loadMoreStep = 6;
 const fallbackImages = [
     "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=80",
     "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80",
@@ -22,8 +22,10 @@ const fallbackImages = [
 ];
 
 export default function ServicesExplorer() {
-    const [allServices, setAllServices] = useState([]);
+    const [services, setServices] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
+    const [cityOptions, setCityOptions] = useState([]);
+    const [totalServices, setTotalServices] = useState(0);
     const [visibleCount, setVisibleCount] = useState(initialVisibleServices);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -41,40 +43,70 @@ export default function ServicesExplorer() {
     ];
 
     useEffect(() => {
-        async function fetchInitialServices() {
+        async function fetchCategories() {
             try {
-                const [servicesResponse, categoriesResponse] = await Promise.all([
-                    getAllServices(maxVisibleServices),
-                    getAllCategories(),
-                ]);
-                const servicesPayload = servicesResponse.data.services;
+                const categoriesResponse = await getAllCategories();
                 const categoriesPayload = categoriesResponse.data.categories ?? [];
-                setAllServices(servicesPayload.data ?? []);
+
                 setCategoryOptions(
                     categoriesPayload
                         .map((category) => category.name)
                         .filter(Boolean)
                 );
             } catch (error) {
-                console.error("Error fetching services:", error);
-                setAllServices([]);
+                console.error("Error fetching categories:", error);
                 setCategoryOptions([]);
-            } finally {
-                setIsLoading(false);
             }
         }
 
-        fetchInitialServices();
+        fetchCategories();
     }, []);
 
-    async function handleLoadMore() {
+    useEffect(() => {
+        let isMounted = true;
+        const timeoutId = setTimeout(async () => {
+            setIsLoading(true);
+
+            try {
+                const servicesResponse = await getAllServices(visibleCount, filters);
+                const servicesPayload = servicesResponse.data.services;
+
+                if (isMounted) {
+                    setServices(servicesPayload.data ?? []);
+                    setTotalServices(servicesPayload.total ?? 0);
+                    setCityOptions(servicesResponse.data.cities ?? []);
+                }
+            } catch (error) {
+                console.error("Error fetching services:", error);
+
+                if (isMounted) {
+                    setServices([]);
+                    setTotalServices(0);
+                    setCityOptions([]);
+                }
+            } finally {
+                if (isMounted) {
+                    setIsLoading(false);
+                    setIsLoadingMore(false);
+                }
+            }
+        }, 300);
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timeoutId);
+        };
+    }, [filters, visibleCount]);
+
+    function handleLoadMore() {
         setIsLoadingMore(true);
-        setVisibleCount(allServices.length);
-        setIsLoadingMore(false);
+        setVisibleCount((currentCount) => currentCount + loadMoreStep);
     }
 
     function handleFilterChange(event) {
         const { name, value } = event.target;
+
+        setVisibleCount(initialVisibleServices);
         setFilters((currentFilters) => ({
             ...currentFilters,
             [name]: value,
@@ -91,51 +123,7 @@ export default function ServicesExplorer() {
         setVisibleCount(initialVisibleServices);
     }
 
-    const cityOptions = [...new Set(allServices.map((service) => service.city).filter(Boolean))];
-
-    const filteredServices = allServices.filter((service) => {
-        const matchesQuery = filters.query.trim()
-            ? [service.title, service.description, service.category?.name]
-                .filter(Boolean)
-                .some((value) => value.toLowerCase().includes(filters.query.trim().toLowerCase()))
-            : true;
-        const matchesCategory = filters.category
-            ? service.category?.name?.toLowerCase().includes(filters.category.toLowerCase())
-            : true;
-        const matchesCity = filters.city
-            ? service.city?.toLowerCase().includes(filters.city.toLowerCase())
-            : true;
-
-        return matchesQuery && matchesCategory && matchesCity;
-    });
-
-    const sortedServices = [...filteredServices].sort((firstService, secondService) => {
-        if (filters.sort === "Top Rated") {
-            return Number(secondService.rating || 0) - Number(firstService.rating || 0);
-        }
-
-        if (filters.sort === "Price: Low to High") {
-            return Number(firstService.price_min || 0) - Number(secondService.price_min || 0);
-        }
-
-        if (filters.sort === "Price: High to Low") {
-            return Number(secondService.price_min || 0) - Number(firstService.price_min || 0);
-        }
-
-        if (filters.sort === "Newest") {
-            return new Date(secondService.created_at) - new Date(firstService.created_at);
-        }
-
-        return 0;
-    });
-
-    const hasActiveFilters = Boolean(
-        filters.query || filters.category || filters.city || filters.sort
-    );
-    const servicesToRender = hasActiveFilters
-        ? sortedServices
-        : allServices.slice(0, visibleCount);
-    const canLoadMore = !hasActiveFilters && visibleCount < allServices.length;
+    const canLoadMore = services.length < totalServices;
 
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-10 sm:px-6 lg:px-8">
@@ -200,10 +188,10 @@ export default function ServicesExplorer() {
                 <div className="mt-10 grid gap-7 lg:grid-cols-2 xl:grid-cols-3">
                     {isLoading ? (
                         <ServicesState message="Loading services..." />
-                    ) : servicesToRender.length === 0 ? (
+                    ) : services.length === 0 ? (
                         <ServicesState message="No services match your search." />
                     ) : (
-                        servicesToRender.map((service, index) => (
+                        services.map((service, index) => (
                             <ServiceCard
                                 key={service.id}
                                 service={service}
