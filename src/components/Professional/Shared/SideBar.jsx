@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiPlus } from "react-icons/fi";
+import { FiBarChart2, FiHome, FiPlus } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
 
 const navItems = [
     { label: "Home", path: "/professional/home", icon: FiHome },
+    { label: "Analistique", path: "/professional/analistique", icon: FiBarChart2 },
 ];
 
 export default function SideBar() {

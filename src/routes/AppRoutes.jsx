@@ -14,6 +14,7 @@ import Professional from '../pages/Client/Professional';
 import ShowService from '../pages/Client/ShowService';
 import ProfessionalHome from '../pages/Professional/Home';
 import ProfilePreview from '../pages/Professional/ProfilePreview';
+import Analistique from '../pages/Professional/Analistique';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -45,6 +46,11 @@ export default function AppRoutes() {
             <Route path='/professional/home' element={
                 <RoleRoutes allowedRole={['professional']}>
                     <ProfessionalHome />
+                </RoleRoutes>
+            } />
+            <Route path='/professional/analistique' element={
+                <RoleRoutes allowedRole={['professional']}>
+                    <Analistique />
                 </RoleRoutes>
             } />
             <Route path='/profile' element={<ProfileRoute />} />
