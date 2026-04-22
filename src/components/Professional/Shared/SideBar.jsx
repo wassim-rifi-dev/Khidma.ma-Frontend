@@ -37,7 +37,7 @@ export default function SideBar() {
 
             <div className="mt-auto px-5 pb-6 pt-6">
                 <Link
-                    to="/home"
+                    to="/client/home"
                     className="mb-3 flex w-full items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3.5 text-left text-sm font-semibold text-slate-700 transition hover:bg-sky-100"
                 >
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-sky-500 shadow-sm">

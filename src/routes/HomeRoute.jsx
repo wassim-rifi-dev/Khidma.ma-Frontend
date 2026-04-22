@@ -1,19 +1,25 @@
 import { Navigate } from "react-router-dom";
-import Home from "../pages/Client/Home";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import ClientHome from "../pages/Client/Home";
+import LoadingScreen from "../components/ui/LoadingScreen";
 
 export default function HomeRoute({isDark , toogleDark}) {
-    const {user} = useContext(AuthContext);
+    const {loading} = useContext(AuthContext);
     const token = localStorage.getItem("token");
 
     if (!token) {
         return <Navigate to={'/login'} replace />
     }
 
-    if (['client', 'professional'].includes(user.role)) {
-        return <Home isDark={isDark} toogleDark={toogleDark} />
+    if (loading) {
+        return (
+            <LoadingScreen
+                title="Loading your workspace"
+                subtitle="We are preparing the right home page for your account."
+            />
+        );
     }
 
-    return <Navigate to="/login" replace />;
+    return <ClientHome isDark={isDark} toogleDark={toogleDark} />;
 }

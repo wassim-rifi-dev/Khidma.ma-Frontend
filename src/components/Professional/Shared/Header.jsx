@@ -152,7 +152,7 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
 
                                 <div className="py-2">
                                     <Link
-                                        to="/profile"
+                                        to="/professional/profile"
                                         onClick={() => setDropdownOpen(false)}
                                         className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors ${
                                             isDark
@@ -164,7 +164,7 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
                                         Mon Profil
                                     </Link>
                                     <Link
-                                        to="/home"
+                                        to="/client/home"
                                         onClick={() => setDropdownOpen(false)}
                                         className={`mx-2 my-1 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-colors ${
                                             isDark
@@ -228,7 +228,7 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
                     isDark ? 'bg-[#0F172A] border-[#334155]/50' : 'bg-white border-[#E2E8F0]'
                 }`}>
                     <nav className={`flex flex-col font-bold ${isDark ? 'text-white' : 'text-[#475569]'}`}>
-                        <Link to={'/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
+                        <Link to={'/professional/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
                         <Link to={'/services'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Services</Link>
                         <Link to={'/messages'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Messages</Link>
                     </nav>

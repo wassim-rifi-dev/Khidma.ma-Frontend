@@ -42,7 +42,7 @@ export default function Header({ isDark, toogleDark }) {
                     ? 'bg-[#0F172A] border-[#334155]/50'
                     : 'bg-white border-[#E2E8F0]'
             }`}>
-                <Link to={'/home'}>
+                <Link to={'/client/home'}>
                     {isDark
                         ? <img src={logoDark} alt="Logo" className="h-14 w-auto" />
                         : <img src={logoLight} alt="Logo" className="h-14 w-auto" />
@@ -52,12 +52,12 @@ export default function Header({ isDark, toogleDark }) {
                 <nav className={`hidden md:flex items-center gap-8 font-bold text-[15px] ${
                     isDark ? 'text-white' : 'text-[#475569]'
                 }`}>
-                    <Link to={'/home'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Home</Link>
+                    <Link to={'/client/home'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Home</Link>
                     <Link to={'/services'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Services</Link>
                     <Link to={'/messages'} className={`transition-colors ${isDark ? 'hover:text-[#FF781F]' : 'hover:text-black'}`}>Messages</Link>
                     {isProfessional && (
                         <Link
-                            to="/professional/profile-preview"
+                            to="/professional/home"
                             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
                                 isDark
                                     ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15'
@@ -171,7 +171,7 @@ export default function Header({ isDark, toogleDark }) {
                                     </Link>
                                     {isProfessional && (
                                         <Link
-                                            to="/professional/profile-preview"
+                                            to="/professional/home"
                                             onClick={() => setDropdownOpen(false)}
                                             className={`mx-2 my-1 flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-colors ${
                                                 isDark
@@ -236,11 +236,11 @@ export default function Header({ isDark, toogleDark }) {
                     isDark ? 'bg-[#0F172A] border-[#334155]/50' : 'bg-white border-[#E2E8F0]'
                 }`}>
                     <nav className={`flex flex-col font-bold ${isDark ? 'text-white' : 'text-[#475569]'}`}>
-                        <Link to={'/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
+                        <Link to={'/client/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
                         <Link to={'/services'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Services</Link>
                         <Link to={'/messages'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Messages</Link>
                         {isProfessional && (
-                            <Link to={'/professional/profile-preview'} className={`my-3 flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors ${
+                            <Link to={'/professional/home'} className={`my-3 flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors ${
                                 isDark ? 'bg-orange-500/10 text-orange-300 hover:bg-orange-500/15' : 'bg-orange-50 text-orange-600 hover:bg-orange-100'
                             }`}>
                                 <FiBriefcase size={18} />

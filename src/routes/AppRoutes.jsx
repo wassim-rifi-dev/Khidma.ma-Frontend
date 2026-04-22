@@ -5,12 +5,14 @@ import Login from '../pages/Auth/Login';
 import { useDarkMode } from '../hooks/useDarkMode';
 import IsAuthRoute from './IsAuthRoutes';
 import RoleRoutes from './RoleRoutes';
-import Home from '../pages/Client/Home';
-import Profile from '../pages/Client/Profile';
+import HomeRoute from './HomeRoute';
+import ProfileRoute from './ProfileRoute';
+import ClientHome from '../pages/Client/Home';
 import EditProfile from '../pages/Client/EditProfile';
 import Services from '../pages/Client/Services';
 import Professional from '../pages/Client/Professional';
 import ShowService from '../pages/Client/ShowService';
+import ProfessionalHome from '../pages/Professional/Home';
 import ProfilePreview from '../pages/Professional/ProfilePreview';
 
 export default function AppRoutes() {
@@ -27,18 +29,25 @@ export default function AppRoutes() {
                     <ProfilePreview />
                 </RoleRoutes>
             } />
+            <Route path='/professional/profile' element={
+                <RoleRoutes allowedRole={['professional']}>
+                    <ProfilePreview />
+                </RoleRoutes>
+            } />
 
             {/* Private Route */}
-            <Route path='/home' element={
+            <Route path='/home' element={<HomeRoute isDark={dark} toogleDark={changeMode} />} />
+            <Route path='/client/home' element={
                 <IsAuthRoute>
-                    <Home />
+                    <ClientHome isDark={dark} toogleDark={changeMode} />
                 </IsAuthRoute>
             } />
-            <Route path='/profile' element={
-                <IsAuthRoute>
-                    <Profile />
-                </IsAuthRoute>
+            <Route path='/professional/home' element={
+                <RoleRoutes allowedRole={['professional']}>
+                    <ProfessionalHome />
+                </RoleRoutes>
             } />
+            <Route path='/profile' element={<ProfileRoute />} />
             <Route path='/profile/edit' element={
                 <IsAuthRoute>
                     <EditProfile />

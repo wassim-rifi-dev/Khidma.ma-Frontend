@@ -11,7 +11,7 @@ export default function ProfilePictureCard({ user, professional }) {
     const photoUrl = getUserPhotoUrl(user?.photo);
 
     return (
-        <section className="mx-auto mt-10 w-full max-w-6xl rounded-[32px] border border-slate-100 bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-10">
+        <section className="mx-auto mt-10 w-full max-w-6xl rounded-2xl border border-slate-100 bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-10">
             <div className="flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
                 <div className="flex flex-col items-center gap-7 text-center sm:flex-row sm:text-left">
                     <div className="relative h-36 w-36 shrink-0 sm:h-40 sm:w-40">
