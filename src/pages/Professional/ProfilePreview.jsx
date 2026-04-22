@@ -1,6 +1,7 @@
 import AboutActivitySection from "../../components/Professional/Profile/sections/AboutActivitySection";
 import MyServicesSection from "../../components/Professional/Profile/sections/MyServicesSection";
 import ProfilePictureCard from "../../components/Professional/Profile/sections/ProfilePictureCard";
+import RecentReviewsSection from "../../components/Professional/Profile/sections/RecentReviewsSection";
 import Header from "../../components/Professional/Shared/Header";
 import SideBar from "../../components/Professional/Shared/SideBar";
 
@@ -14,6 +15,7 @@ export default function ProfilePreview() {
                 <ProfilePictureCard />
                 <AboutActivitySection />
                 <MyServicesSection />
+                <RecentReviewsSection />
             </section>
         </main>
     );
