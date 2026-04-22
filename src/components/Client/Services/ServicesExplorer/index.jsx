@@ -8,6 +8,7 @@ import {
 } from "react-icons/fi";
 import { getAllServices } from "../../../../services/ServiceServices";
 import { getAllCategories } from "../../../../services/CategoryServices";
+import getStorageUrl from "../../../../utils/getStorageUrl";
 import SearchBox from "./SearchBox";
 import ServiceCard from "./ServiceCard";
 import ServicesState from "./ServicesState";
@@ -206,7 +207,7 @@ export default function ServicesExplorer() {
                             <ServiceCard
                                 key={service.id}
                                 service={service}
-                                image={service.image || fallbackImages[index % fallbackImages.length]}
+                                image={getStorageUrl(service.images?.[0]?.image_url) || fallbackImages[index % fallbackImages.length]}
                                 iconIndex={index}
                             />
                         ))

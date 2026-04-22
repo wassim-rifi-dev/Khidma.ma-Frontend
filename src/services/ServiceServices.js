@@ -12,3 +12,12 @@ export async function getAllServices(perPage = 6) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getServiceById(serviceId) {
+    try {
+        const response = await api.get(`/services/${serviceId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}

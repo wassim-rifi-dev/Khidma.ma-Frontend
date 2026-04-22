@@ -11,6 +11,7 @@ import Profile from '../pages/Client/Profile';
 import EditProfile from '../pages/Client/EditProfile';
 import Services from '../pages/Client/Services';
 import Professional from '../pages/Client/Professional';
+import ShowService from '../pages/Client/ShowService';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -41,6 +42,11 @@ export default function AppRoutes() {
             <Route path='/services' element={
                 <IsAuthRoute>
                     <Services />
+                </IsAuthRoute>
+            } />
+            <Route path='/services/:serviceId' element={
+                <IsAuthRoute>
+                    <ShowService />
                 </IsAuthRoute>
             } />
             <Route path='/professional/:professionalId' element={

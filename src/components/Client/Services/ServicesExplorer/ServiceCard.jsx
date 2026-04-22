@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FiMapPin, FiStar, FiTool } from "react-icons/fi";
 import { MdCleaningServices, MdElectricalServices } from "react-icons/md";
 
@@ -26,7 +27,10 @@ export default function ServiceCard({ service, image, iconIndex }) {
     const isTopRated = Number(service.rating || 0) >= 4.5;
 
     return (
-        <article className="overflow-hidden rounded-[30px] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+        <Link
+            to={`/services/${service.id}`}
+            className="block overflow-hidden rounded-[30px] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(15,23,42,0.12)]"
+        >
             <div className="relative h-64 overflow-hidden">
                 <img
                     src={image}
@@ -87,6 +91,6 @@ export default function ServiceCard({ service, image, iconIndex }) {
                     </div>
                 </div>
             </div>
-        </article>
+        </Link>
     );
 }
