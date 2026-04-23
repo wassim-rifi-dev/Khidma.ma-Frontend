@@ -79,24 +79,19 @@ export default function StepSimpleInfo({ form, handleChange, setStep }) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-6">
-                <button
-                    type="button"
-                    onClick={() => setStep?.(1)}
-                    className="w-full py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
-                >
-                    Back
-                </button>
-
-                <button
+            <button
                     type="button"
                     onClick={() => setStep?.(2)}
-                    className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] sm:col-span-2"
+                    className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"                    
+                    disabled={
+                        !form.title.trim() ||
+                        !form.city.trim() ||
+                        form.city === 'other'
+                    }
                 >
                     Continue
                     <FaArrowRight size={14} />
                 </button>
-            </div>
         </div>
     );
 }
