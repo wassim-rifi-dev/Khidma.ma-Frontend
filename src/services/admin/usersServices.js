@@ -10,6 +10,16 @@ export async function getAllUser() {
     }
 }
 
+export async function getUserCount() {
+    try {
+        const response = await api.get('admin/users/count');
+
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function updateUserStatus(userId , data) {
     try {
         const response = await api.patch(`admin/users/${userId}/status` , data);
