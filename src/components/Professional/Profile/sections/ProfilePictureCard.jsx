@@ -50,13 +50,13 @@ export default function ProfilePictureCard({ user, professional }) {
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row xl:justify-end">
-                    <button
-                        type="button"
+                    <Link
+                        to="/professional/profile/edit"
                         className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-8 py-4 text-base font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
                     >
                         <FiEdit3 className="h-5 w-5" />
                         Edit Profile
-                    </button>
+                    </Link>
 
                     <Link
                         to={professional?.id ? `/professional/${professional.id}` : "#"}

@@ -14,6 +14,7 @@ import Professional from '../pages/Client/Professional';
 import ShowService from '../pages/Client/ShowService';
 import ProfessionalHome from '../pages/Professional/Home';
 import ProfilePreview from '../pages/Professional/ProfilePreview';
+import EditProfessionalProfile from '../pages/Professional/EditProfile';
 import Analistique from '../pages/Professional/Analistique';
 import Requests from '../pages/Professional/Requests';
 import RequestDetails from '../pages/Professional/RequestDetails';
@@ -38,6 +39,11 @@ export default function AppRoutes() {
             <Route path='/professional/profile' element={
                 <RoleRoutes allowedRole={['professional']}>
                     <ProfilePreview />
+                </RoleRoutes>
+            } />
+            <Route path='/professional/profile/edit' element={
+                <RoleRoutes allowedRole={['professional']}>
+                    <EditProfessionalProfile />
                 </RoleRoutes>
             } />
 

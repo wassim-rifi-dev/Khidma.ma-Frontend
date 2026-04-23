@@ -26,3 +26,12 @@ export async function getMyProfessionalProfile() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function updateProfessionalProfile(data) {
+    try {
+        const response = await api.put("/professional/profile/update", data);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
