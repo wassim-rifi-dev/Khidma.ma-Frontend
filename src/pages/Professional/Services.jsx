@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
     FiArrowUpRight,
@@ -10,6 +10,7 @@ import {
     FiTool,
 } from "react-icons/fi";
 import ProfessionalFooter from "../../components/Professional/Home/ProfessionalFooter";
+import EditServiceModal from "../../components/Professional/Services/Edit/EditServiceModal";
 import ProfessionalLayout from "../../components/Professional/Shared/ProfessionalLayout";
 
 const services = [
@@ -116,7 +117,7 @@ function EmptyServices() {
     );
 }
 
-function ServiceCard({ service }) {
+function ServiceCard({ service, onEdit }) {
     const categoryName = getCategoryName(service);
     const rating = Number(service.rating || 0).toFixed(1);
 
@@ -155,6 +156,7 @@ function ServiceCard({ service }) {
                     ) : null}
                     <button
                         type="button"
+                        onClick={() => onEdit(service)}
                         className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-500"
                         title="Edit service"
                     >
@@ -167,6 +169,16 @@ function ServiceCard({ service }) {
 }
 
 export default function Services() {
+    const [serviceItems, setServiceItems] = useState(services);
+    const [editingService, setEditingService] = useState(null);
+
+    function handleSaveService(serviceId, nextService) {
+        setServiceItems((currentServices) =>
+            currentServices.map((service) => (service.id === serviceId ? nextService : service)),
+        );
+        setEditingService(null);
+    }
+
     return (
         <ProfessionalLayout title="Manage services">
             <div className="mx-auto max-w-7xl">
@@ -188,13 +200,17 @@ export default function Services() {
                     </Link>
                 </div>
 
-                <ServicesSummary services={services} />
+                <ServicesSummary services={serviceItems} />
 
                 <div className="mt-8">
-                    {services.length ? (
+                    {serviceItems.length ? (
                         <div className="grid gap-6 lg:grid-cols-2">
-                            {services.map((service) => (
-                                <ServiceCard key={service.id || service.title} service={service} />
+                            {serviceItems.map((service) => (
+                                <ServiceCard
+                                    key={service.id || service.title}
+                                    service={service}
+                                    onEdit={setEditingService}
+                                />
                             ))}
                         </div>
                     ) : (
@@ -204,6 +220,13 @@ export default function Services() {
 
                 <ProfessionalFooter />
             </div>
+
+            <EditServiceModal
+                service={editingService}
+                isOpen={Boolean(editingService)}
+                onClose={() => setEditingService(null)}
+                onSave={handleSaveService}
+            />
         </ProfessionalLayout>
     );
 }

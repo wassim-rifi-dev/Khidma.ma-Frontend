@@ -15,6 +15,7 @@ import {
     FiUsers,
 } from "react-icons/fi";
 import ProfessionalFooter from "../../components/Professional/Home/ProfessionalFooter";
+import EditServiceModal from "../../components/Professional/Services/Edit/EditServiceModal";
 import ProfessionalLayout from "../../components/Professional/Shared/ProfessionalLayout";
 
 const services = [
@@ -193,7 +194,21 @@ function ServiceGallery({ photos }) {
 
 export default function ServiceDetails() {
     const { serviceId } = useParams();
-    const service = services.find((item) => item.id === serviceId) || services[0];
+    const [service, setService] = useState(services.find((item) => item.id === serviceId) || services[0]);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+
+    function handleSaveService(_, nextService) {
+        setService((currentService) => ({
+            ...currentService,
+            ...nextService,
+            price: nextService.price_min && nextService.price_max
+                ? `${nextService.price_min} - ${nextService.price_max} MAD`
+                : nextService.price_min
+                    ? `From ${nextService.price_min} MAD`
+                    : currentService.price,
+        }));
+        setIsEditOpen(false);
+    }
 
     return (
         <ProfessionalLayout title="Service details" contentClassName="pt-24">
@@ -248,6 +263,7 @@ export default function ServiceDetails() {
                             </button>
                             <button
                                 type="button"
+                                onClick={() => setIsEditOpen(true)}
                                 className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-bold text-white shadow-[0_12px_30px_rgba(249,115,22,0.25)] transition hover:bg-orange-600"
                             >
                                 <FiEdit3 className="h-4 w-4" />
@@ -328,6 +344,13 @@ export default function ServiceDetails() {
 
                 <ProfessionalFooter />
             </div>
+
+            <EditServiceModal
+                service={service}
+                isOpen={isEditOpen}
+                onClose={() => setIsEditOpen(false)}
+                onSave={handleSaveService}
+            />
         </ProfessionalLayout>
     );
 }
