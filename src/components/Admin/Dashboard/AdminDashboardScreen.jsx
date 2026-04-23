@@ -6,37 +6,7 @@ import {
     FiTrendingUp,
     FiUsers,
 } from "react-icons/fi";
-
-const statCards = [
-    {
-        label: "Total users",
-        value: "12,480",
-        trend: "+18% this month",
-        accent: "from-sky-500 to-cyan-400",
-        icon: FiUsers,
-    },
-    {
-        label: "Active professionals",
-        value: "1,284",
-        trend: "+74 approved today",
-        accent: "from-emerald-500 to-lime-400",
-        icon: FiBriefcase,
-    },
-    {
-        label: "Open requests",
-        value: "326",
-        trend: "41 need follow-up",
-        accent: "from-amber-500 to-orange-400",
-        icon: FiClipboard,
-    },
-    {
-        label: "Published services",
-        value: "5,902",
-        trend: "+126 new listings",
-        accent: "from-violet-500 to-fuchsia-400",
-        icon: FiLayers,
-    },
-];
+import useAdminDashboard from "../../../hooks/admin/useAdminDashboard";
 
 const moderationItems = [
     { title: "Review reported for abusive language", meta: "Service #2841", tone: "bg-rose-50 text-rose-600" },
@@ -52,6 +22,34 @@ const requestRows = [
 ];
 
 export default function AdminDashboardScreen() {
+    const { summary } = useAdminDashboard();
+
+    const statCardsConfig = [
+        {
+            key: "total_users",
+            label: "Total users",
+            accent: "from-sky-500 to-cyan-400",
+            icon: FiUsers,
+        },
+        {
+            key: "active_professionals",
+            label: "Active professionals",
+            accent: "from-emerald-500 to-lime-400",
+            icon: FiBriefcase,
+        },
+        {
+            key: "open_requests",
+            label: "Open requests",
+            accent: "from-amber-500 to-orange-400",
+            icon: FiClipboard,
+        },
+        {
+            key: "published_services",
+            label: "Published services",
+            accent: "from-violet-500 to-fuchsia-400",
+            icon: FiLayers,
+        },
+    ];
     return (
         <div className="space-y-8">
             <section className="rounded-[26px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
@@ -80,21 +78,17 @@ export default function AdminDashboardScreen() {
             </section>
 
             <section className="grid gap-6 md:grid-cols-2 2xl:grid-cols-4">
-                {statCards.map(({ label, value, trend, accent, icon: Icon }) => (
+                {statCardsConfig.map(({key , label , accent, icon: Icon }) => (
                     <article key={label} className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
                         <div className="flex items-start justify-between gap-4">
                             <div>
                                 <p className="text-sm font-medium text-slate-500">{label}</p>
-                                <p className="mt-4 text-3xl font-bold tracking-tight text-slate-950">{value}</p>
+                                <p className="mt-4 text-3xl font-bold tracking-tight text-slate-950">{summary[key]}</p>
                             </div>
-                            <span className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-white shadow-[0_12px_24px_rgba(249,116,21,0.14)]`}>
+                            <span className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${accent} text-white shadow-[0_12px_24px_rgba(249,116,21,0.14)]`}>
                                 <Icon className="h-5 w-5" />
                             </span>
                         </div>
-                        <p className="mt-5 flex items-center gap-2 text-sm text-emerald-600">
-                            <FiTrendingUp className="h-4 w-4" />
-                            {trend}
-                        </p>
                     </article>
                 ))}
             </section>
