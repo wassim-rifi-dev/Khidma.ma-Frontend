@@ -1,0 +1,191 @@
+import {
+    FiArrowUpRight,
+    FiBriefcase,
+    FiClipboard,
+    FiLayers,
+    FiTrendingUp,
+    FiUsers,
+} from "react-icons/fi";
+
+const statCards = [
+    {
+        label: "Total users",
+        value: "12,480",
+        trend: "+18% this month",
+        accent: "from-sky-500 to-cyan-400",
+        icon: FiUsers,
+    },
+    {
+        label: "Active professionals",
+        value: "1,284",
+        trend: "+74 approved today",
+        accent: "from-emerald-500 to-lime-400",
+        icon: FiBriefcase,
+    },
+    {
+        label: "Open requests",
+        value: "326",
+        trend: "41 need follow-up",
+        accent: "from-amber-500 to-orange-400",
+        icon: FiClipboard,
+    },
+    {
+        label: "Published services",
+        value: "5,902",
+        trend: "+126 new listings",
+        accent: "from-violet-500 to-fuchsia-400",
+        icon: FiLayers,
+    },
+];
+
+const moderationItems = [
+    { title: "Review reported for abusive language", meta: "Service #2841", tone: "bg-rose-50 text-rose-600" },
+    { title: "Professional profile waiting approval", meta: "Electrician in Rabat", tone: "bg-amber-50 text-amber-600" },
+    { title: "Client dispute on completed request", meta: "Request #9008", tone: "bg-sky-50 text-sky-600" },
+];
+
+const requestRows = [
+    { id: "#REQ-9201", service: "AC repair", city: "Casablanca", status: "Pending", color: "bg-amber-100 text-amber-700" },
+    { id: "#REQ-9194", service: "Plumbing visit", city: "Rabat", status: "Delayed", color: "bg-rose-100 text-rose-700" },
+    { id: "#REQ-9188", service: "Home painting", city: "Marrakech", status: "Completed", color: "bg-emerald-100 text-emerald-700" },
+    { id: "#REQ-9181", service: "Deep cleaning", city: "Tangier", status: "In progress", color: "bg-sky-100 text-sky-700" },
+];
+
+export default function AdminDashboardScreen() {
+    return (
+        <div className="space-y-8">
+            <section className="rounded-[26px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Admin overview</p>
+                            <h2 className="mt-2 text-3xl font-bold text-slate-950">Simple dashboard mockup</h2>
+                            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
+                                A light static admin screen with the main platform numbers, recent requests, and moderation notes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2 lg:w-[320px]">
+                        <div className="rounded-[22px] bg-orange-50 px-5 py-4">
+                            <p className="text-sm font-medium text-slate-500">Health score</p>
+                            <p className="mt-2 text-3xl font-bold text-slate-950">94%</p>
+                        </div>
+                        <div className="rounded-[22px] bg-slate-50 px-5 py-4">
+                            <p className="text-sm font-medium text-slate-500">Open reports</p>
+                            <p className="mt-2 text-3xl font-bold text-slate-950">19</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="grid gap-6 md:grid-cols-2 2xl:grid-cols-4">
+                {statCards.map(({ label, value, trend, accent, icon: Icon }) => (
+                    <article key={label} className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                        <div className="flex items-start justify-between gap-4">
+                            <div>
+                                <p className="text-sm font-medium text-slate-500">{label}</p>
+                                <p className="mt-4 text-3xl font-bold tracking-tight text-slate-950">{value}</p>
+                            </div>
+                            <span className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-white shadow-[0_12px_24px_rgba(249,116,21,0.14)]`}>
+                                <Icon className="h-5 w-5" />
+                            </span>
+                        </div>
+                        <p className="mt-5 flex items-center gap-2 text-sm text-emerald-600">
+                            <FiTrendingUp className="h-4 w-4" />
+                            {trend}
+                        </p>
+                    </article>
+                ))}
+            </section>
+
+            <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+                <div className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Requests monitor</p>
+                            <h3 className="mt-2 text-xl font-semibold text-slate-900">Latest request flow</h3>
+                        </div>
+                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">Last 24 hours</span>
+                    </div>
+
+                    <div className="mt-6 overflow-hidden rounded-[22px] border border-slate-200">
+                        <div className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                            <span>Request</span>
+                            <span>Service</span>
+                            <span>City</span>
+                            <span>Status</span>
+                        </div>
+
+                        <div className="divide-y divide-slate-200">
+                            {requestRows.map((row) => (
+                                <div key={row.id} className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-3 px-5 py-4 text-sm text-slate-600">
+                                    <span className="font-semibold text-slate-900">{row.id}</span>
+                                    <span>{row.service}</span>
+                                    <span>{row.city}</span>
+                                    <span className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${row.color}`}>
+                                        {row.status}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid gap-6">
+                    <article className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Moderation queue</p>
+                                <h3 className="mt-2 text-xl font-semibold text-slate-900">Needs attention</h3>
+                            </div>
+                            <span className="rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-600">3 items</span>
+                        </div>
+
+                        <div className="mt-6 space-y-3">
+                            {moderationItems.map((item) => (
+                                <article key={item.title} className="rounded-[18px] border border-slate-200 p-4">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <h4 className="text-sm font-semibold text-slate-900">{item.title}</h4>
+                                            <p className="mt-1 text-sm text-slate-500">{item.meta}</p>
+                                        </div>
+                                        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${item.tone}`}>Open</span>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </article>
+
+                    <article className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Quick actions</p>
+                                <h3 className="mt-2 text-xl font-semibold text-slate-900">Shortcuts</h3>
+                            </div>
+                            <FiArrowUpRight className="h-5 w-5 text-[#F97415]" />
+                        </div>
+
+                        <div className="mt-6 grid gap-3">
+                            <button className="flex items-center justify-between rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-4 text-left transition hover:border-orange-200 hover:bg-orange-50">
+                                <span>
+                                    <span className="block text-sm font-semibold text-slate-900">Review pending professionals</span>
+                                    <span className="mt-1 block text-sm text-slate-500">18 profiles waiting validation</span>
+                                </span>
+                                <FiArrowUpRight className="h-5 w-5 text-slate-400" />
+                            </button>
+
+                            <button className="flex items-center justify-between rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-4 text-left transition hover:border-orange-200 hover:bg-orange-50">
+                                <span>
+                                    <span className="block text-sm font-semibold text-slate-900">Check service moderation</span>
+                                    <span className="mt-1 block text-sm text-slate-500">7 new flagged service cards</span>
+                                </span>
+                                <FiArrowUpRight className="h-5 w-5 text-slate-400" />
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    );
+}
