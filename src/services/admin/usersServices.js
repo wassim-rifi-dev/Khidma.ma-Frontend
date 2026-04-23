@@ -10,9 +10,9 @@ export async function getAllUser() {
     }
 }
 
-export async function updateUserStatus(userId) {
+export async function updateUserStatus(userId , data) {
     try {
-        const response = await api.patch(`admin/users/${userId}/status`);
+        const response = await api.patch(`admin/users/${userId}/status` , data);
 
         return response.data;
     } catch (error) {
