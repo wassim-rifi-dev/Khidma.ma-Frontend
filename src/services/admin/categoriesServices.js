@@ -9,3 +9,13 @@ export async function getAllCategories() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function createCategorie(data) {
+    try {
+        const response = await api.post('admin/category/store' , data);
+
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
