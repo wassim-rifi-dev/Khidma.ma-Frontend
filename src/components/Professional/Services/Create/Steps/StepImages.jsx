@@ -31,7 +31,7 @@ function UploadCard({
 
             <label
                 htmlFor={id}
-                className="mt-2 flex min-h-[180px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-[rgb(255,120,31)]/40 bg-slate-50 px-4 py-6 transition hover:bg-orange-50/40"
+                className="mt-2 flex min-h-30 cursor-pointer items-center justify-center rounded-xl border border-dashed border-[rgb(255,120,31)]/40 bg-slate-50 px-4 py-6 transition hover:bg-orange-50/40"
             >
                 <input
                     id={id}
@@ -75,7 +75,7 @@ function GallerySlot({ file, index, onChange, onRemove }) {
         <div className="relative">
             <label
                 htmlFor={`gallery-image-${index}`}
-                className="flex min-h-[120px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-[rgb(255,120,31)]/40 bg-slate-50 p-3 transition hover:bg-orange-50/40"
+                className="flex min-h-30 cursor-pointer items-center justify-center rounded-xl border border-dashed border-[rgb(255,120,31)]/40 bg-slate-50 p-3 transition hover:bg-orange-50/40"
             >
                 <input
                     id={`gallery-image-${index}`}
