@@ -1,22 +1,4 @@
-import { api } from "./api";
-
-export async function getTopProfessionals() {
-    try {
-        const response = await api.get("/professionals/top");
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-} //
-
-export async function getProfessionalById(professionalId) {
-    try {
-        const response = await api.get(`/professionals/${professionalId}`);
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-} //
+import { api } from "../api";
 
 export async function getMyProfessionalProfile() {
     try {
@@ -27,7 +9,7 @@ export async function getMyProfessionalProfile() {
     }
 }
 
-export async function getProfessionalAnalytics() {
+export async function getAnalytics() {
     try {
         const response = await api.get("/professional/analytics");
         return response.data;
