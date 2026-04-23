@@ -54,6 +54,15 @@ export async function getLastSixClientRequest() {
     }
 }
 
+export async function getProfessionalRequests() {
+    try {
+        const response = await api.get("professional/request");
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function createRequest(serviceId , data) {
     try {
         const response = await api.post(`request/store/${serviceId}` , data);

@@ -1,4 +1,4 @@
-export default function RequestsHeader() {
+export default function RequestsHeader({ summary }) {
     return (
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between mt-5">
             <div>
@@ -11,12 +11,12 @@ export default function RequestsHeader() {
             <div className="grid grid-cols-2 gap-4 sm:gap-5">
                 <div className="flex h-19.5 w-26 flex-col items-center justify-center rounded-lg bg-white shadow-sm sm:w-34">
                     <span className="text-sm font-medium text-slate-600">Total</span>
-                    <span className="mt-1 text-2xl font-bold text-[#1f252b]">48</span>
+                    <span className="mt-1 text-2xl font-bold text-[#1f252b]">{summary.total}</span>
                 </div>
 
                 <div className="flex h-19.5 w-26 flex-col items-center justify-center rounded-lg bg-white shadow-sm sm:w-34">
                     <span className="text-sm font-medium text-slate-600">Completed</span>
-                    <span className="mt-1 text-2xl font-bold text-[#ff781f]">12</span>
+                    <span className="mt-1 text-2xl font-bold text-[#ff781f]">{summary.completed}</span>
                 </div>
             </div>
         </div>

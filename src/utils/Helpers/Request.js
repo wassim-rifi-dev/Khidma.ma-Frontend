@@ -47,3 +47,62 @@ export function formatRelativeDate(dateString) {
 
     return `${diffInDays} days ago`;
 }
+
+export function getProfessionalRequestStatusConfig(status) {
+    if (status === "Terminer") {
+        return {
+            label: "Completed",
+            className: "bg-emerald-50 text-emerald-600",
+        };
+    }
+
+    if (status === "En_Cour") {
+        return {
+            label: "In Progress",
+            className: "bg-sky-50 text-sky-600",
+        };
+    }
+
+    return {
+        label: "New",
+        className: "bg-orange-50 text-[#ff781f]",
+    };
+}
+
+export function getProfessionalRequestFilterValue(status) {
+    if (status === "Terminer") {
+        return "completed";
+    }
+
+    if (status === "En_Cour") {
+        return "in-progress";
+    }
+
+    return "new";
+}
+
+export function formatRequestDate(dateString) {
+    if (!dateString) {
+        return "Recently";
+    }
+
+    const date = new Date(dateString);
+
+    if (Number.isNaN(date.getTime())) {
+        return "Recently";
+    }
+
+    return new Intl.DateTimeFormat("en", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    }).format(date);
+}
+
+export function formatRequestPrice(price) {
+    if (price === null || price === undefined || price === "") {
+        return "Price not set";
+    }
+
+    return `${price} MAD`;
+}
