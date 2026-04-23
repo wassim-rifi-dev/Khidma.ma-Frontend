@@ -19,3 +19,13 @@ export async function updateUserStatus(userId) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function deleteUser(userId) {
+    try {
+        const response = await api.delete(`admin/users/${userId}`);
+
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
