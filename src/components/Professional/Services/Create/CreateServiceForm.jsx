@@ -1,21 +1,23 @@
-// import { useState } from "react";
+import { useState } from "react";
 import StepSimpleInfo from "./Steps/StepSimpleInfo";
+import useCreateServiceForm from "../../../../hooks/useCreateServiceForm";
 
-export default function RegisterForm() {
-    // const [step , setStep] = useState(1);
+export default function CreateServiceForm() {
+    const { form, handleChange } = useCreateServiceForm();
+    const [step, setStep] = useState(1);
 
-    // function renderStep() {
-    //     switch (step) {
-    //         case 1:
-    //             return <StepSimpleInfo />
-    //         default:
-    //             return null;
-    //     }
-    // }
+    function renderStep() {
+        switch (step) {
+            case 1:
+                return <StepSimpleInfo form={form} handleChange={handleChange} setStep={setStep} />;
+            default:
+                return null;
+        }
+    }
 
     return (
         <form>
-            <StepSimpleInfo />
+            {renderStep()}
         </form>
-    )
+    );
 }

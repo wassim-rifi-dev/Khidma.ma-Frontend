@@ -1,7 +1,7 @@
 import { FaArrowRight } from "react-icons/fa";
 import { FiChevronDown, FiFileText, FiMapPin, FiTool } from "react-icons/fi";
 
-export default function StepSimpleInfo() {
+export default function StepSimpleInfo({ form, handleChange, setStep }) {
     return (
         <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 md:p-8">
             <div className="text-center mb-6 sm:mb-8">
@@ -26,6 +26,8 @@ export default function StepSimpleInfo() {
                         <input
                             type="text"
                             name="title"
+                            value={form.title}
+                            onChange={handleChange}
                             placeholder="Professional Plumbing Repair"
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                         />
@@ -40,7 +42,8 @@ export default function StepSimpleInfo() {
                     <div className="relative">
                         <select
                             name="city"
-                            defaultValue=""
+                            value={form.city}
+                            onChange={handleChange}
                             className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-500 appearance-none focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors cursor-pointer"
                         >
                             <option value="" disabled>Where do you work?</option>
@@ -67,6 +70,8 @@ export default function StepSimpleInfo() {
                         <textarea
                             name="description"
                             rows="5"
+                            value={form.description}
+                            onChange={handleChange}
                             placeholder="Describe your service, what is included, and what clients can expect from your work."
                             className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors resize-none"
                         />
@@ -77,12 +82,15 @@ export default function StepSimpleInfo() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-6">
                 <button
                     type="button"
+                    onClick={() => setStep?.(1)}
                     className="w-full py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
                 >
                     Back
                 </button>
 
                 <button
+                    type="button"
+                    onClick={() => setStep?.(2)}
                     className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] sm:col-span-2"
                 >
                     Continue
