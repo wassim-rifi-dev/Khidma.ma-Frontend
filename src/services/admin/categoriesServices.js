@@ -29,3 +29,13 @@ export async function updateCategorie(categorieId , data) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function deleteCategorie(categorieId) {
+    try {
+        const response = await api.delete(`admin/category/delete/${categorieId}`);
+
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
