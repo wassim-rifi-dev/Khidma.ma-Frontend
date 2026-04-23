@@ -9,3 +9,13 @@ export async function getAllServices() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function deleteService(serviceId) {
+    try {
+        const response = await api.delete(`admin/services/${serviceId}`);
+    
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
