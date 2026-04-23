@@ -27,6 +27,15 @@ export async function getMyProfessionalProfile() {
     }
 }
 
+export async function getProfessionalAnalytics() {
+    try {
+        const response = await api.get("/professional/analytics");
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function updateProfessionalProfile(data) {
     try {
         const response = await api.put("/professional/profile/update", data);

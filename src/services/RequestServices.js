@@ -63,6 +63,15 @@ export async function getProfessionalRequests() {
     }
 }
 
+export async function getProfessionalRequestById(requestId) {
+    try {
+        const response = await api.get(`professional/request/${requestId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function createRequest(serviceId , data) {
     try {
         const response = await api.post(`request/store/${serviceId}` , data);

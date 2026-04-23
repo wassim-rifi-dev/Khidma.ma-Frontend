@@ -1,4 +1,11 @@
+import useProfessionalRequestDetails from "../../../hooks/useProfessionalRequestDetails";
+import {
+    formatRequestDate,
+    formatRequestPrice,
+    getProfessionalRequestStatusConfig,
+} from "../../../utils/Helpers/Request";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     FiArrowLeft,
     FiCalendar,
@@ -12,6 +19,38 @@ import {
 } from "react-icons/fi";
 
 export default function RequestDetailsContent() {
+    const { requestId } = useParams();
+    const { requestDetails, isLoading } = useProfessionalRequestDetails(requestId);
+
+    if (isLoading) {
+        return (
+            <div className="rounded-[28px] bg-white p-7 shadow-sm text-sm font-medium text-slate-500">
+                Loading request details...
+            </div>
+        );
+    }
+
+    if (!requestDetails) {
+        return (
+            <div className="rounded-[28px] bg-white p-7 shadow-sm">
+                <Link
+                    to="/professional/requests"
+                    className="mb-6 inline-flex items-center gap-2 rounded-xl bg-slate-50 px-4 py-2 text-sm font-bold text-slate-600 transition hover:bg-slate-100"
+                >
+                    <FiArrowLeft className="h-4 w-4" />
+                    Back
+                </Link>
+                <p className="text-sm font-medium text-slate-500">Request not found.</p>
+            </div>
+        );
+    }
+
+    const status = getProfessionalRequestStatusConfig(requestDetails.status);
+    const clientName = `${requestDetails.client?.first_name || ""} ${requestDetails.client?.last_name || ""}`.trim() || "Client";
+    const serviceCategory = requestDetails.service?.category?.name || requestDetails.service?.categorie?.name || "Service";
+    const serviceTitle = requestDetails.service?.title || "Requested service";
+    const preferredDateTime = [requestDetails.preferred_date, requestDetails.preferred_time].filter(Boolean).join(" - ") || "Not specified";
+
     return (
         <>
             <Link
@@ -24,29 +63,29 @@ export default function RequestDetailsContent() {
 
             <section className="rounded-[28px] bg-white p-7 shadow-sm">
                 <div className="flex flex-wrap items-center gap-3">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-sky-100 px-3 py-1 text-sm font-bold text-sky-800">
-                        <span className="h-2 w-2 rounded-full bg-sky-700" />
-                        New
+                    <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold ${status.className}`}>
+                        <span className="h-2 w-2 rounded-full bg-current" />
+                        {status.label}
                     </span>
-                    <span className="text-sm font-bold tracking-wide text-stone-500">Req-8842-A</span>
+                    <span className="text-sm font-bold tracking-wide text-stone-500">#{requestDetails.id}</span>
                 </div>
 
                 <h1 className="mt-4 text-5xl font-bold tracking-normal text-[#1f252b]">
-                    Kitchen Sink Repair
+                    {serviceTitle}
                 </h1>
 
                 <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-base font-semibold text-stone-600">
                     <span className="inline-flex items-center gap-2">
                         <FiUser className="h-5 w-5" />
-                        Fatima Z.
+                        {clientName}
                     </span>
                     <span className="inline-flex items-center gap-2">
                         <FiCalendar className="h-5 w-5" />
-                        Requested for Today
+                        {formatRequestDate(requestDetails.preferred_date || requestDetails.created_at)}
                     </span>
                     <span className="inline-flex items-center gap-2">
                         <FiMapPin className="h-5 w-5" />
-                        Casablanca
+                        {requestDetails.address || requestDetails.service?.city || "Location not set"}
                     </span>
                 </div>
             </section>
@@ -60,8 +99,7 @@ export default function RequestDetailsContent() {
                         </h2>
 
                         <div className="mt-4 rounded-2xl bg-[#f6f7f9] px-5 py-4 text-sm font-medium leading-6 text-stone-700">
-                            "The sink is leaking profusely and needs urgent attention. Please let me know if
-                            you can come today."
+                            {requestDetails.message || "No message provided by the client."}
                         </div>
                     </article>
 
@@ -75,20 +113,15 @@ export default function RequestDetailsContent() {
                             <div className="mt-5 space-y-4 text-sm">
                                 <div>
                                     <p className="text-xs font-semibold text-stone-500">Name</p>
-                                    <p className="mt-1 font-bold text-[#1f252b]">Fatima Z.</p>
+                                    <p className="mt-1 font-bold text-[#1f252b]">{clientName}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs font-semibold text-stone-500">Phone</p>
-                                    <p className="mt-1 font-bold text-[#1f252b]">
-                                        +212 6 ** ** 45
-                                        <span className="ml-2 rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-stone-500">
-                                            Visible after accept
-                                        </span>
-                                    </p>
+                                    <p className="mt-1 font-bold text-[#1f252b]">{requestDetails.client?.phone || "Phone not available"}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs font-semibold text-stone-500">Location</p>
-                                    <p className="mt-1 font-bold text-[#1f252b]">Casablanca, Maarif</p>
+                                    <p className="mt-1 font-bold text-[#1f252b]">{requestDetails.address || requestDetails.service?.city || "Location not set"}</p>
                                 </div>
                             </div>
                         </article>
@@ -102,15 +135,15 @@ export default function RequestDetailsContent() {
                             <div className="mt-5 space-y-4 text-sm">
                                 <div>
                                     <p className="text-xs font-semibold text-stone-500">Category</p>
-                                    <p className="mt-1 font-bold text-[#1f252b]">Plumbing</p>
+                                    <p className="mt-1 font-bold text-[#1f252b]">{serviceCategory}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs font-semibold text-stone-500">Requested Service</p>
-                                    <p className="mt-1 font-bold text-[#1f252b]">Sink Repair</p>
+                                    <p className="mt-1 font-bold text-[#1f252b]">{serviceTitle}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs font-semibold text-stone-500">Preferred Date & Time</p>
-                                    <p className="mt-1 font-bold text-[#b94f12]">As soon as possible (Today)</p>
+                                    <p className="mt-1 font-bold text-[#b94f12]">{preferredDateTime}</p>
                                 </div>
                             </div>
                         </article>
@@ -127,15 +160,15 @@ export default function RequestDetailsContent() {
                     <div className="mt-5 rounded-2xl bg-[#f6f7f9] p-4 text-left text-sm">
                         <div className="flex items-center justify-between py-2">
                             <span className="text-xs font-semibold text-stone-500">Service</span>
-                            <span className="font-bold text-[#1f252b]">Plumbing</span>
+                            <span className="font-bold text-[#1f252b]">{serviceCategory}</span>
                         </div>
                         <div className="flex items-center justify-between py-2">
                             <span className="text-xs font-semibold text-stone-500">Location</span>
-                            <span className="font-bold text-[#1f252b]">Casablanca</span>
+                            <span className="font-bold text-[#1f252b]">{requestDetails.address || requestDetails.service?.city || "Location not set"}</span>
                         </div>
                         <div className="flex items-center justify-between py-2">
                             <span className="text-xs font-semibold text-stone-500">Estimated Value</span>
-                            <span className="font-bold text-[#b94f12]">MAD 150 - 300</span>
+                            <span className="font-bold text-[#b94f12]">{formatRequestPrice(requestDetails.price)}</span>
                         </div>
                     </div>
 

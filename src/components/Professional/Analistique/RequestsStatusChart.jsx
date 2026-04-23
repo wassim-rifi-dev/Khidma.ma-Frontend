@@ -3,13 +3,7 @@ import { ArcElement, Chart, DoughnutController, Tooltip } from "chart.js";
 
 Chart.register(ArcElement, DoughnutController, Tooltip);
 
-const statusItems = [
-    { label: "New", value: 45, color: "#0073ad" },
-    { label: "Progress", value: 35, color: "#f97316" },
-    { label: "Done", value: 20, color: "#2ea84f" },
-];
-
-export default function RequestsStatusChart() {
+export default function RequestsStatusChart({ items, total }) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -20,11 +14,11 @@ export default function RequestsStatusChart() {
         const chart = new Chart(canvasRef.current, {
             type: "doughnut",
             data: {
-                labels: statusItems.map((item) => item.label),
+                labels: items.map((item) => item.label),
                 datasets: [
                     {
-                        data: statusItems.map((item) => item.value),
-                        backgroundColor: statusItems.map((item) => item.color),
+                        data: items.map((item) => item.value),
+                        backgroundColor: items.map((item) => item.color),
                         borderWidth: 0,
                         hoverOffset: 3,
                     },
@@ -59,7 +53,7 @@ export default function RequestsStatusChart() {
                         ctx.textAlign = "center";
                         ctx.fillStyle = "#1f2937";
                         ctx.font = "700 34px Inter, system-ui, sans-serif";
-                        ctx.fillText("124", centerX, centerY - 2);
+                        ctx.fillText(total, centerX, centerY - 2);
                         ctx.fillStyle = "#57534e";
                         ctx.font = "500 15px Inter, system-ui, sans-serif";
                         ctx.fillText("Total", centerX, centerY + 24);
@@ -70,7 +64,7 @@ export default function RequestsStatusChart() {
         });
 
         return () => chart.destroy();
-    }, []);
+    }, [items, total]);
 
     return (
         <section className="rounded-[28px] bg-white p-8 shadow-sm">
@@ -81,7 +75,7 @@ export default function RequestsStatusChart() {
             </div>
 
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-                {statusItems.map((item) => (
+                {items.map((item) => (
                     <div key={item.label} className="flex items-center gap-2 text-base font-medium text-stone-600">
                         <span className="h-3.5 w-3.5 rounded-full" style={{ backgroundColor: item.color }} />
                         <span>

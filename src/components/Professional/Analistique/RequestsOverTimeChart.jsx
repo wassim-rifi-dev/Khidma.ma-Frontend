@@ -13,11 +13,7 @@ import {
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, LineController, Filler, Tooltip, Legend);
 
-const labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
-const requestsData = [24, 32, 28, 41];
-const completedData = [18, 25, 22, 34];
-
-export default function RequestsOverTimeChart() {
+export default function RequestsOverTimeChart({ chartData }) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -28,37 +24,17 @@ export default function RequestsOverTimeChart() {
         const chart = new Chart(canvasRef.current, {
             type: "line",
             data: {
-                labels,
-                datasets: [
-                    {
-                        label: "Requests",
-                        data: requestsData,
-                        borderColor: "#f97316",
-                        backgroundColor: "rgba(249, 115, 22, 0.08)",
-                        pointBackgroundColor: "#f97316",
-                        pointBorderColor: "#ffffff",
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 5,
-                        borderWidth: 3,
-                        tension: 0.38,
-                        fill: false,
-                    },
-                    {
-                        label: "Completed",
-                        data: completedData,
-                        borderColor: "#bfdbfe",
-                        backgroundColor: "rgba(191, 219, 254, 0.16)",
-                        pointBackgroundColor: "#bfdbfe",
-                        pointBorderColor: "#ffffff",
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 5,
-                        borderWidth: 3,
-                        tension: 0.38,
-                        fill: false,
-                    },
-                ],
+                labels: chartData.labels,
+                datasets: chartData.datasets.map((dataset) => ({
+                    ...dataset,
+                    pointBorderColor: "#ffffff",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 5,
+                    borderWidth: 3,
+                    tension: 0.38,
+                    fill: false,
+                })),
             },
             options: {
                 responsive: true,
@@ -132,7 +108,7 @@ export default function RequestsOverTimeChart() {
         });
 
         return () => chart.destroy();
-    }, []);
+    }, [chartData]);
 
     return (
         <section className="mt-6 rounded-[28px] bg-white p-8 shadow-sm">

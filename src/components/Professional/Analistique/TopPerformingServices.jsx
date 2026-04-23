@@ -1,10 +1,4 @@
-const services = [
-    { name: "Plumbing Repair", requests: 42, percentage: 85, color: "bg-orange-500" },
-    { name: "Electrical Installation", requests: 38, percentage: 65, color: "bg-sky-800" },
-    { name: "Home Cleaning", requests: 24, percentage: 40, color: "bg-slate-600" },
-];
-
-export default function TopPerformingServices() {
+export default function TopPerformingServices({ services }) {
     return (
         <section className="rounded-[28px] bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900">Top Performing Services</h2>

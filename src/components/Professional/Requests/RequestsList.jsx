@@ -1,7 +1,12 @@
 import RequestCard from "./RequestCard";
 import RequestFilters from "./RequestFilters";
+import { getProfessionalRequestFilterValue } from "../../../utils/Helpers/Request";
 
 export default function RequestsList({ requests, filters, activeFilter, onFilterChange, isLoading }) {
+    const visibleRequests = activeFilter === "all"
+        ? requests
+        : requests.filter((request) => getProfessionalRequestFilterValue(request.status) === activeFilter);
+
     return (
         <section className="mt-8 rounded-[28px] bg-white p-6 shadow-sm">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
@@ -20,7 +25,7 @@ export default function RequestsList({ requests, filters, activeFilter, onFilter
                     </div>
                 ) : null}
 
-                {!isLoading && !requests.length ? (
+                {!isLoading && !visibleRequests.length ? (
                     <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-8 text-center">
                         <h3 className="text-lg font-bold text-slate-900">No requests found</h3>
                         <p className="mt-2 text-sm text-slate-500">
@@ -29,7 +34,7 @@ export default function RequestsList({ requests, filters, activeFilter, onFilter
                     </div>
                 ) : null}
 
-                {!isLoading ? requests.map((request) => (
+                {!isLoading ? visibleRequests.map((request) => (
                     <RequestCard key={request.id} request={request} />
                 )) : null}
             </div>
