@@ -24,6 +24,9 @@ import ProfessionalServiceDetails from '../pages/Professional/ServiceDetails';
 import AdminDashboard from '../pages/Admin/Dashboard';
 import AdminUsers from '../pages/Admin/Users';
 import AdminProfessionals from '../pages/Admin/Professionals';
+import AdminServices from '../pages/Admin/Services';
+import AdminCategories from '../pages/Admin/Categories';
+import AdminAnalytics from '../pages/Admin/Analytics';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -105,6 +108,21 @@ export default function AppRoutes() {
             <Route path='/admin/professionals' element={
                 <RoleRoutes allowedRole={['admin']}>
                     <AdminProfessionals />
+                </RoleRoutes>
+            } />
+            <Route path='/admin/services' element={
+                <RoleRoutes allowedRole={['admin']}>
+                    <AdminServices />
+                </RoleRoutes>
+            } />
+            <Route path='/admin/categories' element={
+                <RoleRoutes allowedRole={['admin']}>
+                    <AdminCategories />
+                </RoleRoutes>
+            } />
+            <Route path='/admin/analytics' element={
+                <RoleRoutes allowedRole={['admin']}>
+                    <AdminAnalytics />
                 </RoleRoutes>
             } />
             <Route path='/profile' element={<ProfileRoute />} />

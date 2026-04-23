@@ -1,12 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import {
-    FiAlertCircle,
     FiBarChart2,
     FiBriefcase,
-    FiClipboard,
+    FiBookmark,
     FiGrid,
     FiLayers,
-    FiMessageSquare,
     FiUsers,
 } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
@@ -16,9 +14,7 @@ const navItems = [
     { label: "Users", path: "/admin/users", icon: FiUsers },
     { label: "Professionals", path: "/admin/professionals", icon: FiBriefcase },
     { label: "Services", path: "/admin/services", icon: FiLayers },
-    { label: "Requests", path: "/admin/requests", icon: FiClipboard },
-    { label: "Reports", path: "/admin/reports", icon: FiAlertCircle },
-    { label: "Messages", path: "/admin/messages", icon: FiMessageSquare },
+    { label: "Categories", path: "/admin/categories", icon: FiBookmark },
     { label: "Analytics", path: "/admin/analytics", icon: FiBarChart2 },
 ];
 
