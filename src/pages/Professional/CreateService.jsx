@@ -1,6 +1,3 @@
-import ProfessionalFooter from "../../components/Professional/Home/ProfessionalFooter";
-import CreateServiceForm from "../../components/Professional/Services/CreateServiceForm";
-import CreateServiceHeader from "../../components/Professional/Services/CreateServiceHeader";
 import Header from "../../components/Professional/Shared/Header";
 import SideBar from "../../components/Professional/Shared/SideBar";
 
