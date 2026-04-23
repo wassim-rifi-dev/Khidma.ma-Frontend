@@ -82,7 +82,7 @@ export default function StepSimpleInfo({ form, handleChange, setStep }) {
             <button
                     type="button"
                     onClick={() => setStep?.(2)}
-                    className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"                    
+                    className="w-full mt-6 flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"                    
                     disabled={
                         !form.title.trim() ||
                         !form.city.trim() ||

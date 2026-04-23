@@ -11,28 +11,12 @@ export default function useCreateServiceForm() {
         hasStartingPrice: true,
     });
 
-    function handleChange(event) {
-        const { name, value, type, checked } = event.target;
-
-        setForm((current) => {
-            const nextValue = type === "checkbox" ? checked : value;
-
-            return {
-                ...current,
-                [name]: nextValue,
-                ...(name === "hasStartingPrice" && !checked ? { price_max: "" } : {}),
-            };
-        });
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
+    function handleChange(e) {
+        setForm({ ...form, [e.target.name]: e.target.value});
     }
 
     return {
         form,
-        setForm,
         handleChange,
-        handleSubmit,
     };
 }

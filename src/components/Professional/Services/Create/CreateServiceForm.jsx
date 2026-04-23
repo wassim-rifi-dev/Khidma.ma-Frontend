@@ -1,7 +1,6 @@
 import { useState } from "react";
 import StepSimpleInfo from "./Steps/StepSimpleInfo";
 import StepPricing from "./Steps/StepPricing";
-import StepReview from "./Steps/StepReview";
 import useCreateServiceForm from "../../../../hooks/useCreateServiceForm";
 
 export default function CreateServiceForm() {
