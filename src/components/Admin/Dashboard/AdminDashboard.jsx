@@ -1,12 +1,7 @@
-import {
-    FiArrowUpRight,
-    FiBriefcase,
-    FiClipboard,
-    FiLayers,
-    FiTrendingUp,
-    FiUsers,
-} from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import useAdminDashboard from "../../../hooks/admin/useAdminDashboard";
+import { statCardsConfig } from "../../../constants/admin/adminDashboardStats";
+import StatsCard from "./statsCard";
 
 const moderationItems = [
     { title: "Review reported for abusive language", meta: "Service #2841", tone: "bg-rose-50 text-rose-600" },
@@ -21,35 +16,9 @@ const requestRows = [
     { id: "#REQ-9181", service: "Deep cleaning", city: "Tangier", status: "In progress", color: "bg-sky-100 text-sky-700" },
 ];
 
-export default function AdminDashboardScreen() {
+export default function AdminDashboard() {
     const { summary } = useAdminDashboard();
 
-    const statCardsConfig = [
-        {
-            key: "total_users",
-            label: "Total users",
-            accent: "from-sky-500 to-cyan-400",
-            icon: FiUsers,
-        },
-        {
-            key: "active_professionals",
-            label: "Active professionals",
-            accent: "from-emerald-500 to-lime-400",
-            icon: FiBriefcase,
-        },
-        {
-            key: "open_requests",
-            label: "Open requests",
-            accent: "from-amber-500 to-orange-400",
-            icon: FiClipboard,
-        },
-        {
-            key: "published_services",
-            label: "Published services",
-            accent: "from-violet-500 to-fuchsia-400",
-            icon: FiLayers,
-        },
-    ];
     return (
         <div className="space-y-8">
             <section className="rounded-[26px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
@@ -78,18 +47,8 @@ export default function AdminDashboardScreen() {
             </section>
 
             <section className="grid gap-6 md:grid-cols-2 2xl:grid-cols-4">
-                {statCardsConfig.map(({key , label , accent, icon: Icon }) => (
-                    <article key={label} className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
-                        <div className="flex items-start justify-between gap-4">
-                            <div>
-                                <p className="text-sm font-medium text-slate-500">{label}</p>
-                                <p className="mt-4 text-3xl font-bold tracking-tight text-slate-950">{summary[key]}</p>
-                            </div>
-                            <span className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${accent} text-white shadow-[0_12px_24px_rgba(249,116,21,0.14)]`}>
-                                <Icon className="h-5 w-5" />
-                            </span>
-                        </div>
-                    </article>
+                {statCardsConfig.map(({key : summaryKey , label , accent, icon: Icon }) => (
+                    <StatsCard label={label} key={summaryKey} accent={accent} summary={summary} icon={Icon} />
                 ))}
             </section>
 
