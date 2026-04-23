@@ -10,8 +10,16 @@ import ServiceStats from "./ServiceStats";
 
 export default function ServiceDetailsSection() {
     const { serviceId } = useParams();
-    const { details, isLoading, error } = useServiceDetails(serviceId);
+    const { details, isLoading, error, isSaving, saveService } = useServiceDetails(serviceId);
     const [isEditOpen, setIsEditOpen] = useState(false);
+
+    async function handleSaveService(_, nextService) {
+        const isSaved = await saveService(nextService);
+
+        if (isSaved) {
+            setIsEditOpen(false);
+        }
+    }
 
     if (isLoading) {
         return (
@@ -108,7 +116,8 @@ export default function ServiceDetailsSection() {
                 service={details.service}
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
-                onSave={() => setIsEditOpen(false)}
+                onSave={handleSaveService}
+                isSaving={isSaving}
             />
         </>
     );

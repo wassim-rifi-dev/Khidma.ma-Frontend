@@ -41,7 +41,7 @@ function PriceField({ label, name, value, onChange, placeholder, disabled = fals
     );
 }
 
-export default function EditServiceModal({ service, isOpen, onClose, onSave }) {
+export default function EditServiceModal({ service, isOpen, onClose, onSave, isSaving = false }) {
     const { form, isValid, handleChange, handleSubmit } = useEditServiceForm(service, onSave);
 
     if (!isOpen || !service) {
@@ -161,6 +161,7 @@ export default function EditServiceModal({ service, isOpen, onClose, onSave }) {
                         <button
                             type="button"
                             onClick={onClose}
+                            disabled={isSaving}
                             className="w-full sm:w-auto rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
                         >
                             Cancel
@@ -168,10 +169,10 @@ export default function EditServiceModal({ service, isOpen, onClose, onSave }) {
 
                         <button
                             type="submit"
-                            disabled={!isValid}
+                            disabled={!isValid || isSaving}
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[rgb(255,120,31)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
                         >
-                            Save Changes
+                            {isSaving ? "Saving..." : "Save Changes"}
                             <FaArrowRight size={13} />
                         </button>
                     </div>

@@ -43,3 +43,12 @@ export async function getProfessionalServicesSummary() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function updateProfessionalService(serviceId, data) {
+    try {
+        const response = await api.put(`service/update/${serviceId}`, data);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
