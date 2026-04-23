@@ -58,7 +58,7 @@ export default function ProfilePictureCard({ user, professional }) {
                         Edit Profile
                     </Link>
 
-                    <Link
+                    {/* <Link
                         to={professional?.id ? `/professional/${professional.id}` : "#"}
                         className={`inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold transition ${
                             professional?.id
@@ -68,7 +68,7 @@ export default function ProfilePictureCard({ user, professional }) {
                     >
                         <FiEye className="h-5 w-5" />
                         Preview Public Profile
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </section>

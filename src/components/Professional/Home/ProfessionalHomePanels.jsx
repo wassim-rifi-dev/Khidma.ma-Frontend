@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { FiCamera, FiCheck, FiImage, FiPlus } from "react-icons/fi";
 
-export default function ProfessionalHomePanels() {
+export default function ProfessionalHomePanels({ user, professional, services, hasPhoto, hasDescription }) {
+    const categoryName = professional?.category?.name || professional?.categorie?.name || "Your category";
+    const previewSkills = services
+        .slice(0, 2)
+        .map((service) => service?.category?.name || service?.categorie?.name || service?.title)
+        .filter(Boolean);
+    const hasServices = services.length > 0;
+
     return (
         <section className="mt-10 space-y-8">
             <div className="grid grid-cols-2 gap-8">
@@ -12,17 +19,21 @@ export default function ProfessionalHomePanels() {
                         </div>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-slate-950">You haven't added any services yet</h2>
+                    <h2 className="text-2xl font-bold text-slate-950">
+                        {hasServices ? `You have ${services.length} active service${services.length > 1 ? "s" : ""}` : "You haven't added any services yet"}
+                    </h2>
                     <p className="mt-3 max-w-sm text-base leading-7 text-slate-600">
-                        Your profile is hidden until you add at least one service offering.
+                        {hasServices
+                            ? "Keep your offers up to date so clients can discover your latest work and pricing."
+                            : "Your profile is hidden until you add at least one service offering."}
                     </p>
 
                     <Link
-                        to="/professional/services/create"
+                        to={hasServices ? "/professional/services" : "/professional/services/create"}
                         className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#F97415] px-8 text-sm font-bold text-white shadow-[0_12px_24px_rgba(249,116,21,0.22)] transition hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-100"
                     >
                         <FiPlus className="h-4 w-4" />
-                        Create Service
+                        {hasServices ? "Manage Services" : "Create Service"}
                     </Link>
                 </article>
 
@@ -38,11 +49,16 @@ export default function ProfessionalHomePanels() {
                         <div className="mx-auto mt-3 h-3 w-20 rounded-full bg-slate-100" />
 
                         <div className="mt-5 flex justify-center gap-2">
-                            <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-[#F97415]">Skill 1</span>
-                            <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-[#F97415]">Skill 2</span>
+                            {(previewSkills.length ? previewSkills : [categoryName]).slice(0, 2).map((skill) => (
+                                <span key={skill} className="rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-[#F97415]">
+                                    {skill}
+                                </span>
+                            ))}
                         </div>
 
-                        <p className="mt-5 text-sm text-slate-600">Add details to see your preview...</p>
+                        <p className="mt-5 text-sm text-slate-600">
+                            {user?.name ? `${user.name} in ${professional?.city || "your city"}` : "Add details to see your preview..."}
+                        </p>
                     </div>
 
                     <Link
@@ -61,7 +77,7 @@ export default function ProfessionalHomePanels() {
                         Tips to get more clients
                     </h2>
                     <Link
-                        to="/professional/profile"
+                        to="/professional/profile/edit"
                         className="rounded-full bg-orange-50 px-6 py-3 text-sm font-bold text-[#F97415] transition hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-100"
                     >
                         Improve Profile
@@ -75,7 +91,9 @@ export default function ProfessionalHomePanels() {
                         </span>
                         <div>
                             <h3 className="font-bold text-slate-950">Use a clear profile picture</h3>
-                            <p className="mt-1 text-sm text-slate-600">Profiles with real photos get 3x more bookings.</p>
+                            <p className="mt-1 text-sm text-slate-600">
+                                {hasPhoto ? "Great, your profile photo is already helping clients trust you." : "Profiles with real photos get 3x more bookings."}
+                            </p>
                         </div>
                     </div>
 
@@ -85,7 +103,9 @@ export default function ProfessionalHomePanels() {
                         </span>
                         <div>
                             <h3 className="font-bold text-slate-950">Be specific in your descriptions</h3>
-                            <p className="mt-1 text-sm text-slate-600">Detail exactly what is included in your service to avoid confusion.</p>
+                            <p className="mt-1 text-sm text-slate-600">
+                                {hasDescription ? "Your description is live. Keep it updated as your experience grows." : "Detail exactly what is included in your service to avoid confusion."}
+                            </p>
                         </div>
                     </div>
                 </div>
