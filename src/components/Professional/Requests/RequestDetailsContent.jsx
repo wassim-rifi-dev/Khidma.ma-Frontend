@@ -20,7 +20,7 @@ import {
 
 export default function RequestDetailsContent() {
     const { requestId } = useParams();
-    const { requestDetails, isLoading } = useProfessionalRequestDetails(requestId);
+    const { requestDetails, isLoading, isUpdating, acceptRequest } = useProfessionalRequestDetails(requestId);
 
     if (isLoading) {
         return (
@@ -50,6 +50,7 @@ export default function RequestDetailsContent() {
     const serviceCategory = requestDetails.service?.category?.name || requestDetails.service?.categorie?.name || "Service";
     const serviceTitle = requestDetails.service?.title || "Requested service";
     const preferredDateTime = [requestDetails.preferred_date, requestDetails.preferred_time].filter(Boolean).join(" - ") || "Not specified";
+    const canAccept = requestDetails.status === "Nouveau" && !isUpdating;
 
     return (
         <>
@@ -172,13 +173,17 @@ export default function RequestDetailsContent() {
                         </div>
                     </div>
 
-                    <button
-                        type="button"
-                        className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#df660f] text-sm font-bold text-white transition hover:bg-[#c9580c]"
-                    >
-                        <FiCheckCircle className="h-4 w-4" />
-                        Accept Request
-                    </button>
+                    {requestDetails.status === "Nouveau" ? (
+                        <button
+                            type="button"
+                            onClick={acceptRequest}
+                            disabled={!canAccept}
+                            className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#df660f] text-sm font-bold text-white transition hover:bg-[#c9580c] disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                            <FiCheckCircle className="h-4 w-4" />
+                            {isUpdating ? "Accepting..." : "Accept Request"}
+                        </button>
+                    ) : null}
 
                     <button
                         type="button"

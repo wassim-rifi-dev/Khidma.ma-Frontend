@@ -72,6 +72,15 @@ export async function getProfessionalRequestById(requestId) {
     }
 }
 
+export async function updateProfessionalRequestStatus(requestId, status) {
+    try {
+        const response = await api.put(`request/update-status/${requestId}`, { status });
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function createRequest(serviceId , data) {
     try {
         const response = await api.post(`request/store/${serviceId}` , data);
