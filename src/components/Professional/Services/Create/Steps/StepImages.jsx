@@ -115,6 +115,8 @@ function GallerySlot({ file, index, onChange, onRemove }) {
 
 export default function StepImages({
     form,
+    isSubmitting,
+    submitError,
     setStep,
     handleCoverImageChange,
     handleGalleryImagesChange,
@@ -221,10 +223,17 @@ export default function StepImages({
                 </div>
             </div>
 
+            {submitError ? (
+                <div className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+                    {submitError}
+                </div>
+            ) : null}
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-6">
                 <button
                     type="button"
                     onClick={() => setStep(2)}
+                    disabled={isSubmitting}
                     className="w-full py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
                 >
                     <span className="inline-flex items-center gap-2">
@@ -236,9 +245,9 @@ export default function StepImages({
                 <button
                     type="submit"
                     className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"
-                    disabled={!form.coverImage}
+                    disabled={isSubmitting}
                 >
-                    Publish Service
+                    {isSubmitting ? "Publishing..." : "Publish Service"}
                     <FaArrowRight size={14} />
                 </button>
             </div>

@@ -79,3 +79,16 @@ export async function restoreProfessionalService(serviceId) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function createProfessionalService(data) {
+    try {
+        const response = await api.post("service/store", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}

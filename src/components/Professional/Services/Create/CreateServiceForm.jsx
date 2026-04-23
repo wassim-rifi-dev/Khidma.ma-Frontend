@@ -7,6 +7,8 @@ import useCreateServiceForm from "../../../../hooks/useCreateServiceForm";
 export default function CreateServiceForm() {
     const {
         form,
+        isSubmitting,
+        submitError,
         handleChange,
         handleCoverImageChange,
         handleGalleryImagesChange,
@@ -32,6 +34,8 @@ export default function CreateServiceForm() {
                 return (
                     <StepImages
                         form={form}
+                        isSubmitting={isSubmitting}
+                        submitError={submitError}
                         setStep={setStep}
                         handleCoverImageChange={handleCoverImageChange}
                         handleGalleryImagesChange={handleGalleryImagesChange}
