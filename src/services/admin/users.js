@@ -9,3 +9,13 @@ export async function getAllUser() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function updateUserStatus(userId) {
+    try {
+        const response = await api.patch(`admin/users/${userId}/status`);
+
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
