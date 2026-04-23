@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { FiCheckCircle, FiClock, FiInbox, FiMapPin, FiMessageCircle, FiUser } from "react-icons/fi";
 
 const filters = [
@@ -18,6 +19,7 @@ const requests = [
         price: "$85",
         status: "new",
         message: "Leaking sink needs urgent inspection.",
+        detailsPath: "/professional/requests/req-8842-a",
     },
     {
         id: "#ORD-1047",
@@ -28,6 +30,7 @@ const requests = [
         price: "$120",
         status: "in-progress",
         message: "Install lighting fixtures in two rooms.",
+        detailsPath: "/professional/requests/req-1047",
     },
     {
         id: "#ORD-1046",
@@ -38,6 +41,7 @@ const requests = [
         price: "$65",
         status: "completed",
         message: "Apartment cleaning after renovation.",
+        detailsPath: "/professional/requests/req-1046",
     },
     {
         id: "#ORD-1045",
@@ -48,6 +52,7 @@ const requests = [
         price: "$95",
         status: "completed",
         message: "Replace faucet and check water pressure.",
+        detailsPath: "/professional/requests/req-1045",
     },
 ];
 
@@ -153,13 +158,13 @@ export default function RequestsList() {
                                 </div>
                             </div>
 
-                            <button
-                                type="button"
+                            <Link
+                                to={request.detailsPath}
                                 className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-[#ff781f] hover:text-white xl:w-auto"
                             >
                                 <FiMessageCircle className="h-4 w-4" />
                                 Details
-                            </button>
+                            </Link>
                         </article>
                     );
                 })}
