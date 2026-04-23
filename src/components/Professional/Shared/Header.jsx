@@ -8,7 +8,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
 
-export default function Header({ isDark = false, toogleDark = () => {}, withSidebar = false }) {
+export default function Header({ isDark = false, toogleDark = () => {}, withSidebar = false, title = "Manage your services" }) {
     const [menuOpen, toggleMenu] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const { user , logout } = useContext(AuthContext);
@@ -50,7 +50,7 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
                     <div className="hidden min-w-0 items-center gap-6 lg:flex">
                         <div>
                             <p className="text-sm font-medium text-slate-400">Professional Workspace</p>
-                            <h1 className="text-xl font-semibold text-slate-900">Manage your services</h1>
+                            <h1 className="text-xl font-semibold text-slate-900">{title}</h1>
                         </div>
 
                         <label className="flex h-11 w-80 items-center gap-3 rounded-full border border-slate-200 bg-slate-50 px-4 text-slate-400 transition focus-within:border-orange-300 focus-within:bg-white focus-within:ring-4 focus-within:ring-orange-100">

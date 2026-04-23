@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { FiBarChart2, FiClipboard, FiHome, FiPlus } from "react-icons/fi";
+import { FiBarChart2, FiBriefcase, FiClipboard, FiHome, FiPlus } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
 
 const navItems = [
     { label: "Home", path: "/professional/home", icon: FiHome },
+    { label: "Services", path: "/professional/services", icon: FiBriefcase },
     { label: "Requests", path: "/professional/requests", icon: FiClipboard },
     { label: "Analistique", path: "/professional/analistique", icon: FiBarChart2 },
 ];
@@ -20,7 +21,7 @@ export default function SideBar() {
 
             <nav className="mt-1 space-y-1">
                 {navItems.map(({ label, path, icon: Icon }) => {
-                    const active = pathname === path;
+                    const active = pathname === path || pathname.startsWith(`${path}/`);
 
                     return (
                     <Link
