@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "../api";
 
 export async function getClientRequest() {
     try {
@@ -7,7 +7,7 @@ export async function getClientRequest() {
     } catch (error) {
         throw error.response?.data || error.message;
     }
-} //
+}
 
 export async function getClientRequestCount() {
     try {
@@ -16,7 +16,7 @@ export async function getClientRequestCount() {
     } catch (error) {
         throw error.response?.data || error.message;
     }
-} //
+}
 
 export async function getCompletedClientRequestCount() {
     try {
@@ -25,16 +25,7 @@ export async function getCompletedClientRequestCount() {
     } catch (error) {
         throw error.response?.data || error.message;
     }
-} //
-
-export async function getClientReviewCount() {
-    try {
-        const response = await api.get('client/review/count');
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-} // review
+}
 
 export async function getLastThreeClientRequest() {
     try {
@@ -43,38 +34,11 @@ export async function getLastThreeClientRequest() {
     } catch (error) {
         throw error.response?.data || error.message;
     }
-} //
+}
 
 export async function getLastSixClientRequest() {
     try {
         const response = await api.get('client/request/latest-six');
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-} //
-
-export async function getProfessionalRequests() {
-    try {
-        const response = await api.get("professional/request");
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-}
-
-export async function getProfessionalRequestById(requestId) {
-    try {
-        const response = await api.get(`professional/request/${requestId}`);
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-}
-
-export async function updateProfessionalRequestStatus(requestId, status) {
-    try {
-        const response = await api.put(`request/update-status/${requestId}`, { status });
         return response.data;
     } catch (error) {
         throw error.response?.data || error.message;
@@ -88,7 +52,7 @@ export async function createRequest(serviceId , data) {
     } catch (error) {
         throw error.response?.data || error.message;
     }
-} //
+}
 
 export async function cancelRequest(requestId) {
     try {
@@ -97,4 +61,4 @@ export async function cancelRequest(requestId) {
     } catch (error) {
         throw error.response?.data || error.message;
     }
-} //
+}
