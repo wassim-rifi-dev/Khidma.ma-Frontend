@@ -4,6 +4,7 @@ import * as professionalServicesService from "../services/ServiceServices";
 export default function useProfessionalServices() {
     const [services, setServices] = useState([]);
     const [trashedServices, setTrashedServices] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [summary, setSummary] = useState({
         published_services: 0,
         priced_offers: 0,
@@ -46,11 +47,17 @@ export default function useProfessionalServices() {
 
     useEffect(() => {
         async function loadData() {
-            await Promise.all([
-                loadServices(),
-                loadTrashedServices(),
-                loadSummary(),
-            ]);
+            setIsLoading(true);
+
+            try {
+                await Promise.all([
+                    loadServices(),
+                    loadTrashedServices(),
+                    loadSummary(),
+                ]);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         loadData();
@@ -71,5 +78,5 @@ export default function useProfessionalServices() {
         }
     }
 
-    return { services, trashedServices, summary, isUpdating, restoreService };
+    return { services, trashedServices, summary, isLoading, isUpdating, restoreService };
 }

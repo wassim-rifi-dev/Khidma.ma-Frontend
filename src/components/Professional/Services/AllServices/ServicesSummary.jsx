@@ -5,7 +5,7 @@ import {
     FiTool,
 } from "react-icons/fi";
 
-export default function ServicesSummary({ summary }) {
+export default function ServicesSummary({ summary, isLoading = false }) {
     const summaryItems = [
         { label: "Published services", value: summary.published_services, icon: FiBriefcase },
         { label: "Priced offers", value: summary.priced_offers, icon: FiTool },
@@ -23,7 +23,11 @@ export default function ServicesSummary({ summary }) {
                             <Icon className="h-5 w-5" />
                         </span>
                     </div>
-                    <p className="mt-4 text-3xl font-bold text-slate-900">{value}</p>
+                    {isLoading ? (
+                        <div className="mt-4 h-9 w-20 animate-pulse rounded bg-slate-200" />
+                    ) : (
+                        <p className="mt-4 text-3xl font-bold text-slate-900">{value}</p>
+                    )}
                 </article>
             ))}
         </div>

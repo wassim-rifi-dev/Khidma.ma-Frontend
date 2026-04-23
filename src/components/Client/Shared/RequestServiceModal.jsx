@@ -19,7 +19,13 @@ export default function RequestServiceModal({
     location = "Morocco",
     price = "Contact for price",
 }) {
-    const { form, handleChange, handleSubmit } = useCreateRequestForm(serviceId, onClose);
+    const {
+        form,
+        isSubmitting,
+        submitError,
+        handleChange,
+        handleSubmit,
+    } = useCreateRequestForm(serviceId, onClose);
 
     if (!isOpen) {
         return null;
@@ -31,7 +37,8 @@ export default function RequestServiceModal({
                 <button
                     type="button"
                     onClick={onClose}
-                    className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-800"
+                    disabled={isSubmitting}
+                    className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
                     aria-label="Close request modal"
                 >
                     <FiX className="h-5 w-5" />
@@ -62,9 +69,10 @@ export default function RequestServiceModal({
                                 name="message"
                                 value={form.message}
                                 onChange={handleChange}
+                                disabled={isSubmitting}
                                 required
                                 placeholder="Describe what you need help with..."
-                                className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                                className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
                             />
                         </label>
 
@@ -79,8 +87,9 @@ export default function RequestServiceModal({
                                     name="preferred_date"
                                     value={form.preferred_date}
                                     onChange={handleChange}
+                                    disabled={isSubmitting}
                                     required
-                                    className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                                    className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
                                 />
                             </label>
 
@@ -94,8 +103,9 @@ export default function RequestServiceModal({
                                     name="preferred_time"
                                     value={form.preferred_time}
                                     onChange={handleChange}
+                                    disabled={isSubmitting}
                                     required
-                                    className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                                    className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
                                 />
                             </label>
                         </div>
@@ -110,9 +120,10 @@ export default function RequestServiceModal({
                                 name="address"
                                 value={form.address}
                                 onChange={handleChange}
+                                disabled={isSubmitting}
                                 required
                                 placeholder="Add your address or neighborhood"
-                                className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                                className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:ring-4 focus:ring-orange-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
                             />
                         </label>
 
@@ -127,11 +138,12 @@ export default function RequestServiceModal({
                                     name="price"
                                     value={form.price}
                                     onChange={handleChange}
+                                    disabled={isSubmitting}
                                     min="0"
                                     step="0.01"
                                     required
                                     placeholder="Enter your budget"
-                                    className="min-w-0 flex-1 bg-transparent px-4 text-sm text-slate-700 outline-none placeholder:text-slate-400"
+                                    className="min-w-0 flex-1 bg-transparent px-4 text-sm text-slate-700 outline-none placeholder:text-slate-400 disabled:cursor-not-allowed disabled:text-slate-400"
                                 />
                                 <span className="flex items-center border-l border-slate-200 px-4 text-sm font-semibold text-slate-500">
                                     MAD
@@ -165,20 +177,28 @@ export default function RequestServiceModal({
                         </aside>
                     </div>
 
+                    {submitError ? (
+                        <p className="px-6 text-sm font-medium text-red-500 sm:px-8">
+                            {submitError}
+                        </p>
+                    ) : null}
+
                     <div className="flex flex-col-reverse gap-3 border-t border-slate-100 px-6 py-5 sm:flex-row sm:justify-end sm:px-8">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="rounded-full bg-slate-100 px-6 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-200"
+                            disabled={isSubmitting}
+                            className="rounded-full bg-slate-100 px-6 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600"
+                            disabled={isSubmitting}
+                            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.28)] transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-orange-300"
                         >
-                            <FiSend className="h-4 w-4" />
-                            Send Request
+                            <FiSend className={`h-4 w-4 ${isSubmitting ? "animate-pulse" : ""}`} />
+                            {isSubmitting ? "Sending..." : "Send Request"}
                         </button>
                     </div>
                 </form>

@@ -6,6 +6,7 @@ export default function ProfessionalProfilePictureSection({
     fileInputKey,
     imagePreview,
     uploadError,
+    isBusy = false,
     onImageChange,
     onRemoveImage,
 }) {
@@ -17,6 +18,7 @@ export default function ProfessionalProfilePictureSection({
                 type="file"
                 accept="image/*"
                 onChange={onImageChange}
+                disabled={isBusy}
                 className="hidden"
             />
 
@@ -28,7 +30,7 @@ export default function ProfessionalProfilePictureSection({
                 />
                 <label
                     htmlFor={fileInputId}
-                    className="absolute bottom-1 right-1 flex h-8 w-8 items-center justify-center rounded-full bg-white text-orange-500 shadow-md ring-2 ring-slate-100"
+                    className={`absolute bottom-1 right-1 flex h-8 w-8 items-center justify-center rounded-full bg-white text-orange-500 shadow-md ring-2 ring-slate-100 ${isBusy ? "pointer-events-none opacity-60" : ""}`}
                 >
                     <FiCamera className="h-4 w-4" />
                 </label>
@@ -44,14 +46,15 @@ export default function ProfessionalProfilePictureSection({
                 <div className="mt-5 flex items-center gap-5">
                     <label
                         htmlFor={fileInputId}
-                        className="rounded-full bg-orange-50 px-5 py-2.5 text-sm font-medium text-orange-500 transition hover:bg-orange-100"
+                        className={`rounded-full bg-orange-50 px-5 py-2.5 text-sm font-medium text-orange-500 transition hover:bg-orange-100 ${isBusy ? "pointer-events-none opacity-60" : ""}`}
                     >
                         Upload New
                     </label>
                     <button
                         type="button"
                         onClick={onRemoveImage}
-                        className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
+                        disabled={isBusy}
+                        className="text-sm font-medium text-slate-500 transition hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                         Remove
                     </button>

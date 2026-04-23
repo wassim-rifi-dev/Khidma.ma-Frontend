@@ -9,6 +9,8 @@ export default function useCreateRequestForm(serviceId, onSuccess) {
         address: "",
         price: "",
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState("");
 
     function handleChange(event) {
         setForm({ ...form, [event.target.name]: event.target.value });
@@ -16,6 +18,8 @@ export default function useCreateRequestForm(serviceId, onSuccess) {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setSubmitError("");
+        setIsSubmitting(true);
 
         try {
             const response = await createRequest(serviceId, form);
@@ -32,9 +36,13 @@ export default function useCreateRequestForm(serviceId, onSuccess) {
                 onSuccess(response);
             }
         } catch (err) {
+            const validationErrors = err?.errors ? Object.values(err.errors).flat() : [];
+            setSubmitError(validationErrors[0] || err?.message || "Failed to send your request.");
             console.error("Error : ", err);
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
-    return { form, handleChange, handleSubmit };
+    return { form, isSubmitting, submitError, handleChange, handleSubmit };
 }
