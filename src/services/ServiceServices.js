@@ -52,3 +52,30 @@ export async function updateProfessionalService(serviceId, data) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getTrashedProfessionalServices() {
+    try {
+        const response = await api.get("service/trashed");
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
+export async function deleteProfessionalService(serviceId) {
+    try {
+        const response = await api.delete(`service/delete/${serviceId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
+export async function restoreProfessionalService(serviceId) {
+    try {
+        const response = await api.put(`service/restore/${serviceId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}

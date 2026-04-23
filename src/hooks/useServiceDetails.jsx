@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getServiceById, updateProfessionalService } from "../services/ServiceServices";
+import { deleteProfessionalService, getServiceById, updateProfessionalService } from "../services/ServiceServices";
 import { buildServiceDetails } from "../utils/Helpers/Services";
 
 export default function useServiceDetails(serviceId) {
@@ -7,6 +7,7 @@ export default function useServiceDetails(serviceId) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isSaving, setIsSaving] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     async function fetchServiceDetails() {
         const response = await getServiceById(serviceId);
@@ -77,14 +78,34 @@ export default function useServiceDetails(serviceId) {
         }
     }
 
+    async function removeService() {
+        if (!serviceId) {
+            return false;
+        }
+
+        setIsDeleting(true);
+
+        try {
+            await deleteProfessionalService(serviceId);
+            return true;
+        } catch (requestError) {
+            console.error("Unable to delete service:", requestError);
+            return false;
+        } finally {
+            setIsDeleting(false);
+        }
+    }
+
     return useMemo(
         () => ({
             details: buildServiceDetails(service),
             isLoading,
             error,
             isSaving,
+            isDeleting,
             saveService,
+            removeService,
         }),
-        [service, isLoading, error, isSaving],
+        [service, isLoading, error, isSaving, isDeleting],
     );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FiArrowLeft, FiEdit3, FiEye, FiStar } from "react-icons/fi";
-import { Link, useParams } from "react-router-dom";
+import { FiArrowLeft, FiEdit3, FiEye, FiStar, FiTrash2 } from "react-icons/fi";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useServiceDetails from "../../../../hooks/useServiceDetails";
 import EditServiceModal from "../Edit/EditServiceModal";
 import ServiceGallery from "./ServiceGallery";
@@ -9,8 +9,9 @@ import ServiceRecentRequests from "./ServiceRecentRequests";
 import ServiceStats from "./ServiceStats";
 
 export default function ServiceDetailsSection() {
+    const navigate = useNavigate();
     const { serviceId } = useParams();
-    const { details, isLoading, error, isSaving, saveService } = useServiceDetails(serviceId);
+    const { details, isLoading, error, isSaving, isDeleting, saveService, removeService } = useServiceDetails(serviceId);
     const [isEditOpen, setIsEditOpen] = useState(false);
 
     async function handleSaveService(_, nextService) {
@@ -18,6 +19,14 @@ export default function ServiceDetailsSection() {
 
         if (isSaved) {
             setIsEditOpen(false);
+        }
+    }
+
+    async function handleDeleteService() {
+        const isDeleted = await removeService();
+
+        if (isDeleted) {
+            navigate("/professional/services");
         }
     }
 
@@ -88,6 +97,15 @@ export default function ServiceDetailsSection() {
                         >
                             <FiEdit3 className="h-4 w-4" />
                             Edit Service
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleDeleteService}
+                            disabled={isDeleting}
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-red-200 bg-red-50 px-6 py-3 text-sm font-bold text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                            <FiTrash2 className="h-4 w-4" />
+                            {isDeleting ? "Deleting..." : "Delete Service"}
                         </button>
                     </div>
                 </div>
