@@ -1,10 +1,19 @@
 import { useState } from "react";
 import StepSimpleInfo from "./Steps/StepSimpleInfo";
 import StepPricing from "./Steps/StepPricing";
+import StepImages from "./Steps/StepImages";
 import useCreateServiceForm from "../../../../hooks/useCreateServiceForm";
 
 export default function CreateServiceForm() {
-    const { form, handleChange, handleSubmit } = useCreateServiceForm();
+    const {
+        form,
+        handleChange,
+        handleCoverImageChange,
+        handleGalleryImagesChange,
+        removeCoverImage,
+        removeGalleryImage,
+        handleSubmit,
+    } = useCreateServiceForm();
     const [step, setStep] = useState(1);
 
     function renderStep() {
@@ -17,6 +26,17 @@ export default function CreateServiceForm() {
                         form={form}
                         handleChange={handleChange}
                         setStep={setStep}
+                    />
+                );
+            case 3:
+                return (
+                    <StepImages
+                        form={form}
+                        setStep={setStep}
+                        handleCoverImageChange={handleCoverImageChange}
+                        handleGalleryImagesChange={handleGalleryImagesChange}
+                        removeCoverImage={removeCoverImage}
+                        removeGalleryImage={removeGalleryImage}
                     />
                 );
             default:
