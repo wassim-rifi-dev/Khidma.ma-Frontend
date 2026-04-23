@@ -25,3 +25,21 @@ export async function getServiceById(serviceId) {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getProfessionalServices() {
+    try {
+        const response = await api.get('professional/services');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
+export async function getProfessionalServicesSummary() {
+    try {
+        const response = await api.get('professional/services/summary');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
