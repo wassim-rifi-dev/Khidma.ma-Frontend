@@ -28,6 +28,7 @@ function StateMessage({ children, tone = "default" }) {
 
 export default function ServiceDetails({ details, isLoading, error }) {
     const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+    const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
 
     if (isLoading) {
         return <StateMessage>Loading service...</StateMessage>;
@@ -44,6 +45,20 @@ export default function ServiceDetails({ details, isLoading, error }) {
     const professionalName = professionalUser.name || "Professional";
     const professionalCategory = professional?.category?.name || categoryName;
     const location = service.city || professional?.city || "Morocco";
+    const galleryImages = [
+        {
+            src: mainImage || fallbackImage,
+            title: service.title,
+        },
+        {
+            src: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1200&q=80",
+            title: "Recent work",
+        },
+        {
+            src: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=1200&q=80",
+            title: "Work detail",
+        },
+    ];
 
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-10 sm:px-6 lg:px-8">
@@ -76,12 +91,36 @@ export default function ServiceDetails({ details, isLoading, error }) {
                 </div>
 
                 <div className="mt-10 grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
-                    <div>
-                        <img
-                            src={mainImage || fallbackImage}
-                            alt={service.title}
-                            className="h-75 w-full rounded-2xl object-cover shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:h-90"
-                        />
+                    <div className="space-y-4">
+                        <div className="overflow-hidden rounded-2xl bg-slate-100 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                            <img
+                                src={galleryImages[selectedGalleryIndex]?.src || galleryImages[0].src}
+                                alt={galleryImages[selectedGalleryIndex]?.title || galleryImages[0].title}
+                                className="h-75 w-full object-cover sm:h-90"
+                            />
+                        </div>
+
+                        <div className="grid gap-4 sm:grid-cols-3">
+                            {galleryImages.map((image, index) => (
+                                <button
+                                    key={image.title}
+                                    type="button"
+                                    onClick={() => setSelectedGalleryIndex(index)}
+                                    className={`group overflow-hidden rounded-[28px] border bg-slate-100 shadow-sm ring-2 transition hover:ring-orange-300 ${
+                                        selectedGalleryIndex === index
+                                            ? "border-orange-200 ring-orange-300"
+                                            : "border-slate-100 ring-transparent"
+                                    }`}
+                                    title={image.title}
+                                >
+                                    <img
+                                        src={image.src}
+                                        alt={image.title}
+                                        className="h-24 w-full object-cover transition duration-300 group-hover:scale-105"
+                                    />
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     <aside className="self-start rounded-2xl bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">

@@ -19,6 +19,7 @@ import Requests from '../pages/Professional/Requests';
 import RequestDetails from '../pages/Professional/RequestDetails';
 import CreateService from '../pages/Professional/CreateService';
 import ProfessionalServices from '../pages/Professional/Services';
+import ProfessionalServiceDetails from '../pages/Professional/ServiceDetails';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -70,6 +71,11 @@ export default function AppRoutes() {
             <Route path='/professional/services' element={
                 <RoleRoutes allowedRole={['professional']}>
                     <ProfessionalServices />
+                </RoleRoutes>
+            } />
+            <Route path='/professional/services/:serviceId' element={
+                <RoleRoutes allowedRole={['professional']}>
+                    <ProfessionalServiceDetails />
                 </RoleRoutes>
             } />
             <Route path='/professional/services/create' element={

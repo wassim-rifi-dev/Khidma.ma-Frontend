@@ -146,7 +146,7 @@ function ServiceCard({ service }) {
                 <div className="flex items-center gap-2">
                     {service.id ? (
                         <Link
-                            to={`/services/${service.id}`}
+                            to={`/professional/services/${service.id}`}
                             className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-500"
                             title="Preview service"
                         >
