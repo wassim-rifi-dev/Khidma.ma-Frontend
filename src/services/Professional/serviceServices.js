@@ -1,32 +1,6 @@
-import { api } from "./api";
+import { api } from '../api';
 
-export async function getAllServices(perPage = 6, filters = {}) {
-    try {
-        const response = await api.get('/services', {
-            params: {
-                per_page: perPage,
-                query: filters.query || undefined,
-                category: filters.category || undefined,
-                city: filters.city || undefined,
-                sort: filters.sort || undefined,
-            },
-        });
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-} //
-
-export async function getServiceById(serviceId) {
-    try {
-        const response = await api.get(`/services/${serviceId}`);
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || error.message;
-    }
-} //
-
-export async function getProfessionalServices() {
+export async function getServices() {
     try {
         const response = await api.get('professional/services');
         return response.data;
@@ -35,7 +9,7 @@ export async function getProfessionalServices() {
     }
 }
 
-export async function getProfessionalServicesSummary() {
+export async function getServicesSummary() {
     try {
         const response = await api.get('professional/services/summary');
         return response.data;
@@ -44,7 +18,7 @@ export async function getProfessionalServicesSummary() {
     }
 }
 
-export async function updateProfessionalService(serviceId, data) {
+export async function updateService(serviceId, data) {
     try {
         const response = await api.put(`service/update/${serviceId}`, data);
         return response.data;
@@ -53,7 +27,7 @@ export async function updateProfessionalService(serviceId, data) {
     }
 }
 
-export async function getTrashedProfessionalServices() {
+export async function getTrashedServices() {
     try {
         const response = await api.get("service/trashed");
         return response.data;
@@ -62,7 +36,7 @@ export async function getTrashedProfessionalServices() {
     }
 }
 
-export async function deleteProfessionalService(serviceId) {
+export async function deleteService(serviceId) {
     try {
         const response = await api.delete(`service/delete/${serviceId}`);
         return response.data;
@@ -71,7 +45,7 @@ export async function deleteProfessionalService(serviceId) {
     }
 }
 
-export async function restoreProfessionalService(serviceId) {
+export async function restoreService(serviceId) {
     try {
         const response = await api.put(`service/restore/${serviceId}`);
         return response.data;
@@ -80,7 +54,7 @@ export async function restoreProfessionalService(serviceId) {
     }
 }
 
-export async function createProfessionalService(data) {
+export async function createService(data) {
     try {
         const response = await api.post("service/store", data, {
             headers: {
