@@ -1,10 +1,7 @@
 import { FiEdit2, FiEye, FiFilter, FiSearch, FiShield, FiSlash, FiUsers } from "react-icons/fi";
-
-const summaryCards = [
-    { label: "Total users", value: "12,480" },
-    { label: "Active accounts", value: "11,932" },
-    { label: "Admins", value: "4" },
-];
+import useTotalUsersCount from "../../../hooks/admin/useTotalUsersCount";
+import useActiveUsersCount from "../../../hooks/admin/useActiveUsersCount";
+import useAdminsCount from "../../../hooks/admin/useAdminsCount";
 
 const users = [
     {
@@ -46,6 +43,16 @@ const users = [
 ];
 
 export default function AdminUsersManagement() {
+    const { totalUsersCount } = useTotalUsersCount();
+    const { activeUsersCount } = useActiveUsersCount();
+    const { adminsCount } = useAdminsCount();
+
+    const summaryCards = [
+        { label: "Total users", value: totalUsersCount },
+        { label: "Active accounts", value: activeUsersCount },
+        { label: "Admins", value: adminsCount },
+    ];
+
     return (
         <div className="space-y-6">
             <section className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
