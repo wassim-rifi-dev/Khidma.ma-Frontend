@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { FiEdit3, FiEye, FiMapPin, FiStar, FiTool } from "react-icons/fi";
+import { FiAward, FiCheckCircle, FiEdit3, FiEye, FiMapPin, FiStar, FiTool } from "react-icons/fi";
 import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../../utils/getUserPhotoUrl";
 
 export default function ProfilePictureCard({ user, professional }) {
     const categoryName = professional?.category?.name || professional?.categorie?.name || "Professional";
     const city = professional?.city || "Morocco";
+    const isVerified = Boolean(professional?.is_verified);
     const rating = Number(professional?.rating || 0).toFixed(1);
     const reviewsCount = professional?.reviews_count || 0;
     const photoUrl = getUserPhotoUrl(user?.photo);
@@ -20,15 +21,37 @@ export default function ProfilePictureCard({ user, professional }) {
                             alt={user?.name || "Professional"}
                             className="h-full w-full rounded-full object-cover ring-4 ring-orange-100"
                         />
-                        <span className="absolute bottom-2 right-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-orange-500 shadow-md ring-2 ring-slate-100">
-                            <FiTool className="h-5 w-5" />
-                        </span>
+                        {isVerified ? (
+                            <span className="absolute bottom-2 right-2 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-white shadow-md ring-4 ring-white">
+                                <FiCheckCircle className="h-5 w-5" />
+                            </span>
+                        ) : (
+                            <span className="absolute bottom-2 right-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-orange-500 shadow-md ring-2 ring-slate-100">
+                                <FiTool className="h-5 w-5" />
+                            </span>
+                        )}
                     </div>
 
                     <div>
-                        <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-                            {user?.name || "Professional"}
-                        </h2>
+                        <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+                            <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                                {user?.name || "Professional"}
+                            </h2>
+                            <span
+                                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${
+                                    isVerified
+                                        ? "bg-emerald-50 text-emerald-700"
+                                        : "bg-amber-50 text-amber-700"
+                                }`}
+                            >
+                                {isVerified ? (
+                                    <FiAward className="h-4 w-4" />
+                                ) : (
+                                    <FiTool className="h-4 w-4" />
+                                )}
+                                {isVerified ? "Verified Professional" : "Verification Pending"}
+                            </span>
+                        </div>
 
                         <div className="mt-4 flex flex-wrap justify-center gap-3 text-base text-slate-500 sm:justify-start">
                             <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 font-medium text-slate-600">

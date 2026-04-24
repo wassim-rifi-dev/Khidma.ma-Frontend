@@ -44,6 +44,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
     const professionalPhoto = getUserPhotoUrl(professionalUser.photo);
     const professionalName = professionalUser.name || "Professional";
     const professionalCategory = professional?.category?.name || categoryName;
+    const isVerifiedProfessional = Boolean(professional?.is_verified);
     const location = service.city || professional?.city || "Morocco";
     const galleryImages = [
         {
@@ -142,7 +143,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
                         <div className="mt-8 space-y-4 border-t border-slate-100 pt-6 text-sm text-slate-500">
                             <div className="flex items-center gap-3">
                                 <FiShield className="h-4 w-4 text-orange-500" />
-                                <span>{professionalUser.is_active ? "Verified Professional" : "Professional"}</span>
+                                <span>{isVerifiedProfessional ? "Verified Professional" : "Professional"}</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <FiClock className="h-4 w-4 text-orange-500" />

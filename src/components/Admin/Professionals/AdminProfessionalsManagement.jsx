@@ -6,7 +6,18 @@ import ProfessionalsSummaryCards from "./ProfessionalsSummaryCards";
 import ProfessionalsTable from "./ProfessionalsTable";
 
 export default function AdminProfessionalsManagement() {
-    const { summaryCards, professionals } = useAdminProfessionals();
+    const {
+        activeFilter,
+        feedback,
+        loading,
+        pendingProfessionalId,
+        professionals,
+        searchQuery,
+        setActiveFilter,
+        setSearchQuery,
+        summaryCards,
+        toggleVerification,
+    } = useAdminProfessionals();
 
     return (
         <div className="space-y-6">
@@ -28,7 +39,17 @@ export default function AdminProfessionalsManagement() {
             </section>
 
             <ProfessionalsSummaryCards cards={summaryCards} />
-            <ProfessionalsTable professionals={professionals} />
+            <ProfessionalsTable
+                activeFilter={activeFilter}
+                feedback={feedback}
+                loading={loading}
+                pendingProfessionalId={pendingProfessionalId}
+                professionals={professionals}
+                searchQuery={searchQuery}
+                setActiveFilter={setActiveFilter}
+                setSearchQuery={setSearchQuery}
+                toggleVerification={toggleVerification}
+            />
         </div>
     );
 }

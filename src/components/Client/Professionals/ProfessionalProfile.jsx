@@ -56,12 +56,13 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
     const categoryName = professional.category?.name;
     const rating = Number(professional.rating || 0).toFixed(1);
     const location = professional.city;
+    const isVerified = Boolean(professional.is_verified);
     const firstService = services[0];
     const quickInfo = [
         { icon: FiTool, label: "Category", value: categoryName },
         { icon: FiMapPin, label: "Service Area", value: location },
         { icon: FiClock, label: "Services", value: serviceCount },
-        { icon: FiShield, label: "Identity", value: user.is_active ? "Verified" : "Pending", accent: user.is_active },
+        { icon: FiShield, label: "Identity", value: isVerified ? "Verified" : "Pending", accent: isVerified },
     ];
 
     return (
@@ -75,7 +76,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                                 alt={user.name || "Professional"}
                                 className="h-full w-full rounded-full object-cover ring-4 ring-cyan-100"
                             />
-                            {user.is_active ? (
+                            {isVerified ? (
                                 <span className="absolute bottom-1 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#dfe8fb] text-slate-600 shadow-sm">
                                     <FiCheckCircle className="h-3.5 w-3.5" />
                                 </span>
@@ -89,6 +90,16 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                                 </h1>
                                 <span className="rounded-full bg-[#dfe8fb] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600">
                                     {categoryName}
+                                </span>
+                                <span
+                                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
+                                        isVerified
+                                            ? "bg-emerald-50 text-emerald-700"
+                                            : "bg-amber-50 text-amber-700"
+                                    }`}
+                                >
+                                    {isVerified ? <FiAward className="h-3.5 w-3.5" /> : <FiClock className="h-3.5 w-3.5" />}
+                                    {isVerified ? "Verified professional" : "Pending verification"}
                                 </span>
                             </div>
 

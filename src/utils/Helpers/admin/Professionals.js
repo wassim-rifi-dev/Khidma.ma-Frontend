@@ -74,8 +74,10 @@ export function formatAdminProfessionals(professionals) {
         return {
             id: professional?.id,
             name: professional?.user?.name || "Unknown professional",
+            username: professional?.user?.username || "",
             specialty: professional?.category?.name || "No category",
             city: professional?.city || "Unknown city",
+            isVerified: Boolean(professional?.is_verified),
             status: statusMeta.label,
             availability: availabilityMeta.label,
             joined: formatJoinedDate(professional?.created_at),

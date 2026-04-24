@@ -15,6 +15,7 @@ const profile = {
         id: "preview",
         city: "Casablanca",
         rating: 4.8,
+        is_verified: true,
         reviews_count: 36,
         requests_count: 128,
         completed_requests_count: 94,
