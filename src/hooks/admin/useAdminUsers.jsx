@@ -87,15 +87,6 @@ export default function useAdminUsers() {
             return;
         }
 
-        const actionLabel = nextIsActive ? "activate" : "deactivate";
-        const confirmed = window.confirm(
-            `Are you sure you want to ${actionLabel} ${targetUser.name || targetUser.username || "this user"}?`
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
         try {
             setPendingAction({ userId, type: "status" });
             setFeedback(null);
@@ -124,14 +115,6 @@ export default function useAdminUsers() {
         const targetUser = allUsers.find((user) => user?.id === userId);
 
         if (!targetUser) {
-            return;
-        }
-
-        const confirmed = window.confirm(
-            `Are you sure you want to delete ${targetUser.name || targetUser.username || "this user"}?`
-        );
-
-        if (!confirmed) {
             return;
         }
 

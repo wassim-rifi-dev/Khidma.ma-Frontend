@@ -79,14 +79,6 @@ export default function useAdminServices() {
             return;
         }
 
-        const confirmed = window.confirm(
-            `Are you sure you want to delete ${targetService.title || "this service"}?`
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
         try {
             setPendingServiceId(serviceId);
             setFeedback(null);

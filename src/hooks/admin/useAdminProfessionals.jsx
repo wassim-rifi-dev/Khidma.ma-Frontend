@@ -80,15 +80,6 @@ export default function useAdminProfessionals() {
             return;
         }
 
-        const actionLabel = nextIsVerified ? "verify" : "remove verification from";
-        const confirmed = window.confirm(
-            `Are you sure you want to ${actionLabel} ${targetProfessional.user?.name || "this professional"}?`
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
         try {
             setPendingProfessionalId(professionalId);
             setFeedback(null);

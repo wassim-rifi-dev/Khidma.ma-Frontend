@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiEye, FiLoader, FiMail, FiPhone, FiSearch, FiShield, FiSlash, FiTrash2, FiUnlock, FiUser } from "react-icons/fi";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
+import AdminActionConfirmModal from "../Shared/AdminActionConfirmModal";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
 
 function UserViewModal({ user, onClose }) {
@@ -122,6 +123,7 @@ export default function UsersTable({
     users,
 }) {
     const [selectedUser, setSelectedUser] = useState(null);
+    const [confirmState, setConfirmState] = useState(null);
 
     return (
         <>
@@ -221,7 +223,17 @@ export default function UsersTable({
                                             <>
                                                 <button
                                                     type="button"
-                                                    onClick={() => toggleUserStatus(user.id, !user.isActive)}
+                                                    onClick={() =>
+                                                        setConfirmState({
+                                                            title: user.isActive ? "Deactivate user" : "Activate user",
+                                                            message: `Are you sure you want to ${user.isActive ? "deactivate" : "activate"} ${user.name}?`,
+                                                            confirmLabel: user.isActive ? "Deactivate" : "Activate",
+                                                            confirmTone: user.isActive ? "danger" : "success",
+                                                            onConfirm: () => toggleUserStatus(user.id, !user.isActive),
+                                                            userId: user.id,
+                                                            type: "status",
+                                                        })
+                                                    }
                                                     disabled={pendingAction?.userId === user.id}
                                                     title={user.isActive ? "Deactivate user" : "Activate user"}
                                                     aria-label={user.isActive ? "Deactivate user" : "Activate user"}
@@ -242,7 +254,17 @@ export default function UsersTable({
                                                 {user.canDelete ? (
                                                     <button
                                                         type="button"
-                                                        onClick={() => removeUser(user.id)}
+                                                        onClick={() =>
+                                                            setConfirmState({
+                                                                title: "Delete user",
+                                                                message: `Are you sure you want to delete ${user.name}? This action cannot be undone.`,
+                                                                confirmLabel: "Delete",
+                                                                confirmTone: "danger",
+                                                                onConfirm: () => removeUser(user.id),
+                                                                userId: user.id,
+                                                                type: "delete",
+                                                            })
+                                                        }
                                                         disabled={pendingAction?.userId === user.id}
                                                         title="Delete user"
                                                         aria-label="Delete user"
@@ -274,6 +296,26 @@ export default function UsersTable({
             </section>
 
             <UserViewModal user={selectedUser} onClose={() => setSelectedUser(null)} />
+            <AdminActionConfirmModal
+                isOpen={Boolean(confirmState)}
+                title={confirmState?.title}
+                message={confirmState?.message}
+                confirmLabel={confirmState?.confirmLabel}
+                confirmTone={confirmState?.confirmTone}
+                isLoading={
+                    pendingAction?.userId === confirmState?.userId &&
+                    pendingAction?.type === confirmState?.type
+                }
+                onClose={() => {
+                    if (!pendingAction) {
+                        setConfirmState(null);
+                    }
+                }}
+                onConfirm={async () => {
+                    await confirmState?.onConfirm?.();
+                    setConfirmState(null);
+                }}
+            />
         </>
     );
 }
