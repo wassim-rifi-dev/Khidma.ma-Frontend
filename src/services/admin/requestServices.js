@@ -9,3 +9,13 @@ export async function getOpenRequestsCount() {
         throw error.response?.data || error.message;
     }
 }
+
+export async function getLatestRequests() {
+    try {
+        const response = await api.get('admin/requests/latest');
+
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
