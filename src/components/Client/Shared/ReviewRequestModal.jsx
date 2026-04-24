@@ -7,13 +7,14 @@ function StarButton({ active, onClick }) {
         <button
             type="button"
             onClick={onClick}
-            className={`flex h-11 w-11 items-center justify-center rounded-full border transition ${
+            className={`flex h-10 w-10 items-center justify-center transition ${
                 active
-                    ? "border-orange-200 bg-orange-50 text-orange-500"
-                    : "border-slate-200 bg-white text-slate-300 hover:border-orange-100 hover:text-orange-400"
+                    ? "text-orange-500"
+                    : "text-slate-300 hover:text-orange-400"
             }`}
+            aria-label="Set rating star"
         >
-            <FiStar className={`h-5 w-5 ${active ? "fill-current" : ""}`} />
+            <FiStar className={`h-7 w-7 ${active ? "fill-current" : ""}`} />
         </button>
     );
 }
