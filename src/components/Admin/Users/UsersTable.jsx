@@ -1,4 +1,4 @@
-import { FiLoader, FiSearch, FiSlash, FiUnlock } from "react-icons/fi";
+import { FiLoader, FiSearch, FiSlash, FiTrash2, FiUnlock } from "react-icons/fi";
 
 function getFilterButtonClass(isActive) {
     return isActive
@@ -10,7 +10,8 @@ export default function UsersTable({
     activeFilter,
     feedback,
     loading,
-    pendingUserId,
+    pendingAction,
+    removeUser,
     searchQuery,
     setActiveFilter,
     setSearchQuery,
@@ -102,25 +103,42 @@ export default function UsersTable({
                                 <span>{user.joined}</span>
                                 <div className="flex items-center gap-2 text-slate-400">
                                     {user.canToggleStatus ? (
-                                        <button
-                                            type="button"
-                                            onClick={() => toggleUserStatus(user.id, !user.isActive)}
-                                            disabled={pendingUserId === user.id}
-                                            className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition ${
-                                                user.isActive
-                                                    ? "bg-rose-50 text-rose-600 hover:bg-rose-100"
-                                                    : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
-                                            } disabled:cursor-not-allowed disabled:opacity-70`}
-                                        >
-                                            {pendingUserId === user.id ? (
-                                                <FiLoader className="h-4 w-4 animate-spin" />
-                                            ) : user.isActive ? (
-                                                <FiSlash className="h-4 w-4" />
-                                            ) : (
-                                                <FiUnlock className="h-4 w-4" />
-                                            )}
-                                            {user.isActive ? "Deactivate" : "Activate"}
-                                        </button>
+                                        <>
+                                            <button
+                                                type="button"
+                                                onClick={() => toggleUserStatus(user.id, !user.isActive)}
+                                                disabled={pendingAction?.userId === user.id}
+                                                className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition ${
+                                                    user.isActive
+                                                        ? "bg-rose-50 text-rose-600 hover:bg-rose-100"
+                                                        : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
+                                                } disabled:cursor-not-allowed disabled:opacity-70`}
+                                            >
+                                                {pendingAction?.userId === user.id && pendingAction?.type === "status" ? (
+                                                    <FiLoader className="h-4 w-4 animate-spin" />
+                                                ) : user.isActive ? (
+                                                    <FiSlash className="h-4 w-4" />
+                                                ) : (
+                                                    <FiUnlock className="h-4 w-4" />
+                                                )}
+                                                {user.isActive ? "Deactivate" : "Activate"}
+                                            </button>
+                                            {user.canDelete ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeUser(user.id)}
+                                                    disabled={pendingAction?.userId === user.id}
+                                                    className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-70"
+                                                >
+                                                    {pendingAction?.userId === user.id && pendingAction?.type === "delete" ? (
+                                                        <FiLoader className="h-4 w-4 animate-spin" />
+                                                    ) : (
+                                                        <FiTrash2 className="h-4 w-4" />
+                                                    )}
+                                                    Delete
+                                                </button>
+                                            ) : null}
+                                        </>
                                     ) : (
                                         <span className="inline-flex rounded-full bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-500">
                                             Current admin

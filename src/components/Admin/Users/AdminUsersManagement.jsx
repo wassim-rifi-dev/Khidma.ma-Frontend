@@ -8,7 +8,8 @@ export default function AdminUsersManagement() {
         activeFilter,
         feedback,
         loading,
-        pendingUserId,
+        pendingAction,
+        removeUser,
         searchQuery,
         setActiveFilter,
         setSearchQuery,
@@ -41,7 +42,8 @@ export default function AdminUsersManagement() {
                 activeFilter={activeFilter}
                 feedback={feedback}
                 loading={loading}
-                pendingUserId={pendingUserId}
+                pendingAction={pendingAction}
+                removeUser={removeUser}
                 searchQuery={searchQuery}
                 setActiveFilter={setActiveFilter}
                 setSearchQuery={setSearchQuery}

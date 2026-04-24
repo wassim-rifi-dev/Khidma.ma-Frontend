@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import {
+    deleteUser,
     getAllUser,
     updateUserStatus,
 } from "../../services/admin/usersServices";
@@ -16,7 +17,7 @@ export default function useAdminUsers() {
     const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(true);
     const [feedback, setFeedback] = useState(null);
-    const [pendingUserId, setPendingUserId] = useState(null);
+    const [pendingAction, setPendingAction] = useState(null);
 
     useEffect(() => {
         async function fetchUsers() {
@@ -48,6 +49,7 @@ export default function useAdminUsers() {
             .map((user) => ({
                 ...user,
                 canToggleStatus: user.id !== currentUser?.id,
+                canDelete: user.id !== currentUser?.id,
             }))
             .filter((user) => {
                 if (activeFilter === "active" && !user.isActive) {
@@ -95,7 +97,7 @@ export default function useAdminUsers() {
         }
 
         try {
-            setPendingUserId(userId);
+            setPendingAction({ userId, type: "status" });
             setFeedback(null);
 
             const response = await updateUserStatus(userId, { is_active: nextIsActive });
@@ -114,7 +116,45 @@ export default function useAdminUsers() {
                 message: error?.message || "Unable to update user status.",
             });
         } finally {
-            setPendingUserId(null);
+            setPendingAction(null);
+        }
+    }
+
+    async function removeUser(userId) {
+        const targetUser = allUsers.find((user) => user?.id === userId);
+
+        if (!targetUser) {
+            return;
+        }
+
+        const confirmed = window.confirm(
+            `Are you sure you want to delete ${targetUser.name || targetUser.username || "this user"}?`
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            setPendingAction({ userId, type: "delete" });
+            setFeedback(null);
+
+            const response = await deleteUser(userId);
+
+            setAllUsers((currentUsers) =>
+                currentUsers.filter((user) => user?.id !== userId)
+            );
+            setFeedback({
+                type: "success",
+                message: response?.message || "User deleted successfully.",
+            });
+        } catch (error) {
+            setFeedback({
+                type: "error",
+                message: error?.message || "Unable to delete user.",
+            });
+        } finally {
+            setPendingAction(null);
         }
     }
 
@@ -122,7 +162,8 @@ export default function useAdminUsers() {
         activeFilter,
         feedback,
         loading,
-        pendingUserId,
+        pendingAction,
+        removeUser,
         searchQuery,
         setActiveFilter,
         setSearchQuery,
