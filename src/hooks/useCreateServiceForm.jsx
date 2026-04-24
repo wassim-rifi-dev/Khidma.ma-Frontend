@@ -91,6 +91,9 @@ export default function useCreateServiceForm() {
         } finally {
             setIsSubmitting(false);
         }
+
+        console.log(form);
+        
     }
 
     return {

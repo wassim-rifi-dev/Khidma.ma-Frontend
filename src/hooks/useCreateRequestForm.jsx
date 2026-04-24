@@ -24,6 +24,8 @@ export default function useCreateRequestForm(serviceId, onSuccess) {
         try {
             const response = await createRequest(serviceId, form);
 
+            window.dispatchEvent(new Event("client-request-created"));
+
             setForm({
                 message: "",
                 preferred_date: "",

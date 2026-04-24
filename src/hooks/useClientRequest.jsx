@@ -51,9 +51,26 @@ export default function useClientRequest() {
             }
         }
 
-        fetchLastSixRequests();
-        fetchLastThreeRequests();
-        fetchCount();
+        async function loadClientRequests() {
+            setIsLoading(true);
+
+            await Promise.all([
+                fetchLastSixRequests(),
+                fetchLastThreeRequests(),
+                fetchCount(),
+            ]);
+        }
+
+        function handleClientRequestCreated() {
+            loadClientRequests();
+        }
+
+        loadClientRequests();
+        window.addEventListener("client-request-created", handleClientRequestCreated);
+
+        return () => {
+            window.removeEventListener("client-request-created", handleClientRequestCreated);
+        };
     } , [])
 
     return { request_count, completed_request_count, review_count, three_requests, six_requests, isLoading };
