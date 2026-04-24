@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAllProfessional } from "../../services/admin/professionalsServices";
-import { buildProfessionalsSummaryCards } from "../../utils/Helpers/admin/Professionals";
+import {
+    buildProfessionalsSummaryCards,
+    formatAdminProfessionals,
+} from "../../utils/Helpers/admin/Professionals";
 
 export default function useAdminProfessionals() {
     const [summaryCards, setSummaryCards] = useState([
@@ -8,6 +11,7 @@ export default function useAdminProfessionals() {
         { label: "Verified", value: 0 },
         { label: "Pending review", value: 0 },
     ]);
+    const [professionals, setProfessionals] = useState([]);
 
     useEffect(() => {
         async function fetchProfessionalsSummary() {
@@ -16,6 +20,7 @@ export default function useAdminProfessionals() {
                 const professionals = response?.data?.professionals ?? [];
 
                 setSummaryCards(buildProfessionalsSummaryCards(professionals));
+                setProfessionals(formatAdminProfessionals(professionals));
             } catch (error) {
                 console.error("Error fetching admin professionals summary:", error);
             }
@@ -24,5 +29,5 @@ export default function useAdminProfessionals() {
         fetchProfessionalsSummary();
     }, []);
 
-    return { summaryCards };
+    return { summaryCards, professionals };
 }
