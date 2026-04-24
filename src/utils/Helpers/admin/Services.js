@@ -43,6 +43,7 @@ export function formatAdminServices(services) {
             id: service?.id,
             title: service?.title || "Untitled service",
             category: service?.category?.name || "No category",
+            professionalUsername: service?.professional?.user?.username || "",
             professional: service?.professional?.user?.name || "Unknown professional",
             status: statusMeta.label,
             updated: formatUpdatedDate(service?.updated_at || service?.created_at),

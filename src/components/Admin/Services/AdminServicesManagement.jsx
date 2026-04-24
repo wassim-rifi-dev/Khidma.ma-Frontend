@@ -6,7 +6,18 @@ import ServicesSummaryCards from "./ServicesSummaryCards";
 import ServicesTable from "./ServicesTable";
 
 export default function AdminServicesManagement() {
-    const { summaryCards, services } = useAdminServices();
+    const {
+        activeFilter,
+        feedback,
+        loading,
+        pendingServiceId,
+        removeService,
+        searchQuery,
+        services,
+        setActiveFilter,
+        setSearchQuery,
+        summaryCards,
+    } = useAdminServices();
 
     return (
         <div className="space-y-6">
@@ -28,7 +39,17 @@ export default function AdminServicesManagement() {
             </section>
 
             <ServicesSummaryCards cards={summaryCards} />
-            <ServicesTable services={services} />
+            <ServicesTable
+                activeFilter={activeFilter}
+                feedback={feedback}
+                loading={loading}
+                pendingServiceId={pendingServiceId}
+                removeService={removeService}
+                searchQuery={searchQuery}
+                services={services}
+                setActiveFilter={setActiveFilter}
+                setSearchQuery={setSearchQuery}
+            />
         </div>
     );
 }
