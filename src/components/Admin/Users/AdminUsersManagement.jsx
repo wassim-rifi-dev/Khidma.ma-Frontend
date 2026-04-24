@@ -4,7 +4,18 @@ import UsersSummaryCards from "./UsersSummaryCards";
 import UsersTable from "./UsersTable";
 
 export default function AdminUsersManagement() {
-    const { users, summaryCards } = useAdminUsers();
+    const {
+        activeFilter,
+        feedback,
+        loading,
+        pendingUserId,
+        searchQuery,
+        setActiveFilter,
+        setSearchQuery,
+        summaryCards,
+        toggleUserStatus,
+        users,
+    } = useAdminUsers();
 
     return (
         <div className="space-y-6">
@@ -26,7 +37,17 @@ export default function AdminUsersManagement() {
             </section>
 
             <UsersSummaryCards cards={summaryCards} />
-            <UsersTable users={users} />
+            <UsersTable
+                activeFilter={activeFilter}
+                feedback={feedback}
+                loading={loading}
+                pendingUserId={pendingUserId}
+                searchQuery={searchQuery}
+                setActiveFilter={setActiveFilter}
+                setSearchQuery={setSearchQuery}
+                toggleUserStatus={toggleUserStatus}
+                users={users}
+            />
         </div>
     );
 }

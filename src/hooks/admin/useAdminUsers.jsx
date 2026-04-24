@@ -1,48 +1,133 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import {
-    getActiveUsersCount,
-    getAdminsCount,
     getAllUser,
-    getTotalUsersCount,
+    updateUserStatus,
 } from "../../services/admin/usersServices";
-import { formatAdminUsers } from "../../utils/Helpers/admin/Users";
+import {
+    buildAdminUsersSummaryCards,
+    formatAdminUsers,
+} from "../../utils/Helpers/admin/Users";
 
 export default function useAdminUsers() {
-    const [users, setUsers] = useState([]);
-    const [summaryCards, setSummaryCards] = useState([
-        { label: "Total users", value: 0 },
-        { label: "Active accounts", value: 0 },
-        { label: "Admins", value: 0 },
-    ]);
+    const { user: currentUser } = useContext(AuthContext);
+    const [allUsers, setAllUsers] = useState([]);
+    const [activeFilter, setActiveFilter] = useState("all");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [feedback, setFeedback] = useState(null);
+    const [pendingUserId, setPendingUserId] = useState(null);
 
     useEffect(() => {
         async function fetchUsers() {
             try {
-                const [
-                    usersResponse,
-                    totalUsersResponse,
-                    activeUsersResponse,
-                    adminsResponse,
-                ] = await Promise.all([
-                    getAllUser(),
-                    getTotalUsersCount(),
-                    getActiveUsersCount(),
-                    getAdminsCount(),
-                ]);
+                setLoading(true);
+                setFeedback(null);
 
-                setUsers(formatAdminUsers(usersResponse?.data?.users));
-                setSummaryCards([
-                    { label: "Total users", value: totalUsersResponse?.data?.total_users ?? 0 },
-                    { label: "Active accounts", value: activeUsersResponse?.data?.active_accounts ?? 0 },
-                    { label: "Admins", value: adminsResponse?.data?.admins ?? 0 },
-                ]);
+                const usersResponse = await getAllUser();
+
+                setAllUsers(usersResponse?.data?.users ?? []);
             } catch (error) {
                 console.error("Error fetching admin users:", error);
+                setFeedback({
+                    type: "error",
+                    message: error?.message || "Unable to load users right now.",
+                });
+            } finally {
+                setLoading(false);
             }
         }
 
         fetchUsers();
     }, []);
 
-    return { users, summaryCards };
+    const users = useMemo(() => {
+        const normalizedQuery = searchQuery.trim().toLowerCase();
+
+        return formatAdminUsers(allUsers)
+            .map((user) => ({
+                ...user,
+                canToggleStatus: user.id !== currentUser?.id,
+            }))
+            .filter((user) => {
+                if (activeFilter === "active" && !user.isActive) {
+                    return false;
+                }
+
+                if (activeFilter === "suspended" && user.isActive) {
+                    return false;
+                }
+
+                if (!normalizedQuery) {
+                    return true;
+                }
+
+                return [
+                    user.name,
+                    user.username,
+                    user.email,
+                    user.role,
+                ]
+                    .filter(Boolean)
+                    .some((value) => value.toLowerCase().includes(normalizedQuery));
+            });
+    }, [activeFilter, allUsers, currentUser?.id, searchQuery]);
+
+    const summaryCards = useMemo(
+        () => buildAdminUsersSummaryCards(allUsers),
+        [allUsers]
+    );
+
+    async function toggleUserStatus(userId, nextIsActive) {
+        const targetUser = allUsers.find((user) => user?.id === userId);
+
+        if (!targetUser) {
+            return;
+        }
+
+        const actionLabel = nextIsActive ? "activate" : "deactivate";
+        const confirmed = window.confirm(
+            `Are you sure you want to ${actionLabel} ${targetUser.name || targetUser.username || "this user"}?`
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            setPendingUserId(userId);
+            setFeedback(null);
+
+            const response = await updateUserStatus(userId, { is_active: nextIsActive });
+            const updatedUser = response?.data?.user;
+
+            setAllUsers((currentUsers) =>
+                currentUsers.map((user) => (user?.id === userId ? updatedUser : user))
+            );
+            setFeedback({
+                type: "success",
+                message: response?.message || "User status updated successfully.",
+            });
+        } catch (error) {
+            setFeedback({
+                type: "error",
+                message: error?.message || "Unable to update user status.",
+            });
+        } finally {
+            setPendingUserId(null);
+        }
+    }
+
+    return {
+        activeFilter,
+        feedback,
+        loading,
+        pendingUserId,
+        searchQuery,
+        setActiveFilter,
+        setSearchQuery,
+        summaryCards,
+        toggleUserStatus,
+        users,
+    };
 }
