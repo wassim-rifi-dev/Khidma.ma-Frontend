@@ -1,24 +1,24 @@
-import { FiChevronDown, FiMapPin } from 'react-icons/fi';
-import { services } from '../../../../data/Services';
+import { FiChevronDown, FiMapPin } from "react-icons/fi";
+import { services } from "../../../../data/Services";
 
-export default function StepProInfo({ form, handleChange, setStep }) {
+export default function StepProInfo({ form, handleChange, setStep, isSubmitting, error }) {
+    const isDisabled = isSubmitting || !form.category.trim() || !form.city.trim() || !form.description.trim();
+
     return (
-        <div className="bg-white w-full max-w-xl mx-auto rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 md:p-8">
-
-            <div className="text-center mb-6 sm:mb-8">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800">
+        <div className="mx-auto w-full max-w-xl rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6 md:p-8">
+            <div className="mb-6 text-center sm:mb-8">
+                <h2 className="text-lg font-bold text-slate-800 sm:text-xl md:text-2xl">
                     Professional Details
                 </h2>
 
-                <p className="text-slate-500 text-xs sm:text-sm mt-1">
+                <p className="mt-1 text-xs text-slate-500 sm:text-sm">
                     Tell us about your services so clients can find you more easily.
                 </p>
             </div>
 
-            <div className="max-w-md w-full mx-auto space-y-4 sm:space-y-5">
-
+            <div className="mx-auto w-full max-w-md space-y-4 sm:space-y-5">
                 <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                    <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                         Service Category
                     </label>
 
@@ -27,26 +27,23 @@ export default function StepProInfo({ form, handleChange, setStep }) {
                             name="category"
                             value={form.category}
                             onChange={handleChange}
-                            className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-500 appearance-none focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors cursor-pointer"
+                            disabled={isSubmitting}
+                            className="w-full cursor-pointer appearance-none rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-4 pr-10 text-sm text-slate-500 transition-colors focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-400 disabled:cursor-not-allowed disabled:bg-slate-100 sm:text-base"
                         >
                             <option value="" disabled>Select a category</option>
-
-                            {
-                                services.map((service, index) => (
-                                    <option key={index} value={service.value}>
-                                        {service.title}
-                                    </option>
-                                ))
-                            }
-
+                            {services.map((service, index) => (
+                                <option key={index} value={service.value}>
+                                    {service.title}
+                                </option>
+                            ))}
                         </select>
 
-                        <FiChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none" />
+                        <FiChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                    <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                         City
                     </label>
 
@@ -55,7 +52,8 @@ export default function StepProInfo({ form, handleChange, setStep }) {
                             name="city"
                             value={form.city}
                             onChange={handleChange}
-                            className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-500 appearance-none focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors cursor-pointer"
+                            disabled={isSubmitting}
+                            className="w-full cursor-pointer appearance-none rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-4 pr-10 text-sm text-slate-500 transition-colors focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-400 disabled:cursor-not-allowed disabled:bg-slate-100 sm:text-base"
                         >
                             <option value="" disabled>Select your city</option>
                             <option value="casablanca">Casablanca</option>
@@ -63,12 +61,12 @@ export default function StepProInfo({ form, handleChange, setStep }) {
                             <option value="fes">Fes</option>
                         </select>
 
-                        <FiMapPin className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none" />
+                        <FiMapPin className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                    <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                         Professional Description
                     </label>
 
@@ -77,32 +75,39 @@ export default function StepProInfo({ form, handleChange, setStep }) {
                         value={form.description}
                         onChange={handleChange}
                         rows="4"
+                        disabled={isSubmitting}
                         placeholder="Briefly describe your experience and the specific services you offer..."
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm sm:text-base text-slate-700 placeholder-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors resize-none"
+                        className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-400 disabled:cursor-not-allowed disabled:bg-slate-100 sm:text-base"
                     ></textarea>
                 </div>
-
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-6">
+            {error ? (
+                <p className="mt-5 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+                    {error}
+                </p>
+            ) : null}
 
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
                 <button
                     type="button"
-                    onClick={() => {setStep(2)}}
-                    className="w-full py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-colors"
+                    onClick={() => {
+                        setStep(2);
+                    }}
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl border border-slate-200 bg-white py-3 font-semibold text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                     Back
                 </button>
 
                 <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 bg-[rgb(255,120,31)] text-white font-semibold py-3 rounded-xl transition hover:bg-[#e96d17] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:bg-gray-300 sm:col-span-2"
+                    disabled={isDisabled}
+                    className="w-full rounded-xl bg-[rgb(255,120,31)] py-3 font-semibold text-white transition hover:bg-[#e96d17] disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 disabled:hover:bg-gray-300 sm:col-span-2"
                 >
-                    Enregistrer
+                    {isSubmitting ? "Creating account..." : "Enregistrer"}
                 </button>
-
             </div>
-
         </div>
     );
 }
