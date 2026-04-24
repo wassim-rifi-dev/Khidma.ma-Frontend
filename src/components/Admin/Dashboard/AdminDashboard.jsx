@@ -48,7 +48,7 @@ export default function AdminDashboard() {
 
             <section className="grid gap-6 md:grid-cols-2 2xl:grid-cols-4">
                 {statCardsConfig.map(({key : summaryKey , label , accent, icon: Icon }) => (
-                    <StatsCard label={label} key={summaryKey} accent={accent} summary={summary} icon={Icon} />
+                    <StatsCard label={label} key={summaryKey} summaryKey={summaryKey} accent={accent} summary={summary} icon={Icon} />
                 ))}
             </section>
 
