@@ -112,7 +112,9 @@ export default function ProfessionalsTable({
                                         type="button"
                                         onClick={() => toggleVerification(professional.id, !professional.isVerified)}
                                         disabled={pendingProfessionalId === professional.id}
-                                        className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition ${
+                                        title={professional.isVerified ? "Unverify professional" : "Verify professional"}
+                                        aria-label={professional.isVerified ? "Unverify professional" : "Verify professional"}
+                                        className={`inline-flex items-center justify-center rounded-full p-2.5 transition ${
                                             professional.isVerified
                                                 ? "bg-rose-50 text-rose-600 hover:bg-rose-100"
                                                 : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
@@ -125,7 +127,6 @@ export default function ProfessionalsTable({
                                         ) : (
                                             <FiCheckCircle className="h-4 w-4" />
                                         )}
-                                        {professional.isVerified ? "Unverify" : "Verify"}
                                     </button>
                                 </div>
                             </div>

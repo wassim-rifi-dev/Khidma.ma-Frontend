@@ -67,13 +67,18 @@ export function formatAdminUsers(users) {
     return users.map((user) => ({
         id: user?.id,
         name: user?.name || user?.username || "Unknown user",
+        firstName: user?.first_name || "",
+        lastName: user?.last_name || "",
         username: user?.username || "",
         email: user?.email || "No email",
+        phone: user?.phone || "No phone",
+        photo: user?.photo || null,
         rawRole: user?.role || "",
         role: formatRoleLabel(user?.role || ""),
         isActive: Boolean(user?.is_active),
         status: user?.is_active ? "Active" : "Suspended",
         joined: formatJoinedDate(user?.created_at),
+        createdAt: user?.created_at || null,
         roleTone: getRoleTone(user?.role || ""),
         statusTone: getStatusTone(user?.is_active),
     }));
