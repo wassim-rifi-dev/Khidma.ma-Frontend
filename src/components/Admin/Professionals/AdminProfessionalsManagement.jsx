@@ -8,12 +8,7 @@ import {
     FiSlash,
     FiTool,
 } from "react-icons/fi";
-
-const summaryCards = [
-    { label: "Total professionals", value: "1,284" },
-    { label: "Verified", value: "1,046" },
-    { label: "Pending review", value: "18" },
-];
+import useAdminProfessionals from "../../../hooks/admin/useAdminProfessionals";
 
 const professionals = [
     {
@@ -59,6 +54,8 @@ const professionals = [
 ];
 
 export default function AdminProfessionalsManagement() {
+    const { summaryCards } = useAdminProfessionals();
+
     return (
         <div className="space-y-6">
             <section className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
