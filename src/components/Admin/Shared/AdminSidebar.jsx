@@ -1,13 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
     FiBarChart2,
     FiBriefcase,
     FiBookmark,
     FiGrid,
     FiLayers,
+    FiLogOut,
     FiUsers,
 } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
+import { AuthContext } from "../../../context/AuthContext";
 
 const navItems = [
     { label: "Dashboard", path: "/admin/dashboard", icon: FiGrid },
@@ -20,6 +23,23 @@ const navItems = [
 
 export default function AdminSidebar() {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+    const { logout, setUser } = useContext(AuthContext);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+    async function handleLogout() {
+        setIsLoggingOut(true);
+
+        try {
+            await logout();
+        } catch {
+            localStorage.removeItem("token");
+            setUser(null);
+        } finally {
+            setIsLoggingOut(false);
+            navigate("/login");
+        }
+    }
 
     return (
         <aside className="fixed left-0 top-0 z-40 hidden h-screen w-60 shrink-0 border-r border-slate-200 bg-white lg:flex lg:flex-col">
@@ -50,13 +70,15 @@ export default function AdminSidebar() {
             </nav>
 
             <div className="mt-auto px-5 pb-6 pt-6">
-                <div className="rounded-[26px] border border-slate-200 bg-slate-50 p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#F97415]">Today</p>
-                    <h3 className="mt-3 text-base font-semibold text-slate-900">12 reviews need moderation</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-500">
-                    Keep an eye on reports, delayed requests, and newly published services.
-                    </p>
-                </div>
+                <button
+                    type="button"
+                    onClick={handleLogout}
+                    disabled={isLoggingOut}
+                    className="mb-4 flex h-12 w-full items-center gap-3.5 rounded-2xl border border-slate-200 px-4 text-sm font-medium text-slate-600 transition-colors hover:border-red-100 hover:bg-red-50 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                    <FiLogOut className="h-5 w-5 shrink-0" />
+                    <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+                </button>
             </div>
         </aside>
     );
