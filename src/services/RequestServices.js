@@ -36,6 +36,15 @@ export async function getClientReviewCount() {
     }
 } // review
 
+export async function createReview(orderId, data) {
+    try {
+        const response = await api.post(`review/store/${orderId}`, data);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function getLastThreeClientRequest() {
     try {
         const response = await api.get('client/request/latest');

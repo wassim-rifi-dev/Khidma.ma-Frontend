@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import RequestCard from "./RequestCard";
 import { showcaseImages } from "../../../../data/CaseImages";
 import useClientRequest from "../../../../hooks/useClientRequest";
+import ReviewRequestModal from "../../Shared/ReviewRequestModal";
 
 function EmptyRequestsState() {
     return (
@@ -13,7 +15,10 @@ function EmptyRequestsState() {
 
 export default function MyRequestsSection() {
     const { three_requests, isLoading } = useClientRequest();
+    const [selectedRequest, setSelectedRequest] = useState(null);
+
     return (
+        <>
         <div className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center justify-center">
             <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
                 <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
@@ -63,12 +68,22 @@ export default function MyRequestsSection() {
                             <EmptyRequestsState />
                         ) : (
                             three_requests.map((request) => (
-                                <RequestCard key={request.id} request={request} />
+                                <RequestCard
+                                    key={request.id}
+                                    request={request}
+                                    onReview={setSelectedRequest}
+                                />
                             ))
                         )}
                     </div>
                 </div>
             </div>
         </div>
+        <ReviewRequestModal
+            request={selectedRequest}
+            isOpen={Boolean(selectedRequest)}
+            onClose={() => setSelectedRequest(null)}
+        />
+        </>
     );
 }

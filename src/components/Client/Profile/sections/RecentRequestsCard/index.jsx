@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { FiTool } from "react-icons/fi";
 import RecentRequestsMessage from "./RecentRequestsMessage";
 import * as requestHelpers from "../../../../../utils/Helpers/Request"
 import useClientRequest from "../../../../../hooks/useClientRequest";
+import ReviewRequestModal from "../../../Shared/ReviewRequestModal";
 
 export default function RecentRequestsCard() {
     const { six_requests, isLoading } = useClientRequest();
+    const [selectedRequest, setSelectedRequest] = useState(null);
 
     return (
+        <>
         <section className="rounded-[28px] bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:p-6">
             <h2 className="mb-5 text-lg font-semibold text-slate-900">Recent Requests</h2>
 
@@ -42,14 +46,36 @@ export default function RecentRequestsCard() {
                                     </div>
                                 </div>
 
-                                <span className={`w-fit rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide ${statusMeta.className}`}>
-                                    {statusMeta.label}
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <span className={`w-fit rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide ${statusMeta.className}`}>
+                                        {statusMeta.label}
+                                    </span>
+                                    {request.status === "Terminer" && !request.review ? (
+                                        <button
+                                            type="button"
+                                            onClick={() => setSelectedRequest(request)}
+                                            className="rounded-full bg-orange-50 px-3 py-1 text-[11px] font-semibold tracking-wide text-orange-600 transition hover:bg-orange-100"
+                                        >
+                                            Leave a Review
+                                        </button>
+                                    ) : null}
+                                    {request.review ? (
+                                        <span className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-semibold tracking-wide text-emerald-600">
+                                            Review Sent
+                                        </span>
+                                    ) : null}
+                                </div>
                             </div>
                         );
                     })}
                 </div>
             )}
         </section>
+        <ReviewRequestModal
+            request={selectedRequest}
+            isOpen={Boolean(selectedRequest)}
+            onClose={() => setSelectedRequest(null)}
+        />
+        </>
     );
 }

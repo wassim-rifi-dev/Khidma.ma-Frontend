@@ -61,15 +61,17 @@ export default function useClientRequest() {
             ]);
         }
 
-        function handleClientRequestCreated() {
+        function refreshClientRequests() {
             loadClientRequests();
         }
 
         loadClientRequests();
-        window.addEventListener("client-request-created", handleClientRequestCreated);
+        window.addEventListener("client-request-created", refreshClientRequests);
+        window.addEventListener("client-review-created", refreshClientRequests);
 
         return () => {
-            window.removeEventListener("client-request-created", handleClientRequestCreated);
+            window.removeEventListener("client-request-created", refreshClientRequests);
+            window.removeEventListener("client-review-created", refreshClientRequests);
         };
     } , [])
 

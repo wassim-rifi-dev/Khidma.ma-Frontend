@@ -2,10 +2,18 @@ import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../../utils/getUserPhotoUrl";
 import * as requestHelpers from "../../../../utils/Helpers/Request";
 
-export default function RequestCard({ request }) {
+export default function RequestCard({ request, onReview }) {
     const statusConfig = requestHelpers.getStatusConfig(request.status);
     const professionalUser = request.service?.professional?.user;
     const professionalPhoto = getUserPhotoUrl(professionalUser?.photo);
+    const canReview = request.status === "Terminer" && !request.review;
+    const hasReview = Boolean(request.review);
+
+    function handleAction() {
+        if (canReview) {
+            onReview?.(request);
+        }
+    }
 
     return (
         <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-50">
@@ -39,8 +47,19 @@ export default function RequestCard({ request }) {
                 </p>
             )}
 
-            <button className="w-full bg-gray-50 text-gray-700 text-xs sm:text-sm font-semibold py-2 rounded-xl hover:bg-gray-100 transition">
-                {statusConfig.actionLabel}
+            <button
+                type="button"
+                onClick={handleAction}
+                disabled={!canReview}
+                className={`w-full text-xs sm:text-sm font-semibold py-2 rounded-xl transition ${
+                    canReview
+                        ? "bg-orange-50 text-orange-600 hover:bg-orange-100"
+                        : hasReview
+                            ? "bg-emerald-50 text-emerald-600"
+                            : "bg-gray-50 text-gray-700"
+                } ${!canReview ? "cursor-not-allowed" : ""}`}
+            >
+                {hasReview ? "Review Sent" : statusConfig.actionLabel}
             </button>
         </div>
     );
