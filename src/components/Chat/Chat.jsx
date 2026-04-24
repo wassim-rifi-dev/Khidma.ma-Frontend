@@ -160,6 +160,7 @@ export default function Chat({ isOpen }) {
                                                 canRespond={user?.role === "professional"}
                                                 isUpdating={updatingRequestId === requestPayload?.request_id}
                                                 onAccept={() => respondToRequest(requestPayload?.request_id, "En_Cour")}
+                                                onComplete={() => respondToRequest(requestPayload?.request_id, "Terminer")}
                                                 onReject={() => respondToRequest(requestPayload?.request_id, "Refuser")}
                                             />
                                         ) : (

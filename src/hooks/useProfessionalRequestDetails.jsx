@@ -71,5 +71,27 @@ export default function useProfessionalRequestDetails(requestId) {
         }
     }
 
-    return { requestDetails, isLoading, isUpdating, acceptRequest, rejectRequest };
+    async function completeRequest() {
+        if (!requestId || !requestDetails || requestDetails.status !== "En_Cour") {
+            return false;
+        }
+
+        setIsUpdating(true);
+
+        try {
+            const response = await updateProfessionalRequestStatus(requestId, "Terminer");
+            setRequestDetails((currentRequest) => ({
+                ...currentRequest,
+                ...(response.data?.request || {}),
+            }));
+            return true;
+        } catch (error) {
+            console.error("Error completing professional request:", error);
+            return false;
+        } finally {
+            setIsUpdating(false);
+        }
+    }
+
+    return { requestDetails, isLoading, isUpdating, acceptRequest, rejectRequest, completeRequest };
 }

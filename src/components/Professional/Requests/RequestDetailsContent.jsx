@@ -10,6 +10,7 @@ import {
     FiArrowLeft,
     FiCalendar,
     FiCheckCircle,
+    FiClipboard,
     FiMapPin,
     FiMessageCircle,
     FiPhone,
@@ -20,7 +21,7 @@ import {
 
 export default function RequestDetailsContent() {
     const { requestId } = useParams();
-    const { requestDetails, isLoading, isUpdating, acceptRequest, rejectRequest } = useProfessionalRequestDetails(requestId);
+    const { requestDetails, isLoading, isUpdating, acceptRequest, rejectRequest, completeRequest } = useProfessionalRequestDetails(requestId);
 
     if (isLoading) {
         return (
@@ -51,6 +52,7 @@ export default function RequestDetailsContent() {
     const serviceTitle = requestDetails.service?.title || "Requested service";
     const preferredDateTime = [requestDetails.preferred_date, requestDetails.preferred_time].filter(Boolean).join(" - ") || "Not specified";
     const canAccept = requestDetails.status === "Nouveau" && !isUpdating;
+    const canComplete = requestDetails.status === "En_Cour" && !isUpdating;
 
     return (
         <>
@@ -185,11 +187,23 @@ export default function RequestDetailsContent() {
                         </button>
                     ) : null}
 
+                    {requestDetails.status === "En_Cour" ? (
+                        <button
+                            type="button"
+                            onClick={completeRequest}
+                            disabled={!canComplete}
+                            className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-600 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                            <FiClipboard className="h-4 w-4" />
+                            {isUpdating ? "Updating..." : "Mark as Completed"}
+                        </button>
+                    ) : null}
+
                     <button
                         type="button"
                         onClick={rejectRequest}
                         disabled={!canAccept}
-                        className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#e8b79e] bg-white text-sm font-bold text-stone-700 transition hover:bg-orange-50"
+                        className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#e8b79e] bg-white text-sm font-bold text-stone-700 transition hover:bg-orange-50 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <FiX className="h-4 w-4" />
                         {isUpdating ? "Updating..." : "Reject Request"}

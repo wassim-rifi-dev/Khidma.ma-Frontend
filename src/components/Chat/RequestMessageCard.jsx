@@ -6,10 +6,12 @@ export default function RequestMessageCard({
     canRespond = false,
     isUpdating = false,
     onAccept = null,
+    onComplete = null,
     onReject = null,
 }) {
     const statusMeta = getRequestStatusMeta(payload?.status);
-    const showActions = canRespond && payload?.status === "Nouveau";
+    const showDecisionActions = canRespond && payload?.status === "Nouveau";
+    const showCompleteAction = canRespond && payload?.status === "En_Cour";
 
     return (
         <div className={`w-full min-w-[16rem] max-w-[23rem] rounded-[24px] border bg-gradient-to-br from-white via-white to-[#fff7f0] p-4 text-left shadow-[0_10px_30px_rgba(249,115,22,0.12)] ${statusMeta.borderClassName}`}>
@@ -58,7 +60,7 @@ export default function RequestMessageCard({
                 </div>
             ) : null}
 
-            {showActions ? (
+            {showDecisionActions ? (
                 <div className="mt-4 grid grid-cols-2 gap-2">
                     <button
                         type="button"
@@ -77,6 +79,20 @@ export default function RequestMessageCard({
                     >
                         <FiX className="h-3.5 w-3.5" />
                         Refuse
+                    </button>
+                </div>
+            ) : null}
+
+            {showCompleteAction ? (
+                <div className="mt-4">
+                    <button
+                        type="button"
+                        onClick={onComplete}
+                        disabled={isUpdating}
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-600 px-3 py-2.5 text-[12px] font-semibold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-emerald-300"
+                    >
+                        <FiCheck className="h-3.5 w-3.5" />
+                        {isUpdating ? "Saving..." : "Mark as Completed"}
                     </button>
                 </div>
             ) : null}

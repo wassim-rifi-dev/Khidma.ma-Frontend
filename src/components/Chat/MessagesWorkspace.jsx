@@ -257,6 +257,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                                                 canRespond={user?.role === "professional"}
                                                                 isUpdating={updatingRequestId === requestPayload?.request_id}
                                                                 onAccept={() => respondToRequest(requestPayload?.request_id, "En_Cour")}
+                                                                onComplete={() => respondToRequest(requestPayload?.request_id, "Terminer")}
                                                                 onReject={() => respondToRequest(requestPayload?.request_id, "Refuser")}
                                                             />
                                                         ) : (
@@ -335,7 +336,14 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                 <p className="text-sm font-semibold text-slate-900">Active Request</p>
                                 {latestRequestPayload ? (
                                     <div className="mt-4">
-                                        <RequestMessageCard payload={latestRequestPayload} />
+                                        <RequestMessageCard
+                                            payload={latestRequestPayload}
+                                            canRespond={user?.role === "professional"}
+                                            isUpdating={updatingRequestId === latestRequestPayload?.request_id}
+                                            onAccept={() => respondToRequest(latestRequestPayload?.request_id, "En_Cour")}
+                                            onComplete={() => respondToRequest(latestRequestPayload?.request_id, "Terminer")}
+                                            onReject={() => respondToRequest(latestRequestPayload?.request_id, "Refuser")}
+                                        />
                                     </div>
                                 ) : (
                                     <p className="mt-3 text-sm leading-7 text-slate-500">
