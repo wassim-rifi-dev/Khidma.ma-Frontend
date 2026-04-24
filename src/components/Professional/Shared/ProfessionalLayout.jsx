@@ -1,9 +1,11 @@
 import Header from "./Header";
 import SideBar from "./SideBar";
+import ChatFlow from "../../Chat";
 
 export default function ProfessionalLayout({ children, contentClassName = "pt-28", title = "Manage your services" }) {
     return (
         <main className="min-h-screen bg-[#f6f8fc]">
+            <ChatFlow />
             <SideBar />
             <Header withSidebar title={title} />
 
