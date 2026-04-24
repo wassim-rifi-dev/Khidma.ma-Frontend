@@ -12,9 +12,10 @@ const statusIcons = {
     New: FiInbox,
 };
 
-export default function RequestCard({ request }) {
+export default function RequestCard({ request, isUpdating = false, onCompleteRequest = null }) {
     const status = getProfessionalRequestStatusConfig(request.status);
     const StatusIcon = statusIcons[status.label] || FiInbox;
+    const canComplete = request.status === "En_Cour" && typeof onCompleteRequest === "function";
 
     return (
         <article className="flex flex-col gap-4 rounded-2xl border border-slate-100 bg-[#f8fafc] p-4 transition hover:border-orange-100 hover:bg-white hover:shadow-sm xl:flex-row xl:items-center xl:justify-between">
@@ -53,13 +54,27 @@ export default function RequestCard({ request }) {
                 </div>
             </div>
 
-            <Link
-                to={`/professional/requests/${request.id}`}
-                className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-[#ff781f] hover:text-white xl:w-auto"
-            >
-                <FiMessageCircle className="h-4 w-4" />
-                Details
-            </Link>
+            <div className="flex flex-col gap-2 sm:flex-row xl:w-auto">
+                {canComplete ? (
+                    <button
+                        type="button"
+                        onClick={() => onCompleteRequest(request.id)}
+                        disabled={isUpdating}
+                        className="flex h-10 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                        <FiCheckCircle className="h-4 w-4" />
+                        {isUpdating ? "Updating..." : "Completed"}
+                    </button>
+                ) : null}
+
+                <Link
+                    to={`/professional/requests/${request.id}`}
+                    className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-[#ff781f] hover:text-white xl:w-auto"
+                >
+                    <FiMessageCircle className="h-4 w-4" />
+                    Details
+                </Link>
+            </div>
         </article>
     );
 }

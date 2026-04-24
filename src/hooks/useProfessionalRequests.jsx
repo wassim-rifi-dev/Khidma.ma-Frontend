@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { getProfessionalRequests } from "../services/RequestServices";
+import { getProfessionalRequests, updateProfessionalRequestStatus } from "../services/RequestServices";
 
 export default function useProfessionalRequests() {
     const [requests, setRequests] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [updatingRequestId, setUpdatingRequestId] = useState(null);
 
     useEffect(() => {
         async function fetchProfessionalRequests() {
@@ -30,5 +31,31 @@ export default function useProfessionalRequests() {
         };
     }, [requests]);
 
-    return { requests, summary, isLoading };
+    async function completeRequest(requestId) {
+        if (!requestId || updatingRequestId) {
+            return false;
+        }
+
+        setUpdatingRequestId(requestId);
+
+        try {
+            const response = await updateProfessionalRequestStatus(requestId, "Terminer");
+            const updatedRequest = response.data?.request;
+
+            if (updatedRequest) {
+                setRequests((currentRequests) => currentRequests.map((request) => (
+                    request.id === requestId ? { ...request, ...updatedRequest } : request
+                )));
+            }
+
+            return true;
+        } catch (error) {
+            console.error("Error completing professional request:", error);
+            return false;
+        } finally {
+            setUpdatingRequestId(null);
+        }
+    }
+
+    return { requests, summary, isLoading, updatingRequestId, completeRequest };
 }

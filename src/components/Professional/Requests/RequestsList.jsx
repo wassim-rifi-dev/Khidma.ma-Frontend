@@ -2,7 +2,15 @@ import RequestCard from "./RequestCard";
 import RequestFilters from "./RequestFilters";
 import { getProfessionalRequestFilterValue } from "../../../utils/Helpers/Request";
 
-export default function RequestsList({ requests, filters, activeFilter, onFilterChange, isLoading }) {
+export default function RequestsList({
+    requests,
+    filters,
+    activeFilter,
+    onFilterChange,
+    isLoading,
+    updatingRequestId,
+    onCompleteRequest,
+}) {
     const visibleRequests = activeFilter === "all"
         ? requests
         : requests.filter((request) => getProfessionalRequestFilterValue(request.status) === activeFilter);
@@ -35,7 +43,12 @@ export default function RequestsList({ requests, filters, activeFilter, onFilter
                 ) : null}
 
                 {!isLoading ? visibleRequests.map((request) => (
-                    <RequestCard key={request.id} request={request} />
+                    <RequestCard
+                        key={request.id}
+                        request={request}
+                        isUpdating={updatingRequestId === request.id}
+                        onCompleteRequest={onCompleteRequest}
+                    />
                 )) : null}
             </div>
         </section>

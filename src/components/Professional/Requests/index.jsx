@@ -11,7 +11,7 @@ const filters = [
 ];
 
 export default function RequestsSection() {
-    const { requests, summary, isLoading } = useProfessionalRequests();
+    const { requests, summary, isLoading, updatingRequestId, completeRequest } = useProfessionalRequests();
     const [activeFilter, setActiveFilter] = useState("all");
 
     return (
@@ -23,6 +23,8 @@ export default function RequestsSection() {
                 activeFilter={activeFilter}
                 onFilterChange={setActiveFilter}
                 isLoading={isLoading}
+                updatingRequestId={updatingRequestId}
+                onCompleteRequest={completeRequest}
             />
         </>
     );
