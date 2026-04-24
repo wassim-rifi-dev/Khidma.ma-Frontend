@@ -306,7 +306,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                     </div>
                 </div>
 
-                <aside className={`flex min-h-0 flex-col overflow-y-auto bg-white p-5 shadow-sm ${panelRadiusClassName}`}>
+                <aside className={`flex min-h-0 flex-col overflow-hidden bg-white p-5 shadow-sm ${panelRadiusClassName}`}>
                     {activeConversation ? (
                         <>
                             <div className="text-center">
