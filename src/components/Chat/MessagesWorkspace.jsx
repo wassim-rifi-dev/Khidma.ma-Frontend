@@ -66,11 +66,11 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
     }, [messages]);
 
     const shellClassName = variant === "professional"
-        ? "min-h-[calc(100vh-8rem)] rounded-[28px] bg-[#eef2f7] p-3 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-4"
-        : "min-h-[calc(100vh-8rem)] rounded-[32px] bg-[#edf1f6] p-3 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-4";
+        ? "h-full min-h-0 rounded-[28px] bg-[#eef2f7] p-3 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-4"
+        : "h-full min-h-0 rounded-[32px] bg-[#edf1f6] p-3 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-4";
     const gridClassName = variant === "professional"
-        ? "grid min-h-[calc(100vh-10rem)] gap-3 xl:grid-cols-[290px_minmax(0,1fr)_270px]"
-        : "grid min-h-[calc(100vh-10rem)] gap-3 xl:grid-cols-[300px_minmax(0,1fr)_280px]";
+        ? "grid h-full min-h-0 gap-3 xl:grid-cols-[290px_minmax(0,1fr)_270px]"
+        : "grid h-full min-h-0 gap-3 xl:grid-cols-[300px_minmax(0,1fr)_280px]";
     const asideClassName = variant === "professional"
         ? "flex min-h-0 flex-col rounded-[24px] bg-white p-4 shadow-sm"
         : "flex min-h-0 flex-col rounded-[28px] bg-white/80 p-4 shadow-sm backdrop-blur";
@@ -306,7 +306,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                     </div>
                 </div>
 
-                <aside className={`flex min-h-0 flex-col bg-white p-5 shadow-sm ${panelRadiusClassName}`}>
+                <aside className={`flex min-h-0 flex-col overflow-y-auto bg-white p-5 shadow-sm ${panelRadiusClassName}`}>
                     {activeConversation ? (
                         <>
                             <div className="text-center">
