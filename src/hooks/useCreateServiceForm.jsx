@@ -7,7 +7,6 @@ export default function useCreateServiceForm() {
     const [form, setForm] = useState({
         title: "",
         city: "",
-        category: "",
         description: "",
         price_min: "",
         price_max: "",
