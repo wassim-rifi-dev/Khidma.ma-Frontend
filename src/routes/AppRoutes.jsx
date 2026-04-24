@@ -27,6 +27,7 @@ import AdminProfessionals from '../pages/Admin/Professionals';
 import AdminServices from '../pages/Admin/Services';
 import AdminCategories from '../pages/Admin/Categories';
 import AdminAnalytics from '../pages/Admin/Analytics';
+import Messages from '../pages/Messages';
 
 export default function AppRoutes() {
     const {dark , changeMode} = useDarkMode();
@@ -140,6 +141,11 @@ export default function AppRoutes() {
                 <IsAuthRoute>
                     <ShowService />
                 </IsAuthRoute>
+            } />
+            <Route path='/messages' element={
+                <RoleRoutes allowedRole={['client', 'professional']}>
+                    <Messages />
+                </RoleRoutes>
             } />
             <Route path='/professional/:professionalId' element={
                 <IsAuthRoute>

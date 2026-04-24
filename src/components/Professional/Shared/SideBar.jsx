@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { FiBarChart2, FiBriefcase, FiClipboard, FiHome, FiPlus } from "react-icons/fi";
+import { FiBarChart2, FiBriefcase, FiClipboard, FiHome, FiMessageSquare, FiPlus } from "react-icons/fi";
 import logoLight from "../../../assets/logoLight.svg";
 
 const navItems = [
     { label: "Home", path: "/professional/home", icon: FiHome },
     { label: "Services", path: "/professional/services", icon: FiBriefcase },
     { label: "Requests", path: "/professional/requests", icon: FiClipboard },
+    { label: "Messages", path: "/messages", icon: FiMessageSquare },
     { label: "Analistique", path: "/professional/analistique", icon: FiBarChart2 },
 ];
 
