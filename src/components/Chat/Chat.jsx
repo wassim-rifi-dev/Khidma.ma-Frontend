@@ -14,8 +14,10 @@ export default function Chat({ isOpen }) {
         loadingMessages,
         messages,
         sending,
+        updatingRequestId,
         setActiveChatId,
         setDraft,
+        respondToRequest,
         sendMessage,
         user,
     } = useChatInterface(isOpen);
@@ -153,7 +155,13 @@ export default function Chat({ isOpen }) {
                                         }`}
                                     >
                                         {message.message_type === "request" && requestPayload ? (
-                                            <RequestMessageCard payload={requestPayload} />
+                                            <RequestMessageCard
+                                                payload={requestPayload}
+                                                canRespond={user?.role === "professional"}
+                                                isUpdating={updatingRequestId === requestPayload?.request_id}
+                                                onAccept={() => respondToRequest(requestPayload?.request_id, "En_Cour")}
+                                                onReject={() => respondToRequest(requestPayload?.request_id, "Refuser")}
+                                            />
                                         ) : (
                                             <p className="text-[12px] leading-5">{message.message}</p>
                                         )}

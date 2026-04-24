@@ -20,7 +20,7 @@ import {
 
 export default function RequestDetailsContent() {
     const { requestId } = useParams();
-    const { requestDetails, isLoading, isUpdating, acceptRequest } = useProfessionalRequestDetails(requestId);
+    const { requestDetails, isLoading, isUpdating, acceptRequest, rejectRequest } = useProfessionalRequestDetails(requestId);
 
     if (isLoading) {
         return (
@@ -187,10 +187,12 @@ export default function RequestDetailsContent() {
 
                     <button
                         type="button"
+                        onClick={rejectRequest}
+                        disabled={!canAccept}
                         className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#e8b79e] bg-white text-sm font-bold text-stone-700 transition hover:bg-orange-50"
                     >
                         <FiX className="h-4 w-4" />
-                        Reject Request
+                        {isUpdating ? "Updating..." : "Reject Request"}
                     </button>
 
                     <button

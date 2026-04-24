@@ -1,4 +1,12 @@
 export function getStatusConfig(status) {
+    if (status === "Refuser") {
+        return {
+            label: "Refused",
+            badgeClassName: "bg-rose-50 text-rose-600",
+            actionLabel: "Send Another Request",
+        };
+    }
+
     if (status === "En_Cour") {
         return {
             label: "In Progress",
@@ -49,6 +57,13 @@ export function formatRelativeDate(dateString) {
 }
 
 export function getProfessionalRequestStatusConfig(status) {
+    if (status === "Refuser") {
+        return {
+            label: "Refused",
+            className: "bg-rose-50 text-rose-600",
+        };
+    }
+
     if (status === "Terminer") {
         return {
             label: "Completed",
@@ -70,6 +85,10 @@ export function getProfessionalRequestStatusConfig(status) {
 }
 
 export function getProfessionalRequestFilterValue(status) {
+    if (status === "Refuser") {
+        return "refused";
+    }
+
     if (status === "Terminer") {
         return "completed";
     }

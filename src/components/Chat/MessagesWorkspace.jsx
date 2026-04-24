@@ -23,8 +23,10 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
         loadingMessages,
         messages,
         sending,
+        updatingRequestId,
         setActiveChatId,
         setDraft,
+        respondToRequest,
         sendMessage,
         user,
     } = useChatInterface(true, preferredChatId);
@@ -250,7 +252,13 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                                         }`}
                                                     >
                                                         {message.message_type === "request" && requestPayload ? (
-                                                            <RequestMessageCard payload={requestPayload} />
+                                                            <RequestMessageCard
+                                                                payload={requestPayload}
+                                                                canRespond={user?.role === "professional"}
+                                                                isUpdating={updatingRequestId === requestPayload?.request_id}
+                                                                onAccept={() => respondToRequest(requestPayload?.request_id, "En_Cour")}
+                                                                onReject={() => respondToRequest(requestPayload?.request_id, "Refuser")}
+                                                            />
                                                         ) : (
                                                             message.message
                                                         )}

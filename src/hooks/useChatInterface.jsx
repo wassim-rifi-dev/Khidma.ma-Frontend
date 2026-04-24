@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { createMessage, getChatMessages, getChats } from "../services/ChatServices";
 import { API_BASE_URL } from "../services/api";
+import { updateProfessionalRequestStatus } from "../services/RequestServices";
 
 function getMaxMessageIdFromConversations(items) {
     return items.reduce((maxId, item) => Math.max(maxId, Number(item?.last_message_id || 0)), 0);
@@ -31,6 +32,32 @@ function mergeConversationUpdate(current, message) {
     ];
 }
 
+function updateRequestPayloadInMessages(current, requestId, status) {
+    return current.map((message) => {
+        if (message.message_type !== "request" || !message.media_url) {
+            return message;
+        }
+
+        try {
+            const payload = JSON.parse(message.media_url);
+
+            if (Number(payload?.request_id) !== Number(requestId)) {
+                return message;
+            }
+
+            return {
+                ...message,
+                media_url: JSON.stringify({
+                    ...payload,
+                    status,
+                }),
+            };
+        } catch {
+            return message;
+        }
+    });
+}
+
 export default function useChatInterface(enabled = true, preferredChatId = null) {
     const { user } = useContext(AuthContext);
     const [conversations, setConversations] = useState([]);
@@ -40,6 +67,7 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
     const [loadingConversations, setLoadingConversations] = useState(false);
     const [loadingMessages, setLoadingMessages] = useState(false);
     const [sending, setSending] = useState(false);
+    const [updatingRequestId, setUpdatingRequestId] = useState(null);
     const [error, setError] = useState("");
     const cursorRef = useRef(0);
 
@@ -304,6 +332,26 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
         }
     };
 
+    const respondToRequest = async (requestId, status) => {
+        if (!requestId || updatingRequestId) {
+            return false;
+        }
+
+        setUpdatingRequestId(requestId);
+
+        try {
+            await updateProfessionalRequestStatus(requestId, status);
+            setMessages((current) => updateRequestPayloadInMessages(current, requestId, status));
+            setError("");
+            return true;
+        } catch (requestError) {
+            setError(requestError?.message || "Unable to update request status.");
+            return false;
+        } finally {
+            setUpdatingRequestId(null);
+        }
+    };
+
     return {
         activeChatId,
         activeConversation,
@@ -314,8 +362,10 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
         loadingMessages,
         messages,
         sending,
+        updatingRequestId,
         setActiveChatId,
         setDraft,
+        respondToRequest,
         sendMessage,
         user,
     };

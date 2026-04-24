@@ -61,3 +61,35 @@ export function getMessagePreview(conversation) {
 
     return conversation.last_message;
 }
+
+export function getRequestStatusMeta(status) {
+    if (status === "En_Cour") {
+        return {
+            label: "Accepted",
+            badgeClassName: "bg-emerald-50 text-emerald-600",
+            borderClassName: "border-emerald-200",
+        };
+    }
+
+    if (status === "Terminer") {
+        return {
+            label: "Completed",
+            badgeClassName: "bg-sky-50 text-sky-600",
+            borderClassName: "border-sky-200",
+        };
+    }
+
+    if (status === "Refuser") {
+        return {
+            label: "Refused",
+            badgeClassName: "bg-rose-50 text-rose-600",
+            borderClassName: "border-rose-200",
+        };
+    }
+
+    return {
+        label: "New Request",
+        badgeClassName: "bg-orange-100 text-orange-600",
+        borderClassName: "border-orange-200",
+    };
+}
