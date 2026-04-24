@@ -1,81 +1,83 @@
+import { useEffect, useState } from "react";
 import AboutActivitySection from "../../components/Professional/Profile/sections/AboutActivitySection";
 import MyServicesSection from "../../components/Professional/Profile/sections/MyServicesSection";
 import ProfilePictureCard from "../../components/Professional/Profile/sections/ProfilePictureCard";
 import RecentReviewsSection from "../../components/Professional/Profile/sections/RecentReviewsSection";
 import ProfessionalLayout from "../../components/Professional/Shared/ProfessionalLayout";
-
-const profile = {
-    user: {
-        name: "Yassine El Amrani",
-        first_name: "Yassine",
-        last_name: "El Amrani",
-        photo: null,
-    },
-    professional: {
-        id: "preview",
-        city: "Casablanca",
-        rating: 4.8,
-        is_verified: true,
-        reviews_count: 36,
-        requests_count: 128,
-        completed_requests_count: 94,
-        description:
-            "Experienced home maintenance professional focused on clean finishes, reliable timing, and practical solutions for everyday repairs.",
-        category: { name: "Home Maintenance" },
-        services: [
-            {
-                id: "plumbing-preview",
-                title: "Kitchen Plumbing Repair",
-                description: "Leak inspection, faucet replacement, sink repair, and quick pipe maintenance for kitchens.",
-                price_min: 150,
-                price_max: 350,
-                rating: 4.9,
-                category: { name: "Plumbing" },
-            },
-            {
-                id: "electrical-preview",
-                title: "Lighting Installation",
-                description: "Install ceiling lights, wall fixtures, switches, and safe wiring for small home upgrades.",
-                price_min: 200,
-                price_max: 500,
-                rating: 4.7,
-                category: { name: "Electrical" },
-            },
-        ],
-        recent_reviews: [
-            {
-                id: "review-1",
-                rating: 5,
-                comment: "Very clean work and arrived exactly on time. The sink problem was fixed quickly.",
-                created_at: "2026-04-20",
-                client: { name: "Fatima Z." },
-            },
-            {
-                id: "review-2",
-                rating: 5,
-                comment: "Professional service, clear price, and good communication before the visit.",
-                created_at: "2026-04-18",
-                client: { name: "Omar B." },
-            },
-        ],
-    },
-};
+import { getMyProfessionalProfile } from "../../services/ProfessionalServices";
 
 export default function ProfilePreview() {
-    const user = profile?.user;
-    const professional = profile?.professional;
+    const [user, setUser] = useState(null);
+    const [professional, setProfessional] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function fetchProfile() {
+            setIsLoading(true);
+            setError("");
+
+            try {
+                const response = await getMyProfessionalProfile();
+
+                if (!isMounted) {
+                    return;
+                }
+
+                setUser(response?.data?.user || null);
+                setProfessional(response?.data?.professional || null);
+            } catch (requestError) {
+                if (!isMounted) {
+                    return;
+                }
+
+                setUser(null);
+                setProfessional(null);
+                setError(requestError?.message || "Unable to load your profile preview.");
+            } finally {
+                if (isMounted) {
+                    setIsLoading(false);
+                }
+            }
+        }
+
+        fetchProfile();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
     const services = professional?.services || [];
     const recentReviews = professional?.recent_reviews || [];
 
     return (
         <ProfessionalLayout contentClassName="pt-24" title="Profile preview">
-            <ProfilePictureCard user={user} professional={professional} />
-            <AboutActivitySection professional={professional} />
-            <MyServicesSection services={services} />
-            <RecentReviewsSection
-                reviews={recentReviews}
-                reviewsCount={professional?.reviews_count || 0}
-            />
+            {isLoading ? (
+                <section className="mx-auto mt-10 w-full max-w-6xl rounded-2xl border border-slate-100 bg-white p-8 text-center text-slate-500 shadow-sm">
+                    Loading your profile preview...
+                </section>
+            ) : null}
+
+            {!isLoading && error ? (
+                <section className="mx-auto mt-10 w-full max-w-6xl rounded-2xl border border-red-100 bg-red-50 p-8 text-center text-red-600 shadow-sm">
+                    {error}
+                </section>
+            ) : null}
+
+            {!isLoading && !error && professional ? (
+                <>
+                    <ProfilePictureCard user={user} professional={professional} />
+                    <AboutActivitySection professional={professional} />
+                    <MyServicesSection services={services} />
+                    <RecentReviewsSection
+                        reviews={recentReviews}
+                        reviewsCount={professional?.reviews_count || 0}
+                    />
+                </>
+            ) : null}
         </ProfessionalLayout>
     );
 }
