@@ -31,7 +31,7 @@ function mergeConversationUpdate(current, message) {
     ];
 }
 
-export default function useChatInterface(enabled = true) {
+export default function useChatInterface(enabled = true, preferredChatId = null) {
     const { user } = useContext(AuthContext);
     const [conversations, setConversations] = useState([]);
     const [activeChatId, setActiveChatId] = useState(null);
@@ -72,6 +72,10 @@ export default function useChatInterface(enabled = true) {
                 cursorRef.current = Math.max(cursorRef.current, getMaxMessageIdFromConversations(items));
                 setError("");
                 setActiveChatId((currentId) => {
+                    if (preferredChatId && items.some((item) => item.id === preferredChatId)) {
+                        return preferredChatId;
+                    }
+
                     if (currentId && items.some((item) => item.id === currentId)) {
                         return currentId;
                     }
@@ -99,7 +103,17 @@ export default function useChatInterface(enabled = true) {
             cancelled = true;
             window.clearInterval(intervalId);
         };
-    }, [enabled, user]);
+    }, [enabled, preferredChatId, user]);
+
+    useEffect(() => {
+        if (!preferredChatId || conversations.length === 0) {
+            return;
+        }
+
+        if (conversations.some((conversation) => conversation.id === preferredChatId)) {
+            setActiveChatId(preferredChatId);
+        }
+    }, [conversations, preferredChatId]);
 
     useEffect(() => {
         if (!enabled || !activeChatId) {

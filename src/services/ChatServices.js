@@ -9,6 +9,15 @@ export async function getChats() {
     }
 }
 
+export async function getOrCreateDirectChat(professionalId) {
+    try {
+        const response = await api.post(`/chat/direct/${professionalId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export async function getChatMessages(chatId) {
     try {
         const response = await api.get(`/chat/${chatId}`);

@@ -12,7 +12,7 @@ const FILTERS = [
     { key: "recent", label: "Recent" },
 ];
 
-export default function MessagesWorkspace({ variant = "client" }) {
+export default function MessagesWorkspace({ variant = "client", preferredChatId = null }) {
     const {
         activeChatId,
         activeConversation,
@@ -27,7 +27,7 @@ export default function MessagesWorkspace({ variant = "client" }) {
         setDraft,
         sendMessage,
         user,
-    } = useChatInterface(true);
+    } = useChatInterface(true, preferredChatId);
     const [search, setSearch] = useState("");
     const [activeFilter, setActiveFilter] = useState("all");
 

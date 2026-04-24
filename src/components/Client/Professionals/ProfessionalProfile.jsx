@@ -13,6 +13,7 @@ import { MdCleaningServices, MdElectricalServices } from "react-icons/md";
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
 import RequestServiceModal from "../Shared/RequestServiceModal";
+import useDirectChatNavigation from "../../../hooks/useDirectChatNavigation";
 
 function getServiceIcon(index) {
     const icons = [FiTool, MdCleaningServices, MdElectricalServices];
@@ -29,6 +30,7 @@ function EmptyState({ children }) {
 
 export default function ProfessionalProfile({ profile, isLoading, error }) {
     const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+    const { chatError, isStartingChat, openDirectChat } = useDirectChatNavigation();
 
     if (isLoading) {
         return (
@@ -126,11 +128,17 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                                 >
                                     Request Service
                                 </button>
-                                <button className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-6 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-200">
+                                <button
+                                    type="button"
+                                    onClick={() => openDirectChat(professional.id)}
+                                    disabled={isStartingChat}
+                                    className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-6 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-70"
+                                >
                                     <FiMessageSquare className="h-4 w-4" />
-                                    Chat
+                                    {isStartingChat ? "Opening..." : "Chat"}
                                 </button>
                             </div>
+                            {chatError ? <p className="mt-3 text-sm text-red-500">{chatError}</p> : null}
                         </div>
                     </div>
                 </div>
@@ -308,11 +316,17 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                             >
                                 Request Service
                             </button>
-                            <button className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-3.5 text-sm font-medium text-slate-600 transition hover:bg-slate-200">
+                            <button
+                                type="button"
+                                onClick={() => openDirectChat(professional.id)}
+                                disabled={isStartingChat}
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-3.5 text-sm font-medium text-slate-600 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-70"
+                            >
                                 <FiMessageSquare className="h-4 w-4" />
-                                Send Message
+                                {isStartingChat ? "Opening..." : "Send Message"}
                             </button>
                         </div>
+                        {chatError ? <p className="mt-3 text-sm text-red-500">{chatError}</p> : null}
 
                         <div className="mt-6 rounded-2xl bg-slate-50 p-4 text-sm text-slate-500">
                             Completed requests:{" "}

@@ -10,6 +10,7 @@ import {
 import defaultProfile from "../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../utils/getUserPhotoUrl";
 import RequestServiceModal from "../Shared/RequestServiceModal";
+import useDirectChatNavigation from "../../../hooks/useDirectChatNavigation";
 
 const fallbackImage =
     "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80";
@@ -29,6 +30,7 @@ function StateMessage({ children, tone = "default" }) {
 export default function ServiceDetails({ details, isLoading, error }) {
     const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
     const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
+    const { chatError, isStartingChat, openDirectChat } = useDirectChatNavigation();
 
     if (isLoading) {
         return <StateMessage>Loading service...</StateMessage>;
@@ -139,6 +141,17 @@ export default function ServiceDetails({ details, isLoading, error }) {
                         >
                             Request Service
                         </button>
+                        {professional?.id ? (
+                            <button
+                                type="button"
+                                onClick={() => openDirectChat(professional.id)}
+                                disabled={isStartingChat}
+                                className="mt-3 w-full rounded-full bg-slate-100 px-6 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-70"
+                            >
+                                {isStartingChat ? "Opening chat..." : "Message Professional"}
+                            </button>
+                        ) : null}
+                        {chatError ? <p className="mt-3 text-sm text-red-500">{chatError}</p> : null}
 
                         <div className="mt-8 space-y-4 border-t border-slate-100 pt-6 text-sm text-slate-500">
                             <div className="flex items-center gap-3">
