@@ -1,12 +1,7 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { createMessage, getChatMessages, getChats } from "../services/ChatServices";
-import { API_BASE_URL } from "../services/api";
 import { updateProfessionalRequestStatus } from "../services/RequestServices";
-
-function getMaxMessageIdFromConversations(items) {
-    return items.reduce((maxId, item) => Math.max(maxId, Number(item?.last_message_id || 0)), 0);
-}
 
 function mergeConversationUpdate(current, message) {
     const existingConversation = current.find((conversation) => conversation.id === message.chat_id);
@@ -69,7 +64,6 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
     const [sending, setSending] = useState(false);
     const [updatingRequestId, setUpdatingRequestId] = useState(null);
     const [error, setError] = useState("");
-    const cursorRef = useRef(0);
 
     const activeConversation = useMemo(
         () => conversations.find((conversation) => conversation.id === activeChatId) || null,
@@ -97,7 +91,6 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
                 }
 
                 setConversations(items);
-                cursorRef.current = Math.max(cursorRef.current, getMaxMessageIdFromConversations(items));
                 setError("");
                 setActiveChatId((currentId) => {
                     if (preferredChatId && items.some((item) => item.id === preferredChatId)) {
@@ -125,7 +118,7 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
 
         const intervalId = window.setInterval(() => {
             loadConversations({ silent: true });
-        }, 15000);
+        }, 5000);
 
         return () => {
             cancelled = true;
@@ -162,10 +155,6 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
 
                 if (!cancelled) {
                     setMessages(items);
-                    cursorRef.current = Math.max(
-                        cursorRef.current,
-                        ...items.map((item) => Number(item?.id || 0))
-                    );
                     setError("");
                 }
             } catch (requestError) {
@@ -181,124 +170,15 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
 
         loadMessages();
 
+        const intervalId = window.setInterval(() => {
+            loadMessages({ silent: true });
+        }, 5000);
+
         return () => {
             cancelled = true;
+            window.clearInterval(intervalId);
         };
     }, [activeChatId, enabled]);
-
-    useEffect(() => {
-        if (!enabled || !user) {
-            return undefined;
-        }
-
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-            return undefined;
-        }
-
-        const abortController = new AbortController();
-        let reconnectTimer = null;
-        let stopped = false;
-
-        const connect = async () => {
-            try {
-                const response = await fetch(`${API_BASE_URL}/chat/stream?cursor=${cursorRef.current}`, {
-                    headers: {
-                        Accept: "text/event-stream",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    signal: abortController.signal,
-                });
-
-                if (!response.ok || !response.body) {
-                    throw new Error("Unable to start chat stream.");
-                }
-
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder();
-                let buffer = "";
-
-                while (!stopped) {
-                    const { done, value } = await reader.read();
-
-                    if (done) {
-                        break;
-                    }
-
-                    buffer += decoder.decode(value, { stream: true });
-                    const chunks = buffer.split("\n\n");
-                    buffer = chunks.pop() || "";
-
-                    chunks.forEach((chunk) => {
-                        const lines = chunk.split("\n");
-                        const eventLine = lines.find((line) => line.startsWith("event:"));
-                        const dataLine = lines.find((line) => line.startsWith("data:"));
-
-                        if (!eventLine || !dataLine) {
-                            return;
-                        }
-
-                        const eventName = eventLine.replace("event:", "").trim();
-                        const payload = JSON.parse(dataLine.replace("data:", "").trim());
-
-                        if (payload?.cursor) {
-                            cursorRef.current = Math.max(cursorRef.current, Number(payload.cursor));
-                        }
-
-                        if (eventName !== "message.created" || !payload?.message) {
-                            return;
-                        }
-
-                        const incomingMessage = payload.message;
-
-                        setConversations((current) => {
-                            const hasConversation = current.some((conversation) => conversation.id === incomingMessage.chat_id);
-
-                            if (!hasConversation) {
-                                getChats()
-                                    .then((chatResponse) => {
-                                        const items = chatResponse?.data?.conversations || [];
-                                        setConversations(items);
-                                        cursorRef.current = Math.max(cursorRef.current, getMaxMessageIdFromConversations(items));
-                                    })
-                                    .catch(() => {});
-
-                                return current;
-                            }
-
-                            return mergeConversationUpdate(current, incomingMessage);
-                        });
-                        setMessages((current) => {
-                            if (incomingMessage.chat_id !== activeChatId) {
-                                return current;
-                            }
-
-                            if (current.some((message) => message.id === incomingMessage.id)) {
-                                return current;
-                            }
-
-                            return [...current, incomingMessage];
-                        });
-                    });
-                }
-            } catch (streamError) {
-                if (!abortController.signal.aborted) {
-                    reconnectTimer = window.setTimeout(connect, 1500);
-                }
-            }
-        };
-
-        connect();
-
-        return () => {
-            stopped = true;
-            abortController.abort();
-            if (reconnectTimer) {
-                window.clearTimeout(reconnectTimer);
-            }
-        };
-    }, [activeChatId, enabled, user]);
 
     const sendMessage = async () => {
         const content = draft.trim();
@@ -318,7 +198,6 @@ export default function useChatInterface(enabled = true, preferredChatId = null)
             const newMessage = response?.data?.message;
 
             if (newMessage) {
-                cursorRef.current = Math.max(cursorRef.current, Number(newMessage.id || 0));
                 setMessages((current) => current.some((message) => message.id === newMessage.id) ? current : [...current, newMessage]);
                 setConversations((current) => mergeConversationUpdate(current, newMessage));
             }
