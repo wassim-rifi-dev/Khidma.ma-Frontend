@@ -9,6 +9,7 @@ import {
     FiStar,
     FiTool,
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../../shared/utils/getUserPhotoUrl";
 import { getServiceIcon } from "../../../../shared/utils/Helpers/client/Services";
@@ -217,9 +218,19 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                         </section>
 
                         <section>
-                            <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
-                                Customer Reviews
-                            </h2>
+                            <div className="flex flex-wrap items-center justify-between gap-3">
+                                <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
+                                    Customer Reviews
+                                </h2>
+                                {reviewCount > 0 ? (
+                                    <Link
+                                        to={`/professional/${professional.id}/reviews`}
+                                        className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-orange-200 hover:text-orange-500"
+                                    >
+                                        View all reviews
+                                    </Link>
+                                ) : null}
+                            </div>
                             <div className="mt-5 space-y-4">
                                 {reviews.length === 0 ? (
                                     <EmptyState>No customer reviews yet.</EmptyState>

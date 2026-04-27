@@ -11,6 +11,7 @@ import ClientHome from '../features/client/pages/Home';
 import EditProfile from '../features/client/pages/EditProfile';
 import Services from '../features/client/pages/Services';
 import Professional from '../features/client/pages/Professional';
+import ProfessionalReviews from '../features/client/pages/ProfessionalReviews';
 import ShowService from '../features/client/pages/ShowService';
 import ProfessionalHome from '../features/professional/pages/Home';
 import ProfilePreview from '../features/professional/pages/ProfilePreview';
@@ -150,6 +151,11 @@ export default function AppRoutes() {
             <Route path='/professional/:professionalId' element={
                 <IsAuthRoute>
                     <Professional />
+                </IsAuthRoute>
+            } />
+            <Route path='/professional/:professionalId/reviews' element={
+                <IsAuthRoute>
+                    <ProfessionalReviews />
                 </IsAuthRoute>
             } />
         </Routes>
