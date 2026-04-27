@@ -88,8 +88,19 @@ export default function useProfessionalProfile(professionalId) {
             setError("Professional id is missing.");
         }
 
+        function handleReviewCreated(event) {
+            const nextProfessionalId = String(event?.detail?.professionalId || "");
+
+            if (nextProfessionalId && nextProfessionalId === String(professionalId)) {
+                fetchProfessional();
+            }
+        }
+
+        window.addEventListener("client-review-created", handleReviewCreated);
+
         return () => {
             isMounted = false;
+            window.removeEventListener("client-review-created", handleReviewCreated);
         };
     }, [professionalId]);
 

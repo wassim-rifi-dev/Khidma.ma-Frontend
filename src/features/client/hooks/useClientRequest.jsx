@@ -34,8 +34,6 @@ export default function useClientRequest() {
             } catch (error) {
                 console.error("Error fetching client requests:", error);
                 setThreeRequests([]);
-            } finally {
-                setIsLoading(false);
             }
         }
 
@@ -46,19 +44,20 @@ export default function useClientRequest() {
             } catch (error) {
                 console.error("Error fetching recent requests:", error);
                 setSixRequests([]);
-            } finally {
-                setIsLoading(false);
             }
         }
 
         async function loadClientRequests() {
             setIsLoading(true);
-
-            await Promise.all([
-                fetchLastSixRequests(),
-                fetchLastThreeRequests(),
-                fetchCount(),
-            ]);
+            try {
+                await Promise.all([
+                    fetchLastSixRequests(),
+                    fetchLastThreeRequests(),
+                    fetchCount(),
+                ]);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         function refreshClientRequests() {

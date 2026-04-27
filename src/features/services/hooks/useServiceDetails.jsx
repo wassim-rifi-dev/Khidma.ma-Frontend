@@ -47,8 +47,19 @@ export default function useServiceDetails(serviceId) {
             setError("Service id is missing.");
         }
 
+        function handleReviewCreated(event) {
+            const nextServiceId = String(event?.detail?.serviceId || "");
+
+            if (nextServiceId && nextServiceId === String(serviceId)) {
+                fetchService();
+            }
+        }
+
+        window.addEventListener("client-review-created", handleReviewCreated);
+
         return () => {
             isMounted = false;
+            window.removeEventListener("client-review-created", handleReviewCreated);
         };
     }, [serviceId]);
 

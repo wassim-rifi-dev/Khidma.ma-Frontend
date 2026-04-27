@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { FiStar, FiX } from "react-icons/fi";
 import { createReview } from "../../../services/services/RequestServices";
 
-function StarButton({ active, onClick }) {
+function StarButton({ active, onClick, onMouseEnter }) {
     return (
         <button
             type="button"
             onClick={onClick}
+            onMouseEnter={onMouseEnter}
             className={`flex h-10 w-10 items-center justify-center transition ${
                 active
                     ? "text-orange-500"
@@ -21,8 +22,10 @@ function StarButton({ active, onClick }) {
 
 export default function ReviewRequestModal({ request, isOpen, onClose, onCreated }) {
     const [rating, setRating] = useState(5);
+    const [hoveredRating, setHoveredRating] = useState(0);
     const [comment, setComment] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -31,7 +34,9 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
         }
 
         setRating(5);
+        setHoveredRating(0);
         setComment("");
+        setIsSuccess(false);
         setError("");
     }, [isOpen, request?.id]);
 
@@ -41,6 +46,7 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
 
     const serviceTitle = request.service?.title || "this service";
     const professionalName = request.service?.professional?.user?.name || "the professional";
+    const activeRating = hoveredRating || rating;
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -49,7 +55,18 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
             return;
         }
 
+        if (!rating) {
+            setError("Please choose a star rating.");
+            return;
+        }
+
+        if (!comment.trim()) {
+            setError("Please add a short comment about your experience.");
+            return;
+        }
+
         setIsSubmitting(true);
+        setIsSuccess(false);
         setError("");
 
         try {
@@ -58,9 +75,22 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
                 comment: comment.trim(),
             });
 
+            const review = response.data?.review || null;
+
+            setIsSuccess(true);
             onCreated?.(response.data?.review || null);
-            window.dispatchEvent(new Event("client-review-created"));
-            onClose?.();
+            window.dispatchEvent(new CustomEvent("client-review-created", {
+                detail: {
+                    review,
+                    serviceId: request.service?.id || null,
+                    professionalId: request.service?.professional?.id || null,
+                    orderId: request.id,
+                },
+            }));
+
+            window.setTimeout(() => {
+                onClose?.();
+            }, 900);
         } catch (requestError) {
             setError(requestError?.message || "Unable to save your review.");
         } finally {
@@ -92,15 +122,25 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
                 <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                     <div>
                         <p className="text-sm font-semibold text-slate-900">Your rating</p>
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <p className="mt-1 text-xs text-slate-400">
+                            Pick from 1 to 5 stars.
+                        </p>
+                        <div
+                            className="mt-3 flex flex-wrap gap-2"
+                            onMouseLeave={() => setHoveredRating(0)}
+                        >
                             {[1, 2, 3, 4, 5].map((value) => (
                                 <StarButton
                                     key={value}
-                                    active={value <= rating}
+                                    active={value <= activeRating}
                                     onClick={() => setRating(value)}
+                                    onMouseEnter={() => setHoveredRating(value)}
                                 />
                             ))}
                         </div>
+                        <p className="mt-2 text-sm font-medium text-orange-500">
+                            {rating}/5 stars
+                        </p>
                     </div>
 
                     <label className="block">
@@ -111,7 +151,12 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
                             rows={5}
                             placeholder="Tell others how the service went..."
                             className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-orange-200 focus:bg-white focus:ring-4 focus:ring-orange-50"
+                            maxLength={500}
                         />
+                        <div className="mt-2 flex items-center justify-between text-xs text-slate-400">
+                            <span>Share what went well and how the professional handled the job.</span>
+                            <span>{comment.trim().length}/500</span>
+                        </div>
                     </label>
 
                     {error ? (
@@ -120,20 +165,27 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
                         </div>
                     ) : null}
 
+                    {isSuccess ? (
+                        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-600">
+                            Review submitted successfully.
+                        </div>
+                    ) : null}
+
                     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                         <button
                             type="button"
                             onClick={onClose}
+                            disabled={isSubmitting}
                             className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || isSuccess}
                             className="rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-orange-300"
                         >
-                            {isSubmitting ? "Sending..." : "Submit Review"}
+                            {isSubmitting ? "Submitting..." : isSuccess ? "Review Submitted" : "Submit Review"}
                         </button>
                     </div>
                 </form>
