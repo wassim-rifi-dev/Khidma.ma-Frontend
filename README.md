@@ -1,12 +1,19 @@
 # Khidma.ma Frontend
 
-<p align="center">
+<div align="center">
   <img src="./src/assets/logoLight.svg" alt="Khidma.ma logo" width="220" />
-</p>
+  <h3>React frontend for the Khidma.ma services marketplace</h3>
+  <p>
+    <img src="https://img.shields.io/badge/React-19-0f172a?style=for-the-badge&logo=react" alt="React 19" />
+    <img src="https://img.shields.io/badge/Vite-8-f59e0b?style=for-the-badge&logo=vite" alt="Vite 8" />
+    <img src="https://img.shields.io/badge/Tailwind-4-0ea5e9?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS 4" />
+    <img src="https://img.shields.io/badge/Router-v7-111827?style=for-the-badge" alt="React Router 7" />
+  </p>
+</div>
 
-<p align="center">
-  <strong>React frontend for the Khidma.ma services marketplace.</strong>
-</p>
+---
+
+> The frontend delivers the public marketplace, the professional workspace, and the admin panels in a single React application.
 
 ## Overview
 
@@ -26,6 +33,14 @@ The frontend communicates with the Laravel API in `../Backend`.
 - Axios
 - Tailwind CSS 4
 - Chart.js
+
+## UI Scope
+
+| Space | Purpose |
+| --- | --- |
+| Public marketplace | Browse services, profiles, and reviews |
+| Professional dashboard | Manage services, requests, and analytics |
+| Admin area | Monitor users, categories, moderation, and platform health |
 
 ## Main Areas
 
