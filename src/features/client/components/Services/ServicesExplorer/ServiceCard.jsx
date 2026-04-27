@@ -14,7 +14,7 @@ export default function ServiceCard({ service, image, iconIndex }) {
     return (
         <Link
             to={`/services/${service.id}`}
-            className="block overflow-hidden rounded-[30px] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(15,23,42,0.12)]"
+            className="block overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.07)] transition hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.11)]"
         >
             <div className="relative h-64 overflow-hidden">
                 <img
@@ -30,7 +30,7 @@ export default function ServiceCard({ service, image, iconIndex }) {
                 ) : null}
             </div>
 
-            <div className="p-5">
+            <div className="p-5 sm:p-6">
                 <div className="flex items-center justify-between gap-3">
                     <span className="text-xs font-semibold tracking-[0.18em] text-orange-500">
                         {(service.category?.name || "SERVICE").toUpperCase()}
@@ -44,14 +44,14 @@ export default function ServiceCard({ service, image, iconIndex }) {
                 <h2 className="mt-3 text-[1.65rem] font-semibold leading-tight text-slate-900">
                     {service.title}
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-slate-500">
+                <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-500">
                     {service.description}
                 </p>
 
                 <div className="mt-5 border-t border-slate-100 pt-4">
                     <div className="flex items-end justify-between gap-4">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-700">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-700 ring-1 ring-slate-200/70">
                                 <Icon className="h-5 w-5" />
                             </div>
                             <div>
@@ -79,3 +79,4 @@ export default function ServiceCard({ service, image, iconIndex }) {
         </Link>
     );
 }
+

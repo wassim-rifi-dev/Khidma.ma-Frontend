@@ -10,7 +10,7 @@ export default function ServiceGallery({ images }) {
     }
 
     return (
-        <article className="mt-6 rounded-[28px] bg-white p-7 shadow-sm">
+        <article className="mt-6 rounded-2xl bg-white p-7 shadow-sm">
             <div className="mb-5 flex items-center justify-between gap-4">
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900">Service photos</h2>
@@ -36,7 +36,7 @@ export default function ServiceGallery({ images }) {
                             key={`${image.title}-${index}`}
                             type="button"
                             onClick={() => setSelectedImageIndex(index)}
-                            className={`group overflow-hidden rounded-[28px] border bg-slate-100 text-left shadow-sm ring-2 transition hover:ring-orange-300 ${
+                            className={`group overflow-hidden rounded-2xl border bg-slate-100 text-left shadow-sm ring-2 transition hover:ring-orange-300 ${
                                 selectedImageIndex === index
                                     ? "border-orange-200 ring-orange-300"
                                     : "border-slate-100 ring-transparent"
@@ -55,3 +55,4 @@ export default function ServiceGallery({ images }) {
         </article>
     );
 }
+

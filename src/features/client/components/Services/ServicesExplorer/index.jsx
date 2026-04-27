@@ -139,7 +139,7 @@ export default function ServicesExplorer() {
                     </p>
                 </div>
 
-                <div className="mt-10 rounded-[28px] bg-white p-3 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                <div className="mt-10 rounded-2xl bg-white p-3 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
                     <div className="grid gap-3 xl:grid-cols-[1.2fr_0.9fr_0.9fr_0.9fr_auto]">
                         <SearchBox
                             icon={FiSearch}
@@ -219,3 +219,4 @@ export default function ServicesExplorer() {
         </section>
     );
 }
+

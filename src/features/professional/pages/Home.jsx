@@ -21,13 +21,13 @@ export default function Home() {
     return (
         <ProfessionalLayout title="Professional dashboard">
             {isLoading ? (
-                <div className="rounded-[28px] bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
+                <div className="rounded-2xl bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
                     Loading dashboard...
                 </div>
             ) : null}
 
             {!isLoading && error ? (
-                <div className="rounded-[28px] bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
+                <div className="rounded-2xl bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
                     {error}
                 </div>
             ) : null}
@@ -55,3 +55,4 @@ export default function Home() {
         </ProfessionalLayout>
     );
 }
+

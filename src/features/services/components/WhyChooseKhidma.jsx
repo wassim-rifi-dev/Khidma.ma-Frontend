@@ -24,8 +24,8 @@ export default function WhyChooseKhidma({ isDark }) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                    <div className={`p-8 rounded-4xl hover:shadow-lg transition-shadow duration-300 border ${
-                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#F1F5F9]'
+                    <div className={`rounded-2xl border p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#E2E8F0]'
                     }`}>
                         <div className="w-14 h-14 bg-[rgba(34,197,94,0.1)] text-[#22C55E] rounded-2xl flex items-center justify-center mb-6">
                             <GoShieldCheck size={30} />
@@ -42,8 +42,8 @@ export default function WhyChooseKhidma({ isDark }) {
                         </p>
                     </div>
 
-                    <div className={`p-8 rounded-4xl hover:shadow-lg transition-shadow duration-300 border ${
-                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#F1F5F9]'
+                    <div className={`rounded-2xl border p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#E2E8F0]'
                     }`}>
                         <div className="w-14 h-14 bg-[rgba(249,116,21,0.1)] text-[#F97415] rounded-2xl flex items-center justify-center mb-6">
                             <HiOutlineLightningBolt size={30} />
@@ -60,8 +60,8 @@ export default function WhyChooseKhidma({ isDark }) {
                         </p>
                     </div>
 
-                    <div className={`p-8 rounded-4xl hover:shadow-lg transition-shadow duration-300 border ${
-                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#F1F5F9]'
+                    <div className={`rounded-2xl border p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#E2E8F0]'
                     }`}>
                         <div className="w-14 h-14 bg-[rgba(59,130,246,0.1)] text-[#3B82F6] rounded-2xl flex items-center justify-center mb-6">
                             <MdEditNote size={30} />
@@ -78,8 +78,8 @@ export default function WhyChooseKhidma({ isDark }) {
                         </p>
                     </div>
 
-                    <div className={`p-8 rounded-4xl hover:shadow-lg transition-shadow duration-300 border ${
-                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#F1F5F9]'
+                    <div className={`rounded-2xl border p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                        isDark ? 'bg-[#1F2937] border-[#334155]' : 'bg-[#F8F7F5] border-[#E2E8F0]'
                     }`}>
                         <div className="w-14 h-14 bg-[rgba(147,51,234,0.1)] text-[#9333EA] rounded-2xl flex items-center justify-center mb-6">
                             <FiMapPin size={24} />

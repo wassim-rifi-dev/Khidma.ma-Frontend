@@ -2,7 +2,7 @@ import { FiCalendar } from "react-icons/fi";
 
 export default function ServiceRecentRequests({ requests, hasRequests }) {
     return (
-        <aside className="rounded-[28px] bg-white p-7 shadow-sm xl:self-start">
+        <aside className="rounded-2xl bg-white p-7 shadow-sm xl:self-start">
             <h2 className="text-xl font-bold text-slate-900">Recent requests</h2>
 
             {hasRequests ? (
@@ -36,3 +36,4 @@ export default function ServiceRecentRequests({ requests, hasRequests }) {
         </aside>
     );
 }
+

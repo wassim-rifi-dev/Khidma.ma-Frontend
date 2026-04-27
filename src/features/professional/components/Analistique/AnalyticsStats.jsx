@@ -14,7 +14,7 @@ export default function AnalyticsStats({ stats }) {
                 const Icon = icons[iconKey];
 
                 return (
-                <article key={label} className="rounded-[28px] bg-white p-7 shadow-sm">
+                <article key={label} className="rounded-2xl bg-white p-7 shadow-sm">
                     <div className="mb-6 flex items-start justify-between">
                         <span className={`flex h-12 w-12 items-center justify-center rounded-full ${iconStyle}`}>
                             <Icon className="h-6 w-6" />
@@ -29,3 +29,4 @@ export default function AnalyticsStats({ stats }) {
         </div>
     );
 }
+

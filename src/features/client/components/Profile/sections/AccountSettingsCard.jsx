@@ -2,7 +2,7 @@ import { FiRefreshCw, FiTrash2 } from "react-icons/fi";
 
 export default function AccountSettingsCard() {
     return (
-        <section className="rounded-[28px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+        <section className="rounded-2xl bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
             <h2 className="mb-6 text-lg font-semibold text-slate-900">Account Settings</h2>
 
             <div className="mb-6 flex items-start justify-between">
@@ -37,3 +37,4 @@ export default function AccountSettingsCard() {
         </section>
     );
 }
+

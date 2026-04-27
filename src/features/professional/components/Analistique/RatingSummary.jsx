@@ -2,7 +2,7 @@ import { FiStar } from "react-icons/fi";
 
 export default function RatingSummary({ summary }) {
     return (
-        <section className="flex min-h-64 items-center gap-12 rounded-[28px] bg-white p-8 shadow-sm">
+        <section className="flex min-h-64 items-center gap-12 rounded-2xl bg-white p-8 shadow-sm">
             <div className="min-w-40 text-center">
                 <p className="text-5xl font-bold text-slate-950">{summary.average}</p>
                 <div className="mt-4 flex justify-center gap-1 text-amber-400">
@@ -30,3 +30,4 @@ export default function RatingSummary({ summary }) {
         </section>
     );
 }
+

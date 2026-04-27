@@ -14,7 +14,7 @@ export default function RequestMessageCard({
     const showCompleteAction = canRespond && payload?.status === "En_Cour";
 
     return (
-        <div className={`w-full min-w-[16rem] max-w-[23rem] rounded-[24px] border bg-gradient-to-br from-white via-white to-[#fff7f0] p-4 text-left shadow-[0_10px_30px_rgba(249,115,22,0.12)] ${statusMeta.borderClassName}`}>
+        <div className={`w-full min-w-[16rem] max-w-[23rem] rounded-2xl border bg-gradient-to-br from-white via-white to-[#fff7f0] p-4 text-left shadow-[0_10px_30px_rgba(249,115,22,0.12)] ${statusMeta.borderClassName}`}>
             <div className="flex items-center justify-between gap-3">
                 <span className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${statusMeta.badgeClassName}`}>
                     {statusMeta.label}
@@ -99,3 +99,4 @@ export default function RequestMessageCard({
         </div>
     );
 }
+

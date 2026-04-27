@@ -2,7 +2,7 @@ import { FiCheckCircle } from "react-icons/fi";
 
 export default function ServiceInfoGrid({ items }) {
     return (
-        <article className="rounded-[28px] bg-white p-7 shadow-sm">
+        <article className="rounded-2xl bg-white p-7 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900">Service information</h2>
             <div className="mt-5 grid gap-3 md:grid-cols-2">
                 {items.map((item) => (
@@ -21,3 +21,4 @@ export default function ServiceInfoGrid({ items }) {
         </article>
     );
 }
+

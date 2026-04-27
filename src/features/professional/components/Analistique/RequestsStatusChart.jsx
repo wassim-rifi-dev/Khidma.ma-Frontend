@@ -67,7 +67,7 @@ export default function RequestsStatusChart({ items, total }) {
     }, [items, total]);
 
     return (
-        <section className="rounded-[28px] bg-white p-8 shadow-sm">
+        <section className="rounded-2xl bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900">Requests Status</h2>
 
             <div className="mx-auto mt-6 h-64 w-64">
@@ -87,3 +87,4 @@ export default function RequestsStatusChart({ items, total }) {
         </section>
     );
 }
+

@@ -11,7 +11,7 @@ export default function RecentRequestsCard() {
 
     return (
         <>
-        <section className="rounded-[28px] bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:p-6">
+        <section className="rounded-2xl bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:p-6">
             <h2 className="mb-5 text-lg font-semibold text-slate-900">Recent Requests</h2>
 
             {isLoading ? (
@@ -79,3 +79,4 @@ export default function RecentRequestsCard() {
         </>
     );
 }
+

@@ -89,7 +89,7 @@ export default function Hero({isDark}) {
 
             {/* Right Side */}
             <div className="hidden lg:block w-full lg:w-1/2 relative mt-10 lg:mt-0 pl-10">
-                <div className="relative rounded-[40px] overflow-hidden shadow-2xl">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-[0_30px_70px_rgba(15,23,42,0.18)]">
                     <img
                         src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1000"
                         alt="Technician working"
@@ -99,8 +99,8 @@ export default function Hero({isDark}) {
                 </div>
 
                 <div
-                    className={`absolute bottom-10 -left-6 p-4 rounded-2xl shadow-xl border flex items-center gap-4 animate-bounce-slow ${
-                        isDark ? "bg-[#1F2937] border-[#334155]" : "bg-white border-gray-50"
+                    className={`absolute bottom-10 -left-6 flex items-center gap-4 rounded-2xl border p-4 shadow-[0_18px_40px_rgba(15,23,42,0.14)] animate-bounce-slow ${
+                        isDark ? "bg-[#1F2937] border-[#334155]" : "bg-white border-slate-100"
                     }`}
                 >
                     <div className="bg-[rgba(249,115,22,0.2)] p-3 rounded-xl">

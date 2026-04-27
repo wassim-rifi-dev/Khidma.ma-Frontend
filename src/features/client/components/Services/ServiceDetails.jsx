@@ -20,7 +20,7 @@ function StateMessage({ children, tone = "default" }) {
 
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-10 sm:px-6 lg:px-8">
-            <div className={`mx-auto max-w-7xl rounded-[30px] bg-white p-8 text-center text-sm ${color} shadow-sm`}>
+            <div className={`mx-auto max-w-7xl rounded-2xl bg-white p-8 text-center text-sm ${color} shadow-sm`}>
                 {children}
             </div>
         </section>
@@ -109,7 +109,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
                                     key={image.title}
                                     type="button"
                                     onClick={() => setSelectedGalleryIndex(index)}
-                                    className={`group overflow-hidden rounded-[28px] border bg-slate-100 shadow-sm ring-2 transition hover:ring-orange-300 ${
+                                    className={`group overflow-hidden rounded-2xl border bg-slate-100 shadow-sm ring-2 transition hover:ring-orange-300 ${
                                         selectedGalleryIndex === index
                                             ? "border-orange-200 ring-orange-300"
                                             : "border-slate-100 ring-transparent"
@@ -167,7 +167,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
                 </div>
 
                 <div className="mt-8 grid gap-6 xl:max-w-[calc(100%-304px)]">
-                    <section className="rounded-[30px] bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                    <section className="rounded-2xl bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
                         <h2 className="text-2xl font-semibold text-slate-900">
                             About this service
                         </h2>
@@ -176,7 +176,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
                         </p>
                     </section>
 
-                    <section className="rounded-[30px] bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                    <section className="rounded-2xl bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                             <img
                                 src={professionalPhoto || defaultProfile}
@@ -220,3 +220,4 @@ export default function ServiceDetails({ details, isLoading, error }) {
         </section>
     );
 }
+

@@ -2,7 +2,7 @@ import { FiCalendar, FiChevronDown } from "react-icons/fi";
 
 export default function AnalyticsHeader() {
     return (
-        <div className="mb-8 flex min-h-40 items-center justify-between gap-5 rounded-[28px] bg-linear-to-r from-slate-100 via-white to-orange-50 px-8 py-6 shadow-sm">
+        <div className="mb-8 flex min-h-40 items-center justify-between gap-5 rounded-2xl bg-linear-to-r from-slate-100 via-white to-orange-50 px-8 py-6 shadow-sm">
             <div>
                 <h1 className="text-4xl font-bold text-slate-900">Analytics</h1>
                 <p className="mt-2 text-base font-medium text-slate-600">Track your performance and growth</p>
@@ -19,3 +19,4 @@ export default function AnalyticsHeader() {
         </div>
     );
 }
+

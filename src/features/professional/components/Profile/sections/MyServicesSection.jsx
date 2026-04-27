@@ -60,7 +60,7 @@ export default function MyServicesSection({ services = [] }) {
                     </Link>
                 </div>
 
-                <aside className="rounded-[30px] bg-[#252a2b] p-7 text-white shadow-[0_22px_55px_rgba(15,23,42,0.18)] xl:self-start">
+                <aside className="rounded-2xl bg-[#252a2b] p-7 text-white shadow-[0_22px_55px_rgba(15,23,42,0.18)] xl:self-start">
                     <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-orange-300">
                         <FiArrowUpRight className="h-5 w-5" />
                     </span>
@@ -81,3 +81,4 @@ export default function MyServicesSection({ services = [] }) {
         </section>
     );
 }
+

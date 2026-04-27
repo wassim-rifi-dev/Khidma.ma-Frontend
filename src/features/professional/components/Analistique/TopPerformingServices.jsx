@@ -1,6 +1,6 @@
 export default function TopPerformingServices({ services }) {
     return (
-        <section className="rounded-[28px] bg-white p-8 shadow-sm">
+        <section className="rounded-2xl bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900">Top Performing Services</h2>
 
             <div className="mt-14 space-y-7">
@@ -19,3 +19,4 @@ export default function TopPerformingServices({ services }) {
         </section>
     );
 }
+

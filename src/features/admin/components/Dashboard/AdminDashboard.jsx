@@ -15,7 +15,7 @@ export default function AdminDashboard() {
 
     return (
         <div className="space-y-8">
-            <section className="rounded-[26px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+            <section className="rounded-2xl bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
                         <div>
@@ -106,3 +106,4 @@ export default function AdminDashboard() {
         </div>
     );
 }
+

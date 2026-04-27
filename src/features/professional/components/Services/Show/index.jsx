@@ -32,7 +32,7 @@ export default function ServiceDetailsSection() {
 
     if (isLoading) {
         return (
-            <div className="rounded-[28px] bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
+            <div className="rounded-2xl bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
                 Loading service details...
             </div>
         );
@@ -40,7 +40,7 @@ export default function ServiceDetailsSection() {
 
     if (error || !details) {
         return (
-            <div className="rounded-[28px] bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
+            <div className="rounded-2xl bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
                 Service details unavailable.
             </div>
         );
@@ -56,7 +56,7 @@ export default function ServiceDetailsSection() {
                 Back to services
             </Link>
 
-            <section className="rounded-[30px] bg-white p-8 shadow-sm">
+            <section className="rounded-2xl bg-white p-8 shadow-sm">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                     <div>
                         <div className="flex flex-wrap items-center gap-3">
@@ -117,7 +117,7 @@ export default function ServiceDetailsSection() {
 
             <section className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
                 <div className="space-y-6">
-                    <article className="rounded-[28px] bg-white p-7 shadow-sm">
+                    <article className="rounded-2xl bg-white p-7 shadow-sm">
                         <h2 className="text-2xl font-bold text-slate-900">Service description</h2>
                         <p className="mt-4 max-w-4xl text-base leading-8 text-slate-500">
                             {details.info.description}
@@ -140,3 +140,4 @@ export default function ServiceDetailsSection() {
         </>
     );
 }
+

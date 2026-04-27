@@ -10,7 +10,7 @@ export default function Picture() {
     const photoUrl = getUserPhotoUrl(user.photo);
     
     return (
-        <div className="w-full rounded-[40px] flex flex-col items-center text-center shadow-sm bg-white px-4 sm:px-6 md:px-10 py-10">
+        <div className="w-full rounded-2xl flex flex-col items-center text-center shadow-sm bg-white px-4 sm:px-6 md:px-10 py-10">
 
             <div className="w-28 h-28 rounded-full border-[5px] border-orange-500 overflow-hidden mb-4">
                 {
@@ -51,3 +51,4 @@ export default function Picture() {
         </div>
     )
 }
+

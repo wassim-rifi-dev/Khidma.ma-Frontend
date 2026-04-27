@@ -66,15 +66,15 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
     }, [messages]);
 
     const shellClassName = variant === "professional"
-        ? "min-h-0 rounded-[28px] bg-[#eef2f7] p-3 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-4 lg:h-full"
-        : "min-h-0 rounded-[32px] bg-[#edf1f6] p-3 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-4 lg:h-full";
+        ? "min-h-0 rounded-2xl bg-[#eef2f7] p-3 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-4 lg:h-full"
+        : "min-h-0 rounded-2xl bg-[#edf1f6] p-3 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-4 lg:h-full";
     const gridClassName = variant === "professional"
         ? "grid min-h-0 gap-3 lg:h-full xl:grid-cols-[290px_minmax(0,1fr)_270px]"
         : "grid min-h-0 gap-3 lg:h-full xl:grid-cols-[300px_minmax(0,1fr)_280px]";
     const asideClassName = variant === "professional"
-        ? "flex min-h-0 flex-col rounded-[24px] bg-white p-4 shadow-sm"
-        : "flex min-h-0 flex-col rounded-[28px] bg-white/80 p-4 shadow-sm backdrop-blur";
-    const panelRadiusClassName = variant === "professional" ? "rounded-[24px]" : "rounded-[28px]";
+        ? "flex min-h-0 flex-col rounded-2xl bg-white p-4 shadow-sm"
+        : "flex min-h-0 flex-col rounded-2xl bg-white/80 p-4 shadow-sm backdrop-blur";
+    const panelRadiusClassName = variant === "professional" ? "rounded-2xl" : "rounded-2xl";
 
     return (
         <section className={shellClassName}>
@@ -115,13 +115,13 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
 
                     <div className="mt-5 space-y-2 pr-1 xl:flex-1 xl:overflow-y-auto">
                         {loadingConversations ? (
-                            <div className="rounded-3xl bg-[#f7f8fb] px-4 py-6 text-center text-sm text-slate-500">
+                            <div className="rounded-2xl bg-[#f7f8fb] px-4 py-6 text-center text-sm text-slate-500">
                                 Loading conversations...
                             </div>
                         ) : null}
 
                         {!loadingConversations && filteredConversations.length === 0 ? (
-                            <div className="rounded-3xl bg-[#f7f8fb] px-4 py-6 text-center text-sm text-slate-500">
+                            <div className="rounded-2xl bg-[#f7f8fb] px-4 py-6 text-center text-sm text-slate-500">
                                 No conversations match your search yet.
                             </div>
                         ) : null}
@@ -134,7 +134,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                     key={conversation.id}
                                     type="button"
                                     onClick={() => setActiveChatId(conversation.id)}
-                                    className={`w-full rounded-[24px] border px-4 py-4 text-left transition ${
+                                    className={`w-full rounded-2xl border px-4 py-4 text-left transition ${
                                         isActive
                                             ? "border-orange-200 bg-[#fff5ef] shadow-[0_12px_30px_rgba(249,115,22,0.12)]"
                                             : "border-transparent bg-transparent hover:border-slate-200 hover:bg-white"
@@ -244,7 +244,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                                         className={`inline-block ${
                                                             message.message_type === "request" && requestPayload
                                                                 ? ""
-                                                                : `rounded-[26px] px-5 py-3 text-sm leading-7 shadow-sm ${
+                                                                : `rounded-2xl px-5 py-3 text-sm leading-7 shadow-sm ${
                                                                     isSent
                                                                         ? "rounded-br-[10px] bg-gradient-to-r from-orange-500 to-[#db6b12] text-white"
                                                                         : "rounded-bl-[10px] bg-[#f8fafc] text-slate-700"
@@ -277,7 +277,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                     </div>
 
                     <div className="border-t border-slate-100 bg-white px-4 py-4 sm:px-5">
-                        <div className="flex items-center gap-2 rounded-[24px] border border-slate-200 bg-[#f8fafc] px-3 py-3 shadow-inner sm:gap-3 sm:rounded-full sm:px-4">
+                        <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-[#f8fafc] px-3 py-3 shadow-inner sm:gap-3 sm:rounded-full sm:px-4">
                             <input
                                 type="text"
                                 value={draft}
@@ -332,7 +332,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                 ) : null}
                             </div>
 
-                            <div className="mt-8 rounded-[24px] bg-[#f8fafc] p-4">
+                            <div className="mt-8 rounded-2xl bg-[#f8fafc] p-4">
                                 <p className="text-sm font-semibold text-slate-900">Active Request</p>
                                 {latestRequestPayload ? (
                                     <div className="mt-4 overflow-x-auto">
@@ -352,7 +352,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                 )}
                             </div>
 
-                            <div className="mt-6 rounded-[24px] bg-white">
+                            <div className="mt-6 rounded-2xl bg-white">
                                 <div className="flex items-center justify-between">
                                     <p className="text-sm font-semibold text-slate-900">Conversation Details</p>
                                     <span className="text-xs text-orange-500">Live</span>
@@ -380,3 +380,4 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
         </section>
     );
 }
+

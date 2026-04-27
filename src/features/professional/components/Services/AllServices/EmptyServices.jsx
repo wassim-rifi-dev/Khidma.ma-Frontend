@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function EmptyServices() {
     return (
-        <div className="rounded-[26px] border border-dashed border-slate-200 bg-white p-10 text-center shadow-sm">
+        <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-10 text-center shadow-sm">
             <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-orange-50 text-orange-500">
                 <FiPlus className="h-7 w-7" />
             </span>
@@ -21,3 +21,4 @@ export default function EmptyServices() {
         </div>
     );
 }
+

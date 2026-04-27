@@ -7,7 +7,7 @@ export default function ProfessionalCard({ professional }) {
     const photoUrl = getUserPhotoUrl(professional.user?.photo);
 
     return (
-        <div className="bg-white rounded-[30px] md:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm relative group hover:shadow-md transition-shadow">
+        <div className="relative rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_50px_rgba(15,23,42,0.1)] sm:p-8">
             <div className="flex justify-between items-start mb-6">
                 <div className="relative">
                     <img
@@ -19,9 +19,9 @@ export default function ProfessionalCard({ professional }) {
                     <div className="absolute bottom-1 right-1 w-4 h-4 sm:w-5 sm:h-5 bg-[#22C55E] border-4 border-white rounded-full"></div>
                 </div>
 
-                <div className="bg-gray-50 px-3 py-1 rounded-full flex items-center gap-1">
+                <div className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-amber-700 ring-1 ring-amber-100">
                     <FaRegStar color="#EAB308" />
-                    <span className="text-sm font-bold text-gray-700">
+                    <span className="text-sm font-bold">
                         {Number(professional.rating || 0).toFixed(1)}
                     </span>
                 </div>
@@ -39,11 +39,12 @@ export default function ProfessionalCard({ professional }) {
                 {professional.description}
             </p>
 
-            <div className="flex justify-between items-center border-t border-gray-50 pt-6">
-                <Link to={`/professional/${professional.id}`} className="text-[#FF7A1A] font-bold hover:underline">
+            <div className="flex items-center justify-between border-t border-slate-100 pt-6">
+                <Link to={`/professional/${professional.id}`} className="font-bold text-[#FF7A1A] transition-colors hover:text-[#E66900] hover:underline">
                     Book Profile
                 </Link>
             </div>
         </div>
     );
 }
+

@@ -25,7 +25,7 @@ export default function RequestDetailsContent() {
 
     if (isLoading) {
         return (
-            <div className="rounded-[28px] bg-white p-7 shadow-sm text-sm font-medium text-slate-500">
+            <div className="rounded-2xl bg-white p-7 shadow-sm text-sm font-medium text-slate-500">
                 Loading request details...
             </div>
         );
@@ -33,7 +33,7 @@ export default function RequestDetailsContent() {
 
     if (!requestDetails) {
         return (
-            <div className="rounded-[28px] bg-white p-7 shadow-sm">
+            <div className="rounded-2xl bg-white p-7 shadow-sm">
                 <Link
                     to="/professional/requests"
                     className="mb-6 inline-flex items-center gap-2 rounded-xl bg-slate-50 px-4 py-2 text-sm font-bold text-slate-600 transition hover:bg-slate-100"
@@ -64,7 +64,7 @@ export default function RequestDetailsContent() {
                 Back
             </Link>
 
-            <section className="rounded-[28px] bg-white p-7 shadow-sm">
+            <section className="rounded-2xl bg-white p-7 shadow-sm">
                 <div className="flex flex-wrap items-center gap-3">
                     <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold ${status.className}`}>
                         <span className="h-2 w-2 rounded-full bg-current" />
@@ -95,7 +95,7 @@ export default function RequestDetailsContent() {
 
             <section className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">
                 <div className="space-y-6">
-                    <article className="rounded-[28px] border-l-4 border-[#ff781f] bg-white p-6 shadow-sm">
+                    <article className="rounded-2xl border-l-4 border-[#ff781f] bg-white p-6 shadow-sm">
                         <h2 className="flex items-center gap-2 text-lg font-bold text-[#1f252b]">
                             <FiMessageCircle className="h-4 w-4 text-[#ff781f]" />
                             Message from Client
@@ -107,7 +107,7 @@ export default function RequestDetailsContent() {
                     </article>
 
                     <div className="grid gap-6 lg:grid-cols-2">
-                        <article className="rounded-[28px] bg-white p-6 shadow-sm">
+                        <article className="rounded-2xl bg-white p-6 shadow-sm">
                             <h2 className="flex items-center gap-2 border-b border-slate-100 pb-4 text-base font-bold text-[#1f252b]">
                                 <FiUser className="h-4 w-4" />
                                 Client Information
@@ -129,7 +129,7 @@ export default function RequestDetailsContent() {
                             </div>
                         </article>
 
-                        <article className="rounded-[28px] bg-white p-6 shadow-sm">
+                        <article className="rounded-2xl bg-white p-6 shadow-sm">
                             <h2 className="flex items-center gap-2 border-b border-slate-100 pb-4 text-base font-bold text-[#1f252b]">
                                 <FiTool className="h-4 w-4" />
                                 Service Details
@@ -153,7 +153,7 @@ export default function RequestDetailsContent() {
                     </div>
                 </div>
 
-                <aside className="rounded-[28px] bg-white p-6 text-center shadow-sm">
+                <aside className="rounded-2xl bg-white p-6 text-center shadow-sm">
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-xl font-black text-sky-700">
                         !
                     </div>
@@ -221,3 +221,4 @@ export default function RequestDetailsContent() {
         </>
     );
 }
+

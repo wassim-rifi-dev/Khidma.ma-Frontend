@@ -111,7 +111,7 @@ export default function RequestsOverTimeChart({ chartData }) {
     }, [chartData]);
 
     return (
-        <section className="mt-6 rounded-[28px] bg-white p-8 shadow-sm">
+        <section className="mt-6 rounded-2xl bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900">Requests Over Time</h2>
             <div className="mt-5 h-72">
                 <canvas ref={canvasRef} />
@@ -119,3 +119,4 @@ export default function RequestsOverTimeChart({ chartData }) {
         </section>
     );
 }
+

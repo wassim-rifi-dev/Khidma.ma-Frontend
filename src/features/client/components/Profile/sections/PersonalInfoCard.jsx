@@ -12,7 +12,7 @@ export default function PersonalInfoCard() {
     ];
 
     return (
-        <section className="rounded-[28px] bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+        <section className="rounded-2xl bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
             <div className="mb-7 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900">Personal Information</h2>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-50 text-orange-500">
@@ -35,3 +35,4 @@ export default function PersonalInfoCard() {
         </section>
     );
 }
+

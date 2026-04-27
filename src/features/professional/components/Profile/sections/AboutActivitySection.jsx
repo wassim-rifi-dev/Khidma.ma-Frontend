@@ -24,7 +24,7 @@ export default function AboutActivitySection({ professional }) {
 
     return (
         <section className="mx-auto mt-6 grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <article className="rounded-[30px] border border-slate-100 bg-white p-8 shadow-sm">
+            <article className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
                 <div className="mb-4 flex items-center justify-between">
                     <h3 className="text-xl font-semibold text-slate-900">About</h3>
                     <button
@@ -40,7 +40,7 @@ export default function AboutActivitySection({ professional }) {
                 </p>
             </article>
 
-            <aside className="rounded-[30px] border border-slate-100 bg-white p-8 shadow-sm">
+            <aside className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
                 <h3 className="text-xl font-semibold text-slate-900">Your activity</h3>
 
                 <div className="mt-8 space-y-6">
@@ -61,3 +61,4 @@ export default function AboutActivitySection({ professional }) {
         </section>
     );
 }
+

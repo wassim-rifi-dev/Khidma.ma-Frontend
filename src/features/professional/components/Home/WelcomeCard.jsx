@@ -3,7 +3,7 @@ import getUserPhotoUrl from "../../../../shared/utils/getUserPhotoUrl";
 
 export default function WelcomeCard({ user }) {
     return (
-        <div className="relative flex min-h-70 w-full items-center justify-between overflow-hidden rounded-[30px] border border-slate-100 bg-white px-14 py-14 shadow-[0_22px_55px_rgba(15,23,42,0.07)]">
+        <div className="relative flex min-h-70 w-full items-center justify-between overflow-hidden rounded-2xl border border-slate-100 bg-white px-14 py-14 shadow-[0_22px_55px_rgba(15,23,42,0.07)]">
             <div className="pointer-events-none absolute right-0 top-0 h-full w-[42%] bg-linear-to-l from-orange-50 via-orange-50/55 to-transparent" />
 
             <div className="relative z-10 max-w-4xl">
@@ -27,3 +27,4 @@ export default function WelcomeCard({ user }) {
         </div>
     );
 }
+

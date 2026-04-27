@@ -70,7 +70,7 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 px-4 py-6">
-            <div className="w-full max-w-lg rounded-[28px] bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,0.2)]">
+            <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,0.2)]">
                 <div className="flex items-start justify-between gap-4">
                     <div>
                         <p className="text-sm font-semibold text-orange-500">Completed Request</p>
@@ -141,3 +141,4 @@ export default function ReviewRequestModal({ request, isOpen, onClose, onCreated
         </div>
     );
 }
+

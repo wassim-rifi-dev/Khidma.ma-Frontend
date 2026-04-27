@@ -33,7 +33,7 @@ export default function RequestServiceModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 px-4 py-6 backdrop-blur-sm">
-            <div className="relative w-full max-w-2xl rounded-[30px] bg-white shadow-[0_30px_90px_rgba(15,23,42,0.24)]">
+            <div className="relative w-full max-w-2xl rounded-2xl bg-white shadow-[0_30px_90px_rgba(15,23,42,0.24)]">
                 <button
                     type="button"
                     onClick={onClose}
@@ -206,3 +206,4 @@ export default function RequestServiceModal({
         </div>
     );
 }
+

@@ -12,7 +12,7 @@ export default function AnalyticsSection() {
 
     if (isLoading) {
         return (
-            <div className="rounded-[28px] bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
+            <div className="rounded-2xl bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
                 Loading analytics...
             </div>
         );
@@ -20,7 +20,7 @@ export default function AnalyticsSection() {
 
     if (!analytics) {
         return (
-            <div className="rounded-[28px] bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
+            <div className="rounded-2xl bg-white p-8 text-sm font-medium text-slate-500 shadow-sm">
                 Analytics unavailable.
             </div>
         );
@@ -42,3 +42,4 @@ export default function AnalyticsSection() {
         </>
     );
 }
+

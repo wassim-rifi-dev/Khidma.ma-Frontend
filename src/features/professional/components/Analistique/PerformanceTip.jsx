@@ -2,7 +2,7 @@ import { FiZap } from "react-icons/fi";
 
 export default function PerformanceTip({ tip }) {
     return (
-        <section className="relative min-h-64 overflow-hidden rounded-[28px] bg-orange-50 p-8 shadow-sm">
+        <section className="relative min-h-64 overflow-hidden rounded-2xl bg-orange-50 p-8 shadow-sm">
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-orange-500">
                 <FiZap className="h-5 w-5 fill-current" />
             </span>
@@ -25,3 +25,4 @@ export default function PerformanceTip({ tip }) {
         </section>
     );
 }
+

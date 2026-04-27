@@ -30,7 +30,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
     if (isLoading) {
         return (
             <section className="min-h-screen bg-[#f6f8fc] px-4 py-8 sm:px-6 lg:px-8">
-                <div className="mx-auto max-w-7xl rounded-[30px] bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
+                <div className="mx-auto max-w-7xl rounded-2xl bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
                     Loading professional profile...
                 </div>
             </section>
@@ -40,7 +40,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
     if (error || !profile) {
         return (
             <section className="min-h-screen bg-[#f6f8fc] px-4 py-8 sm:px-6 lg:px-8">
-                <div className="mx-auto max-w-7xl rounded-[30px] bg-white p-8 text-center text-sm text-red-500 shadow-sm">
+                <div className="mx-auto max-w-7xl rounded-2xl bg-white p-8 text-center text-sm text-red-500 shadow-sm">
                     {error || "Professional profile not found."}
                 </div>
             </section>
@@ -65,7 +65,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-8 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
-                <div className="rounded-[30px] bg-white px-6 py-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:px-8">
+                <div className="rounded-2xl bg-white px-6 py-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:px-8">
                     <div className="flex flex-col gap-6 md:flex-row md:items-center">
                         <div className="relative h-28 w-28 shrink-0">
                             <img
@@ -140,7 +140,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
 
                 <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
                     <div className="space-y-6">
-                        <section className="rounded-[30px] bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                        <section className="rounded-2xl bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
                             <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
                                 About Me
                             </h2>
@@ -273,7 +273,7 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
                         </section>
                     </div>
 
-                    <aside className="self-start rounded-[30px] bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.08)] xl:sticky xl:top-24">
+                    <aside className="self-start rounded-2xl bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.08)] xl:sticky xl:top-24">
                         <h2 className="text-2xl font-semibold text-slate-900">Quick Info</h2>
 
                         <div className="mt-6 space-y-4">
@@ -343,3 +343,4 @@ export default function ProfessionalProfile({ profile, isLoading, error }) {
         </section>
     );
 }
+

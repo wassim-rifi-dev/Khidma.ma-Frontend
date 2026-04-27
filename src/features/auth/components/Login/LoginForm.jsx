@@ -7,7 +7,7 @@ export default function LoginForm() {
     const { form, handleChange, handleSubmit, isSubmitting, error } = useLoginForm();
 
     return (
-        <div className="mx-auto w-full max-w-md rounded-3xl border border-slate-50 bg-white p-6 shadow-[0_2px_20px_-4px_rgba(0,0,0,0.05)] sm:p-8 md:p-10">
+        <div className="mx-auto w-full max-w-md rounded-2xl border border-slate-50 bg-white p-6 shadow-[0_2px_20px_-4px_rgba(0,0,0,0.05)] sm:p-8 md:p-10">
             <div className="mb-6 text-center sm:mb-8">
                 <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl md:text-[28px]">
                     Welcome Back
@@ -125,3 +125,4 @@ export default function LoginForm() {
         </div>
     );
 }
+

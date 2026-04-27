@@ -12,7 +12,7 @@ export default function ProfessionalHomePanels({ user, professional, services, h
     return (
         <section className="mt-10 space-y-8">
             <div className="grid gap-8 xl:grid-cols-2">
-                <article className="flex min-h-[330px] flex-col items-center justify-center rounded-[26px] bg-white p-10 text-center shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                <article className="flex min-h-[330px] flex-col items-center justify-center rounded-2xl bg-white p-10 text-center shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
                     <div className="mb-7 h-32 w-32 overflow-hidden rounded-full bg-slate-100 shadow-inner">
                         <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_50%_45%,#ffffff_0%,#e9ece7_36%,#5b5f55_100%)]">
                             <div className="h-8 w-12 rounded-sm border-2 border-slate-500 bg-slate-100 shadow-sm" />
@@ -37,7 +37,7 @@ export default function ProfessionalHomePanels({ user, professional, services, h
                     </Link>
                 </article>
 
-                <article className="min-h-[330px] rounded-[26px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+                <article className="min-h-[330px] rounded-2xl bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
                     <h2 className="mb-5 text-2xl font-bold text-slate-950">How clients will see you</h2>
 
                     <div className="rounded-[18px] bg-white p-8 text-center shadow-[inset_0_0_0_1px_rgba(226,232,240,0.85)]">
@@ -70,7 +70,7 @@ export default function ProfessionalHomePanels({ user, professional, services, h
                 </article>
             </div>
 
-            <article className="rounded-[24px] bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
+            <article className="rounded-2xl bg-white p-8 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <h2 className="flex items-center gap-2 text-2xl font-bold text-slate-950">
                         <FiImage className="h-5 w-5 text-[#F97415]" />
@@ -113,3 +113,4 @@ export default function ProfessionalHomePanels({ user, professional, services, h
         </section>
     );
 }
+

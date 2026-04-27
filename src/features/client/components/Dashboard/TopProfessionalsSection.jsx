@@ -57,11 +57,11 @@ export default function TopProfessional() {
 
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {isLoading ? (
-                        <div className="sm:col-span-2 rounded-[30px] bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
+                        <div className="sm:col-span-2 rounded-2xl bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
                             Loading top professionals...
                         </div>
                     ) : professionals.length === 0 ? (
-                        <div className="sm:col-span-2 rounded-[30px] bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
+                        <div className="sm:col-span-2 rounded-2xl bg-white p-8 text-center text-sm text-slate-500 shadow-sm">
                             No professionals available right now.
                         </div>
                     ) : (
@@ -74,3 +74,4 @@ export default function TopProfessional() {
         </div>
     );
 }
+

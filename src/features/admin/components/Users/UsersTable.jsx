@@ -15,7 +15,7 @@ function UserViewModal({ user, onClose }) {
 
     return (
         <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/45 px-4 py-6 backdrop-blur-sm">
-            <div className="w-full max-w-2xl rounded-[28px] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]">
+            <div className="w-full max-w-2xl rounded-2xl bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]">
                 <div className="flex items-start justify-between gap-4 border-b border-slate-100 px-6 py-5">
                     <div>
                         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">User profile</p>
@@ -422,3 +422,4 @@ export default function UsersTable({
         </>
     );
 }
+
