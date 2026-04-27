@@ -1,12 +1,7 @@
 import { FiCheckCircle, FiLoader, FiMapPin, FiSearch, FiSlash } from "react-icons/fi";
 import { useState } from "react";
 import AdminActionConfirmModal from "../Shared/AdminActionConfirmModal";
-
-function getFilterButtonClass(isActive) {
-    return isActive
-        ? "rounded-full bg-orange-50 px-4 py-2.5 text-sm font-semibold text-[#F97415]"
-        : "rounded-full bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-600";
-}
+import { getAdminFilterButtonClass } from "../../../../shared/utils/Helpers/admin/Filters";
 
 export default function ProfessionalsTable({
     activeFilter,
@@ -40,21 +35,21 @@ export default function ProfessionalsTable({
                         <button
                             type="button"
                             onClick={() => setActiveFilter("all")}
-                            className={getFilterButtonClass(activeFilter === "all")}
+                            className={getAdminFilterButtonClass(activeFilter === "all")}
                         >
                             All professionals
                         </button>
                         <button
                             type="button"
                             onClick={() => setActiveFilter("verified")}
-                            className={getFilterButtonClass(activeFilter === "verified")}
+                            className={getAdminFilterButtonClass(activeFilter === "verified")}
                         >
                             Verified
                         </button>
                         <button
                             type="button"
                             onClick={() => setActiveFilter("pending")}
-                            className={getFilterButtonClass(activeFilter === "pending")}
+                            className={getAdminFilterButtonClass(activeFilter === "pending")}
                         >
                             Pending
                         </button>

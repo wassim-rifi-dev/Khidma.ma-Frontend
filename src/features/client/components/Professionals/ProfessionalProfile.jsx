@@ -9,16 +9,11 @@ import {
     FiStar,
     FiTool,
 } from "react-icons/fi";
-import { MdCleaningServices, MdElectricalServices } from "react-icons/md";
 import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import getUserPhotoUrl from "../../../../shared/utils/getUserPhotoUrl";
+import { getServiceIcon } from "../../../../shared/utils/Helpers/client/Services";
 import RequestServiceModal from "../Shared/RequestServiceModal";
 import useDirectChatNavigation from "../../../chat/hooks/useDirectChatNavigation";
-
-function getServiceIcon(index) {
-    const icons = [FiTool, MdCleaningServices, MdElectricalServices];
-    return icons[index % icons.length];
-}
 
 function EmptyState({ children }) {
     return (

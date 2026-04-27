@@ -3,6 +3,7 @@ import { FiEye, FiLoader, FiMail, FiPhone, FiSearch, FiShield, FiSlash, FiTrash2
 import defaultProfile from "../../../../assets/Profile/default_profile.jpg";
 import AdminActionConfirmModal from "../Shared/AdminActionConfirmModal";
 import getUserPhotoUrl from "../../../../shared/utils/getUserPhotoUrl";
+import { getAdminFilterButtonClass } from "../../../../shared/utils/Helpers/admin/Filters";
 
 function UserViewModal({ user, onClose }) {
     if (!user) {
@@ -104,12 +105,6 @@ function UserViewModal({ user, onClose }) {
     );
 }
 
-function getFilterButtonClass(isActive) {
-    return isActive
-        ? "rounded-full bg-orange-50 px-4 py-2.5 text-sm font-semibold text-[#F97415]"
-        : "rounded-full bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-600";
-}
-
 export default function UsersTable({
     activeFilter,
     feedback,
@@ -144,21 +139,21 @@ export default function UsersTable({
                         <button
                             type="button"
                             onClick={() => setActiveFilter("all")}
-                            className={getFilterButtonClass(activeFilter === "all")}
+                            className={getAdminFilterButtonClass(activeFilter === "all")}
                         >
                             All users
                         </button>
                         <button
                             type="button"
                             onClick={() => setActiveFilter("active")}
-                            className={getFilterButtonClass(activeFilter === "active")}
+                            className={getAdminFilterButtonClass(activeFilter === "active")}
                         >
                             Active
                         </button>
                         <button
                             type="button"
                             onClick={() => setActiveFilter("suspended")}
-                            className={getFilterButtonClass(activeFilter === "suspended")}
+                            className={getAdminFilterButtonClass(activeFilter === "suspended")}
                         >
                             Suspended
                         </button>

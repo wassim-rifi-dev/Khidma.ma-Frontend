@@ -1,27 +1,12 @@
 import { Link } from "react-router-dom";
 import { FiArrowUpRight, FiDroplet, FiHome, FiPlus, FiTool } from "react-icons/fi";
+import { formatProfessionalServicePrice } from "../../../../../shared/utils/Helpers/professional/Services";
 
 const serviceIcons = [
     { icon: FiHome, iconStyle: "bg-orange-100 text-orange-500" },
     { icon: FiDroplet, iconStyle: "bg-sky-100 text-sky-500" },
     { icon: FiTool, iconStyle: "bg-slate-100 text-slate-500" },
 ];
-
-function formatServicePrice(service) {
-    if (service?.price_min && service?.price_max) {
-        return `${service.price_min} - ${service.price_max} MAD`;
-    }
-
-    if (service?.price_min) {
-        return `From ${service.price_min} MAD`;
-    }
-
-    if (service?.price_max) {
-        return `Up to ${service.price_max} MAD`;
-    }
-
-    return "Price not set";
-}
 
 export default function MyServicesSection({ services = [] }) {
     return (
@@ -56,7 +41,7 @@ export default function MyServicesSection({ services = [] }) {
                                     <span className="rounded-md bg-slate-100 px-3 py-1 text-sm font-medium text-slate-500">
                                         {categoryName}
                                     </span>
-                                    <span className="text-base font-bold text-[#A34E0D]">{formatServicePrice(service)}</span>
+                                    <span className="text-base font-bold text-[#A34E0D]">{formatProfessionalServicePrice(service)}</span>
                                 </div>
                             </div>
                         </article>

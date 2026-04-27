@@ -7,18 +7,9 @@ import {
     FiUsers,
 } from "react-icons/fi";
 import useAdminAnalytics from "../../hooks/useAdminAnalytics";
+import { getAnalyticsBarHeight } from "../../../../shared/utils/Helpers/admin/Analytics";
 
 const summaryIcons = [FiUsers, FiActivity, FiClipboard, FiBriefcase];
-
-function getBarHeight(value, maxValue) {
-    if (maxValue <= 0) {
-        return "8%";
-    }
-
-    const ratio = Math.max(value / maxValue, 0.08);
-
-    return `${Math.round(ratio * 100)}%`;
-}
 
 export default function AdminAnalytics() {
     const { analytics, loading, error } = useAdminAnalytics();
@@ -102,11 +93,11 @@ export default function AdminAnalytics() {
                                 <div className="flex h-[180px] w-full items-end gap-1 rounded-[22px] bg-orange-50/70 px-1">
                                     <div
                                         className="w-1/2 rounded-full bg-gradient-to-t from-orange-500 to-amber-300"
-                                        style={{ height: getBarHeight(monthlyRequests[index] ?? 0, maxMonthlyValue) }}
+                                        style={{ height: getAnalyticsBarHeight(monthlyRequests[index] ?? 0, maxMonthlyValue) }}
                                     />
                                     <div
                                         className="w-1/2 rounded-full bg-gradient-to-t from-sky-700 to-sky-300"
-                                        style={{ height: getBarHeight(monthlyCompleted[index] ?? 0, maxMonthlyValue) }}
+                                        style={{ height: getAnalyticsBarHeight(monthlyCompleted[index] ?? 0, maxMonthlyValue) }}
                                     />
                                 </div>
                                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">

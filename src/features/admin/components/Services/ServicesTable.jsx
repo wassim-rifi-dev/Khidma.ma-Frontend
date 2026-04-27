@@ -5,12 +5,7 @@ import {
 } from "react-icons/fi";
 import { useState } from "react";
 import AdminActionConfirmModal from "../Shared/AdminActionConfirmModal";
-
-function getFilterButtonClass(isActive) {
-    return isActive
-        ? "rounded-full bg-orange-50 px-4 py-2.5 text-sm font-semibold text-[#F97415]"
-        : "rounded-full bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-600";
-}
+import { getAdminFilterButtonClass } from "../../../../shared/utils/Helpers/admin/Filters";
 
 export default function ServicesTable({
     activeFilter,
@@ -44,21 +39,21 @@ export default function ServicesTable({
                         <button
                             type="button"
                             onClick={() => setActiveFilter("all")}
-                            className={getFilterButtonClass(activeFilter === "all")}
+                            className={getAdminFilterButtonClass(activeFilter === "all")}
                         >
                             All services
                         </button>
                         <button
                             type="button"
                             onClick={() => setActiveFilter("published")}
-                            className={getFilterButtonClass(activeFilter === "published")}
+                            className={getAdminFilterButtonClass(activeFilter === "published")}
                         >
                             Published
                         </button>
                         <button
                             type="button"
                             onClick={() => setActiveFilter("flagged")}
-                            className={getFilterButtonClass(activeFilter === "flagged")}
+                            className={getAdminFilterButtonClass(activeFilter === "flagged")}
                         >
                             Flagged
                         </button>

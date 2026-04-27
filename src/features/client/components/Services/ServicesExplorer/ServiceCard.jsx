@@ -1,25 +1,10 @@
 import { Link } from "react-router-dom";
-import { FiMapPin, FiStar, FiTool } from "react-icons/fi";
-import { MdCleaningServices, MdElectricalServices } from "react-icons/md";
-
-function getServiceIcon(index) {
-    const icons = [FiTool, MdCleaningServices, MdElectricalServices];
-    return icons[index % icons.length];
-}
-
-function getProviderName(service) {
-    const professional = service.professional?.user;
-
-    if (!professional) {
-        return "Professional";
-    }
-
-    return `${professional.first_name} ${professional.last_name}`;
-}
+import { FiMapPin, FiStar } from "react-icons/fi";
+import { getServiceIcon, getServiceProviderName } from "../../../../../shared/utils/Helpers/client/Services";
 
 export default function ServiceCard({ service, image, iconIndex }) {
     const Icon = getServiceIcon(iconIndex);
-    const providerName = getProviderName(service);
+    const providerName = getServiceProviderName(service);
     const price = service.price_min
         ? `${service.price_min} MAD`
         : "Contact for price";
