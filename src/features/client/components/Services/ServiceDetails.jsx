@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
     FiChevronRight,
@@ -32,6 +32,10 @@ export default function ServiceDetails({ details, isLoading, error }) {
     const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
     const { chatError, isStartingChat, openDirectChat } = useDirectChatNavigation();
 
+    useEffect(() => {
+        setSelectedGalleryIndex(0);
+    }, [details?.service?.id]);
+
     if (isLoading) {
         return <StateMessage>Loading service...</StateMessage>;
     }
@@ -40,7 +44,7 @@ export default function ServiceDetails({ details, isLoading, error }) {
         return <StateMessage tone="error">{error || "Service not found."}</StateMessage>;
     }
 
-    const { service, professional, reviews, price, rating, mainImage } = details;
+    const { service, professional, reviews, images, mainImage, info } = details;
     const categoryName = service.category?.name || "Service";
     const professionalUser = professional?.user || {};
     const professionalPhoto = getUserPhotoUrl(professionalUser.photo);
@@ -48,20 +52,16 @@ export default function ServiceDetails({ details, isLoading, error }) {
     const professionalCategory = professional?.category?.name || categoryName;
     const isVerifiedProfessional = Boolean(professional?.is_verified);
     const location = service.city || professional?.city || "Morocco";
-    const galleryImages = [
-        {
-            src: mainImage || fallbackImage,
-            title: service.title,
-        },
-        {
-            src: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1200&q=80",
-            title: "Recent work",
-        },
-        {
-            src: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=1200&q=80",
-            title: "Work detail",
-        },
-    ];
+    const rating = info?.rating || "0.0";
+    const price = info?.price || "Price not set";
+    const galleryImages = images?.length
+        ? images
+        : [
+              {
+                  src: mainImage?.src || fallbackImage,
+                  title: mainImage?.title || service.title,
+              },
+          ];
 
     return (
         <section className="min-h-screen bg-[#f6f8fc] px-4 py-10 sm:px-6 lg:px-8">

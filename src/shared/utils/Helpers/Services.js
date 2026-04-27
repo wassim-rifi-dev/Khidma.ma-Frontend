@@ -32,6 +32,8 @@ export function buildServiceDetails(service) {
     }
 
     const images = (service.images || [])
+        .slice()
+        .sort((firstImage, secondImage) => Number(secondImage.is_primary) - Number(firstImage.is_primary))
         .map((image, index) => ({
             src: getStorageUrl(image.image_url),
             title: image.alt || service.title || `Service photo ${index + 1}`,
