@@ -29,7 +29,7 @@ export function useLoginForm() {
         } catch (err) {
             console.error("Error : " , err);
             const validationErrors = err?.errors ? Object.values(err.errors).flat() : [];
-            setError(validationErrors[0] || err?.message || "Unable to log in.");
+            setError(validationErrors[0] || err?.message || (typeof err === "string" ? err : "") || "Unable to log in.");
         } finally {
             setIsSubmitting(false);
         }

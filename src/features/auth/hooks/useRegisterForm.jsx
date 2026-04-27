@@ -38,7 +38,7 @@ export function useRegisterForm() {
         } catch (err) {
             console.error("Error : " , err);
             const validationErrors = err?.errors ? Object.values(err.errors).flat() : [];
-            setError(validationErrors[0] || err?.message || "Unable to create your account.");
+            setError(validationErrors[0] || err?.message || (typeof err === "string" ? err : "") || "Unable to create your account.");
         } finally {
             setIsSubmitting(false);
         }

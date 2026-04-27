@@ -39,7 +39,7 @@ export default function AuthProvider({ children }) {
 
             return res;
         } catch (error) {
-            throw error.response?.data || error.message;
+            throw error;
         }
     }
 
@@ -53,7 +53,7 @@ export default function AuthProvider({ children }) {
 
             return res;
         } catch (error) {
-            throw error.response?.data || error.message;
+            throw error;
         }
     }
 
@@ -66,7 +66,7 @@ export default function AuthProvider({ children }) {
 
             return res;
         } catch (error) {
-            throw error.response?.data || error.message;
+            throw error;
         }
     }
 
