@@ -148,7 +148,7 @@ export default function AdminCategoriesManagement() {
                     <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                         <div>
                             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Categories management</p>
-                            <h2 className="mt-2 text-3xl font-bold text-slate-950">Manage service categories</h2>
+                            <h2 className="mt-2 text-2xl font-bold text-slate-950 sm:text-3xl">Manage service categories</h2>
                             <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
                                 Live admin workspace for organizing service categories and tracking how much each one is used across the platform.
                             </p>
@@ -212,8 +212,8 @@ export default function AdminCategoriesManagement() {
                         </div>
                     ) : null}
 
-                    <div className="mt-6 overflow-hidden rounded-[20px] border border-slate-200">
-                        <div className="grid grid-cols-[1.2fr_1fr_1fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    <div className="mt-6 overflow-x-auto rounded-[20px] border border-slate-200">
+                        <div className="grid min-w-[680px] grid-cols-[1.2fr_1fr_1fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                             <span>Category</span>
                             <span>Services</span>
                             <span>Professionals</span>
@@ -228,10 +228,7 @@ export default function AdminCategoriesManagement() {
                                 </div>
                             ) : categories.length > 0 ? (
                                 categories.map((category) => (
-                                    <div
-                                        key={category.id}
-                                        className="grid grid-cols-[1.2fr_1fr_1fr_0.9fr_auto] gap-3 px-5 py-4 text-sm text-slate-600"
-                                    >
+                                    <div key={category.id} className="grid min-w-[680px] grid-cols-[1.2fr_1fr_1fr_0.9fr_auto] gap-3 px-5 py-4 text-sm text-slate-600">
                                         <div className="flex items-center gap-3">
                                             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-orange-50 text-[#F97415]">
                                                 <FiBookmark className="h-4 w-4" />

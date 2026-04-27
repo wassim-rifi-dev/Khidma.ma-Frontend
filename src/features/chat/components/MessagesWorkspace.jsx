@@ -66,11 +66,11 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
     }, [messages]);
 
     const shellClassName = variant === "professional"
-        ? "h-full min-h-0 rounded-[28px] bg-[#eef2f7] p-3 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-4"
-        : "h-full min-h-0 rounded-[32px] bg-[#edf1f6] p-3 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-4";
+        ? "min-h-0 rounded-[28px] bg-[#eef2f7] p-3 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-4 lg:h-full"
+        : "min-h-0 rounded-[32px] bg-[#edf1f6] p-3 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-4 lg:h-full";
     const gridClassName = variant === "professional"
-        ? "grid h-full min-h-0 gap-3 xl:grid-cols-[290px_minmax(0,1fr)_270px]"
-        : "grid h-full min-h-0 gap-3 xl:grid-cols-[300px_minmax(0,1fr)_280px]";
+        ? "grid min-h-0 gap-3 lg:h-full xl:grid-cols-[290px_minmax(0,1fr)_270px]"
+        : "grid min-h-0 gap-3 lg:h-full xl:grid-cols-[300px_minmax(0,1fr)_280px]";
     const asideClassName = variant === "professional"
         ? "flex min-h-0 flex-col rounded-[24px] bg-white p-4 shadow-sm"
         : "flex min-h-0 flex-col rounded-[28px] bg-white/80 p-4 shadow-sm backdrop-blur";
@@ -113,7 +113,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                         ))}
                     </div>
 
-                    <div className="mt-5 flex-1 space-y-2 overflow-y-auto pr-1">
+                    <div className="mt-5 space-y-2 pr-1 xl:flex-1 xl:overflow-y-auto">
                         {loadingConversations ? (
                             <div className="rounded-3xl bg-[#f7f8fb] px-4 py-6 text-center text-sm text-slate-500">
                                 Loading conversations...
@@ -166,7 +166,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                     </div>
                 </aside>
 
-                <div className={`flex min-h-0 flex-col overflow-hidden bg-white shadow-sm ${panelRadiusClassName}`}>
+                <div className={`flex min-h-[26rem] flex-col overflow-hidden bg-white shadow-sm xl:min-h-0 ${panelRadiusClassName}`}>
                     <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
                         {activeConversation ? (
                             <div className="flex min-w-0 items-center gap-3">
@@ -190,7 +190,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                         )}
                     </div>
 
-                    <div className="flex-1 overflow-y-auto bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_12%,#ffffff_100%)] px-5 py-6">
+                    <div className="flex-1 overflow-y-auto bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_12%,#ffffff_100%)] px-4 py-5 sm:px-5 sm:py-6">
                         {error ? (
                             <div className="mb-4 rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-500">
                                 {error}
@@ -232,7 +232,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                         ) : null}
 
                                         <div className={`flex ${isSent ? "justify-end" : "justify-start"}`}>
-                                            <div className={`max-w-[85%] ${isSent ? "items-end" : "items-start"} flex gap-3`}>
+                                            <div className={`flex max-w-full gap-3 sm:max-w-[85%] ${isSent ? "items-end" : "items-start"}`}>
                                                 {!isSent ? (
                                                     <div className="pt-1">
                                                         <ChatAvatar conversation={activeConversation} className="h-8 w-8" textClassName="text-xs" />
@@ -276,8 +276,8 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                         </div>
                     </div>
 
-                    <div className="border-t border-slate-100 bg-white px-5 py-4">
-                        <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-[#f8fafc] px-4 py-3 shadow-inner">
+                    <div className="border-t border-slate-100 bg-white px-4 py-4 sm:px-5">
+                        <div className="flex items-center gap-2 rounded-[24px] border border-slate-200 bg-[#f8fafc] px-3 py-3 shadow-inner sm:gap-3 sm:rounded-full sm:px-4">
                             <input
                                 type="text"
                                 value={draft}
@@ -292,7 +292,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                                 placeholder={activeChatId ? "Type a message..." : "Select a conversation first"}
                                 className="flex-1 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400 disabled:cursor-not-allowed"
                             />
-                            <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full text-slate-400 transition hover:bg-white hover:text-slate-700">
+                            <button type="button" className="hidden h-10 w-10 items-center justify-center rounded-full text-slate-400 transition hover:bg-white hover:text-slate-700 sm:flex">
                                 <FiSmile className="h-4 w-4" />
                             </button>
                             <button
@@ -335,7 +335,7 @@ export default function MessagesWorkspace({ variant = "client", preferredChatId 
                             <div className="mt-8 rounded-[24px] bg-[#f8fafc] p-4">
                                 <p className="text-sm font-semibold text-slate-900">Active Request</p>
                                 {latestRequestPayload ? (
-                                    <div className="mt-4">
+                                    <div className="mt-4 overflow-x-auto">
                                         <RequestMessageCard
                                             payload={latestRequestPayload}
                                             canRespond={user?.role === "professional"}

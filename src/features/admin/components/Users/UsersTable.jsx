@@ -173,7 +173,7 @@ export default function UsersTable({
                 ) : null}
 
                 <div className="mt-6 overflow-hidden rounded-[20px] border border-slate-200">
-                    <div className="grid grid-cols-[1.2fr_1.2fr_0.8fr_0.8fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    <div className="hidden min-w-[760px] grid-cols-[1.2fr_1.2fr_0.8fr_0.8fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 md:grid">
                         <span>User</span>
                         <span>Email</span>
                         <span>Role</span>
@@ -182,7 +182,114 @@ export default function UsersTable({
                         <span>Actions</span>
                     </div>
 
-                    <div className="divide-y divide-slate-200">
+                    <div className="divide-y divide-slate-200 md:hidden">
+                        {loading ? (
+                            <div className="px-5 py-10 text-center text-sm text-slate-500">
+                                Loading users...
+                            </div>
+                        ) : users.length > 0 ? (
+                            users.map((user) => (
+                                <div key={user.id || user.email} className="space-y-4 px-5 py-4 text-sm text-slate-600">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <p className="font-semibold text-slate-900">{user.name}</p>
+                                            <p className="break-all text-sm text-slate-500">{user.email}</p>
+                                            {user.username ? (
+                                                <span className="text-xs text-slate-400">@{user.username}</span>
+                                            ) : null}
+                                        </div>
+                                        <span className={`w-fit rounded-full px-3 py-1 text-xs font-semibold ${user.roleTone}`}>
+                                            {user.role}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <span className={`w-fit rounded-full px-3 py-1 text-xs font-semibold ${user.statusTone}`}>
+                                            {user.status}
+                                        </span>
+                                        <span className="text-xs text-slate-400">Joined {user.joined}</span>
+                                    </div>
+
+                                    <div className="flex flex-wrap items-center gap-2 text-slate-400">
+                                        <button
+                                            type="button"
+                                            onClick={() => setSelectedUser(user)}
+                                            className="inline-flex items-center justify-center rounded-full bg-slate-100 p-2.5 text-slate-600 transition hover:bg-slate-200"
+                                        >
+                                            <FiEye className="h-4 w-4" />
+                                        </button>
+                                        {user.canToggleStatus ? (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setConfirmState({
+                                                            title: user.isActive ? "Deactivate user" : "Activate user",
+                                                            message: `Are you sure you want to ${user.isActive ? "deactivate" : "activate"} ${user.name}?`,
+                                                            confirmLabel: user.isActive ? "Deactivate" : "Activate",
+                                                            confirmTone: user.isActive ? "danger" : "success",
+                                                            onConfirm: () => toggleUserStatus(user.id, !user.isActive),
+                                                            userId: user.id,
+                                                            type: "status",
+                                                        })
+                                                    }
+                                                    disabled={pendingAction?.userId === user.id}
+                                                    className={`inline-flex items-center justify-center rounded-full p-2.5 transition ${
+                                                        user.isActive
+                                                            ? "bg-rose-50 text-rose-600 hover:bg-rose-100"
+                                                            : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
+                                                    } disabled:cursor-not-allowed disabled:opacity-70`}
+                                                >
+                                                    {pendingAction?.userId === user.id && pendingAction?.type === "status" ? (
+                                                        <FiLoader className="h-4 w-4 animate-spin" />
+                                                    ) : user.isActive ? (
+                                                        <FiSlash className="h-4 w-4" />
+                                                    ) : (
+                                                        <FiUnlock className="h-4 w-4" />
+                                                    )}
+                                                </button>
+                                                {user.canDelete ? (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            setConfirmState({
+                                                                title: "Delete user",
+                                                                message: `Are you sure you want to delete ${user.name}? This action cannot be undone.`,
+                                                                confirmLabel: "Delete",
+                                                                confirmTone: "danger",
+                                                                onConfirm: () => removeUser(user.id),
+                                                                userId: user.id,
+                                                                type: "delete",
+                                                            })
+                                                        }
+                                                        disabled={pendingAction?.userId === user.id}
+                                                        className="inline-flex items-center justify-center rounded-full bg-slate-100 p-2.5 text-rose-600 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-70"
+                                                    >
+                                                        {pendingAction?.userId === user.id && pendingAction?.type === "delete" ? (
+                                                            <FiLoader className="h-4 w-4 animate-spin" />
+                                                        ) : (
+                                                            <FiTrash2 className="h-4 w-4" />
+                                                        )}
+                                                    </button>
+                                                ) : null}
+                                            </>
+                                        ) : (
+                                            <span className="inline-flex rounded-full bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-500">
+                                                Current admin
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="px-5 py-10 text-center text-sm text-slate-500">
+                                No users found.
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="hidden overflow-x-auto md:block">
+                        <div className="min-w-[760px] divide-y divide-slate-200">
                         {loading ? (
                             <div className="px-5 py-10 text-center text-sm text-slate-500">
                                 Loading users...
@@ -286,6 +393,7 @@ export default function UsersTable({
                                 No users found.
                             </div>
                         )}
+                        </div>
                     </div>
                 </div>
             </section>

@@ -7,7 +7,7 @@ export default function ProfessionalMessages() {
     const preferredChatId = Number(searchParams.get("chat")) || null;
 
     return (
-        <ProfessionalLayout title="Messages" contentClassName="h-screen overflow-hidden box-border pt-24 pb-6">
+        <ProfessionalLayout title="Messages" contentClassName="min-h-screen box-border pt-24 pb-6 lg:h-screen lg:overflow-hidden">
             <MessagesWorkspace variant="professional" preferredChatId={preferredChatId} />
         </ProfessionalLayout>
     );

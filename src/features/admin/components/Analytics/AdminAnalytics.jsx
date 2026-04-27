@@ -41,7 +41,7 @@ export default function AdminAnalytics() {
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                     <div>
                         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Analytics overview</p>
-                        <h2 className="mt-2 text-3xl font-bold text-slate-950">Platform analytics</h2>
+                        <h2 className="mt-2 text-2xl font-bold text-slate-950 sm:text-3xl">Platform analytics</h2>
                         <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
                             Live admin analytics connected to the database to monitor growth, service demand, and platform health.
                         </p>
@@ -87,7 +87,8 @@ export default function AdminAnalytics() {
                         </span>
                     </div>
 
-                    <div className="mt-8 flex h-72 items-end justify-between gap-4 rounded-[20px] bg-slate-50 px-5 pb-5 pt-8">
+                    <div className="mt-8 overflow-x-auto rounded-[20px] bg-slate-50 px-5 pb-5 pt-8">
+                        <div className="flex h-72 min-w-[560px] items-end justify-between gap-4">
                         {monthlyLabels.map((label, index) => (
                             <div key={label} className="flex flex-1 flex-col items-center gap-3">
                                 <div className="flex h-[180px] w-full items-end gap-1 rounded-[22px] bg-orange-50/70 px-1">
@@ -105,6 +106,7 @@ export default function AdminAnalytics() {
                                 </span>
                             </div>
                         ))}
+                        </div>
                     </div>
 
                     <div className="mt-4 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">

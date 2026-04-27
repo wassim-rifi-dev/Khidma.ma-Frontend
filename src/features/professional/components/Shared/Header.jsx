@@ -40,12 +40,19 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
     const photoUrl = getUserPhotoUrl(safeUser.photo);
 
     return (
-        <header className={`fixed top-0 z-50 ${withSidebar ? "left-60 right-0" : "left-0 w-full"}`}>
+        <header className={`fixed top-0 z-50 ${withSidebar ? "left-0 right-0 lg:left-60" : "left-0 w-full"}`}>
             <div className={`flex items-center px-5 md:px-10 h-18 border-b-2 shadow-lg ${
                 isDark
                     ? 'bg-[#0F172A] border-[#334155]/50'
                     : 'bg-white border-[#E2E8F0]'
             } justify-between`}>
+                {withSidebar ? (
+                    <div className="min-w-0 lg:hidden">
+                        <p className="truncate text-sm font-semibold text-slate-900">{title}</p>
+                        <p className="text-xs text-slate-400">Professional Workspace</p>
+                    </div>
+                ) : null}
+
                 {withSidebar && (
                     <div className="hidden min-w-0 items-center gap-6 lg:flex">
                         <div>
@@ -79,7 +86,7 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
                         </button>
                     </div>
 
-                    <button className="relative md:hidden transition hover:text-[#FF781F] text-gray-600">
+                    <button className="relative transition hover:text-[#FF781F] text-gray-600 md:hidden">
                         <IoMdNotificationsOutline size={22} />
                         <span className="absolute top-0 right-0 block w-2 h-2 bg-orange-500 rounded-full ring-2 ring-white"></span>
                     </button>
@@ -215,7 +222,7 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
                         )}
                     </div>
 
-                    <button className={`md:hidden p-1 transition ${
+                    <button className={`p-1 transition lg:hidden ${
                         isDark ? 'text-white hover:text-[#FF781F]' : 'text-[#0F172A] hover:text-black'
                     }`} onClick={() => toggleMenu(!menuOpen)}>
                         <MdMenu size={26} />
@@ -224,13 +231,16 @@ export default function Header({ isDark = false, toogleDark = () => {}, withSide
             </div>
 
             {menuOpen && (
-                <div className={`absolute top-full left-0 w-full md:hidden shadow-xl px-6 py-4 flex flex-col border-b-2 ${
+                <div className={`absolute top-full left-0 w-full shadow-xl px-6 py-4 flex flex-col border-b-2 lg:hidden ${
                     isDark ? 'bg-[#0F172A] border-[#334155]/50' : 'bg-white border-[#E2E8F0]'
                 }`}>
                     <nav className={`flex flex-col font-bold ${isDark ? 'text-white' : 'text-[#475569]'}`}>
                         <Link to={'/professional/home'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Accueil</Link>
-                        <Link to={'/services'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Services</Link>
+                        <Link to={'/professional/services'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Services</Link>
+                        <Link to={'/professional/requests'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Requests</Link>
                         <Link to={'/messages'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Messages</Link>
+                        <Link to={'/professional/analistique'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Analytics</Link>
+                        <Link to={'/professional/profile'} className={`py-3 border-b transition-colors ${isDark ? 'border-[#334155]/50 hover:text-[#FF781F]' : 'border-[#F1F5F9] hover:text-black'}`}>Profile</Link>
                     </nav>
 
                     <div className={`flex items-center justify-between mt-4 pt-4 border-t ${isDark ? 'border-[#334155]/50' : 'border-[#E2E8F0]'}`}>

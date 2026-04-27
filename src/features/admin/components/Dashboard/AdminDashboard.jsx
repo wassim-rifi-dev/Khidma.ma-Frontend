@@ -20,7 +20,7 @@ export default function AdminDashboard() {
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Admin overview</p>
-                            <h2 className="mt-2 text-3xl font-bold text-slate-950">Simple dashboard mockup</h2>
+                            <h2 className="mt-2 text-2xl font-bold text-slate-950 sm:text-3xl">Simple dashboard mockup</h2>
                             <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
                                 A light static admin screen with the main platform numbers, recent requests, and moderation notes.
                             </p>
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
 
                 <div className="grid gap-6">
                     <article className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Moderation queue</p>
                                 <h3 className="mt-2 text-xl font-semibold text-slate-900">Needs attention</h3>
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
                     </article>
 
                     <article className="rounded-[22px] bg-white p-6 shadow-[0_16px_38px_rgba(15,23,42,0.05)]">
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Quick actions</p>
                                 <h3 className="mt-2 text-xl font-semibold text-slate-900">Shortcuts</h3>

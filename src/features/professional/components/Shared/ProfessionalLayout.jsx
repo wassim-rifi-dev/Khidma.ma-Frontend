@@ -9,7 +9,7 @@ export default function ProfessionalLayout({ children, contentClassName = "pt-28
             <SideBar />
             <Header withSidebar title={title} />
 
-            <section className={`ml-60 px-8 pb-8 lg:px-12 ${contentClassName}`}>
+            <section className={`px-4 pb-8 sm:px-6 lg:ml-60 lg:px-12 ${contentClassName}`}>
                 {children}
             </section>
         </main>

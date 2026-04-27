@@ -10,7 +10,7 @@ export default function ClientMessages() {
         <ClientLayout
             includeFooter={false}
             className="min-h-screen bg-[#f6f8fc] transition-colors duration-300"
-            mainClassName="h-screen overflow-hidden box-border px-4 pb-6 pt-24 sm:px-6 lg:px-8"
+            mainClassName="min-h-screen box-border px-4 pb-6 pt-24 sm:px-6 lg:h-screen lg:overflow-hidden lg:px-8"
         >
             <MessagesWorkspace variant="client" preferredChatId={preferredChatId} />
         </ClientLayout>

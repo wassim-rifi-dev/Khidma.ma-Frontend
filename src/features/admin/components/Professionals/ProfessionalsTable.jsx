@@ -69,7 +69,7 @@ export default function ProfessionalsTable({
                 ) : null}
 
                 <div className="mt-6 overflow-hidden rounded-[20px] border border-slate-200">
-                    <div className="grid grid-cols-[1.15fr_1fr_0.8fr_0.8fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    <div className="hidden min-w-[720px] grid-cols-[1.15fr_1fr_0.8fr_0.8fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 md:grid">
                         <span>Professional</span>
                         <span>Specialty</span>
                         <span>City</span>
@@ -78,7 +78,76 @@ export default function ProfessionalsTable({
                         <span>Actions</span>
                     </div>
 
-                    <div className="divide-y divide-slate-200">
+                    <div className="divide-y divide-slate-200 md:hidden">
+                        {loading ? (
+                            <div className="px-5 py-10 text-center text-sm text-slate-500">
+                                Loading professionals...
+                            </div>
+                        ) : professionals.length > 0 ? (
+                            professionals.map((professional) => (
+                                <div key={professional.id || `${professional.name}-${professional.joined}`} className="space-y-3 px-5 py-4 text-sm text-slate-600">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <p className="font-semibold text-slate-900">{professional.name}</p>
+                                            <p className="mt-1 text-slate-500">{professional.specialty}</p>
+                                            {professional.username ? (
+                                                <span className="text-xs text-slate-400">@{professional.username}</span>
+                                            ) : null}
+                                        </div>
+                                        <span className={`w-fit rounded-full px-3 py-1 text-xs font-semibold ${professional.statusTone}`}>
+                                            {professional.status}
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <span className="inline-flex items-center gap-1.5 text-xs text-slate-500">
+                                            <FiMapPin className="h-4 w-4 text-slate-400" />
+                                            {professional.city}
+                                        </span>
+                                        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${professional.availabilityTone}`}>
+                                            {professional.availability}
+                                        </span>
+                                        <span className="text-xs text-slate-400">Joined {professional.joined}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-slate-400">
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setConfirmState({
+                                                    title: professional.isVerified ? "Remove verification" : "Verify professional",
+                                                    message: `Are you sure you want to ${professional.isVerified ? "remove verification from" : "verify"} ${professional.name}?`,
+                                                    confirmLabel: professional.isVerified ? "Unverify" : "Verify",
+                                                    confirmTone: professional.isVerified ? "danger" : "success",
+                                                    onConfirm: () => toggleVerification(professional.id, !professional.isVerified),
+                                                    professionalId: professional.id,
+                                                })
+                                            }
+                                            disabled={pendingProfessionalId === professional.id}
+                                            className={`inline-flex items-center justify-center rounded-full p-2.5 transition ${
+                                                professional.isVerified
+                                                    ? "bg-rose-50 text-rose-600 hover:bg-rose-100"
+                                                    : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100"
+                                            } disabled:cursor-not-allowed disabled:opacity-70`}
+                                        >
+                                            {pendingProfessionalId === professional.id ? (
+                                                <FiLoader className="h-4 w-4 animate-spin" />
+                                            ) : professional.isVerified ? (
+                                                <FiSlash className="h-4 w-4" />
+                                            ) : (
+                                                <FiCheckCircle className="h-4 w-4" />
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="px-5 py-10 text-center text-sm text-slate-500">
+                                No professionals found.
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="hidden overflow-x-auto md:block">
+                        <div className="min-w-[720px] divide-y divide-slate-200">
                         {loading ? (
                             <div className="px-5 py-10 text-center text-sm text-slate-500">
                                 Loading professionals...
@@ -145,6 +214,7 @@ export default function ProfessionalsTable({
                                 No professionals found.
                             </div>
                         )}
+                        </div>
                     </div>
                 </div>
             </section>

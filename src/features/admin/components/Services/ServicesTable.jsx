@@ -73,7 +73,7 @@ export default function ServicesTable({
                 ) : null}
 
                 <div className="mt-6 overflow-hidden rounded-[20px] border border-slate-200">
-                    <div className="grid grid-cols-[1.2fr_0.9fr_1fr_0.8fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    <div className="hidden min-w-[720px] grid-cols-[1.2fr_0.9fr_1fr_0.8fr_0.9fr_auto] gap-3 bg-slate-50 px-5 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 md:grid">
                         <span>Service</span>
                         <span>Category</span>
                         <span>Professional</span>
@@ -82,7 +82,61 @@ export default function ServicesTable({
                         <span>Actions</span>
                     </div>
 
-                    <div className="divide-y divide-slate-200">
+                    <div className="divide-y divide-slate-200 md:hidden">
+                        {loading ? (
+                            <div className="px-5 py-10 text-center text-sm text-slate-500">
+                                Loading services...
+                            </div>
+                        ) : services.length > 0 ? (
+                            services.map((service) => (
+                                <div key={service.id || `${service.title}-${service.updated}`} className="space-y-3 px-5 py-4 text-sm text-slate-600">
+                                    <div>
+                                        <p className="font-semibold text-slate-900">{service.title}</p>
+                                        <p className="mt-1 text-slate-500">{service.professional}</p>
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                                            {service.category}
+                                        </span>
+                                        <span className={`w-fit rounded-full px-3 py-1 text-xs font-semibold ${service.statusTone}`}>
+                                            {service.status}
+                                        </span>
+                                        <span className="text-xs text-slate-400">Updated {service.updated}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-slate-400">
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setConfirmState({
+                                                    title: "Delete service",
+                                                    message: `Are you sure you want to delete ${service.title}? This action cannot be undone.`,
+                                                    confirmLabel: "Delete",
+                                                    confirmTone: "danger",
+                                                    onConfirm: () => removeService(service.id),
+                                                    serviceId: service.id,
+                                                })
+                                            }
+                                            disabled={pendingServiceId === service.id}
+                                            className="inline-flex items-center justify-center rounded-full bg-rose-50 p-2.5 text-rose-600 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-70"
+                                        >
+                                            {pendingServiceId === service.id ? (
+                                                <FiLoader className="h-4 w-4 animate-spin" />
+                                            ) : (
+                                                <FiTrash2 className="h-4 w-4" />
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="px-5 py-10 text-center text-sm text-slate-500">
+                                No services found.
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="hidden overflow-x-auto md:block">
+                        <div className="min-w-[720px] divide-y divide-slate-200">
                         {loading ? (
                             <div className="px-5 py-10 text-center text-sm text-slate-500">
                                 Loading services...
@@ -132,6 +186,7 @@ export default function ServicesTable({
                                 No services found.
                             </div>
                         )}
+                        </div>
                     </div>
                 </div>
             </section>

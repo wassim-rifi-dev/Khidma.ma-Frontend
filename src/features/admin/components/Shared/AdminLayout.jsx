@@ -6,10 +6,10 @@ export default function AdminLayout({ children, title = "Admin dashboard" }) {
         <main className="min-h-screen bg-[#f6f8fc]">
             <AdminSidebar />
 
-            <div className="ml-60">
+            <div className="lg:ml-60">
                 <AdminHeader title={title} />
 
-                <section className="px-8 pb-8 pt-28 lg:px-12">
+                <section className="px-4 pb-8 pt-28 sm:px-6 lg:px-12">
                     {children}
                 </section>
             </div>

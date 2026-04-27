@@ -14,7 +14,7 @@ export default function SideBar() {
     const { pathname } = useLocation();
 
     return (
-        <aside className="fixed left-0 top-0 z-50 flex h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-slate-200 bg-white">
+        <aside className="fixed left-0 top-0 z-40 hidden h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-slate-200 bg-white lg:flex">
             <div className="px-6 pb-8 pt-6">
                 <img src={logoLight} alt="Khadamni" className="h-[72px] w-auto" />
                 <p className="mt-1.5 text-xs leading-tight text-slate-400">Modern Craftsman</p>

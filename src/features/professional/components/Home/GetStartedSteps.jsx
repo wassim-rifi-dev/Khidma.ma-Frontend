@@ -34,18 +34,18 @@ export default function GetStartedSteps({ professional, hasPhoto, hasDescription
 
     return (
         <section className="mt-10">
-            <div className="mb-6 flex items-end justify-between gap-4">
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <h2 className="text-3xl font-bold text-slate-950">Get Started in 3 Steps</h2>
+                    <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">Get Started in 3 Steps</h2>
                     <p className="mt-1 text-base text-slate-600">Complete these to activate your account.</p>
                 </div>
 
-                <span className="rounded-full bg-orange-100 px-5 py-2 text-sm font-semibold text-[#A34E0D]">
+                <span className="w-fit rounded-full bg-orange-100 px-5 py-2 text-sm font-semibold text-[#A34E0D]">
                     {completedSteps}/3 Completed
                 </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {steps.map(({ title, description, icon: Icon, action, href, status }, index) => {
                     const highlighted = index === nextStepIndex;
                     const completed = status === "completed";
