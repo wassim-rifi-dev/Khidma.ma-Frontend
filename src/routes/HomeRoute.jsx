@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import ClientHome from "../pages/Client/Home";
+import { AuthContext } from "../features/auth/authContext";
+import ClientHome from "../features/client/pages/Home";
 import LoadingScreen from "../components/ui/LoadingScreen";
 
 export default function HomeRoute({isDark , toogleDark}) {

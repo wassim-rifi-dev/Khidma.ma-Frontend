@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import Profile from "../pages/Client/Profile";
+import { AuthContext } from "../features/auth/authContext";
+import Profile from "../features/client/pages/Profile";
 import LoadingScreen from "../components/ui/LoadingScreen";
 
 export default function ProfileRoute() {
