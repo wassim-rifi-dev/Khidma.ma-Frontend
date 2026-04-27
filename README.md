@@ -56,14 +56,15 @@ The frontend communicates with the Laravel API in `../Backend`.
 Create a `.env` file in `Frontend/` if you want to override local defaults:
 
 ```env
-VITE_API_BASE_URL=http://localhost:8000/api
-VITE_STORAGE_BASE_URL=http://localhost:8000/storage/
+VITE_API_BASE_URL=/api
+VITE_STORAGE_BASE_URL=/storage/
 ```
 
 Current fallback behavior:
 
-- API base URL defaults to `http://localhost:8000/api`
-- Storage base URL defaults to `http://localhost:8000/storage/`
+- In development, API requests default to `/api` through the Vite proxy
+- In development, storage URLs default to `/storage/` through the Vite proxy
+- In production or explicit deployments, you can still point both values to a full backend URL
 
 ## Local Development
 

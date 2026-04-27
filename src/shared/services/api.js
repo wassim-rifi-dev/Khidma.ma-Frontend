@@ -3,9 +3,17 @@ import axios from 'axios';
 const DEFAULT_LOCAL_API_URL = 'http://localhost:8000/api';
 
 function resolveApiBaseUrl() {
-    const envUrl = import.meta.env.VITE_API_BASE_URL;
+    const envUrl = import.meta.env.VITE_API_BASE_URL?.trim();
 
-    return envUrl || DEFAULT_LOCAL_API_URL;
+    if (envUrl) {
+        return envUrl;
+    }
+
+    if (import.meta.env.DEV) {
+        return '/api';
+    }
+
+    return DEFAULT_LOCAL_API_URL;
 }
 
 export const API_BASE_URL = resolveApiBaseUrl();
@@ -15,7 +23,6 @@ export const api = axios.create({
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
     },
 });
 

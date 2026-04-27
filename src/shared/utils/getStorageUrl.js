@@ -1,9 +1,17 @@
 const DEFAULT_LOCAL_STORAGE_URL = "http://localhost:8000/storage/";
 
 function resolveStorageBaseUrl() {
-    const envUrl = import.meta.env.VITE_STORAGE_BASE_URL;
+    const envUrl = import.meta.env.VITE_STORAGE_BASE_URL?.trim();
 
-    return envUrl || DEFAULT_LOCAL_STORAGE_URL;
+    if (envUrl) {
+        return envUrl;
+    }
+
+    if (import.meta.env.DEV) {
+        return "/storage/";
+    }
+
+    return DEFAULT_LOCAL_STORAGE_URL;
 }
 
 const storageBaseUrl = resolveStorageBaseUrl();
